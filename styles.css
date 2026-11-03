@@ -219,3 +219,31 @@
 @media(max-width:1120px){.bestiary-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:760px){.bestiary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.codex-banner{padding:23px}.codex-banner .codex-seal{width:55px;height:55px}}
 @media(max-width:430px){.bestiary-grid{grid-template-columns:1fr}.codex-entry{display:grid;grid-template-columns:36% 64%;min-height:180px}.codex-entry .codex-portrait{aspect-ratio:auto;border-bottom:0;border-right:2px solid #ad8453}.codex-info{padding:13px}.codex-banner .codex-seal{display:none}}
+
+/* Interactive world atlas, accessible map pins and off-world portal */
+.atlas-heading{max-width:920px}.atlas-heading strong{color:#f8dba5}
+.atlas-shell{margin-top:28px;border:1px solid #ba915b;background:#0b1125;box-shadow:0 16px 50px #0008,inset 0 0 0 4px #a6774930;border-radius:6px;overflow:hidden}
+.atlas-topline,.atlas-bottomline{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:12px 22px;background:#100e23;color:#ebcd95;font:10px Cinzel,Georgia,serif;letter-spacing:.07em}
+.atlas-topline{border-bottom:1px solid #98734c}.atlas-bottomline{border-top:1px solid #98734c}
+.atlas-scroll{overflow-x:auto;overscroll-behavior-x:contain}
+.atlas-map{position:relative;width:100%;min-width:730px;aspect-ratio:1200/640;background:#0c314b;overflow:hidden}
+.atlas-geography{width:100%;height:100%;display:block}
+.atlas-pins{position:absolute;inset:0;pointer-events:none}
+.atlas-pin{pointer-events:auto;position:absolute;transform:translate(-50%,-50%);background:transparent;border:0;color:#ffedb5;display:flex;flex-direction:column;align-items:center;gap:1px;cursor:pointer;z-index:2;filter:drop-shadow(0 2px 3px #080718)}
+.atlas-pin-dot{width:31px;height:31px;display:grid;place-items:center;font-size:17px;border:1px solid #f1cd88;background:radial-gradient(circle,#624182,#1e1532);border-radius:50%;box-shadow:0 0 0 5px #d9af4933,0 0 18px #fcce65b5;transition:transform .2s}
+.atlas-pin-label{font:600 12px/1.25 Cinzel,Georgia,serif;padding:4px 8px;background:#110d24d9;border:1px solid #c49c64;border-radius:3px;white-space:nowrap;max-width:165px}
+.atlas-pin:hover .atlas-pin-dot,.atlas-pin.active .atlas-pin-dot,.atlas-pin:focus-visible .atlas-pin-dot{transform:scale(1.17);background:#a37b43;box-shadow:0 0 0 6px #e3bb4873,0 0 24px #ffde84}
+.atlas-pin:focus-visible{outline:2px solid #ffe2a5;outline-offset:8px}
+.atlas-portal{display:flex;gap:23px;align-items:center;padding:26px 30px;background:radial-gradient(ellipse at 10% 40%,#59357c7a,#1b1235 48%,#0c1123);border-top:1px solid #bd8a6c}
+.portal-ring{width:95px;height:95px;border-radius:50%;flex:none;display:grid;place-items:center;border:4px double #d1a0ec;box-shadow:inset 0 0 22px #ab4df7,0 0 15px #9a49d1;transform:rotate(-13deg);background:conic-gradient(#33115a,#8d50c4,#1b174e,#ad77e4,#33115a)}
+.portal-ring span{font-size:44px;color:#fcdbff;text-shadow:0 0 20px #fff}
+.atlas-portal>div:nth-child(2){flex:1}.atlas-portal small{color:#dcc4f5;font-size:10px;letter-spacing:.14em}.atlas-portal h3{font-size:23px;color:#f2d59b;margin:5px 0}.atlas-portal p{font-size:13px;line-height:1.5;margin:0}.atlas-portal .btn{white-space:nowrap}
+.atlas-portal .btn.active{border-color:#e4c78d;background:#513e72}
+.atlas-details{margin-top:21px}.atlas-details .location-detail{scroll-margin-top:88px}
+.atlas-details .location-detail h4{font:600 16px Cinzel,Georgia,serif;color:#f2d59b;margin:14px 0 5px}
+.atlas-details .location-detail h4+p{margin:0;font-size:14px}
+.atlas-caveat{display:block;color:#d6badc;margin-top:15px;font-size:11px}
+@media(max-width:900px){.atlas-portal{flex-wrap:wrap}.atlas-portal .btn{width:100%}}
+@media(max-width:760px){.atlas-scroll{scrollbar-color:#c69969 #17152e}.atlas-map{min-width:780px}.atlas-pin-label{font-size:11px}.atlas-topline,.atlas-bottomline{font-size:9px;padding:11px}.atlas-portal{gap:15px;padding:19px}.portal-ring{width:65px;height:65px}.portal-ring span{font-size:30px}.atlas-portal h3{font-size:19px}}
+@media(max-width:450px){.atlas-topline span:last-child,.atlas-bottomline span:last-child{display:none}.atlas-pin-dot{width:33px;height:33px}.atlas-details .location-list{grid-template-columns:1fr 1fr}.atlas-details .location-list button{font-size:11px;min-height:50px}}
+@media(prefers-reduced-motion:reduce){.atlas-pin-dot{transition:none}}
