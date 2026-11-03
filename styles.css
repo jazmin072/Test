@@ -190,3 +190,32 @@
 @media(max-width:850px){.bestiary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.bestiary-grid,.moments-grid{grid-template-columns:1fr}.bestiary-card{min-height:0}.moments-grid article{padding:21px}}
 @media(prefers-reduced-motion:reduce){.bestiary-card{transition:none}}
+
+/* Chronicles visual compendium, styled from reference layout but with canonical text */
+.codex-banner{position:relative;display:flex;align-items:center;gap:22px;justify-content:space-between;flex-wrap:wrap;margin:25px 0 28px;padding:25px 32px;border:1px solid #bd9764;border-radius:7px;background:radial-gradient(ellipse at 8% 50%,#55385588,transparent 55%),linear-gradient(145deg,#191224,#080a17);box-shadow:inset 0 0 0 4px #ad815a17,0 14px 35px #0006}
+.codex-banner:before,.codex-banner:after{content:"✧";position:absolute;color:#e9bd74;opacity:.75;top:6px;font-size:11px}.codex-banner:before{left:10px}.codex-banner:after{right:10px}
+.codex-banner .codex-seal{height:72px;width:72px;flex-shrink:0;display:grid;place-items:center;border:1px solid #c1985a;border-radius:50%;font-size:37px;color:#f3d7a2;box-shadow:0 0 0 5px #b68a5425,0 0 30px #b68a5433}
+.codex-banner>div{flex:1;min-width:215px}.codex-banner small{color:#cbb3cf;font-size:10px;letter-spacing:.15em}
+.codex-banner strong{display:block;font:clamp(24px,3vw,38px)/1.22 Cinzel,Georgia,serif;color:#f1daaf;margin:6px 0}
+.codex-banner p{color:#d7bd88;margin:0;font-size:14px;letter-spacing:.08em}
+.codex-banner>a{font-size:12px;color:#f4d59b;text-decoration:underline;text-underline-offset:4px}
+.bestiary-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.codex-entry{padding:0;display:flex;min-height:0;overflow:hidden;border-color:#b49163;background:#221729;border-radius:4px}
+.codex-entry .codex-portrait{aspect-ratio:1.35;position:relative;overflow:hidden;display:grid;place-items:center;border-bottom:2px solid #ad8453;background:radial-gradient(circle at 50% 35%,#7f5472,#25162f 62%,#100d1e 100%)}
+.codex-portrait .codex-orbit{height:65%;aspect-ratio:1;position:absolute;border:1px solid #efc77b5c;border-radius:50%;box-shadow:0 0 0 23px #dfb4710c,0 0 0 46px #dfb47108;transform:rotate(-18deg)}
+.codex-portrait .codex-rune{font:clamp(54px,6vw,90px) Georgia,serif;color:#ffe9b7;filter:drop-shadow(0 0 14px #e9ab71a8);text-shadow:1px 2px 2px #140b20}
+.codex-druids{background:radial-gradient(circle,#427b61,#1e322a 65%,#0d141d)!important}
+.codex-vampires,.codex-dark-elves{background:radial-gradient(circle,#70445e,#30182b 65%,#120e21)!important}
+.codex-minotaurs,.codex-ogres-giants{background:radial-gradient(circle,#8f6243,#3c2d28 65%,#14111f)!important}
+.codex-dragons{background:radial-gradient(circle,#487b9a,#233d59 65%,#0c1528)!important}
+.codex-goblins{background:radial-gradient(circle,#587e41,#293b27 65%,#0d1820)!important}
+.codex-dwarves{background:radial-gradient(circle,#877040,#3f3020 65%,#191520)!important}
+.codex-cyclopes{background:radial-gradient(circle,#8061a4,#332548 65%,#100d1f)!important}
+.codex-info{padding:14px;display:flex;flex-direction:column;flex:1;background:linear-gradient(170deg,#f4e5c9,#d6c29f);color:#2a1c29}
+.codex-entry .codex-info small{color:#6d4d43;font:10px/1.4 Georgia,serif;letter-spacing:0}
+.codex-entry .codex-info h3{color:#43272f;font:600 20px/1.25 Cinzel,Georgia,serif;margin:8px 0}
+.codex-entry .codex-info p{color:#382b31;font:13px/1.5 Georgia,serif;margin:0 0 12px}
+.codex-entry .codex-info .bestiary-art-note{color:#765a4c;border-top:1px solid #796b5644;font-size:10px;margin-top:auto}
+@media(max-width:1120px){.bestiary-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){.bestiary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.codex-banner{padding:23px}.codex-banner .codex-seal{width:55px;height:55px}}
+@media(max-width:430px){.bestiary-grid{grid-template-columns:1fr}.codex-entry{display:grid;grid-template-columns:36% 64%;min-height:180px}.codex-entry .codex-portrait{aspect-ratio:auto;border-bottom:0;border-right:2px solid #ad8453}.codex-info{padding:13px}.codex-banner .codex-seal{display:none}}
