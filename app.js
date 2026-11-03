@@ -129,7 +129,20 @@ document.addEventListener('click',e=>{
 $('.close-dialog').onclick=()=>$('#bookDialog').close();
 $('#bookDialog').onclick=e=>{if(e.target===$('#bookDialog'))$('#bookDialog').close()};
 $('#loreFilters').innerHTML=['All','Peoples','Magic','Places','History'].map(c=>'<button class="pill '+(c==='All'?'active':'')+'" data-lore-cat="'+c+'">'+c+'</button>').join('');
-function renderLore(){const q=$('#loreSearch').value.toLowerCase();let entries=lore.concat(spoiler?secrets:[]).filter(x=>(cat==='All'||x[0]===cat)&&x.join(' ').toLowerCase().includes(q));$('#loreGrid').innerHTML=entries.map(x=>'<article class="lore-card"><small>'+x[0]+'</small><h3>'+x[1]+'</h3><p>'+x[2]+'</p></article>').join('');$('#loreEmpty').hidden=entries.length!==0}
+function loreArtFor(entry){
+ const title=entry[1],category=entry[0];
+ const species={'Elves':'race-elves','Druids':'race-druids','Vampires':'race-vampires','Minotaurs':'race-minotaurs','Dragons':'race-dragons','Ogres & Giants':'race-giants','Goblins & Dark Elves':'race-dark-elves','Dwarves':'race-dwarves'};
+ if(species[title])return 'assets/'+species[title]+'.svg';
+ if(/Everlangyrs/i.test(title))return 'assets/lore-valley.svg';
+ if(/Dark Veil|Mountain/i.test(title))return 'assets/lore-mountains.svg';
+ if(/Government/i.test(title))return 'assets/lore-technology.svg';
+ if(/New Londanais|Bozton|Teramek/i.test(title))return 'assets/lore-city.svg';
+ if(/Crystal|Essence/i.test(title))return 'assets/lore-crystal.svg';
+ if(/Fracture|Separation|Pocket/i.test(title))return 'assets/lore-fracture.svg';
+ if(/Druid|Sanctuary|Ascension/i.test(title))return 'assets/lore-forest.svg';
+ return category==='History'?'assets/lore-fracture.svg':category==='Magic'?'assets/lore-creation.svg':'assets/lore-valley.svg';
+}
+function renderLore(){const q=$('#loreSearch').value.toLowerCase();let entries=lore.concat(spoiler?secrets:[]).filter(x=>(cat==='All'||x[0]===cat)&&x.join(' ').toLowerCase().includes(q));$('#loreGrid').innerHTML=entries.map(x=>'<article class="lore-card"><img class="lore-card-visual" src="'+loreArtFor(x)+'" alt="Original Chronicles concept illustration for '+x[1]+'" loading="lazy"><div class="lore-card-body"><small>'+x[0]+'</small><h3>'+x[1]+'</h3><p>'+x[2]+'</p></div></article>').join('');$('#loreEmpty').hidden=entries.length!==0}
 renderLore();
 $('#loreSearch').oninput=renderLore;
 document.querySelectorAll('[data-lore-cat]').forEach(b=>b.onclick=()=>{cat=b.dataset.loreCat;document.querySelectorAll('[data-lore-cat]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderLore()});
@@ -336,9 +349,10 @@ function renderGlossary(){
  root.replaceChildren();
  glossaryEntries.filter(x=>spoiler||!x[2]).forEach(x=>{
   const card=document.createElement('article');card.className='glossary-card';
+  const illustration=document.createElement('img');illustration.className='glossary-visual';illustration.loading='lazy';illustration.src=loreArtFor(['History',x[0]]);illustration.alt='Original Chronicles fantasy lore illustration';
   const title=document.createElement('h3');title.textContent=x[0];
   const p=document.createElement('p');p.textContent=x[1];
-  card.append(title,p);root.append(card);
+  card.append(illustration,title,p);root.append(card);
  });
 }
 renderGlossary();
