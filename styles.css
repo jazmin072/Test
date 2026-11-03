@@ -276,3 +276,24 @@
 @media(max-width:1100px){.topbar nav{gap:9px}.topbar nav summary,.topbar nav a{font-size:10px}}
 @media(max-width:760px){.global-search-results,.glossary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:530px){.global-search-results,.glossary-grid{grid-template-columns:1fr}.global-search-row{flex-direction:column}.reader-mode{max-width:250px}.reader-mode small{display:none}}
+
+/* Original artwork rather than blank encyclopedia and creature holders */
+.lore-card{overflow:hidden;padding:0;display:flex;flex-direction:column}
+.lore-card-visual{display:block;width:100%;aspect-ratio:1.7;object-fit:cover;object-position:center;background:#1c1430;border-bottom:1px solid #b38a64}
+.lore-card-body{padding:20px 23px 25px;flex:1}
+.lore-card-body h3{margin:8px 0;color:#f5d7a9}
+.lore-card-body p{font-size:14px;line-height:1.7;margin:0}
+.codex-entry .codex-portrait{background:#181126!important;aspect-ratio:4/5;display:block}
+.codex-entry .bestiary-illustration{width:100%;height:100%;max-height:none;object-fit:cover;object-position:center}
+.codex-entry .codex-info{background:linear-gradient(170deg,#f6e8cd,#dbc3a1)}
+.glossary-card{overflow:hidden;padding:0}
+.glossary-card h3,.glossary-card p{margin-left:20px;margin-right:20px}
+.glossary-card h3{margin-top:15px}
+.glossary-card p{margin-bottom:23px}
+.glossary-visual{display:block;width:100%;height:155px;object-fit:cover;border-bottom:1px solid #b68a64}
+.moments-grid .moment-illustrated{padding:0;overflow:hidden}
+.moment-illustrated>img{display:block;width:100%;height:210px;object-fit:cover;object-position:center 22%;border-bottom:1px solid #a37f6c}
+.moment-illustrated>small,.moment-illustrated>h3,.moment-illustrated>p,.moment-illustrated>a{display:block;margin-left:25px;margin-right:25px}
+.moment-illustrated>small{margin-top:18px}
+.moment-illustrated>a{margin-bottom:25px}
+@media(max-width:550px){.moment-illustrated>img{height:190px}.codex-entry .codex-portrait{aspect-ratio:4/5}}
