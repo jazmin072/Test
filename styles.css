@@ -297,3 +297,10 @@
 .moment-illustrated>small{margin-top:18px}
 .moment-illustrated>a{margin-bottom:25px}
 @media(max-width:550px){.moment-illustrated>img{height:190px}.codex-entry .codex-portrait{aspect-ratio:4/5}}
+
+/* Author-approved race collage: each card displays its proper crop of the original illustrated compendium. */
+.approved-race-art{display:block;width:100%;height:100%;min-height:200px;background-image:url("/chronicles-approved-races-sprite.webp");background-size:400% 400%;background-repeat:no-repeat;background-color:#181425}
+.codex-entry .codex-portrait{aspect-ratio:240/264;display:block;overflow:hidden}
+.codex-entry .approved-race-art{height:100%;min-height:0}
+.lore-card-visual.approved-race-art{width:100%;height:auto;aspect-ratio:1.7;min-height:0;background-size:400% 400%;border-bottom:1px solid #b38a64}
+@media(max-width:430px){.codex-entry .codex-portrait{aspect-ratio:240/264;min-height:180px}.codex-entry .approved-race-art{min-height:180px}}
