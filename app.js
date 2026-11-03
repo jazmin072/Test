@@ -299,11 +299,12 @@ function bestiaryPortrait(name){
  const svg='<svg xmlns="http://www.w3.org/2000/svg" width="260" height="270" viewBox="0 0 260 270"><defs><radialGradient id="bg"><stop stop-color="'+a.back+'"/><stop offset="1" stop-color="#141126"/></radialGradient><linearGradient id="body" x2="0" y2="1"><stop stop-color="#ae79dc"/><stop offset="1" stop-color="#2b173f"/></linearGradient></defs><rect width="260" height="270" fill="url(#bg)"/><g opacity=".3" stroke="#cba56c"><circle cx="130" cy="135" r="113" fill="none"/><circle cx="130" cy="135" r="99" fill="none"/><path d="M10 135H250 M130 10V260"/></g><g>'+content+'</g><path d="M9 9H251V261H9Z" fill="none" stroke="#d8b877" stroke-width="3"/><path d="M22 22H42 M22 22V42 M238 22H218 M238 22V42 M22 248H42 M22 248V228 M238 248H218 M238 248V228" stroke="#f3cf8d" stroke-width="3" fill="none"/></svg>';
  return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
 }
+const raceArtwork={"Elves":"elves","Druids":"druids","Vampires":"vampires","Minotaurs":"minotaurs","Dark Elves":"dark-elves","Goblins":"goblins","Dwarves":"dwarves","Dragons":"dragons","Giants":"giants","Ogres":"ogres","Cyclopes":"cyclopes","Succubi":"succubi","Dark Slimes":"dark-slimes"};
 let bestiaryFilter='All';
 function renderBestiary(){
  const host=document.querySelector('#bestiaryGrid');if(!host)return;
  host.innerHTML=bestiaryEntries.filter(entry=>bestiaryFilter==='All'||entry.category===bestiaryFilter).map(entry=>
- '<article class="bestiary-card codex-entry"><div class="codex-portrait" ><img class="bestiary-illustration" src="'+bestiaryPortrait(entry.name)+'" alt="Concept portrait representing '+entry.name+'" loading="lazy"></div><div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p>'+entry.summary+'</p><span class="bestiary-art-note">Illustrative race design · story-grounded lore</span></div></article>'
+ '<article class="bestiary-card codex-entry"><div class="codex-portrait" ><img class="bestiary-illustration" src="assets/race-'+raceArtwork[entry.name]+'.svg" alt="Original fantasy concept art for '+entry.name+'" loading="lazy"></div><div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p>'+entry.summary+'</p><span class="bestiary-art-note">Original Chronicles illustration · appearance subject to author approval</span></div></article>'
  ).join('');
 }
 const bestiaryFilters=document.querySelector('#bestiaryFilters');
