@@ -59,7 +59,43 @@
 </section>
 <section class="section alt" id="world"><p class="eyebrow">A LIVING ARCHIVE</p><h2>The World Encyclopedia</h2><p>Discover cultures, places and the powers that shape the universe.</p><div class="world-controls"><label class="search-box">⌕ <input id="loreSearch" type="search" placeholder="Search the encyclopedia..." aria-label="Search encyclopedia"></label><div class="pills" id="loreFilters"></div></div><div class="lore-grid" id="loreGrid"></div><p id="loreEmpty" hidden>No entries match your search.</p></section>
 
-<section class="section locations-section" id="locations"><p class="eyebrow">EXPLORE THE KNOWN WORLD</p><h2>Places and peoples</h2><p>Explore important settings from the stories. This is a location guide, not a geographical map: positions and distances will be added only when confirmed by the books or author.</p><div class="location-browser"><div class="location-list" id="locationList" role="group" aria-label="Choose a setting"></div><article class="location-detail" id="locationDetail" aria-live="polite"></article></div><p class="location-note">Illustrated maps can be added here later without changing the established geography.</p></section>
+<section class="section locations-section" id="locations">
+<div class="atlas-heading"><p class="eyebrow">THE CHRONICLES ATLAS</p><h2>Explore the lands and their people</h2><p>Select a glowing location to discover the landscape, its communities, and its place in the stories. The globe uses familiar Earth-shaped continents; the pins are <strong>illustrative placements, not established coordinates</strong>.</p></div>
+<div class="atlas-shell">
+ <div class="atlas-topline"><span>THE WORLD OF PLU & SELENA</span><span>ILLUSTRATIVE ATLAS · NO CANONICAL COORDINATES</span></div>
+ <div class="atlas-scroll" tabindex="0" aria-label="Scroll to explore illustrated world map">
+ <div class="atlas-map" id="atlasMap" aria-label="Interactive map of story locations">
+ <svg class="atlas-geography" viewBox="0 0 1200 640" role="img" aria-label="Stylised Earth-like world continents and ocean, with illustrative story-location markers">
+ <defs><radialGradient id="atlasOcean" cx=".45" cy=".45" r=".75"><stop offset="0" stop-color="#13546d"/><stop offset=".48" stop-color="#103b55"/><stop offset="1" stop-color="#080f2a"/></radialGradient><linearGradient id="atlasLand" x1=".1" y1=".1" x2=".9" y2=".9"><stop stop-color="#6a8e5d"/><stop offset=".5" stop-color="#426c57"/><stop offset="1" stop-color="#254746"/></linearGradient><linearGradient id="atlasDry" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c5a176"/><stop offset="1" stop-color="#947b59"/></linearGradient><filter id="atlasGlow"><feGaussianBlur stdDeviation="13"/></filter><pattern id="atlasGrid" width="100" height="80" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 80" fill="none" stroke="#a9cdd6" stroke-width=".7" opacity=".18"/></pattern></defs>
+ <rect width="1200" height="640" fill="url(#atlasOcean)"/><rect width="1200" height="640" fill="url(#atlasGrid)"/>
+ <g fill="#a1d4ec" opacity=".07"><circle cx="205" cy="125" r="165" filter="url(#atlasGlow)"/><circle cx="920" cy="475" r="260" filter="url(#atlasGlow)"/></g>
+ <g fill="url(#atlasLand)" stroke="#dabd79" stroke-width="1.7" stroke-linejoin="round">
+ <path d="M63 104 92 74 142 56 163 72 205 50 258 59 280 89 330 92 355 119 334 153 311 160 300 200 264 223 248 253 210 261 189 298 176 325 146 304 149 270 124 252 114 212 81 200 62 164Z"/>
+ <path d="M228 302 252 327 277 339 290 368 316 382 340 421 329 473 306 521 279 574 258 600 239 569 231 520 207 480 211 441 195 394 209 356Z"/>
+ <path d="M364 54 396 33 449 43 476 75 460 113 422 128 388 111Z"/>
+ <path d="M525 114 561 98 610 104 645 85 706 95 755 68 800 77 831 96 886 90 917 112 965 110 1009 130 1054 159 1098 175 1133 215 1110 256 1084 273 1059 260 1041 299 1012 300 988 336 960 316 939 277 903 289 886 336 859 342 826 318 798 291 764 277 744 245 721 229 696 237 675 218 653 226 626 209 597 214 574 184 537 172 512 146Z"/>
+ <path d="M576 249 612 239 658 252 697 285 702 330 676 374 674 414 638 456 612 490 583 472 574 435 550 400 555 362 532 328 545 288Z" fill="url(#atlasDry)"/>
+ <path d="M938 442 973 425 1023 431 1072 458 1106 503 1085 548 1051 554 1018 541 984 553 949 528 926 488Z" fill="url(#atlasDry)"/>
+ <path d="M761 313 797 332 816 362 800 391 784 387 768 364Z"/><path d="M833 343 861 356 878 393 862 426 847 402Z"/><path d="M1055 327 1084 339 1072 367 1061 357Z"/>
+ </g>
+ <g fill="#d3d3c4" opacity=".68"><path d="M88 107 113 86 152 80 175 97 159 126 124 128Z"/><path d="M670 123 716 112 758 117 817 110 861 138 833 162 781 154 748 167 696 152Z"/></g>
+ <g fill="none" stroke="#d8c9a0" stroke-linecap="round" stroke-width="3" opacity=".6"><path d="m130 135 35 34 22 40 29 13"/><path d="m235 387 34 40 17 48 5 27"/><path d="m737 146 42 32 49 14 32 35 55 26"/><path d="m601 329 17 44 23 32"/></g>
+ <g font-family="Georgia,serif" font-size="15" fill="#b1d7de" opacity=".7" font-style="italic"><text x="365" y="345">The Western Ocean</text><text x="1030" y="398">The Eastern Sea</text></g>
+ <g transform="translate(1113 60)" fill="none" stroke="#f6d89d"><circle r="36" opacity=".75"/><path d="M0 -48V48M-48 0H48M0 -34L9 0 0 34 -9 0Z" stroke-width="1.7"/><text x="-5" y="-54" fill="#f6d89d" stroke="none" font-family="Georgia" font-size="15">N</text></g>
+ <path d="M15 15H1185V625H15Z" fill="none" stroke="#c7a068" stroke-width="2" opacity=".65"/>
+ </svg>
+ <div class="atlas-pins" id="atlasPins" role="group" aria-label="Select a story location on the map"></div>
+ </div></div>
+ <div class="atlas-portal">
+  <div class="portal-ring" aria-hidden="true"><span>✧</span></div>
+  <div><small>BEYOND THE VEIL · OTHER WORLDS</small><h3>Plu’s off-world journeys</h3><p>Some adventures take place beyond this world. Enter the portal to learn about Plu’s travels without placing those destinations on the Earth map.</p></div>
+  <button type="button" class="btn" id="atlasPortalButton">Enter the portal</button>
+ </div>
+ <div class="atlas-bottomline"><span>✧ POINTS ARE ARTISTIC MARKERS · NOT CANONICAL GEOGRAPHIC CLAIMS</span><span>THE CHRONICLES OF PLU AND SELENA</span></div>
+</div>
+<div class="location-browser atlas-details"><div class="location-list" id="locationList" role="group" aria-label="Choose a setting"></div><article class="location-detail" id="locationDetail" aria-live="polite"></article></div>
+<p class="location-note">The atlas follows established place names and story information. Exact coastlines, city coordinates and cross-world routes have not been established in the manuscripts and remain open for future author-approved artwork.</p>
+</section>
 <section class="section" id="timeline"><p class="eyebrow">THROUGH THE AGES</p><h2>A world through time</h2><p>The public timeline shows only broad eras. Reveal spoilers to explore more.</p><div id="timelineList" class="timeline"></div></section>
 <section class="section alt" id="connections"><p class="eyebrow">BONDS THAT SHAPE THE WORLD</p><h2>Character connections</h2><p>Explore relationships across the trilogy. Select two illustrated portraits or use the character menus. Major revelations remain hidden until you turn on spoilers.</p><div class="connection-layout"><div class="relationship-map" id="relationMap" aria-label="Interactive character portrait map"></div><div class="relation-panel"><h3>Explore a connection</h3><p>Choose two characters to discover their relationship.</p><label>First character<select id="firstPerson"></select></label><label>Second character<select id="secondPerson"></select></label><div id="relationResult" aria-live="polite"></div></div></div></section>
 <section class="section about" id="about"><p class="eyebrow">THE CREATOR'S DESK</p><h2>Behind the Chronicles</h2><p>The official world hub for the trilogy, companion adventures, characters and evolving lore of <i>The Chronicles of Plu and Selena</i>.</p><p>Written by <strong>Jonathan M. Reed</strong>.</p><a class="btn primary" href="#books">Explore the library</a></section></main>
