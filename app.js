@@ -226,3 +226,36 @@ if(locationList&&locationDetail){
  locationList.addEventListener('click',e=>{const button=e.target.closest('[data-location]');if(button)showLocation(Number(button.dataset.location))});
  showLocation(0);
 }
+
+
+/* Canon-conscious, art-ready creature notes. Images can be attached once approved. */
+const bestiaryEntries=[
+ {name:'Elves',category:'Peoples',realm:'The World Before · Elf Blood',summary:'An ancient people tied to the earliest ages of the world. Their history is closely connected to the original fracture and to Taylor’s unexplained past.',image:null},
+ {name:'Druids',category:'Peoples',realm:'The World Before · The Listening World',summary:'A people with an intimate connection to living nature. Their traditions and the use of life-linked magic are important to the world’s history.',image:null},
+ {name:'Vampires',category:'Peoples',realm:'Elf Blood · Dark Rain',summary:'Vampires are one of the world’s established peoples, with communities and clans of their own. Breni’s later story follows disputes involving two vampire clans.',image:null},
+ {name:'Minotaurs',category:'Peoples',realm:'Elf Blood',summary:'The Minotaur sanctuary offers a place of refuge and preserves traditions of its people during a dangerous period of the separated world.',image:null},
+ {name:'Dark Elves',category:'Peoples',realm:'The Goddess Elf · The Listening World',summary:'A distinct community involved in the long history of Everlangyrs, where questions of shared ground and peaceful coexistence remain important.',image:null},
+ {name:'Goblins',category:'Peoples',realm:'The Goddess Elf · The Listening World',summary:'A community with its own leaders and history in Everlangyrs. Their relationships with neighbouring dark elves form part of the region’s story.',image:null},
+ {name:'Dwarves',category:'Peoples',realm:'The World Before · Dark Rain',summary:'One of the world’s long-established peoples. Dwarven characters and tensions between communities play a part in Breni’s island mystery.',image:null},
+ {name:'Dragons',category:'Creatures',realm:'The World Before · The Listening World',summary:'Among the beings connected with the earliest ages, dragons also feature in the distant mountains that Reyla encounters in her later travels.',image:null},
+ {name:'Ogres & Giants',category:'Creatures',realm:'The World Before',summary:'Powerful ancient peoples remembered in accounts of early wars and disputes. Their conflicts form part of the world’s deep history.',image:null},
+ {name:'Cyclopes',category:'Creatures',realm:'The World Before · The Goddess Elf',summary:'One of the extraordinary peoples that belongs to the larger history and later gatherings of the Chronicles.',image:null}
+];
+let bestiaryFilter='All';
+function renderBestiary(){
+ const host=document.querySelector('#bestiaryGrid');if(!host)return;
+ host.innerHTML=bestiaryEntries.filter(entry=>bestiaryFilter==='All'||entry.category===bestiaryFilter).map(entry=>
+ '<article class="bestiary-card"><div class="bestiary-emblem" aria-hidden="true">✧</div><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p>'+entry.summary+'</p><span class="bestiary-art-note">Illustration to be added</span></article>'
+ ).join('');
+}
+const bestiaryFilters=document.querySelector('#bestiaryFilters');
+if(bestiaryFilters){
+ bestiaryFilters.innerHTML=['All','Peoples','Creatures'].map(cat=>'<button type="button" class="pill'+(cat==='All'?' active':'')+'" data-bestiary-cat="'+cat+'">'+cat+'</button>').join('');
+ bestiaryFilters.addEventListener('click',event=>{
+  const button=event.target.closest('[data-bestiary-cat]');if(!button)return;
+  bestiaryFilter=button.dataset.bestiaryCat;
+  bestiaryFilters.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b===button));
+  renderBestiary();
+ });
+ renderBestiary();
+}
