@@ -39,3 +39,43 @@
 #relationResult .spoiler-detail{border-left:3px solid #e9c17e;padding-left:14px}
 @media(max-width:950px){.connection-layout{grid-template-columns:1fr}}
 @media(max-width:640px){.relationship-map{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:10px}.relation-node{padding:9px 5px}.relation-photo{width:min(100%,110px)}.relation-panel{padding:18px}}
+
+/* Book retailer, release and pre-launch reader sections */
+.retailer-disclaimer{max-width:960px;font-size:13px;margin:0 0 28px}
+.book-meta h4{font:600 14px Cinzel,Georgia,serif;color:var(--gold);margin:12px 0 9px}
+.release-short{border-top:1px solid #6b4c7370;padding-top:12px;font-size:13px;color:#dcc9db}
+.release-short strong{color:#f4d18d}
+.storefront-links{display:flex;flex-wrap:wrap;gap:8px}
+.storefront-links a{font:600 11px/1.45 'DM Sans',sans-serif;border:1px solid #aa8a65;color:#f7e1b8;padding:9px 11px;border-radius:5px;background:#1a112c}
+.storefront-links a:hover{background:#6f4e7b;color:white}
+.retailer-empty{font-size:12px;opacity:.88}
+.release-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:32px}
+.release-card{display:flex;gap:20px;background:#21162c;border:1px solid #6b4c73;padding:17px;border-radius:8px;align-items:flex-start}
+.release-card img{width:105px;aspect-ratio:2/3;object-fit:cover;border-radius:4px;flex:none}
+.release-card h3{font-size:19px;margin:3px 0 8px;color:var(--gold)}
+.release-card small{color:#d7aee9;text-transform:uppercase;letter-spacing:.1em}
+.release-card p{font-size:13px;line-height:1.6;margin-bottom:8px}
+.release-card .release-date{color:#f4dfaf;font-weight:700;font-size:15px}
+.release-card a{font-size:12px;color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+.reader-hub .hub-heading{max-width:830px}
+.reader-signup{display:grid;grid-template-columns:1.6fr .8fr;border:1px solid #aa7b73;background:linear-gradient(120deg,#251433,#110d24);border-radius:10px;overflow:hidden;margin-top:27px}
+.reader-signup>div:first-child{padding:36px}
+.reader-signup h3{color:#f2d39a}
+.reader-signup small{color:#c6b8ce}
+.signup-preview{display:flex;gap:12px;margin:18px 0;flex-wrap:wrap}
+.signup-preview input{flex:1;min-width:210px;padding:14px;background:#100c1f;border:1px solid #8b6d8c;color:white}
+.signup-preview input:disabled{opacity:.65}
+.signup-preview button:disabled{opacity:.65;cursor:not-allowed}
+.newsletter-decor{background:radial-gradient(circle,#68477d,#261336);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.newsletter-decor span{font-size:100px;color:#efcb8c}
+.newsletter-decor p{text-align:center;color:#f8dfb5;font:20px Cinzel,Georgia,serif}
+.community-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:30px 0}
+.community-topic{border:1px solid #75527c;background:linear-gradient(160deg,#21172d,#0f0c22);padding:26px;min-height:245px}
+.community-topic small{color:#edc489;letter-spacing:.08em}
+.community-topic h3{color:#f1ce91;margin:15px 0}
+.community-topic span{font-size:12px;color:#ceb5e6}
+.community-guidelines{padding:22px 28px;background:#1d142c;border-left:3px solid #e9c17e;max-width:970px}
+.community-guidelines h3{font-size:18px;margin:0 0 7px}
+.community-guidelines p{margin:0}
+@media(max-width:920px){.release-grid,.reader-signup{grid-template-columns:1fr}.newsletter-decor{display:none}.community-grid{grid-template-columns:1fr}.topbar nav{gap:10px}}
+@media(max-width:600px){.release-card{gap:13px;padding:11px}.release-card img{width:78px}.release-card h3{font-size:16px}.reader-signup>div:first-child{padding:22px}.signup-preview{flex-direction:column}}
