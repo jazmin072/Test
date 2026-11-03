@@ -77,12 +77,28 @@ function retailerLinks(book){
  const list=storefronts[book.id]||[];
  return list.length?'<div class="storefront-links" aria-label="Retailers for '+book.title+'">'+list.map(([store,url])=>'<a href="'+url+'" rel="noopener noreferrer" target="_blank">'+store+' ↗</a>').join('')+'</div>':'<p class="retailer-empty">Store listings will be added when confirmed.</p>';
 }
+function renderBookCard(book){
+ const info=releaseInfo[book.id],upcoming=['before','goddess','wonders','creatures','plu'].includes(book.id);
+ const category=book.type==='trilogy'?'MAIN TRILOGY':(['listening','rain'].includes(book.id)?'POST-TRILOGY COMPANION':'COMPANION STORY');
+ return '<article class="book-card '+(book.type==='trilogy'?'main-volume':'companion-volume')+'"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small class="book-category">'+category+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p><p class="release-short"><strong>'+info.status+'</strong> · '+info.date+'</p><button class="text-link" data-book="'+book.id+'">Discover this story →</button><h4>Available retailers</h4>'+retailerLinks(book)+'</div></article>';
+}
 function renderBooks(filter='all'){
- $('#bookGrid').innerHTML=books.filter(book=>filter==='all'||book.type===filter).map(book=>{
- const info=releaseInfo[book.id];
- return '<article class="book-card"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy" onerror="this.style.display=&quot;none&quot;;this.nextElementSibling.style.display=&quot;block&quot;">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small>'+book.label+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p><p class="release-short"><strong>'+info.status+'</strong> · '+info.date+'</p><button class="text-link" data-book="'+book.id+'">Discover this story →</button><h4>Find this book</h4>'+retailerLinks(book)+'</div></article>';
+ const groups=[
+  {id:'trilogy',title:'The original trilogy',hint:'Start here · Read Books One through Three',ids:['elf','before','goddess']},
+  {id:'after',title:'Stories after the trilogy',hint:'Reyla and Breni · Best read after the main trilogy',ids:['listening','rain']},
+  {id:'other',title:'Other companions & stories ahead',hint:'Family moments, creature tales and future adventures',ids:['wonders','creatures','plu']}
+ ];
+ const eligible=book=>{
+  if(filter==='all')return true;
+  if(filter==='upcoming')return ['before','goddess','wonders','creatures','plu'].includes(book.id);
+  return book.type===filter;
+ };
+ $('#bookGrid').innerHTML=groups.map(g=>{
+  const list=g.ids.map(id=>books.find(b=>b.id===id)).filter(b=>b&&eligible(b));
+  return list.length?'<div class="book-section"><div class="book-group-heading"><h3>'+g.title+'</h3><p>'+g.hint+'</p></div><div class="book-group-grid">'+list.map(renderBookCard).join('')+'</div></div>':'';
  }).join('');
 }
+
 function renderReleases(){
  $('#releaseGrid').innerHTML=books.map(book=>{
  const info=releaseInfo[book.id];
