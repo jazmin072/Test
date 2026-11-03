@@ -174,3 +174,55 @@ syncRelationControls();
 $('.menu-toggle').onclick=()=>{const nav=$('#nav');nav.classList.toggle('open');$('.menu-toggle').setAttribute('aria-expanded',nav.classList.contains('open'))};
 document.querySelectorAll('#nav a').forEach(a=>a.onclick=()=>{$('#nav').classList.remove('open');$('.menu-toggle').setAttribute('aria-expanded','false')});
 $('#year').textContent=new Date().getFullYear();
+
+/* Gallery is built from the existing approved illustrations. */
+const galleryCharacters=['plu','selena','breni','reyla','taylor','talula','ray'];
+const galleryHost=document.querySelector('#portraitGallery');
+const galleryModal=document.querySelector('#galleryDialog');
+const galleryContent=document.querySelector('#galleryDialogContent');
+if(galleryHost&&galleryModal&&galleryContent){
+ galleryHost.innerHTML=galleryCharacters.map(id=>{
+  const person=chars.find(x=>x.id===id);
+  return '<button type="button" class="portrait-tile" data-gallery-person="'+id+'" aria-label="View '+person.name+' portrait"><img src="'+person.image+'" alt="Portrait of '+person.name+'" loading="lazy"><span class="portrait-label">'+person.name+'</span><small>'+person.subtitle+'</small></button>';
+ }).join('');
+ galleryHost.addEventListener('click',event=>{
+  const tile=event.target.closest('[data-gallery-person]');if(!tile)return;
+  const person=chars.find(x=>x.id===tile.dataset.galleryPerson);
+  galleryContent.replaceChildren();
+  const img=document.createElement('img');img.src=person.image;img.alt='Official portrait of '+person.name;
+  const bio=document.createElement('div');bio.className='gallery-details';
+  const title=document.createElement('h3');title.textContent=person.name;
+  const subtitle=document.createElement('p');subtitle.textContent=person.subtitle;
+  const link=document.createElement('a');link.href='#characters';link.className='btn';link.textContent='View character profiles';
+  bio.append(title,subtitle,link);galleryContent.append(img,bio);
+  galleryModal.showModal();
+ });
+ galleryModal.querySelector('.close-gallery').addEventListener('click',()=>galleryModal.close());
+ galleryModal.addEventListener('click',e=>{if(e.target===galleryModal)galleryModal.close()});
+ galleryContent.addEventListener('click',e=>{if(e.target.closest('a[href="#characters"]'))galleryModal.close()});
+}
+const knownLocations=[
+ {name:'New Londanais',tag:'Urban centre',description:'An important urban centre in the Chronicles. Its full geography and history are still being documented in the public encyclopedia.',books:'Main trilogy'},
+ {name:'Bozton',tag:'City',description:'A city where everyday life meets the extraordinary, including events in The Goddess Elf.',books:'The Goddess Elf'},
+ {name:'Everlangyrs',tag:'Disputed region',description:'A region where dark elf and goblin communities must confront long-standing tensions and negotiate their future.',books:'The Goddess Elf · The Listening World'},
+ {name:'Teramek',tag:'Territory',description:'A territory affected by the fractures between realities. Its role is explored in the larger story.',books:'The Goddess Elf'},
+ {name:'Dark Veil Mountains',tag:'Remote mountains',description:'Remote mountains associated with dragon communities and Reyla’s later journeys.',books:'The Listening World'},
+ {name:'The Minotaur Sanctuary',tag:'Refuge',description:'A sanctuary that preserves Minotaur tradition and provides refuge during the events of the separated era.',books:'Elf Blood'}
+];
+const locationList=document.querySelector('#locationList'),locationDetail=document.querySelector('#locationDetail');
+function showLocation(index){
+ if(!locationList||!locationDetail)return;
+ const place=knownLocations[index];
+ locationList.querySelectorAll('button').forEach((button,i)=>{button.classList.toggle('active',i===index);button.setAttribute('aria-pressed',String(i===index))});
+ locationDetail.replaceChildren();
+ const label=document.createElement('small');label.textContent=place.tag;
+ const title=document.createElement('h3');title.textContent=place.name;
+ const description=document.createElement('p');description.textContent=place.description;
+ const books=document.createElement('p');books.className='location-source';books.textContent='Appears in: '+place.books;
+ locationDetail.append(label,title,description,books);
+}
+if(locationList&&locationDetail){
+ locationList.innerHTML=knownLocations.map((place,i)=>'<button type="button" data-location="'+i+'" aria-pressed="false">'+place.name+' <span>›</span></button>').join('');
+ locationList.addEventListener('click',e=>{const button=e.target.closest('[data-location]');if(button)showLocation(Number(button.dataset.location))});
+ showLocation(0);
+}
