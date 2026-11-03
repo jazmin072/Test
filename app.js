@@ -317,3 +317,74 @@ if(bestiaryFilters){
  });
  renderBestiary();
 }
+
+/* Universal discovery - search reflects spoiler visibility and links into the archive. */
+const glossaryEntries=[
+ ['The Fracture','A defining disruption of reality whose causes emerge across the trilogy.',false],
+ ['Separation Era','The age of divided realities in Elf Blood.',false],
+ ['Merger Era','A later period of change between the worlds.',false],
+ ['Divine Creation','The shaping of worlds and life associated with Plu and Selena.',false],
+ ['Druidic Magic','Magic rooted in deep connection with the living world.',false],
+ ['Residual Essence','Power that remains after an extraordinary magical event.',false],
+ ['Pocket Reality','A separated space connected with the Fracture.',true],
+ ['Crystal Storage','Using crystals to hold unusual magical energies.',true],
+ ['Reyla’s Ascension','A later transformation in Reyla’s connection to the world.',true]
+];
+function renderGlossary(){
+ const root=document.querySelector('#glossaryGrid');if(!root)return;
+ root.replaceChildren();
+ glossaryEntries.filter(x=>spoiler||!x[2]).forEach(x=>{
+  const card=document.createElement('article');card.className='glossary-card';
+  const title=document.createElement('h3');title.textContent=x[0];
+  const p=document.createElement('p');p.textContent=x[1];
+  card.append(title,p);root.append(card);
+ });
+}
+renderGlossary();
+const globalSearch=document.querySelector('#globalSearch'),globalResults=document.querySelector('#globalSearchResults'),globalStatus=document.querySelector('#globalSearchStatus'),globalFilters=document.querySelector('#globalSearchFilters');
+let globalFilter='All';
+function searchable(){
+ const links={elf:'elf-blood.html',before:'the-world-before.html',goddess:'the-goddess-elf.html'};
+ const entries=[
+ ...books.map(b=>({type:'Books',title:b.title,description:b.desc,href:links[b.id]||'#books'})),
+ ...chars.filter(ch=>(spoiler||!ch.spoiler)&&ch.id!=='hybrid').map(ch=>({type:'Characters',title:ch.name,description:ch.subtitle,href:'#characters',char:ch.id})),
+ ...knownLocations.filter(loc=>spoiler||!['Everlangyrs','Teramek','Dark Veil Mountains','Breni’s Island Mystery','Plu’s Off-world Journeys'].includes(loc.name)).map(loc=>({type:'Locations',title:loc.name,description:loc.tag,href:'#locations',location:knownLocations.indexOf(loc)})),
+ ...bestiaryEntries.map(b=>({type:'Creatures',title:b.name,description:b.category+' · '+b.summary,href:'#bestiary'})),
+ ...lore.concat(spoiler?secrets:[]).filter(x=>x[1]!=='The Hybrid Official').map(x=>({type:'Lore',title:x[1],description:x[2],href:'#world'})),
+ ...glossaryEntries.filter(x=>spoiler||!x[2]).map(x=>({type:'Lore',title:x[0],description:x[1],href:'#glossary'}))
+ ];
+ return entries;
+}
+function renderGlobalSearch(){
+ if(!globalSearch||!globalResults)return;
+ const term=globalSearch.value.toLocaleLowerCase().trim();
+ globalResults.replaceChildren();
+ if(!term){globalStatus.textContent='Start typing to explore the Chronicles.';return}
+ const hits=searchable().filter(x=>(globalFilter==='All'||x.type===globalFilter)&&[x.title,x.description].join(' ').toLocaleLowerCase().includes(term)).slice(0,24);
+ globalStatus.textContent=hits.length+' '+(hits.length===1?'result':'results')+(spoiler?' · Lore Explorer':' · New Reader');
+ hits.forEach(hit=>{
+  const link=document.createElement('a');link.className='global-result';link.href=hit.href;
+  const type=document.createElement('small');type.textContent=hit.type;
+  const title=document.createElement('strong');title.textContent=hit.title;
+  const desc=document.createElement('span');desc.textContent=hit.description;link.append(type,title,desc);
+  if(hit.char)link.dataset.resultChar=hit.char;
+  if(Number.isInteger(hit.location))link.dataset.resultLocation=hit.location;
+  globalResults.append(link);
+ });
+}
+if(globalSearch){
+ globalSearch.addEventListener('input',renderGlobalSearch);
+ document.querySelector('#clearGlobalSearch')?.addEventListener('click',()=>{globalSearch.value='';globalSearch.focus();renderGlobalSearch()});
+ globalFilters?.addEventListener('click',e=>{
+  const button=e.target.closest('[data-global-filter]');if(!button)return;
+  globalFilter=button.dataset.globalFilter;
+  globalFilters.querySelectorAll('button').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',String(b===button))});
+  renderGlobalSearch();
+ });
+ globalResults.addEventListener('click',e=>{
+  const link=e.target.closest('.global-result');if(!link)return;
+  if(link.dataset.resultLocation)showLocation(Number(link.dataset.resultLocation));
+  if(link.dataset.resultChar){document.querySelector('[data-character-filter="all"]')?.click();const id=link.dataset.resultChar;requestAnimationFrame(()=>document.querySelector('[data-char="'+id+'"]')?.click())}
+ });
+ renderGlobalSearch();
+}
