@@ -14,7 +14,7 @@ const chars=[
 {image:'assets/selena.webp',id:'selena',name:'Selena',symbol:'✦',group:'core',subtitle:'Goddess · Co-creator · Mother',height:'5′9″',age:'Ageless',love:'Plu',overview:'A devoted goddess and mother who acts from compassion, responsibility, and fierce loyalty. Her visual design follows the official Selena references: a deeper warm complexion, distinctive blue-grey hair, and an elegant, powerful presence. She shares the work of creation with Plu and raises Talula with care.',abilities:['Creation and life essence','Protective magic','Emotional resonance','Divine presence'],books:['Elf Blood','The Goddess Elf','Small Wonders']},
 {image:'assets/taylor-new.webp',fallback:'assets/taylor.webp',id:'taylor',name:'Taylor',symbol:'✺',group:'core',subtitle:'Elf · Healer · The mansion',height:'6′0″',age:'Decades in the mansion',love:'Breni',overview:'Taylor shares a resemblance to Plu but appears far less majestic: a relaxed, bohemian elf with long tousled blonde hair, fine rainbow-coloured star glimmers woven through it, prominent pointed ears, layered beads and crystal jewellery, and comfortable flowing woodland clothes. Her mysterious past and missing memories contrast with the ordinary life she builds with Breni and Reyla.',abilities:['Healing living things','Unusual magical intuition','Compassion and curiosity'],books:['Elf Blood'],spoiler:false},
 {image:'assets/talula.webp',id:'talula',name:'Talula',symbol:'✶',group:'core',subtitle:'Selena’s daughter',height:'Not confirmed',age:'Grows up during Elf Blood',love:'Her family',overview:'Bright, observant, and deeply bonded to Selena, Talula grows up surrounded by extraordinary magic but treasures ordinary moments with her mother. Her distinct appearance includes dark hair streaked with red and asymmetrical ears: one pointed elven ear and one rounded human ear. She has no tattoos.',abilities:['Quick learning','Unusual magical resonance','Determination'],books:['Elf Blood','Small Wonders'],spoiler:false},
-{id:'ray',name:'Ray',symbol:'◈',group:'core',subtitle:'Human agent · Sector 1-7',height:'Not confirmed',age:'Not confirmed',love:'Not confirmed',overview:'A capable government agent and investigator whose rare perception leads her into the mystery surrounding the separate realities.',abilities:['Investigation and field leadership','Rare aura sight','Resourcefulness'],books:['Elf Blood'],spoiler:false},
+{id:'ray',name:'Rey',symbol:'◈',group:'core',subtitle:'Human agent · Sector 1-7',height:'Not confirmed',age:'Not confirmed',love:'Not confirmed',overview:'A resourceful government investigator whose rare green aura-sight draws her into the divided-realities mystery. Visually she resembles Reyla but appears darker, more exhausted and dishevelled, with practical, worn government clothing. She and Reyla were separate friends before the soul-projection events.',abilities:['Investigation and field leadership','Rare aura sight','Resourcefulness'],books:['Elf Blood'],spoiler:false},
 {id:'hybrid',name:'The Hybrid Official',symbol:'◆',group:'core',subtitle:'Government antagonist',height:'Not confirmed',age:'Ancient',love:'Power and control',overview:'A dangerous figure whose pursuit of magical power shaped the government and its technology. His deeper history is revealed across the trilogy.',abilities:['Manipulation of stored essence','Empowered equipment and technology','Strategic control'],books:['The World Before','The Goddess Elf'],spoiler:true},
 {id:'iven',name:'Iven',symbol:'⚒',group:'supporting',subtitle:'Dwarf · Companion-story ally',height:'Not confirmed',age:'Not confirmed',love:'Not confirmed',overview:'A dwarf connected to Breni’s investigation and the fraught relationship between dwarven communities and vampire clans.',abilities:['Local knowledge','Investigation and practical problem-solving'],books:['Dark Rain']},
 {id:'saelis',name:'Saelis',symbol:'♜',group:'supporting',subtitle:'Dark elf commander',height:'Not confirmed',age:'Not confirmed',love:'Her people',overview:'A dark elf leader involved in the long-running Everlangyrs dispute, where opposing communities must learn to share a future.',abilities:['Leadership','Negotiation','Knowledge of the valley’s history'],books:['The Listening World']},
@@ -31,18 +31,34 @@ const secrets=[['History','The Hybrid Official','An ancient seeker of residual d
 const timeline=[
 ['The First Ages','Creation and the earliest peoples','The first worlds take shape.',false],['Ancient Civilizations','Cultures and conflicts','Peoples forge alliances and inherit disputes.',false],['The Separation Era','Elf Blood','Divided reality forms the backdrop to the first book.',false],['The Age of Change','The Goddess Elf','The trilogy approaches a turning point.',false],['The Fracture','A world-altering event','An attempt to seize magical essence changes history.',true],['A Living World',"Reyla's later journey",'Much later, Reyla travels among communities.',true],['The Far Future','Dark Rain','Breni confronts a mystery involving vampire clans.',true]];
 const relations={
-'breni|plu':'A chosen family connection and shared responsibility.',
-'plu|selena':'Wives and co-creators whose love underlies the Chronicles.',
-'breni|selena':'Family ties and mutual protection.',
-'reyla|selena':'Connected through care for the living world.',
-'plu|reyla':'A connection through the living world and creation.',
-'breni|reyla':'Trusted companions across shared journeys.',
-'selena|talula':'Mother and daughter united by devotion.',
-'breni|taylor':'Longtime companions with a bond of trust.',
-'plu|taylor':'Connected through the legacy of the Goddess Elf.',
-'selena|taylor':'A deep bond whose origins are explored in the novels.',
-'breni|talula':'A bond important to Breni’s personal story.',
-'reyla|talula':'Connected through their extended family and shared world.'
+'plu|selena':{label:'Wives · Co-creators',text:'Plu and Selena were wives before the worlds existed. Together they create worlds and life, and their enduring love anchors the trilogy.'},
+'breni|taylor':{label:'Devoted companions',text:'Breni and Taylor spend eighty years building a life together in the mansion. Breni protects Taylor, and their shared home later becomes a refuge for Reyla.'},
+'breni|reyla':{label:'Chosen family · Protection',text:'Breni finds Reyla near a stream in their seventy-ninth year at the mansion. She brings Reyla home, where love, trust and everyday care grow between them.'},
+'reyla|taylor':{label:'Family · The mansion',text:'Taylor welcomes Reyla into the household. They develop a deep familial bond while Reyla learns the routines and safety of their home.'},
+'selena|talula':{label:'Mother · Daughter',text:'Selena raises Talula with devotion. Their closeness grows through everyday childhood moments explored in Small Wonders.'},
+'plu|talula':{label:'Linked through creation',text:'Talula is closely connected to Plu and Selena and to the extraordinary magic at the heart of the trilogy.',spoiler:'The union of Talula and Taylor leads to Plu’s return as the Goddess Elf.'},
+'selena|taylor':{label:'Family · Origins of the Fracture',text:'Taylor has a profound connection to Selena, although the full reason belongs to the trilogy’s central mystery.',spoiler:'Selena split Taylor from herself during the Fracture, shaping the events of the Separation Era.'},
+'talula|taylor':{label:'Parallel lives',text:'Taylor and Talula are linked by the mystery of their origins, despite growing up apart.',spoiler:'Their meeting and merging restore the Goddess Elf.'},
+'plu|taylor':{label:'Connected across eras',text:'Taylor’s story is tied to the Goddess Elf, but the source of that connection is part of the trilogy’s unfolding mystery.',spoiler:'Taylor joins Talula in the return of Plu.'},
+'plu|breni':{label:'Creator · Chosen family',text:'Plu and Breni share a bond of protection and family that reaches beyond their ordinary lives.'},
+'breni|selena':{label:'A protective family bond',text:'Breni and Selena are bound by loyalty and by the events surrounding the separated realities.',spoiler:'Breni was born from Selena’s rage and love during the Fracture.'},
+'breni|talula':{label:'Chosen family',text:'Talula and Breni become important members of the same extended family.'},
+'plu|reyla':{label:'Creation · Care for the world',text:'Plu recognizes and protects Reyla’s extraordinary connection to the living world.',spoiler:'Plu peacefully unites Rey and Reyla’s souls and later supports Reyla’s transformation into the living world’s code.'},
+'reyla|selena':{label:'Family · Guardianship',text:'Reyla and Selena share a profound concern for the people and living world around them.'},
+'reyla|talula':{label:'Family across the fracture',text:'Reyla and Talula become connected through their shared family and the events that draw the realities together.'},
+'ray|reyla':{label:'Friends · Separated lives',text:'Rey and Reyla trained and worked alongside one another. They are distinct people whose friendship survived a painful separation.',spoiler:'Government soul projection forced Rey to share Reyla’s body. Plu later joined their two souls peacefully, preserving both identities.'},
+'ray|selena':{label:'Mystery and investigation',text:'As a government agent, Rey encounters traces of Selena’s presence and gradually challenges the official account of what she sees.'},
+'ray|plu':{label:'Fates converging',text:'Rey’s investigation leads her into the mystery surrounding the Goddess Elf.',spoiler:'After the return, Plu preserves Rey’s soul together with Reyla’s.'},
+'ray|breni':{label:'Their paths converge',text:'Rey’s search for Reyla draws her toward the mansion and Breni’s family.'},
+'ray|taylor':{label:'The mansion mystery',text:'Rey’s journey becomes entangled with Taylor’s life at the mansion.'},
+'ray|talula':{label:'Separate sides of the mystery',text:'Rey’s work and Talula’s unusual connection to magic both contribute to the events of Elf Blood.'},
+'hybrid|selena':{label:'Antagonism · Stolen essence',text:'The Hybrid Official covets residual divine power without becoming a true Druid.',spoiler:'His attempt to seize divine power triggers the Fracture.'},
+'hybrid|plu':{label:'The struggle over divine power',text:'The Hybrid Official seeks power associated with the creators, rather than earning their abilities.'},
+'hybrid|ray':{label:'Government superior · Agent',text:'The official directs aspects of Rey’s work and exploits her rare perception and the government’s technology.'},
+'hybrid|reyla':{label:'Government experimentation',text:'Reyla’s life becomes entangled with the government’s attempts to investigate and control unusual powers.'},
+'hybrid|breni':{label:'Opposing forces',text:'Breni stands against the government’s destructive intrusion on her family.'},
+'hybrid|taylor':{label:'Opposing forces',text:'Taylor’s hidden origins and extraordinary magic make her a target in the government’s investigation.'},
+'hybrid|talula':{label:'The resonance mystery',text:'The Hybrid Official’s government tracks unusual magical pulses connected to Talula without understanding their origin.'}
 };
 const $=s=>document.querySelector(s);
 function renderBooks(filter='all'){
@@ -76,13 +92,43 @@ renderLore();
 $('#loreSearch').oninput=renderLore;
 document.querySelectorAll('[data-lore-cat]').forEach(b=>b.onclick=()=>{cat=b.dataset.loreCat;document.querySelectorAll('[data-lore-cat]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderLore()});
 function renderTimeline(){$('#timelineList').innerHTML=timeline.filter(t=>spoiler||!t[3]).map(t=>'<article class="time-point"><small>'+t[0]+'</small><h3>'+t[1]+'</h3><p>'+t[2]+'</p></article>').join('')}
-renderTimeline();$('#spoilerToggle').onchange=e=>{spoiler=e.target.checked;renderLore();renderTimeline();renderCharacters(document.querySelector('[data-character-filter].active')?.dataset.characterFilter||'all')};
-const names={plu:'Plu',selena:'Selena',breni:'Breni',reyla:'Reyla',talula:'Talula',taylor:'Taylor'};
-function updateRelation(){const a=$('#firstPerson').value,b=$('#secondPerson').value,key=[a,b].sort().join('|');$('#relationResult').innerHTML='<strong>'+names[a]+' & '+names[b]+'</strong><p>'+(a===b?'Choose two different characters.':relations[key]||'Their stories intersect in the wider world. Learn more in the novels.')+'</p>'}
-document.querySelectorAll('#firstPerson,#secondPerson').forEach(x=>x.onchange=updateRelation);
+renderTimeline();$('#spoilerToggle').onchange=e=>{spoiler=e.target.checked;renderLore();renderTimeline();renderCharacters(document.querySelector('[data-character-filter].active')?.dataset.characterFilter||'all');syncRelationControls()};
+const relationCast=['plu','selena','breni','taylor','reyla','talula','ray','hybrid'];
+const names=Object.fromEntries(chars.map(ch=>[ch.id,ch.name]));
+const activeRelationIds=()=>relationCast.filter(id=>id!=='hybrid'||spoiler);
+const assetFor=id=>{const ch=chars.find(c=>c.id===id);return ch?.image||null};
+function setOptions(select,choice){select.innerHTML=activeRelationIds().map(id=>'<option value="'+id+'">'+(names[id]||id)+'</option>').join('');if(activeRelationIds().includes(choice))select.value=choice}
 let selected=[];
-document.querySelectorAll('.relation-node').forEach(b=>b.onclick=()=>{selected.push(b.dataset.person);if(selected.length>2)selected=[b.dataset.person];$('#firstPerson').value=selected[0];if(selected[1])$('#secondPerson').value=selected[1];updateRelation()});
-updateRelation();
+function renderRelationMap(){
+ const first=$('#firstPerson').value,second=$('#secondPerson').value;
+ $('#relationMap').innerHTML=activeRelationIds().map(id=>{
+  const ch=chars.find(c=>c.id===id),pic=id==='ray'?'assets/reyla.webp':assetFor(id);
+  return '<button type="button" class="relation-node '+(id===first||id===second?'selected':'')+' '+(id==='ray'?'ray-node':'')+'" data-person="'+id+'" aria-label="Select '+ch.name+'"><span class="relation-photo">'+(pic?'<img src="'+pic+'" alt="" loading="lazy">':'<span class="relation-glyph">'+ch.symbol+'</span>')+'</span><span class="relation-name">'+ch.name+'</span><small>'+ch.subtitle+'</small></button>';
+ }).join('');
+}
+function updateRelation(){
+ const one=$('#firstPerson').value,two=$('#secondPerson').value,key=[one,two].sort().join('|');
+ const rel=relations[key];const result=$('#relationResult');
+ result.innerHTML=one===two?'<strong>Select two different characters</strong><p>Choose another portrait or use the menus.</p>':rel?'<strong>'+names[one]+' & '+names[two]+'</strong><small class="relation-type">'+rel.label+'</small><p>'+rel.text+'</p>'+(spoiler&&rel.spoiler?'<p class="spoiler-detail"><strong>Spoiler:</strong> '+rel.spoiler+'</p>':''):'<strong>'+names[one]+' & '+names[two]+'</strong><p>Both belong to the wider Chronicles, but the books do not establish a specific close personal connection between them.</p>';
+ renderRelationMap();
+}
+function syncRelationControls(){
+ const first=$('#firstPerson').value||'plu',second=$('#secondPerson').value||'selena';
+ setOptions($('#firstPerson'),first);setOptions($('#secondPerson'),second);
+ if(!activeRelationIds().includes(first))$('#firstPerson').value='plu';
+ if(!activeRelationIds().includes(second))$('#secondPerson').value='selena';
+ updateRelation();
+}
+document.querySelectorAll('#firstPerson,#secondPerson').forEach(x=>x.onchange=()=>{selected=[];updateRelation()});
+$('#relationMap').addEventListener('click',e=>{
+ const node=e.target.closest('[data-person]');if(!node)return;
+ const id=node.dataset.person;selected.push(id);
+ if(selected.length>2)selected=[id];
+ $('#firstPerson').value=selected[0];
+ if(selected[1])$('#secondPerson').value=selected[1];
+ updateRelation();
+});
+syncRelationControls();
 $('.menu-toggle').onclick=()=>{const nav=$('#nav');nav.classList.toggle('open');$('.menu-toggle').setAttribute('aria-expanded',nav.classList.contains('open'))};
 document.querySelectorAll('#nav a').forEach(a=>a.onclick=()=>{$('#nav').classList.remove('open');$('.menu-toggle').setAttribute('aria-expanded','false')});
 $('#year').textContent=new Date().getFullYear();
