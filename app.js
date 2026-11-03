@@ -80,7 +80,7 @@ function retailerLinks(book){
 function renderBooks(filter='all'){
  $('#bookGrid').innerHTML=books.filter(book=>filter==='all'||book.type===filter).map(book=>{
  const info=releaseInfo[book.id];
- return '<article class="book-card"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy" onerror="this.style.display=\\'none\\';this.nextElementSibling.style.display=\\'block\\'">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small>'+book.label+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p><p class="release-short"><strong>'+info.status+'</strong> · '+info.date+'</p><button class="text-link" data-book="'+book.id+'">Discover this story →</button><h4>Find this book</h4>'+retailerLinks(book)+'</div></article>';
+ return '<article class="book-card"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy" onerror="this.style.display=&quot;none&quot;;this.nextElementSibling.style.display=&quot;block&quot;">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small>'+book.label+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p><p class="release-short"><strong>'+info.status+'</strong> · '+info.date+'</p><button class="text-link" data-book="'+book.id+'">Discover this story →</button><h4>Find this book</h4>'+retailerLinks(book)+'</div></article>';
  }).join('');
 }
 function renderReleases(){
