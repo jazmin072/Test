@@ -304,3 +304,12 @@
 .codex-entry .approved-race-art{height:100%;min-height:0}
 .lore-card-visual.approved-race-art{width:100%;height:auto;aspect-ratio:1.7;min-height:0;background-size:400% 400%;border-bottom:1px solid #b38a64}
 @media(max-width:430px){.codex-entry .codex-portrait{aspect-ratio:240/264;min-height:180px}.codex-entry .approved-race-art{min-height:180px}}
+
+/* Approved individual Goblin portrait: supersedes the multi-species sprite crop.
+   Image is uploaded at repository root as goblin-approved.webp. */
+.approved-race-art[data-race-portrait="Goblins"]{
+ background-image:url("/goblin-approved.webp");
+ background-size:cover;
+ background-position:center 17%!important;
+ background-repeat:no-repeat;
+}
