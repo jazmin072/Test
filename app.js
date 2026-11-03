@@ -202,31 +202,45 @@ if(galleryHost&&galleryModal&&galleryContent){
  galleryContent.addEventListener('click',e=>{if(e.target.closest('a[href="#characters"]'))galleryModal.close()});
 }
 const knownLocations=[
- {name:'New Londanais',tag:'Urban centre',description:'An important urban centre in the Chronicles. Its full geography and history are still being documented in the public encyclopedia.',books:'Main trilogy'},
- {name:'Bozton',tag:'City',description:'A city where everyday life meets the extraordinary, including events in The Goddess Elf.',books:'The Goddess Elf'},
- {name:'Everlangyrs',tag:'Disputed region',description:'A region where dark elf and goblin communities must confront long-standing tensions and negotiate their future.',books:'The Goddess Elf · The Listening World'},
- {name:'Teramek',tag:'Territory',description:'A territory affected by the fractures between realities. Its role is explored in the larger story.',books:'The Goddess Elf'},
- {name:'Dark Veil Mountains',tag:'Remote mountains',description:'Remote mountains associated with dragon communities and Reyla’s later journeys.',books:'The Listening World'},
- {name:'The Minotaur Sanctuary',tag:'Refuge',description:'A sanctuary that preserves Minotaur tradition and provides refuge during the events of the separated era.',books:'Elf Blood'}
+ {name:'New Londanais',tag:'Urban centre',x:38,y:59,description:'A named urban centre within the separated-era setting. Its appearance in the books connects the city to the wider human world, but the official map does not establish exact streets or borders.',people:'Urban residents living within the human world during the events of the trilogy. The books do not establish a complete demographic breakdown.',land:'City terrain and precise regional boundaries have not been specified.',books:'Elf Blood · Main trilogy'},
+ {name:'Bozton',tag:'City',x:25,y:36,description:'An urban setting featured in The Goddess Elf, where residents must respond to events far larger than the city itself.',people:'Citizens of Bozton, whose everyday lives intersect with the main characters.',land:'A settled city; its physical position and surrounding territory have not been fixed in the books.',books:'The Goddess Elf'},
+ {name:'Everlangyrs',tag:'Shared region',x:58,y:36,description:'A region where a difficult history between neighbouring communities leads to negotiations and a continuing effort to live together. Reyla’s later work returns here.',people:'Dark elves and goblins, with distinctive communities, histories and competing accounts of the valley.',land:'An inhabited valley with paths, foundations, shared meeting spaces and settlements. The Listening World follows how the region changes through cooperation.',books:'The Goddess Elf · The Listening World'},
+ {name:'Teramek',tag:'Territory',x:77,y:58,description:'A location associated with the fractures between realities and the work of repairing what has been damaged.',people:'The available books do not establish a complete inventory of its residents or communities.',land:'The exact terrain, borders and geographic position have not been established.',books:'The Goddess Elf'},
+ {name:'Dark Veil Mountains',tag:'Mountain region',x:80,y:25,description:'A mountainous region visited in Reyla’s later travels, where dragons seek stronger connections with neighbouring communities.',people:'Dragon communities, including a settlement interested in trade and access along a northern road.',land:'Remote mountain terrain with access routes. Exact peaks, borders and distances remain unspecified.',books:'The Listening World'},
+ {name:'The Minotaur Sanctuary',tag:'Sanctuary',x:53,y:68,description:'A refuge with a vital place in Selena and Talula’s journey during Elf Blood. The sanctuary is threatened during the separated-era events.',people:'The Minotaurs and the community that maintains the sanctuary and its traditions.',land:'Protected sanctuary land. Its detailed terrain and exact position have not been formally mapped.',books:'Elf Blood'},
+ {name:'Breni’s Island Mystery',tag:'Island · unplaced',x:null,y:null,description:'The island setting of Dark Rain, where Breni investigates a conflict involving vampire clans and dwarves.',people:'Vampire clans and dwarven residents involved in the mystery.',land:'An island reached through ferry travel, but no confirmed continent or coordinates are established. It is deliberately not pinned to the globe.',books:'Dark Rain'},
+ {name:'Plu’s Off-world Journeys',tag:'Portal · beyond the globe',x:null,y:null,portal:true,description:'Plu’s stories include visits beyond the main world. These destinations are not part of the Earth-based atlas and are approached through a portal rather than assigned invented coordinates.',people:'The peoples and creatures encountered differ from one visited world to another. Specific communities will be added as each destination is confirmed.',land:'Other worlds beyond the primary setting. No invented world names, borders or distances are assigned here.',books:'Plu’s Creatures · Plu’s companion adventures'}
 ];
 const locationList=document.querySelector('#locationList'),locationDetail=document.querySelector('#locationDetail');
+const atlasPins=document.querySelector('#atlasPins'),atlasPortalButton=document.querySelector('#atlasPortalButton');
 function showLocation(index){
- if(!locationList||!locationDetail)return;
+ if(!locationList||!locationDetail||!knownLocations[index])return;
  const place=knownLocations[index];
- locationList.querySelectorAll('button').forEach((button,i)=>{button.classList.toggle('active',i===index);button.setAttribute('aria-pressed',String(i===index))});
+ locationList.querySelectorAll('button').forEach(button=>{const active=Number(button.dataset.location)===index;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active))});
+ atlasPins?.querySelectorAll('[data-atlas-index]').forEach(button=>{const active=Number(button.dataset.atlasIndex)===index;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active))});
+ atlasPortalButton?.classList.toggle('active',!!place.portal);
  locationDetail.replaceChildren();
  const label=document.createElement('small');label.textContent=place.tag;
  const title=document.createElement('h3');title.textContent=place.name;
  const description=document.createElement('p');description.textContent=place.description;
- const books=document.createElement('p');books.className='location-source';books.textContent='Appears in: '+place.books;
- locationDetail.append(label,title,description,books);
+ const peopleTitle=document.createElement('h4');peopleTitle.textContent='People & communities';
+ const people=document.createElement('p');people.textContent=place.people;
+ const landTitle=document.createElement('h4');landTitle.textContent='The land';
+ const land=document.createElement('p');land.textContent=place.land;
+ const books=document.createElement('p');books.className='location-source';books.textContent='Explore in: '+place.books;
+ const caveat=document.createElement('small');caveat.className='atlas-caveat';caveat.textContent=place.x==null?'Not placed on the globe · exact location not established':'Illustrative pin placement · coordinates not established in canon';
+ locationDetail.append(label,title,description,peopleTitle,people,landTitle,land,books,caveat);
 }
 if(locationList&&locationDetail){
  locationList.innerHTML=knownLocations.map((place,i)=>'<button type="button" data-location="'+i+'" aria-pressed="false">'+place.name+' <span>›</span></button>').join('');
- locationList.addEventListener('click',e=>{const button=e.target.closest('[data-location]');if(button)showLocation(Number(button.dataset.location))});
+ locationList.addEventListener('click',event=>{const button=event.target.closest('[data-location]');if(button)showLocation(Number(button.dataset.location))});
+ if(atlasPins){
+  atlasPins.innerHTML=knownLocations.map((place,i)=>place.x==null?'':'<button type="button" class="atlas-pin" style="left:'+place.x+'%;top:'+place.y+'%" data-atlas-index="'+i+'" aria-pressed="false" aria-label="Explore '+place.name+'"><span class="atlas-pin-dot" aria-hidden="true">✦</span><span class="atlas-pin-label">'+place.name+'</span></button>').join('');
+  atlasPins.addEventListener('click',event=>{const button=event.target.closest('[data-atlas-index]');if(!button)return;showLocation(Number(button.dataset.atlasIndex));if(matchMedia('(max-width:760px)').matches)locationDetail.scrollIntoView({behavior:'smooth',block:'start'})});
+ }
+ atlasPortalButton?.addEventListener('click',()=>{showLocation(knownLocations.length-1);locationDetail.scrollIntoView({behavior:'smooth',block:'nearest'})});
  showLocation(0);
 }
-
 
 /* Canon-conscious, art-ready creature notes. Images can be attached once approved. */
 const bestiaryEntries=[
