@@ -79,3 +79,50 @@
 .community-guidelines p{margin:0}
 @media(max-width:920px){.release-grid,.reader-signup{grid-template-columns:1fr}.newsletter-decor{display:none}.community-grid{grid-template-columns:1fr}.topbar nav{gap:10px}}
 @media(max-width:600px){.release-card{gap:13px;padding:11px}.release-card img{width:78px}.release-card h3{font-size:16px}.reader-signup>div:first-child{padding:22px}.signup-preview{flex-direction:column}}
+
+/* Homepage visual hierarchy refresh */
+.topbar nav{gap:clamp(7px,1vw,17px)}
+.topbar nav a{letter-spacing:.04em;font-size:10px}
+.hero{min-height:740px;height:min(950px,100svh);max-height:950px;padding:100px 24px 40px;align-items:flex-end;justify-content:center}
+.hero-group{object-position:center 30%}
+.hero:before{background:linear-gradient(180deg,#09061533 0%,#09061500 26%,#08051340 47%,#090515c9 72%,#090515 98%),linear-gradient(90deg,#0b061b4d,transparent 35%,transparent 65%,#0b061b4d)}
+.hero-copy{max-width:1080px;padding:30px 40px 25px;background:linear-gradient(180deg,#0d092208,#10091cbb);border:1px solid #e9c17e29;backdrop-filter:blur(3px)}
+.hero h1{font-size:clamp(46px,6.2vw,94px);line-height:1.08;margin:0 auto 13px;letter-spacing:-.025em}
+.hero h1 span{display:block;font-size:.55em;font-weight:500;letter-spacing:.065em;margin-bottom:.12em}
+.hero h1 strong{font-size:1.04em;letter-spacing:.015em;text-shadow:0 0 32px #261021,0 3px 7px #05020b}
+.hero-tagline{font-size:clamp(17px,2vw,25px)!important;font-weight:600;color:#fff2d9!important;line-height:1.4;max-width:760px;margin:12px auto}
+.hero-teaser{font-size:clamp(14px,1.4vw,17px)!important;max-width:650px;margin:0 auto 24px}
+.hero-copy .actions{gap:12px}.hero-copy .btn{padding:15px 23px;font-size:12px}
+.hero-scroll{display:inline-block;margin-top:21px;color:#f7dca8;font:12px Cinzel,Georgia,serif;letter-spacing:.06em}
+.story-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(28px,5vw,85px);align-items:center;background:radial-gradient(ellipse at 70% 40%,#24173a,#0b0717 75%)}
+.story-copy h2{max-width:770px}.story-copy p:not(.eyebrow){font-size:clamp(15px,1.3vw,18px);line-height:1.85}
+.story-art{display:block;width:100%;aspect-ratio:5/4;object-fit:cover;object-position:center;box-shadow:0 20px 60px #0009;border:1px solid #a88765;border-radius:6px}
+.story-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.trilogy-feature{text-align:center}.trilogy-feature .trilogy-summary{max-width:710px;margin:0 auto 34px}
+.trilogy-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(15px,3vw,40px);align-items:stretch;max-width:1150px;margin:0 auto}
+.trilogy-volume{position:relative;padding:27px 23px 26px;background:linear-gradient(155deg,#2e1d44,#100b23);border:1px solid #896686;display:flex;align-items:center;flex-direction:column}
+.trilogy-volume .volume-number{display:inline-block;color:#f7d89c;font:600 13px Cinzel,Georgia,serif;letter-spacing:.13em;margin-bottom:13px}
+.trilogy-volume img{width:min(100%,230px);height:320px;object-fit:contain;filter:drop-shadow(0 16px 14px #0009);transition:transform .25s}
+.trilogy-volume:hover img{transform:translateY(-5px)}
+.trilogy-volume h3{color:#f3d496;font-size:clamp(19px,1.8vw,25px);margin:19px 0 10px}
+.trilogy-volume p{font-size:14px;line-height:1.6;flex:1}
+.trilogy-volume .btn{width:100%;max-width:220px;margin-top:13px}
+.trilogy-bottom{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-top:28px;color:#f1d49d;font-size:14px}
+.trilogy-bottom a{text-decoration:underline;text-underline-offset:5px}
+.explore-links .feature-grid{margin-top:28px}
+.book-grid{display:block}
+.book-section{margin:36px 0 52px}
+.book-group-heading{border-bottom:1px solid #987659;padding:0 0 14px;margin:0 0 22px}
+.book-group-heading h3{color:#f4d59a;margin:0 0 3px;font-size:clamp(22px,2.2vw,29px)}
+.book-group-heading p{margin:0;font-size:14px}
+.book-group-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.book-card.main-volume{border-color:#9a785c}
+.book-meta p.release-short{flex:0 0 auto}
+.book-card .book-category{color:#e7cb92}
+.book-card:focus-within{outline:2px solid #e9c17e;outline-offset:2px}
+.feature:focus-visible,.btn:focus-visible,.topbar a:focus-visible{outline:2px solid #f8dba3;outline-offset:4px}
+@media(max-width:1100px){.topbar nav{gap:8px}.topbar nav a{font-size:9px}.topbar{padding:0 2%}}
+@media(max-width:900px){.story-intro{grid-template-columns:1fr}.story-art{max-width:780px;margin:auto;aspect-ratio:16/9}.trilogy-grid{gap:13px}.trilogy-volume{padding:18px 12px}.trilogy-volume img{height:275px}.book-group-grid{gap:15px}}
+@media(max-width:760px){.topbar{padding:0 4%}.topbar nav a{font-size:13px}.hero{height:auto;min-height:690px;max-height:none;padding:110px 14px 35px}.hero-group{object-position:center top}.hero-copy{padding:21px 13px}.hero h1{font-size:clamp(39px,8.5vw,64px)}.hero-tagline{font-size:17px!important}.hero-teaser{font-size:14px!important}.story-intro{gap:25px}.trilogy-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.trilogy-volume img{height:205px}.trilogy-volume h3{font-size:17px}.trilogy-volume p{font-size:12px}.trilogy-volume .btn{font-size:10px;padding:10px 6px}.book-group-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.hero{min-height:670px;padding:90px 12px 25px}.hero-group{object-position:51% 12%}.hero:before{background:linear-gradient(180deg,#09051512 10%,#09051522 28%,#090515aa 53%,#090515 92%)}.hero-copy{background:linear-gradient(180deg,#09051523,#090515b8);padding:18px 10px}.hero h1{font-size:clamp(36px,9vw,48px)}.hero h1 span{font-size:.53em}.hero-copy .actions{flex-direction:column}.hero-copy .btn{width:100%;padding:14px}.hero-teaser{margin-bottom:18px}.hero-scroll{margin-top:15px}.story-intro{padding-top:59px}.story-copy h2{font-size:34px}.story-art{aspect-ratio:5/4}.trilogy-grid{grid-template-columns:1fr;max-width:340px;gap:19px}.trilogy-volume{padding:23px 18px}.trilogy-volume img{height:300px}.trilogy-volume h3{font-size:24px}.trilogy-volume p{font-size:14px}.trilogy-volume .btn{padding:13px}.book-group-grid{grid-template-columns:1fr}.book-card .book-art{min-height:325px}.book-group-heading{margin-bottom:16px}.trilogy-bottom{gap:13px}.story-actions{flex-direction:column}.story-actions .btn{width:100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.trilogy-volume img{transition:none}}
