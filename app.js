@@ -129,6 +129,12 @@ document.addEventListener('click',e=>{
 $('.close-dialog').onclick=()=>$('#bookDialog').close();
 $('#bookDialog').onclick=e=>{if(e.target===$('#bookDialog'))$('#bookDialog').close()};
 $('#loreFilters').innerHTML=['All','Peoples','Magic','Places','History'].map(c=>'<button class="pill '+(c==='All'?'active':'')+'" data-lore-cat="'+c+'">'+c+'</button>').join('');
+const approvedRaceNames=['Elves','Druids','Vampires','Minotaurs','Dragons','Goblins','Dark Elves','Dwarves','Giants','Ogres','Cyclopes','Succubi','Dark Slimes'];
+function raceArtworkForLore(name){
+ const mapped={'Ogres & Giants':'Giants','Goblins & Dark Elves':'Dark Elves'}[name]||name;
+ const idx=approvedRaceNames.indexOf(mapped);
+ return idx<0?null:(idx%4*100/3)+'% '+(Math.floor(idx/4)*100/3)+'%';
+}
 function loreArtFor(entry){
  const title=entry[1],category=entry[0];
  const species={'Elves':'race-elves','Druids':'race-druids','Vampires':'race-vampires','Minotaurs':'race-minotaurs','Dragons':'race-dragons','Ogres & Giants':'race-giants','Goblins & Dark Elves':'race-dark-elves','Dwarves':'race-dwarves'};
@@ -142,7 +148,7 @@ function loreArtFor(entry){
  if(/Druid|Sanctuary|Ascension/i.test(title))return 'assets/lore-forest.svg';
  return category==='History'?'assets/lore-fracture.svg':category==='Magic'?'assets/lore-creation.svg':'assets/lore-valley.svg';
 }
-function renderLore(){const q=$('#loreSearch').value.toLowerCase();let entries=lore.concat(spoiler?secrets:[]).filter(x=>(cat==='All'||x[0]===cat)&&x.join(' ').toLowerCase().includes(q));$('#loreGrid').innerHTML=entries.map(x=>'<article class="lore-card"><img class="lore-card-visual" src="'+loreArtFor(x)+'" alt="Original Chronicles concept illustration for '+x[1]+'" loading="lazy"><div class="lore-card-body"><small>'+x[0]+'</small><h3>'+x[1]+'</h3><p>'+x[2]+'</p></div></article>').join('');$('#loreEmpty').hidden=entries.length!==0}
+function renderLore(){const q=$('#loreSearch').value.toLowerCase();let entries=lore.concat(spoiler?secrets:[]).filter(x=>(cat==='All'||x[0]===cat)&&x.join(' ').toLowerCase().includes(q));$('#loreGrid').innerHTML=entries.map(x=>'<article class="lore-card">'+(raceArtworkForLore(x[1])?'<div class="lore-card-visual approved-race-art" role="img" aria-label="Chronicles illustrated '+x[1]+'" style="background-position:'+raceArtworkForLore(x[1])+'"></div>':'<img class="lore-card-visual" src="'+loreArtFor(x)+'" alt="Illustrated lore scene for '+x[1]+'" loading="lazy">')+'<div class="lore-card-body"><small>'+x[0]+'</small><h3>'+x[1]+'</h3><p>'+x[2]+'</p></div></article>').join('');$('#loreEmpty').hidden=entries.length!==0}
 renderLore();
 $('#loreSearch').oninput=renderLore;
 document.querySelectorAll('[data-lore-cat]').forEach(b=>b.onclick=()=>{cat=b.dataset.loreCat;document.querySelectorAll('[data-lore-cat]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderLore()});
@@ -317,7 +323,7 @@ let bestiaryFilter='All';
 function renderBestiary(){
  const host=document.querySelector('#bestiaryGrid');if(!host)return;
  host.innerHTML=bestiaryEntries.filter(entry=>bestiaryFilter==='All'||entry.category===bestiaryFilter).map(entry=>
- '<article class="bestiary-card codex-entry"><div class="codex-portrait" ><img class="bestiary-illustration" src="assets/race-'+raceArtwork[entry.name]+'.svg" alt="Original fantasy concept art for '+entry.name+'" loading="lazy"></div><div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p>'+entry.summary+'</p><span class="bestiary-art-note">Original Chronicles illustration · appearance subject to author approval</span></div></article>'
+ '<article class="bestiary-card codex-entry"><div class="codex-portrait" ><div class="approved-race-art" data-race-portrait="'+entry.name+'" role="img" aria-label="Illustrated '+entry.name+' portrait from the author-supplied Chronicles compendium" style="background-position:'+((['Elves','Druids','Vampires','Minotaurs','Dragons','Goblins','Dark Elves','Dwarves','Giants','Ogres','Cyclopes','Succubi','Dark Slimes'].indexOf(entry.name)%4)*100/3)+'% '+(Math.floor(['Elves','Druids','Vampires','Minotaurs','Dragons','Goblins','Dark Elves','Dwarves','Giants','Ogres','Cyclopes','Succubi','Dark Slimes'].indexOf(entry.name)/4)*100/3)+'%"></div></div><div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p>'+entry.summary+'</p><span class="bestiary-art-note">Art from the Chronicles illustrated compendium · lore based on the books</span></div></article>'
  ).join('');
 }
 const bestiaryFilters=document.querySelector('#bestiaryFilters');
