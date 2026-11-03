@@ -7,6 +7,24 @@ const books=[
 {id:'wonders',cover:'assets/small-wonders.png',title:'Small Wonders',type:'companion',label:'Selena & Talula · Companion',color:'rose',desc:'A tender portrait of daily life, growing trust and the small moments that make a family.',more:'An intimate story about Selena and Talula and the everyday love that binds them.'},
 {id:'creatures',title:"Plu's Creatures",type:'companion',label:'A Plu story · Companion',color:'gold',desc:'A playful collection of encounters with the remarkable creatures of the world.',more:'A lighter-hearted episodic journey across the strange and wonderful beings of the Chronicles.'},
 {id:'plu',cover:'assets/plu-side-story.png',title:'PLU — A Goddess’s Side Story',type:'companion',label:'Final companion · In progress',color:'gold',desc:'A future side story centered on Plu, set after the other books.',more:'This story is still being written and will appear after the other books in the reading collection.'}];
+
+const storefronts={
+elf:[['Barnes & Noble',books[0].url],['ThriftBooks','https://www.thriftbooks.com/w/elf-blood-the-chronicles-of-plu-and-selena_jonathan-m-reed/60835761/']],
+before:[['Barnes & Noble',books[1].url],['ThriftBooks','https://www.thriftbooks.com/w/the-world-before-the-chronicles-of-plu-and-selena_jonathan-m-reed/60834395/'],['Feltrinelli · eBook','https://www.lafeltrinelli.it/world-before-ebook-inglese-jonathan-m-reed/e/9798237360950']],
+goddess:[['Barnes & Noble',books[2].url]],
+listening:[['Barnes & Noble',books[3].url],['Fishpond · paperback','https://www.fishpond.com.au/Books/listening-world-Jonathan-M-Reed/9798237084870'],['IBS · paperback','https://www.ibs.it/listening-world-libro-inglese-jonathan-m-reed/e/9798237084870']],
+rain:[['Barnes & Noble',books[4].url],['ThriftBooks','https://www.thriftbooks.com/w/dark-rain-the-chronicles-of-plu-and-selena_jonathan-m-reed/60774735/'],['IBS · paperback','https://www.ibs.it/dark-rain-libro-inglese-jonathan-m-reed/e/9798237895520'],['Feltrinelli · paperback','https://www.lafeltrinelli.it/dark-rain-libro-inglese-jonathan-m-reed/e/9798237895520']]
+};
+const releaseInfo={
+elf:{status:'Listed as published',date:'October 2026',desc:'Paperback listed with an October 2026 release month. Exact day varies or has not been verified.'},
+before:{status:'Upcoming · preorder',date:'December 10, 2026',desc:'Retailer listings currently show December 10, 2026 for print and eBook editions.'},
+goddess:{status:'Date to be confirmed',date:'Not announced',desc:'No independently confirmed publication date found; please check the bookstore listings.'},
+listening:{status:'Published',date:'October 21, 2026',desc:'Paperback publication date reported by an independent retailer.'},
+rain:{status:'Published',date:'October 21, 2026',desc:'Paperback publication date reported by an independent retailer.'},
+wonders:{status:'In progress',date:'To be announced',desc:'Companion story about Selena and Talula. Publication date not confirmed.'},
+creatures:{status:'Release date not confirmed',date:'To be announced',desc:'The playful Plu creature adventures. No confirmed retailer release date.'},
+plu:{status:'Still being written',date:'After the other books',desc:'The final companion book is still being written. Its publication date has not been announced.'}
+};
 const chars=[
 {image:'assets/breni.webp',id:'breni',name:'Breni',symbol:'☽',group:'core',subtitle:'Vampire · Demi-god · Warrior',height:'6′9″',age:'Ageless',love:'Family and those she protects',overview:'A composed, fiercely loyal warrior whose imposing strength is matched by restraint. She builds a home with Taylor, protects Reyla, and takes responsibility for people in danger.',abilities:['Twin silver daggers','Exceptional strength and speed','Sunlight immunity','Immobilization'],books:['Elf Blood','The Goddess Elf','Dark Rain']},
 {image:'assets/reyla.webp',id:'reyla',name:'Reyla',symbol:'❦',group:'core',subtitle:'The last true-born Druid',height:'5′6″',age:'Not confirmed',love:'The living world',overview:'A thoughtful listener who values people and nature equally. Her visual reference has dark natural curls, fine-framed glasses, a warm complexion, and distinctive personal markings; her in-world design combines those features with forest-green druid clothing, organic gold details, and living green magic. After finding family in the mansion, she becomes a mediator who seeks patient, lasting solutions instead of force.',abilities:['Connection to nature','Druidic perception','Mediation','World code affinity'],books:['Elf Blood','The Goddess Elf','The Listening World']},
@@ -55,9 +73,23 @@ const relations={
 
 };
 const $=s=>document.querySelector(s);
-function renderBooks(filter='all'){
- $('#bookGrid').innerHTML=books.filter(b=>filter==='all'||b.type===filter).map(b=>'<article class="book-card"><div class="book-art '+b.color+'">'+(b.cover?'<img class="cover-image" src="'+b.cover+'" alt="'+b.title+' cover" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'">':'')+'<span class="cover-text" style="'+(b.cover?'display:none':'')+'">'+b.title+'</span></div><div class="book-meta"><small>'+b.label+'</small><h3>'+b.title+'</h3><p>'+b.desc+'</p><button class="text-link" data-book="'+b.id+'">Discover this story →</button>'+(b.url?'<a class="btn purchase-link" target="_blank" rel="noopener noreferrer" href="'+b.url+'">Buy at Barnes & Noble ↗</a>':'<span class="purchase-pending">Purchase link coming soon</span>')+'</div></article>').join('');
+function retailerLinks(book){
+ const list=storefronts[book.id]||[];
+ return list.length?'<div class="storefront-links" aria-label="Retailers for '+book.title+'">'+list.map(([store,url])=>'<a href="'+url+'" rel="noopener noreferrer" target="_blank">'+store+' ↗</a>').join('')+'</div>':'<p class="retailer-empty">Store listings will be added when confirmed.</p>';
 }
+function renderBooks(filter='all'){
+ $('#bookGrid').innerHTML=books.filter(book=>filter==='all'||book.type===filter).map(book=>{
+ const info=releaseInfo[book.id];
+ return '<article class="book-card"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy" onerror="this.style.display=\\'none\\';this.nextElementSibling.style.display=\\'block\\'">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small>'+book.label+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p><p class="release-short"><strong>'+info.status+'</strong> · '+info.date+'</p><button class="text-link" data-book="'+book.id+'">Discover this story →</button><h4>Find this book</h4>'+retailerLinks(book)+'</div></article>';
+ }).join('');
+}
+function renderReleases(){
+ $('#releaseGrid').innerHTML=books.map(book=>{
+ const info=releaseInfo[book.id];
+ return '<article class="release-card"><img src="'+(book.cover||'assets/plu.webp')+'" alt="" loading="lazy"><div><small>'+info.status+'</small><h3>'+book.title+'</h3><p class="release-date">'+info.date+'</p><p>'+info.desc+'</p><a href="#books">See book & retailers</a></div></article>';
+ }).join('');
+}
+renderReleases();
 renderBooks();
 document.querySelectorAll('[data-book-filter]').forEach(btn=>btn.addEventListener('click',()=>{
  document.querySelectorAll('[data-book-filter]').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderBooks(btn.dataset.bookFilter)
@@ -73,7 +105,7 @@ document.querySelectorAll('[data-character-filter]').forEach(btn=>btn.addEventLi
 }));
 document.addEventListener('click',e=>{
  const b=e.target.closest('[data-book]');
- if(b){const x=books.find(v=>v.id===b.dataset.book);$('#bookDialogContent').innerHTML='<small>'+x.label+'</small><h2>'+x.title+'</h2><p>'+x.desc+'</p><p>'+x.more+'</p>'+(x.url?'<a class="btn primary" href="'+x.url+'" target="_blank" rel="noopener noreferrer">Buy at Barnes & Noble ↗</a>':'<p>Purchase link coming soon.</p>');$('#bookDialog').showModal()}
+ if(b){const x=books.find(v=>v.id===b.dataset.book);$('#bookDialogContent').innerHTML='<small>'+x.label+'</small><h2>'+x.title+'</h2><p>'+x.desc+'</p><p>'+x.more+'</p>'+'<h3>Retailer listings</h3>'+retailerLinks(x);$('#bookDialog').showModal()}
  const cb=e.target.closest('[data-char]');
  if(cb){const c=chars.find(v=>v.id===cb.dataset.char),d=$('#characterDetail');d.hidden=false;d.innerHTML='<button class="detail-close" aria-label="Close profile">×</button><p class="eyebrow">'+(c.group==='core'?'MAIN CAST':'SUPPORTING CAST')+'</p><h3>'+c.name+'</h3><p>'+c.subtitle+'</p><div class="split"><div><h3>Biography</h3><p>'+c.overview+'</p><p><strong>Appearances:</strong> '+c.books.join(', ')+'</p></div><div><h3>Key abilities & traits</h3><ul>'+c.abilities.map(a=>'<li>'+a+'</li>').join('')+'</ul><h3>Profile</h3><p>Height: '+c.height+'<br>Age: '+c.age+'<br>Important bonds: '+c.love+'</p></div></div>';d.scrollIntoView({behavior:'smooth',block:'nearest'})}
  if(e.target.matches('.detail-close'))$('#characterDetail').hidden=true;
