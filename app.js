@@ -45,7 +45,7 @@ const lore=[
 ['Magic','Divine Creation','The ability to shape life and worlds.'],['Magic','Druidic Magic','Power rooted in connection and understanding.'],['Magic','Residual Essence','Traces of power that linger in materials and places.'],['Magic','Crystal Storage','Crystals capable of holding unusual magical energies.'],
 ['Places','New Londanais','An important urban center.'],['Places','Bozton','A city where the extraordinary meets everyday life.'],['Places','Everlangyrs','A region with complicated coexistence among peoples.'],['Places','Teramek','A distinctive territory in the wider world.'],['Places','Dark Veil Mountains','Remote mountains linked to dragon communities.'],['Places','The Minotaur Sanctuary','A place of refuge and tradition.'],
 ['History','The Government','An institution using specially empowered technology.'],['History','The Fracture','A defining disruption at the heart of the trilogy.'],['History','The Separation Era','An age marked by realities divided.'],['History','The Merger Era','A later age of changing relationships between worlds.']];
-const secrets=[['History','The Hybrid Official','An ancient seeker of residual divine power.'],['Magic','Pocket Reality','A separate space resulting from the Fracture.'],['History',"Reyla's Ascension",'A transformation in her relationship with the world.']];
+const secrets=[['History','The Hybrid Official','A mysterious government official whose story is not yet known.'],['Magic','Pocket Reality','A separate space resulting from the Fracture.'],['History',"Reyla's Ascension",'A transformation in her relationship with the world.']];
 const timeline=[
 ['The First Ages','Creation and the earliest peoples','The first worlds take shape.',false],['Ancient Civilizations','Cultures and conflicts','Peoples forge alliances and inherit disputes.',false],['The Separation Era','Elf Blood','Divided reality forms the backdrop to the first book.',false],['The Age of Change','The Goddess Elf','The trilogy approaches a turning point.',false],['The Fracture','A world-altering event','An attempt to seize magical essence changes history.',true],['A Living World',"Reyla's later journey",'Much later, Reyla travels among communities.',true],['The Far Future','Dark Rain','Breni confronts a mystery involving vampire clans.',true]];
 const relations={
@@ -80,7 +80,7 @@ function retailerLinks(book){
 function renderBookCard(book){
  const info=releaseInfo[book.id],upcoming=['before','goddess','wonders','creatures','plu'].includes(book.id);
  const category=book.type==='trilogy'?'MAIN TRILOGY':(['listening','rain'].includes(book.id)?'POST-TRILOGY COMPANION':'COMPANION STORY');
- return '<article class="book-card '+(book.type==='trilogy'?'main-volume':'companion-volume')+'"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small class="book-category">'+category+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p><p class="release-short"><strong>'+info.status+'</strong> · '+info.date+'</p><button class="text-link" data-book="'+book.id+'">Discover this story →</button><h4>Available retailers</h4>'+retailerLinks(book)+'</div></article>';
+ return '<article class="book-card '+(book.type==='trilogy'?'main-volume':'companion-volume')+'"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small class="book-category">'+category+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p><p class="release-short"><strong>'+info.status+'</strong> · '+info.date+'</p>'+(book.type==='trilogy'?'<a class="text-link" href="'+({'elf':'elf-blood.html','before':'the-world-before.html','goddess':'the-goddess-elf.html'}[book.id])+'">Explore book page →</a>':'<button class="text-link" data-book="'+book.id+'">Discover this story →</button>')+'<h4>Available retailers</h4>'+retailerLinks(book)+'</div></article>';
 }
 function renderBooks(filter='all'){
  const groups=[
@@ -134,7 +134,7 @@ renderLore();
 $('#loreSearch').oninput=renderLore;
 document.querySelectorAll('[data-lore-cat]').forEach(b=>b.onclick=()=>{cat=b.dataset.loreCat;document.querySelectorAll('[data-lore-cat]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderLore()});
 function renderTimeline(){$('#timelineList').innerHTML=timeline.filter(t=>spoiler||!t[3]).map(t=>'<article class="time-point"><small>'+t[0]+'</small><h3>'+t[1]+'</h3><p>'+t[2]+'</p></article>').join('')}
-renderTimeline();$('#spoilerToggle').onchange=e=>{spoiler=e.target.checked;renderLore();renderTimeline();renderCharacters(document.querySelector('[data-character-filter].active')?.dataset.characterFilter||'all');syncRelationControls()};
+renderTimeline();$('#spoilerToggle').onchange=e=>{spoiler=e.target.checked;document.body.classList.toggle('lore-explorer',spoiler);$('#readerModeName').textContent=spoiler?'Lore Explorer · spoilers visible':'New Reader · spoilers protected';renderLore();renderTimeline();renderCharacters(document.querySelector('[data-character-filter].active')?.dataset.characterFilter||'all');syncRelationControls();renderGlossary();renderGlobalSearch();if(typeof showLocation==='function')showLocation(currentLocationIndex)};
 const relationCast=['plu','selena','breni','taylor','reyla','talula','ray','hybrid'];
 const names=Object.fromEntries(chars.map(ch=>[ch.id,ch.name]));
 const activeRelationIds=()=>relationCast.filter(id=>id!=='hybrid');
@@ -150,7 +150,7 @@ function renderRelationMap(){
 }
 function updateRelation(){
  const one=$('#firstPerson').value,two=$('#secondPerson').value,key=[one,two].sort().join('|');
- const rel=relations[key];const result=$('#relationResult');
+ const rel=relations[key];const result=$('#relationResult');if(!spoiler&&!['plu|selena','breni|taylor','selena|talula'].includes(key)&&one!==two){result.innerHTML='<strong>Relationship details protected</strong><p>These lives become connected as the trilogy unfolds. Enable Lore Explorer for more context.</p>';renderRelationMap();return;}
  result.innerHTML=one===two?'<strong>Select two different characters</strong><p>Choose another portrait or use the menus.</p>':rel?'<strong>'+names[one]+' & '+names[two]+'</strong><small class="relation-type">'+rel.label+'</small><p>'+rel.text+'</p>'+(spoiler&&rel.spoiler?'<p class="spoiler-detail"><strong>Spoiler:</strong> '+rel.spoiler+'</p>':''):'<strong>'+names[one]+' & '+names[two]+'</strong><p>Both belong to the wider Chronicles, but the books do not establish a specific close personal connection between them.</p>';
  renderRelationMap();
 }
@@ -172,7 +172,9 @@ $('#relationMap').addEventListener('click',e=>{
 });
 syncRelationControls();
 $('.menu-toggle').onclick=()=>{const nav=$('#nav');nav.classList.toggle('open');$('.menu-toggle').setAttribute('aria-expanded',nav.classList.contains('open'))};
-document.querySelectorAll('#nav a').forEach(a=>a.onclick=()=>{$('#nav').classList.remove('open');$('.menu-toggle').setAttribute('aria-expanded','false')});
+document.querySelectorAll('#nav a').forEach(a=>a.onclick=()=>{$('#nav').classList.remove('open');$('.menu-toggle').setAttribute('aria-expanded','false');document.querySelectorAll('#nav details').forEach(d=>d.open=false)});
+document.querySelectorAll('#nav details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)document.querySelectorAll('#nav details').forEach(other=>{if(other!==d)other.open=false})}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('#nav details').forEach(d=>d.open=false);$('#nav').classList.remove('open');$('.menu-toggle').setAttribute('aria-expanded','false')}});
 $('#year').textContent=new Date().getFullYear();
 
 /* Gallery is built from the existing approved illustrations. */
@@ -213,20 +215,22 @@ const knownLocations=[
 ];
 const locationList=document.querySelector('#locationList'),locationDetail=document.querySelector('#locationDetail');
 const atlasPins=document.querySelector('#atlasPins'),atlasPortalButton=document.querySelector('#atlasPortalButton');
+let currentLocationIndex=0;
 function showLocation(index){
  if(!locationList||!locationDetail||!knownLocations[index])return;
- const place=knownLocations[index];
+ currentLocationIndex=index;const place=knownLocations[index];
  locationList.querySelectorAll('button').forEach(button=>{const active=Number(button.dataset.location)===index;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active))});
  atlasPins?.querySelectorAll('[data-atlas-index]').forEach(button=>{const active=Number(button.dataset.atlasIndex)===index;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active))});
  atlasPortalButton?.classList.toggle('active',!!place.portal);
  locationDetail.replaceChildren();
  const label=document.createElement('small');label.textContent=place.tag;
  const title=document.createElement('h3');title.textContent=place.name;
- const description=document.createElement('p');description.textContent=place.description;
+ const hiddenLocation=!spoiler&&['Everlangyrs','Teramek','Dark Veil Mountains','Breni’s Island Mystery','Plu’s Off-world Journeys'].includes(place.name);
+ const description=document.createElement('p');description.textContent=hiddenLocation?'This location appears in later books. Additional history is available in Lore Explorer mode.':place.description;
  const peopleTitle=document.createElement('h4');peopleTitle.textContent='People & communities';
- const people=document.createElement('p');people.textContent=place.people;
+ const people=document.createElement('p');people.textContent=hiddenLocation?'Further details are protected for new readers.':place.people;
  const landTitle=document.createElement('h4');landTitle.textContent='The land';
- const land=document.createElement('p');land.textContent=place.land;
+ const land=document.createElement('p');land.textContent=hiddenLocation?'The full landscape notes are available in Lore Explorer mode.':place.land;
  const books=document.createElement('p');books.className='location-source';books.textContent='Explore in: '+place.books;
  const caveat=document.createElement('small');caveat.className='atlas-caveat';caveat.textContent=place.x==null?'Not placed on the globe · exact location not established':'Illustrative pin placement · coordinates not established in canon';
  locationDetail.append(label,title,description,peopleTitle,people,landTitle,land,books,caveat);
