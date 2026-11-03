@@ -244,22 +244,62 @@ if(locationList&&locationDetail){
 
 /* Canon-conscious, art-ready creature notes. Images can be attached once approved. */
 const bestiaryEntries=[
- {name:'Elves',category:'Peoples',realm:'The World Before · Elf Blood',summary:'An ancient people tied to the earliest ages of the world. Their history is closely connected to the original fracture and to Taylor’s unexplained past.',image:null},
- {name:'Druids',category:'Peoples',realm:'The World Before · The Listening World',summary:'A people with an intimate connection to living nature. Their traditions and the use of life-linked magic are important to the world’s history.',image:null},
- {name:'Vampires',category:'Peoples',realm:'Elf Blood · Dark Rain',summary:'Vampires are one of the world’s established peoples, with communities and clans of their own. Breni’s later story follows disputes involving two vampire clans.',image:null},
- {name:'Minotaurs',category:'Peoples',realm:'Elf Blood',summary:'The Minotaur sanctuary offers a place of refuge and preserves traditions of its people during a dangerous period of the separated world.',image:null},
- {name:'Dark Elves',category:'Peoples',realm:'The Goddess Elf · The Listening World',summary:'A distinct community involved in the long history of Everlangyrs, where questions of shared ground and peaceful coexistence remain important.',image:null},
- {name:'Goblins',category:'Peoples',realm:'The Goddess Elf · The Listening World',summary:'A community with its own leaders and history in Everlangyrs. Their relationships with neighbouring dark elves form part of the region’s story.',image:null},
- {name:'Dwarves',category:'Peoples',realm:'The World Before · Dark Rain',summary:'One of the world’s long-established peoples. Dwarven characters and tensions between communities play a part in Breni’s island mystery.',image:null},
- {name:'Dragons',category:'Creatures',realm:'The World Before · The Listening World',summary:'Among the beings connected with the earliest ages, dragons also feature in the distant mountains that Reyla encounters in her later travels.',image:null},
- {name:'Ogres & Giants',category:'Creatures',realm:'The World Before',summary:'Powerful ancient peoples remembered in accounts of early wars and disputes. Their conflicts form part of the world’s deep history.',image:null},
- {name:'Cyclopes',category:'Creatures',realm:'The World Before · The Goddess Elf',summary:'One of the extraordinary peoples that belongs to the larger history and later gatherings of the Chronicles.',image:null}
+ {name:'Elves',category:'Peoples',realm:'The World Before · Elf Blood',summary:'Among the earliest peoples of the world. Taylor’s lost memories form part of the mystery surrounding the ancient elves.'},
+ {name:'Druids',category:'Peoples',realm:'The World Before · The Listening World',summary:'A people connected deeply to living nature. Their history and the legacy of their magic shape events across the Chronicles.'},
+ {name:'Vampires',category:'Peoples',realm:'Elf Blood · Dark Rain',summary:'Vampire communities have cultures and clans of their own. Breni’s later adventure explores conflict involving two clans.'},
+ {name:'Minotaurs',category:'Peoples',realm:'Elf Blood',summary:'The Minotaur sanctuary offers a refuge and preserves the traditions of its people during a dangerous period.'},
+ {name:'Dark Elves',category:'Peoples',realm:'The Goddess Elf · The Listening World',summary:'A distinct community whose history with neighbouring goblins is important to the future of Everlangyrs.'},
+ {name:'Goblins',category:'Peoples',realm:'The Goddess Elf · The Listening World',summary:'A community with its own leaders and history in Everlangyrs. Their negotiations with the dark elves shape the region.'},
+ {name:'Dwarves',category:'Peoples',realm:'The World Before · Dark Rain',summary:'An established people of the world. Dwarven characters play important roles in the mystery surrounding Breni’s island journey.'},
+ {name:'Dragons',category:'Creatures',realm:'The World Before · The Listening World',summary:'Among the world’s ancient beings. Reyla’s later travels take her toward dragon settlements in the Dark Veil Mountains.'},
+ {name:'Giants',category:'Creatures',realm:'The World Before · The Goddess Elf',summary:'Powerful beings whose early conflicts are part of the world’s deep history and whose presence continues into later eras.'},
+ {name:'Ogres',category:'Creatures',realm:'The World Before',summary:'An ancient people whose conflict with giants belongs to the early history explored in The World Before.'},
+ {name:'Cyclopes',category:'Creatures',realm:'The World Before · The Goddess Elf',summary:'One of the extraordinary peoples encountered in the history and later gatherings of the Chronicles.'},
+ {name:'Succubi',category:'Creatures',realm:'Plu’s Creatures',summary:'A type of being encountered in Plu’s lighter adventures. Their appearances belong to those companion tales rather than the main trilogy’s central mystery.'},
+ {name:'Dark Slimes',category:'Creatures',realm:'Plu’s Creatures',summary:'Unusual dark slime creatures encountered in Plu’s comedic travels. Their particular encounters are explored in the companion stories.'}
 ];
+/* Illustrated race concepts are visual interpretations, not an assertion of
+   fixed clothing, physical traits or abilities. Replace with approved art files as available. */
+const bestiaryDesign={
+ 'Elves':{skin:'#edd1b7',hair:'#bb4a68',back:'#593961',eye:'#dfa854',kind:'elf'},
+ 'Druids':{skin:'#d9bd9e',hair:'#5e9d63',back:'#325b45',eye:'#a5e5a7',kind:'druid'},
+ 'Vampires':{skin:'#b6afc2',hair:'#282037',back:'#48315d',eye:'#e56f83',kind:'vampire'},
+ 'Minotaurs':{skin:'#9e6a50',hair:'#55413a',back:'#68402e',eye:'#f8cd8d',kind:'minotaur'},
+ 'Dark Elves':{skin:'#8b8ab5',hair:'#22223d',back:'#2d2851',eye:'#b7c2f8',kind:'elf'},
+ 'Goblins':{skin:'#78a96c',hair:'#536442',back:'#365947',eye:'#e0d27b',kind:'goblin'},
+ 'Dwarves':{skin:'#bd8967',hair:'#533b3c',back:'#5c3c2a',eye:'#eec98a',kind:'dwarf'},
+ 'Dragons':{skin:'#4c728d',hair:'#a7d0df',back:'#2d455e',eye:'#f2c26f',kind:'dragon'},
+ 'Giants':{skin:'#b49d90',hair:'#d4c0b0',back:'#5d526e',eye:'#e5cfb7',kind:'giant'},
+ 'Ogres':{skin:'#8f648e',hair:'#d8709e',back:'#513451',eye:'#f1daac',kind:'ogre'},
+ 'Cyclopes':{skin:'#9779bd',hair:'#533b7e',back:'#403169',eye:'#f9c777',kind:'cyclops'},
+ 'Succubi':{skin:'#ae8fa4',hair:'#33273c',back:'#6a2855',eye:'#ee8ca1',kind:'succubus'},
+ 'Dark Slimes':{skin:'#543269',hair:'#9a64ca',back:'#1b1b43',eye:'#dbb0ff',kind:'slime'}
+};
+function bestiaryPortrait(name){
+ const a=bestiaryDesign[name]||bestiaryDesign.Elves;
+ const horns=['succubus','minotaur','ogre'].includes(a.kind)?'<path d="M83 94 Q30 45 58 24 Q81 31 107 82 M177 94 Q227 45 202 24 Q177 31 153 82" fill="'+a.hair+'" stroke="#e6c58b" stroke-width="3"/>':'';
+ const ears=['elf','goblin','druid','vampire'].includes(a.kind)?'<path d="M93 139 44 96 62 157 97 160 M165 139 213 96 198 157 164 160" fill="'+a.skin+'" stroke="#5c4060" stroke-width="3"/>':'';
+ const flora=a.kind==='druid'?'<g fill="#aee0a8" stroke="#377753" stroke-width="2"><path d="M71 84Q58 37 28 45 Q29 85 71 84"/><path d="M176 67Q197 19 233 42 Q225 77 176 67"/><circle cx="128" cy="47" r="12" fill="#f1d39f"/></g>':'';
+ const scales=a.kind==='dragon'?'<path d="M65 173 42 148 70 141 50 116 79 113 M191 173 217 148 190 141 208 116 179 113" fill="#7094af" stroke="#d4bb8d" stroke-width="3"/>':'';
+ const eye=a.kind==='cyclops'?'<ellipse cx="129" cy="144" rx="24" ry="15" fill="#f1e3d1" stroke="#3b2b40" stroke-width="3"/><circle cx="129" cy="144" r="10" fill="'+a.eye+'"/><circle cx="129" cy="144" r="4" fill="#171525"/>':'<path d="M90 143Q109 130 123 146Q109 152 90 143 M136 146Q153 130 172 143Q153 152 136 146" fill="#f1e3d1" stroke="#3a283b" stroke-width="3"/><circle cx="108" cy="143" r="5" fill="'+a.eye+'"/><circle cx="153" cy="143" r="5" fill="'+a.eye+'"/>';
+ const fang=a.kind==='vampire'||a.kind==='succubus'?'<path d="M119 174 123 184 127 175 M137 174 141 184 145 175" fill="#fcf5ed"/>':'';
+ const one=a.kind==='slime';
+ const content=one?'<path d="M59 227Q28 194 49 150Q38 117 62 97Q70 57 108 70Q130 33 161 74Q210 71 213 120Q242 157 205 184Q223 223 182 233Z" fill="url(#body)" stroke="#d7a4ff" stroke-width="3"/><path d="M78 154Q97 130 111 153M146 153Q164 132 184 154" fill="none" stroke="#ecd7ff" stroke-width="8" stroke-linecap="round"/><path d="M113 193Q130 204 151 190" fill="none" stroke="#e7c8ff" stroke-width="4" stroke-linecap="round"/><path d="M78 102Q110 61 145 81" fill="none" stroke="#fff" stroke-width="6" opacity=".35"/>':
+ '<path d="M51 264 Q51 214 92 209 L113 201 L147 201 L170 209 Q214 217 213 264Z" fill="'+a.hair+'" stroke="#bb9d6d" stroke-width="2"/>'+horns+ears+scales+
+ '<path d="M97 188 Q108 205 108 221 Q130 233 150 221 Q151 205 163 188" fill="'+a.skin+'"/>'+
+ '<path d="M80 115Q83 69 129 73Q182 72 180 115 L177 178Q164 206 129 209Q95 204 81 178Z" fill="'+a.skin+'" stroke="#78556c" stroke-width="3"/>'+
+ '<path d="M77 129Q58 72 97 62Q128 27 166 62Q199 68 184 128 Q168 112 167 91Q138 105 102 92Q99 119 77 129Z" fill="'+a.hair+'"/>'+
+ flora+eye+'<path d="M119 175Q128 181 139 175" stroke="#7e5361" stroke-width="3" fill="none" stroke-linecap="round"/>'+fang+
+ (a.kind==='minotaur'?'<path d="M101 181Q127 201 156 181 Q142 218 127 216 Q114 216 101 181" fill="#87634c"/>':'')+
+ (a.kind==='dragon'?'<path d="M131 64Q138 24 164 25L157 80" fill="#a4d8e5" stroke="#d1ba84" stroke-width="2"/>':'');
+ const svg='<svg xmlns="http://www.w3.org/2000/svg" width="260" height="270" viewBox="0 0 260 270"><defs><radialGradient id="bg"><stop stop-color="'+a.back+'"/><stop offset="1" stop-color="#141126"/></radialGradient><linearGradient id="body" x2="0" y2="1"><stop stop-color="#ae79dc"/><stop offset="1" stop-color="#2b173f"/></linearGradient></defs><rect width="260" height="270" fill="url(#bg)"/><g opacity=".3" stroke="#cba56c"><circle cx="130" cy="135" r="113" fill="none"/><circle cx="130" cy="135" r="99" fill="none"/><path d="M10 135H250 M130 10V260"/></g><g>'+content+'</g><path d="M9 9H251V261H9Z" fill="none" stroke="#d8b877" stroke-width="3"/><path d="M22 22H42 M22 22V42 M238 22H218 M238 22V42 M22 248H42 M22 248V228 M238 248H218 M238 248V228" stroke="#f3cf8d" stroke-width="3" fill="none"/></svg>';
+ return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
+}
 let bestiaryFilter='All';
 function renderBestiary(){
  const host=document.querySelector('#bestiaryGrid');if(!host)return;
  host.innerHTML=bestiaryEntries.filter(entry=>bestiaryFilter==='All'||entry.category===bestiaryFilter).map(entry=>
- '<article class="bestiary-card codex-entry"><div class="codex-portrait codex-'+entry.name.toLowerCase().replace(/[^a-z]+/g,'-')+'" aria-hidden="true"><span class="codex-orbit"></span><span class="codex-rune">'+({'Elves':'✧','Druids':'❧','Vampires':'☾','Minotaurs':'♜','Dark Elves':'✦','Goblins':'◆','Dwarves':'⚒','Dragons':'♢','Ogres & Giants':'♛','Cyclopes':'◉'}[entry.name]||'✧')+'</span></div><div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p>'+entry.summary+'</p><span class="bestiary-art-note">Illustration forthcoming · canonical field note</span></div></article>'
+ '<article class="bestiary-card codex-entry"><div class="codex-portrait" ><img class="bestiary-illustration" src="'+bestiaryPortrait(entry.name)+'" alt="Concept portrait representing '+entry.name+'" loading="lazy"></div><div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p>'+entry.summary+'</p><span class="bestiary-art-note">Illustrative race design · story-grounded lore</span></div></article>'
  ).join('');
 }
 const bestiaryFilters=document.querySelector('#bestiaryFilters');
