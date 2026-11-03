@@ -245,7 +245,7 @@ let bestiaryFilter='All';
 function renderBestiary(){
  const host=document.querySelector('#bestiaryGrid');if(!host)return;
  host.innerHTML=bestiaryEntries.filter(entry=>bestiaryFilter==='All'||entry.category===bestiaryFilter).map(entry=>
- '<article class="bestiary-card"><div class="bestiary-emblem" aria-hidden="true">✧</div><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p>'+entry.summary+'</p><span class="bestiary-art-note">Illustration to be added</span></article>'
+ '<article class="bestiary-card codex-entry"><div class="codex-portrait codex-'+entry.name.toLowerCase().replace(/[^a-z]+/g,'-')+'" aria-hidden="true"><span class="codex-orbit"></span><span class="codex-rune">'+({'Elves':'✧','Druids':'❧','Vampires':'☾','Minotaurs':'♜','Dark Elves':'✦','Goblins':'◆','Dwarves':'⚒','Dragons':'♢','Ogres & Giants':'♛','Cyclopes':'◉'}[entry.name]||'✧')+'</span></div><div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p>'+entry.summary+'</p><span class="bestiary-art-note">Illustration forthcoming · canonical field note</span></div></article>'
  ).join('');
 }
 const bestiaryFilters=document.querySelector('#bestiaryFilters');
