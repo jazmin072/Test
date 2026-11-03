@@ -247,3 +247,10 @@
 @media(max-width:760px){.atlas-scroll{scrollbar-color:#c69969 #17152e}.atlas-map{min-width:780px}.atlas-pin-label{font-size:11px}.atlas-topline,.atlas-bottomline{font-size:9px;padding:11px}.atlas-portal{gap:15px;padding:19px}.portal-ring{width:65px;height:65px}.portal-ring span{font-size:30px}.atlas-portal h3{font-size:19px}}
 @media(max-width:450px){.atlas-topline span:last-child,.atlas-bottomline span:last-child{display:none}.atlas-pin-dot{width:33px;height:33px}.atlas-details .location-list{grid-template-columns:1fr 1fr}.atlas-details .location-list button{font-size:11px;min-height:50px}}
 @media(prefers-reduced-motion:reduce){.atlas-pin-dot{transition:none}}
+
+/* Unique illustrative portraits in place of rune placeholders */
+.codex-entry .codex-portrait{aspect-ratio:1.12;background:#191226!important;display:block;overflow:hidden;border-bottom:2px solid #ad8453}
+.codex-entry .bestiary-illustration{width:100%;height:100%;display:block;object-fit:cover;object-position:center;transition:transform .22s}
+.codex-entry:hover .bestiary-illustration{transform:scale(1.045)}
+@media(max-width:430px){.codex-entry .codex-portrait{aspect-ratio:auto;border-bottom:0;border-right:2px solid #ad8453}}
+@media(prefers-reduced-motion:reduce){.codex-entry .bestiary-illustration{transition:none}}
