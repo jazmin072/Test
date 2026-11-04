@@ -580,3 +580,18 @@
 .approved-race-art[data-race-portrait="Dark Elves"],
 .approved-race-art[data-race-portrait="Goblins & Dark Elves"]{background-image:url("/dark-elves-approved.webp");background-size:cover}
 .approved-race-art[data-race-portrait="Cyclopes"]{background-image:url("/cyclopes-approved.webp");background-size:cover}
+
+/* Race portraits: full-figure presentation where approved source art contains one. */
+#bestiary .codex-portrait{aspect-ratio:2/3;min-height:330px}
+#bestiary .approved-race-art[data-race-portrait="Goblins"],
+#bestiary .approved-race-art[data-race-portrait="Cyclopes"]{
+ background-size:contain!important;background-position:center center!important;
+ background-color:#19211f;
+}
+#bestiary .approved-race-art[data-race-portrait="Druids"],
+#bestiary .approved-race-art[data-race-portrait="Dark Elves"]{
+ background-size:contain!important;background-position:center center!important;
+ background-color:#1e2026;
+}
+#bestiary .race-setting{font-size:.86rem;line-height:1.45;color:#e8cf9f;border-left:2px solid #c3a078;padding-left:10px;margin:4px 0 12px}
+@media(max-width:700px){#bestiary .codex-portrait{min-height:260px}}
