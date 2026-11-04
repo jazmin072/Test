@@ -129,6 +129,21 @@ $('.close-dialog').onclick=()=>$('#bookDialog').close();
 $('#bookDialog').onclick=e=>{if(e.target===$('#bookDialog'))$('#bookDialog').close()};
 $('#loreFilters').innerHTML=['All','Magic','Places','History'].map(c=>'<button class="pill '+(c==='All'?'active':'')+'" data-lore-cat="'+c+'">'+c+'</button>').join('');
 /* World encyclopedia illustrations are limited to magic, places and history. */
+// Approved magical emblems and regional heraldry. Artwork is displayed only
+// after its image file exists in /assets/lore-approved; the original icon
+// remains as a graceful fallback until the art is added to the repository.
+const approvedLoreImages={
+  "Divine Creation": "celestial_creation_mandala.webp",
+  "Druidic Magic": "luminous_tree_of_life_sigil.webp",
+  "Residual Essence": "amethyst_essence_in_twilight_emblem.webp",
+  "Crystal Storage": "amethyst_crystal_arcane_emblem.webp",
+  "New Londanais": "new_londanais_heraldic_banner.webp",
+  "Bozton": "bozton_s_emerald_eye_banner.webp",
+  "Everlangyrs": "everlangyrs_the_uneasy_treaty_banner.webp",
+  "Teramek": "restored_rift_heraldic_banner.webp",
+  "Dark Veil Mountains": "moonlit_dragon_heraldry_of_the_dark_veil_mountains.webp",
+  "The Minotaur Sanctuary": "minotaur_sanctuary_heraldic_banner.webp"
+};
 function loreArtFor(entry){
  const title=entry[1];
  if(/Everlangyrs/i.test(title))return 'assets/lore-valley.svg';
@@ -144,9 +159,17 @@ function renderLore(){
  const q=$('#loreSearch').value.toLowerCase();
  const entries=lore.concat(spoiler?secrets:[]).filter(x=>(cat==='All'||x[0]===cat)&&x.join(' ').toLowerCase().includes(q));
  $('#loreGrid').innerHTML=entries.map(x=>{
-  const art=loreArtFor(x);
-  return '<article class="lore-card"><img class="lore-card-visual" src="'+art+'" alt="Chronicles illustration for '+x[1]+'" loading="lazy"><div class="lore-card-body"><small>'+x[0]+'</small><h3>'+x[1]+'</h3><p>'+x[2]+'</p></div></article>';
+  const fallback=loreArtFor(x);
+  const art=approvedLoreImages[x[1]]?'assets/lore-approved/'+approvedLoreImages[x[1]]:fallback;
+  return '<article class="lore-card"><img class="lore-card-visual" src="'+art+'" data-fallback-src="'+fallback+'" alt="Chronicles illustration for '+x[1]+'" loading="lazy"><div class="lore-card-body"><small>'+x[0]+'</small><h3>'+x[1]+'</h3><p>'+x[2]+'</p></div></article>';
  }).join('');
+ $('#loreGrid').querySelectorAll('img[data-fallback-src]').forEach(img=>{
+  img.addEventListener('error',()=>{
+   const fallback=img.dataset.fallbackSrc;
+   if(fallback && !img.src.endsWith('/'+fallback))img.src=fallback;
+  });
+  if(img.complete&&img.naturalWidth===0&&img.dataset.fallbackSrc)img.src=img.dataset.fallbackSrc;
+ });
  $('#loreEmpty').hidden=entries.length!==0;
 }
 renderLore();
