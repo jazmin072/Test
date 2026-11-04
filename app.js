@@ -320,12 +320,29 @@ function bestiaryPortrait(name){
  return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
 }
 const raceArtwork={"Elves":"elves","Druids":"druids","Vampires":"vampires","Minotaurs":"minotaurs","Dark Elves":"dark-elves","Goblins":"goblins","Dwarves":"dwarves","Dragons":"dragons","Giants":"giants","Ogres":"ogres","Cyclopes":"cyclopes","Succubi":"succubi","Dark Slimes":"dark-slimes"};
+const bestiaryStats={
+ 'Elves':{height:'About 5–6 ft',build:'Slender to athletic',lifespan:'Long-lived; exact span unconfirmed',strength:'Agility, perception and adaptable magic',traits:'Pointed ears; woodland-adapted appearance',basis:'Fantasy estimate guided by the elf artwork; not a confirmed book statistic.'},
+ 'Druids':{height:'About 5–6 ft',build:'Lean, natural and active',lifespan:'Not established',strength:'Nature connection, healing and plant lore',traits:'Nature-linked clothing and living-world motifs',basis:'Visual estimate; the books establish their connection to nature, not these measurements.'},
+ 'Vampires':{height:'About 5–6.5 ft',build:'Varies; often lean or athletic',lifespan:'Ageless or exceptionally long-lived',strength:'Enhanced senses, speed and strength',traits:'Pale or cool-toned appearance; fangs may be present',basis:'Mixed: long life and supernatural traits are genre-style estimates unless stated in the books.'},
+ 'Minotaurs':{height:'About 6–8 ft',build:'Broad, muscular and heavy-set',lifespan:'Not established',strength:'Great physical power and endurance',traits:'Bull-like head, horns and powerful frame',basis:'Estimated from the pictured horned, muscular form.'},
+ 'Dark Elves':{height:'About 5–6.5 ft',build:'Slender to athletic',lifespan:'Long-lived; exact span unconfirmed',strength:'Agility, tactical skill and community knowledge',traits:'Elven features with darker visual palette',basis:'Visual estimate; book lore establishes a distinct people, not these measurements.'},
+ 'Goblins':{height:'About 3–4.5 ft',build:'Small, wiry and agile',lifespan:'Not established',strength:'Quick movement, ingenuity and adaptability',traits:'Small stature, pointed features and green-toned artwork',basis:'Estimated from the creature artwork; not a confirmed book statistic.'},
+ 'Dwarves':{height:'About 4–5 ft',build:'Short, sturdy and strong',lifespan:'Not established',strength:'Endurance, craft and practical engineering',traits:'Compact frame; often associated with stonework',basis:'Visual and traditional fantasy estimate; book-specific measurements are unconfirmed.'},
+ 'Dragons':{height:'Varies greatly by age and type',build:'Large, scaled and powerful',lifespan:'Potentially centuries; unconfirmed',strength:'Flight, strength, elemental or magical abilities',traits:'Scales, claws, wings or other draconic features',basis:'Fantasy estimate from dragon imagery; exact abilities and size depend on book canon.'},
+ 'Giants':{height:'About 10–20 ft',build:'Very large and powerful',lifespan:'Not established',strength:'Exceptional reach, strength and endurance',traits:'Human-like form at enormous scale',basis:'Estimated from the race concept; book-specific measurements are unconfirmed.'},
+ 'Ogres':{height:'About 7–10 ft',build:'Massive, heavy and muscular',lifespan:'Not established',strength:'Raw strength and durability',traits:'Large frame, heavy features and rugged appearance',basis:'Estimated from the artwork and traditional fantasy depiction.'},
+ 'Cyclopes':{height:'About 7–12 ft',build:'Large and powerfully built',lifespan:'Not established',strength:'Strength, endurance and keen depth perception',traits:'One central eye; imposing stature',basis:'The single eye is a defining visual trait; size and abilities are estimates.'},
+ 'Succubi':{height:'About 5–6.5 ft',build:'Humanoid; varies',lifespan:'Not established',strength:'Charm, illusion or supernatural influence (tentative)',traits:'Horns, wings or demonic features may appear',basis:'Traditional fantasy interpretation of the pictured design, not confirmed book canon.'},
+ 'Dark Slimes':{height:'Variable; can change shape',build:'Gelatinous, amorphous body',lifespan:'Not established',strength:'Resilience, squeezing through gaps and shape-shifting (tentative)',traits:'Dark translucent or magical slime body',basis:'Estimated from the slime artwork; abilities are provisional.'}
+};
 let bestiaryFilter='All';
 function renderBestiary(){
  const host=document.querySelector('#bestiaryGrid');if(!host)return;
- host.innerHTML=bestiaryEntries.filter(entry=>bestiaryFilter==='All'||entry.category===bestiaryFilter).map(entry=>
- '<article class="bestiary-card codex-entry"><div class="codex-portrait" ><div class="approved-race-art" data-race-portrait="'+entry.name+'" role="img" aria-label="Illustrated '+entry.name+' portrait in the Chronicles creature gallery" style="background-position:'+raceArtworkForLore(entry.name)+'"></div></div><div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p class="race-setting">Scene: '+raceSceneSettings[entry.name]+'</p><p>'+entry.summary+'</p><span class="bestiary-art-note">Visual interpretation · book lore unchanged</span></div></article>'
- ).join('');
+ host.innerHTML=bestiaryEntries.filter(entry=>bestiaryFilter==='All'||entry.category===bestiaryFilter).map(entry=>{
+  const stats=bestiaryStats[entry.name]||{};
+  const rows=[['Typical height',stats.height],['Build',stats.build],['Lifespan',stats.lifespan],['Strengths',stats.strength],['Visible traits',stats.traits]].filter(row=>row[1]).map(row=>'<div class="race-stat"><strong>'+row[0]+'</strong><span>'+row[1]+'</span></div>').join('');
+  return '<article class="bestiary-card codex-entry"><div class="codex-portrait"><div class="approved-race-art" data-race-portrait="'+entry.name+'" role="img" aria-label="Full figure artwork of '+entry.name+'" style="background-position:'+raceArtworkForLore(entry.name)+'"></div></div><div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p class="race-setting">Scene: '+raceSceneSettings[entry.name]+'</p><p class="race-explanation">'+entry.summary+'</p><h4 class="race-stats-heading">Race & creature profile</h4><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+(stats.basis||'Illustrative estimate; book details take priority.')+'</p></div></article>';
+ }).join('');
 }
 const bestiaryFilters=document.querySelector('#bestiaryFilters');
 if(bestiaryFilters){
