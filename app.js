@@ -345,6 +345,23 @@ const approvedCreatureUploads={
  dragons:'/cc46fce9-238a-41e6-955e-082095b35d30.png',
  cyclopes:'/76967ae9-60d7-4739-94ac-f49080622d51.png'
 };
+/* Confirm that a landscape image is the four-column Dragon sheet and that the
+   portrait image is the Cyclopes pair, even if GitHub changed upload names. */
+function reconcileApprovedCreatureImages(){
+ const urls=[approvedCreatureUploads.dragons,approvedCreatureUploads.cyclopes];
+ Promise.all(urls.map(url=>new Promise(resolve=>{
+  const probe=new Image();
+  probe.onload=()=>resolve({url,width:probe.naturalWidth,height:probe.naturalHeight});
+  probe.onerror=()=>resolve(null);
+  probe.src=url;
+ }))).then(found=>{
+  const ready=found.filter(Boolean);
+  const dragons=ready.find(info=>info.width>info.height);
+  const cyclopes=ready.find(info=>info.height>info.width);
+  if(dragons)document.querySelectorAll('.dragon-model-cell').forEach(node=>node.style.backgroundImage='url("'+dragons.url+'")');
+  if(cyclopes)document.querySelectorAll('.cyclopes-model-pair img').forEach(node=>{if(node.getAttribute('src')!==cyclopes.url)node.setAttribute('src',cyclopes.url)});
+ });
+}
 function approvedRacePortrait(entry,portraits){
  if(entry.name==='Dragons'){
   const labels=['Humanoid male','Humanoid female','Beast-form male','Beast-form female'];
@@ -378,6 +395,7 @@ if(bestiaryFilters){
   renderBestiary();
  });
  renderBestiary();
+ reconcileApprovedCreatureImages();
 }
 
 /* Universal discovery - search reflects spoiler visibility and links into the archive. */
