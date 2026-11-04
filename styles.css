@@ -1025,3 +1025,24 @@
 @media(max-width:760px){
  #glossary .glossary-detailed-art,.glossary-grid .glossary-detailed-art{height:185px}
 }
+
+/* Author-uploaded supporting cast sheet:
+   first panel Saelis, second Torven, third Vessa, fourth Iven.
+   Only the illustrated upper third is shown; do not repeat the printed
+   labels, invented statistics, or biography from the original collage. */
+.character-card .supporting-cast-portrait{
+ display:block;
+ position:absolute;
+ inset:0;
+ width:100%;
+ height:100%;
+ background-image:url('/assets/supporting-cast-portraits.png');
+ background-size:400% auto;
+ background-repeat:no-repeat;
+ background-position-y:12%;
+ background-color:#1a132c;
+}
+.character-card .supporting-portrait-saelis{background-position-x:0%}
+.character-card .supporting-portrait-torven{background-position-x:33.333333%}
+.character-card .supporting-portrait-vessa{background-position-x:66.666667%}
+.character-card .supporting-portrait-iven{background-position-x:100%}
