@@ -492,3 +492,47 @@
  .official-cast-face{transition:none}
  .official-cast-face:hover{transform:none}
 }
+
+/* New concept art sits in its own proper sections. The source illustrations
+   stay untouched: no redrawing, mirroring, filters or edits to creature designs. */
+.creature-style-figure{
+ margin:20px 0 33px;
+ border:1px solid #a99171;
+ border-radius:6px;
+ overflow:hidden;
+ background:linear-gradient(155deg,#192b25,#1b1628);
+ box-shadow:0 16px 34px #0007;
+}
+.creature-style-figure img{
+ display:block;
+ width:100%;
+ max-height:850px;
+ object-fit:contain;
+ background:#0f0c18;
+}
+.creature-style-figure figcaption,
+.atlas-artwork figcaption{
+ padding:13px 19px 16px;
+ background:#1c1b25;
+ border-top:1px solid #b29770;
+ color:#ead6b7;
+ font-size:13px;
+ line-height:1.6;
+}
+.atlas-artwork{
+ margin:0;
+ padding:0;
+ background:#0d1020;
+}
+.atlas-artwork img{
+ display:block;
+ width:100%;
+ height:auto;
+ object-fit:contain;
+}
+@media(max-width:650px){
+ .creature-style-figure figcaption,.atlas-artwork figcaption{
+ font-size:12px;
+ padding:12px 14px;
+ }
+}
