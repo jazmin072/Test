@@ -1012,26 +1012,16 @@
  #glossary .glossary-visual,.glossary-grid .glossary-visual{height:185px}
 }
 
-/* Approved six photographic fantasy illustrations for the Reader's Glossary.
-   The sprite is a 3-column × 2-row crop of the author's original scene artwork;
-   do not put labels or flat icon art inside its picture windows. */
-#glossary .glossary-approved-scene,
-.glossary-grid .glossary-approved-scene{
+/* Individual book-scene illustrations, cropped from the approved artwork. */
+#glossary .glossary-detailed-art,.glossary-grid .glossary-detailed-art{
  display:block;
  width:100%;
  height:200px;
- background-image:url('/assets/glossary-scenes/approved-story-scenes.avif');
- background-size:300% 200%;
- background-repeat:no-repeat;
- background-color:#141225;
+ object-fit:cover;
+ object-position:center;
  border-bottom:1px solid #b38a64;
+ background:#141225;
 }
-#glossary .glossary-panel-0,.glossary-grid .glossary-panel-0{background-position:0% 0%}
-#glossary .glossary-panel-1,.glossary-grid .glossary-panel-1{background-position:50% 0%}
-#glossary .glossary-panel-2,.glossary-grid .glossary-panel-2{background-position:100% 0%}
-#glossary .glossary-panel-3,.glossary-grid .glossary-panel-3{background-position:0% 100%}
-#glossary .glossary-panel-4,.glossary-grid .glossary-panel-4{background-position:50% 100%}
-#glossary .glossary-panel-5,.glossary-grid .glossary-panel-5{background-position:100% 100%}
 @media(max-width:760px){
- #glossary .glossary-approved-scene,.glossary-grid .glossary-approved-scene{height:185px}
+ #glossary .glossary-detailed-art,.glossary-grid .glossary-detailed-art{height:185px}
 }
