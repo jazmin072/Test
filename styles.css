@@ -1026,79 +1026,27 @@
  #glossary .glossary-detailed-art,.glossary-grid .glossary-detailed-art{height:185px}
 }
 
-/* Author-uploaded supporting cast sheet:
-   first panel Saelis, second Torven, third Vessa, fourth Iven.
-   Only the illustrated upper third is shown; do not repeat the printed
-   labels, invented statistics, or biography from the original collage. */
-.character-card .supporting-cast-portrait{
- display:block;
- position:absolute;
- inset:0;
- width:100%;
- height:100%;
- background-image:url('/assets/supporting-cast-portraits.png');
- background-size:400% auto;
- background-repeat:no-repeat;
- background-position-y:12%;
- background-color:#1a132c;
-}
-.character-card .supporting-portrait-saelis{background-position-x:0%}
-.character-card .supporting-portrait-torven{background-position-x:33.333333%}
-.character-card .supporting-portrait-vessa{background-position-x:66.666667%}
-.character-card .supporting-portrait-iven{background-position-x:100%}
 
-/* Supporting cast: large FULL-BODY art above, small FACE portrait beside the
-   name below. Both are crops of the author's approved 4-character source.
-   Cropping excludes the printed labels and unconfirmed stats on that sheet. */
-.character-card.supporting-full-body-card .character-art{
- height:auto;
- min-height:0;
- aspect-ratio:11 / 20;
- background:#171125;
- overflow:hidden;
+/* Entire author-uploaded supporting illustrations; no headshots or collage crop. */
+.character-card.supporting-full-body-card .character-art {
+  display:block;
+  position:relative;
+  height:auto;
+  min-height:0;
+  aspect-ratio:3 / 4;
+  padding:0;
+  background:#171125;
+  overflow:hidden;
 }
-.character-card.supporting-full-body-card .supporting-cast-portrait{
- background-size:1052% auto;
- background-position-y:67.8%;
+.character-card.supporting-full-body-card .character-art img.supporting-full-figure {
+  display:block;
+  position:static;
+  inset:auto;
+  width:100%;
+  height:100%;
+  aspect-ratio:3 / 4;
+  object-fit:contain;
+  object-position:center center;
+  border:0;
 }
-.character-card.supporting-full-body-card .supporting-portrait-saelis{background-position-x:1.15%}
-.character-card.supporting-full-body-card .supporting-portrait-torven{background-position-x:28.78%}
-.character-card.supporting-full-body-card .supporting-portrait-vessa{background-position-x:56.4%}
-.character-card.supporting-full-body-card .supporting-portrait-iven{background-position-x:84.0%}
-.character-card .supporting-character-heading{
- display:flex;
- gap:13px;
- align-items:center;
- margin-bottom:15px;
- min-height:85px;
-}
-.character-card .supporting-headshot{
- display:block;
- width:79px;
- height:79px;
- flex:none;
- border:2px solid #c4a077;
- border-radius:6px;
- background-color:#241b31;
- background-image:url('/assets/supporting-cast-portraits.png');
- background-size:614.4% auto;
- background-repeat:no-repeat;
- background-position-y:14%;
- box-shadow:0 4px 12px #0008;
-}
-.character-card .supporting-headshot-saelis{background-position-x:4.5%}
-.character-card .supporting-headshot-torven{background-position-x:34.4%}
-.character-card .supporting-headshot-vessa{background-position-x:64.2%}
-.character-card .supporting-headshot-iven{background-position-x:94.1%}
-.character-card .supporting-heading-copy{min-width:0;flex:1}
-.character-card .supporting-character-heading .character-group{margin-bottom:4px}
-.character-card .supporting-character-heading h3{font-size:clamp(20px,2vw,25px);line-height:1.15}
-.character-card .supporting-character-heading .role{
- margin:5px 0 0;
- min-height:0;
- letter-spacing:.025em;
-}
-@media(max-width:480px){
- .character-card .supporting-headshot{width:72px;height:72px}
- .character-card .supporting-character-heading{gap:11px}
-}
+.character-card.supporting-full-body-card .character-info { padding-top:20px; }
