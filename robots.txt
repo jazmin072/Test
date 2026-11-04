@@ -1,3 +1,4 @@
+# Official canonical site: https://chronicles-of-plu-and.vercel.app
 User-agent: *
 Allow: /
 
