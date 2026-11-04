@@ -376,7 +376,7 @@ function renderBestiary(){
   const stats=bestiaryStats[entry.name]||{};
   const rows=[['Typical height',stats.height],['Build',stats.build],['Lifespan',stats.lifespan],['Population',stats.population],['Strengths',stats.strength],['Visible traits',stats.traits],['Societal role',stats.role]].filter(row=>row[1]).map(row=>'<div class="race-stat"><strong>'+row[0]+'</strong><span>'+row[1]+'</span></div>').join('');
   const artPosition=raceArtPositions[entry.name];
-  const portrait=artPosition?'<div class="codex-portrait codex-sprite-portrait" role="img" aria-label="Approved full-body artwork for '+entry.name+'" style="background-position:'+artPosition+'"></div>':'';
+  const portrait=artPosition?'<div class="codex-portrait codex-sprite-portrait" role="img" aria-label="Existing full-body artwork for '+entry.name+'" style="background-position:'+artPosition+'"></div>':'<div class="codex-portrait codex-art-pending" role="img" aria-label="Portrait artwork not yet available for '+entry.name+'"><span>Portrait artwork pending</span><small>Book-specific design required</small></div>';
   return '<article class="bestiary-card codex-entry '+(portrait?'':'text-only-entry')+'">'+portrait+'<div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3>'+(raceSceneSettings[entry.name]?'<p class="race-setting">Scene: '+raceSceneSettings[entry.name]+'</p>':'')+'<p class="race-explanation">'+entry.summary+'</p><h4 class="race-stats-heading">Race & creature profile</h4><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+(stats.basis||'Illustrative estimate; book details take priority.')+'</p></div></article>';
  }).join('');
 }
