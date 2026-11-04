@@ -130,10 +130,17 @@ $('.close-dialog').onclick=()=>$('#bookDialog').close();
 $('#bookDialog').onclick=e=>{if(e.target===$('#bookDialog'))$('#bookDialog').close()};
 $('#loreFilters').innerHTML=['All','Peoples','Magic','Places','History'].map(c=>'<button class="pill '+(c==='All'?'active':'')+'" data-lore-cat="'+c+'">'+c+'</button>').join('');
 /* Approved 4x4 artwork sheet: each entry displays its own 256x384 full-body cell. */
-const raceArtSlots={
-'Elves':0,'Druids':1,'Vampires':2,'Minotaurs':3,'Dragons':4,'Goblins':5,'Dark Elves':6,'Dwarves':7,'Giants':8,'Ogres':9,'Cyclopes':10,'Succubi':11,'Dark Slimes':12
+const raceArtFiles={
+ 'Elves':'elves-female.webp','Druids':'druids-female.webp','Vampires':'vampires-female.webp','Minotaurs':'minotaurs-female.webp','Goblins':'goblins-female.webp',
+ 'Dark Elves':'dark-elves.webp','Dwarves':'dwarves.webp','Dragons':'dragons.webp','Giants':'giants.webp','Ogres':'ogres.webp','Cyclopes':'cyclopes.webp','Succubi':'succubi.webp',
+ 'Witches & Wiccans':'witches-wiccans.webp','Fairies':'fairies.webp','Werewolves':'werewolves.webp','Harpies':'harpies.webp','Nymphs':'nymphs.webp','Leprechauns':'leprechauns.webp',
+ 'Humans':'humans.webp','Hybrids':'hybrids.webp','Monsters':'monsters.webp','Dark Slimes':'dark-slimes.webp'
 };
-const raceArtPositions=Object.fromEntries(Object.entries(raceArtSlots).map(([name,slot])=>[name,((slot%4)/3*100)+'% '+(Math.floor(slot/4)/3*100)+'%']));
+const racePortraitFiles={
+ 'Elves':['elves-male.webp','elves-female.webp'],'Druids':['druids-male.webp','druids-female.webp'],
+ 'Vampires':['vampires-male.webp','vampires-female.webp'],'Minotaurs':['minotaurs-male.webp','minotaurs-female.webp'],
+ 'Goblins':['goblins-male.webp','goblins-female.webp']
+};
 const visualProfiles={
 'Elves':['Humanoid · tall and slender','Agility · magical perception'], 'Druids':['Humanoid · nature-attuned','Nature connection · mediation'],
 'Vampires':['Humanoid · powerful build','Strength · speed · clan knowledge'],'Minotaurs':['Humanoid · large and horned','Physical strength · sanctuary traditions'],
@@ -375,9 +382,9 @@ function renderBestiary(){
  host.innerHTML=bestiaryEntries.filter(entry=>bestiaryFilter==='All'||entry.category===bestiaryFilter).map(entry=>{
   const stats=bestiaryStats[entry.name]||{};
   const rows=[['Typical height',stats.height],['Build',stats.build],['Lifespan',stats.lifespan],['Population',stats.population],['Strengths',stats.strength],['Visible traits',stats.traits],['Societal role',stats.role]].filter(row=>row[1]).map(row=>'<div class="race-stat"><strong>'+row[0]+'</strong><span>'+row[1]+'</span></div>').join('');
-  const artPosition=raceArtPositions[entry.name];
-  const portrait=artPosition?'<div class="codex-portrait codex-sprite-portrait" role="img" aria-label="Existing full-body artwork for '+entry.name+'" style="background-position:'+artPosition+'"></div>':'<div class="codex-portrait codex-art-pending" role="img" aria-label="Portrait artwork not yet available for '+entry.name+'"><span>Portrait artwork pending</span><small>Book-specific design required</small></div>';
-  return '<article class="bestiary-card codex-entry '+(portrait?'':'text-only-entry')+'">'+portrait+'<div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3>'+(raceSceneSettings[entry.name]?'<p class="race-setting">Scene: '+raceSceneSettings[entry.name]+'</p>':'')+'<p class="race-explanation">'+entry.summary+'</p><h4 class="race-stats-heading">Race & creature profile</h4><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+(stats.basis||'Illustrative estimate; book details take priority.')+'</p></div></article>';
+  const portraits=racePortraitFiles[entry.name]||[raceArtFiles[entry.name]].filter(Boolean);
+  const portrait=portraits.length?'<div class="codex-portrait-gallery" aria-label="Full-body artwork for '+entry.name+'">'+portraits.map((file,index)=>'<figure><img class="codex-portrait-image" src="assets/creatures/'+file+'" alt="'+entry.name+(portraits.length===2?(index===0?' male':' female'):'')+' full-body portrait" loading="lazy">'+(portraits.length===2?'<figcaption>'+(index===0?'Male':'Female')+'</figcaption>':'')+'</figure>').join('')+'</div>':'<div class="codex-portrait codex-art-pending" role="img" aria-label="Portrait artwork not yet available for '+entry.name+'"><span>Portrait artwork pending</span><small>Book-specific design required</small></div>';
+  return '<article class="bestiary-card codex-entry">'+portrait+'<div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3>'+(raceSceneSettings[entry.name]?'<p class="race-setting">Scene: '+raceSceneSettings[entry.name]+'</p>':'')+'<p class="race-explanation">'+entry.summary+'</p><h4 class="race-stats-heading">Race & creature profile</h4><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+(stats.basis||'Illustrative estimate; book details take priority.')+'</p></div></article>';
  }).join('');
 }
 const bestiaryFilters=document.querySelector('#bestiaryFilters');
