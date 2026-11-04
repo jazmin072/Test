@@ -1106,3 +1106,145 @@ footer .artwork-placeholder-notice{
 footer .artwork-placeholder-notice strong{
  color:var(--gold);
 }
+
+
+/* November 2026 legibility and responsive gallery corrections.
+   Contrast overrides intentionally sit at the end of the stylesheet. */
+#bestiary .government-active .codex-info,
+#bestiary .plu-active .codex-info{
+  color:#271e29;
+}
+#bestiary .government-active .codex-info h3,
+#bestiary .plu-active .codex-info h3{
+  color:#30203a !important;
+  font-weight:700;
+}
+#bestiary .government-active .codex-info>small,
+#bestiary .plu-active .codex-info>small,
+#bestiary .government-active .codex-info .race-explanation,
+#bestiary .plu-active .codex-info .race-explanation,
+#bestiary .government-active .codex-info .race-stats-basis,
+#bestiary .plu-active .codex-info .race-stats-basis{
+  color:#403741 !important;
+}
+#bestiary .codex-info .race-stat,
+#bestiary .codex-info .race-stat span,
+#bestiary .codex-info .race-stat p,
+#bestiary .codex-info .race-stats,
+#bestiary .codex-info .race-stats p{
+  color:#302833 !important;
+}
+#bestiary .codex-info .race-stat strong,
+#bestiary .codex-info .race-stats strong{
+  color:#533348 !important;
+}
+#bestiary .creature-reference summary{
+  color:#36243f !important;
+  font-size:14px;
+  line-height:1.55;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+#bestiary .codex-info .creature-reference{
+  border-top-color:#958575;
+}
+#bestiary .codex-info h3{
+  line-height:1.3;
+  overflow-wrap:anywhere;
+}
+#bestiary .codex-entry .codex-info>small{
+  font-size:12px;
+  line-height:1.55;
+}
+#bestiary .codex-entry .codex-portrait{
+  align-items:center;
+  min-height:0 !important;
+  padding:14px;
+}
+#bestiary .codex-portrait-gallery,
+#bestiary .codex-portrait-gallery.single{
+  max-width:100%;
+  align-items:center;
+}
+#bestiary .codex-portrait-figure{
+  justify-content:center;
+  min-width:0;
+  max-width:100%;
+}
+#bestiary .codex-portrait-image{
+  width:100%;
+  height:auto !important;
+  aspect-ratio:auto !important;
+  max-height:440px;
+  object-fit:contain;
+}
+#bestiary .codex-portrait-figure figcaption{
+  color:#f2d8aa;
+  font-size:12px;
+  letter-spacing:.025em;
+}
+#bestiary .codex-art-pending{min-height:180px;aspect-ratio:auto;}
+#bestiary .government-record .government-extract,
+#bestiary .government-record .government-status strong{
+  color:#f6efe6;
+}
+#bestiary .government-record .record-disclaimer{color:#d7d9d4}
+#bestiary .plu-record .plu-quote{color:#fff5e8}
+#bestiary .codex-info .race-voice{min-height:0;}
+#bestiary .government-active .codex-info .government-record,
+#bestiary .plu-active .codex-info .plu-record{color:#f7ede4;}
+#bestiary .government-active .codex-info .government-record p,
+#bestiary .plu-active .codex-info .plu-record p{color:#f7ede4;}
+
+@media(max-width:1050px){
+  .topbar{min-height:68px;height:68px}
+  .topbar .menu-toggle{display:block}
+  .topbar nav{
+    display:none;position:absolute;top:68px;left:0;right:0;
+    background:#120c20;flex-direction:column;gap:0;
+    padding:12px 22px 20px;max-height:calc(100svh - 68px);
+    overflow-y:auto;border-bottom:1px solid #a98a70;
+  }
+  .topbar nav.open{display:flex}
+  .topbar nav a{font-size:14px}
+  .topbar nav .nav-group{width:100%;border-bottom:1px solid #73567555}
+  .topbar nav .nav-group summary{padding:13px 7px}
+  .topbar nav .nav-dropdown{
+    position:static;min-width:0;margin:0 0 8px 8px;
+    box-shadow:none;max-width:100%;
+  }
+  .topbar nav .nav-home,.topbar nav .nav-search{padding:13px 7px}
+  .spoiler-switch.reader-mode{
+    position:fixed;right:0;left:0;bottom:0;
+    width:100%;max-width:none;
+    display:flex;flex-direction:row;align-items:center;justify-content:space-between;
+    padding:8px 16px;border-radius:0;
+    border:0;border-top:1px solid #c8a679;
+    background:#1c1428f5;
+    gap:10px;box-shadow:0 -5px 18px #0009;
+  }
+  .spoiler-switch.reader-mode small{display:none}
+  .spoiler-switch.reader-mode .reader-mode-name{font-size:11px;line-height:1.3}
+  .spoiler-switch.reader-mode .reader-mode-toggle{font-size:12px;color:#fff4e9}
+  body{padding-bottom:52px}
+}
+@media(max-width:640px){
+  #bestiary .codex-entry{display:flex;flex-direction:column}
+  #bestiary .codex-entry .codex-portrait{
+    width:100%;border-right:0;border-bottom:1px solid #a98b6b;
+    padding:12px;
+  }
+  #bestiary .codex-portrait-gallery{
+    grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;
+  }
+  #bestiary .codex-portrait-gallery.single{
+    grid-template-columns:minmax(0,1fr);max-width:330px;margin:0 auto;
+  }
+  #bestiary .codex-portrait-image{max-height:470px}
+  #bestiary .codex-info{padding:18px}
+  #bestiary .codex-entry .codex-info h3{font-size:24px}
+  #bestiary .codex-info .race-explanation{font-size:15px;line-height:1.65}
+  #bestiary .dragon-race-card .codex-portrait,
+  #bestiary .cyclopes-race-card .codex-portrait{padding:12px}
+}
