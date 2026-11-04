@@ -133,16 +133,16 @@ $('#loreFilters').innerHTML=['All','Magic','Places','History'].map(c=>'<button c
 // after its image file exists in /assets/lore-approved; the original icon
 // remains as a graceful fallback until the art is added to the repository.
 const approvedLoreImages={
-  "Divine Creation": "celestial_creation_mandala.webp",
-  "Druidic Magic": "luminous_tree_of_life_sigil.webp",
-  "Residual Essence": "amethyst_essence_in_twilight_emblem.webp",
-  "Crystal Storage": "amethyst_crystal_arcane_emblem.webp",
-  "New Londanais": "new_londanais_heraldic_banner.webp",
-  "Bozton": "bozton_s_emerald_eye_banner.webp",
-  "Everlangyrs": "everlangyrs_the_uneasy_treaty_banner.webp",
-  "Teramek": "restored_rift_heraldic_banner.webp",
-  "Dark Veil Mountains": "moonlit_dragon_heraldry_of_the_dark_veil_mountains.webp",
-  "The Minotaur Sanctuary": "minotaur_sanctuary_heraldic_banner.webp"
+  "Divine Creation": "celestial_creation_mandala.png",
+  "Druidic Magic": "luminous_tree_of_life_sigil.png",
+  "Residual Essence": "amethyst_essence_in_twilight_emblem.png",
+  "Crystal Storage": "amethyst_crystal_arcane_emblem.png",
+  "New Londanais": "new_londanais_heraldic_banner.png",
+  "Bozton": "bozton_s_emerald_eye_banner.png",
+  "Everlangyrs": "everlangyrs_the_uneasy_treaty_banner.png",
+  "Teramek": "restored_rift_heraldic_banner.png",
+  "Dark Veil Mountains": "moonlit_dragon_heraldry_of_the_dark_veil_mountains.png",
+  "The Minotaur Sanctuary": "minotaur_sanctuary_heraldic_banner.png"
 };
 function loreArtFor(entry){
  const title=entry[1];
