@@ -569,6 +569,30 @@ if(bestiaryFilters){
 }
 
 /* Universal discovery - search reflects spoiler visibility and links into the archive. */
+/* Each glossary entry illustrates a concrete narrative moment rather
+   than reusing generic magic icons. Spoiler visibility remains unchanged. */
+const glossarySceneImages={
+  "The Fracture": "the-fracture.svg",
+  "Separation Era": "separation-era.svg",
+  "Merger Era": "merger-era.svg",
+  "Divine Creation": "divine-creation.svg",
+  "Druidic Magic": "druidic-magic.svg",
+  "Residual Essence": "residual-essence.svg",
+  "Pocket Reality": "pocket-reality.svg",
+  "Crystal Storage": "crystal-storage.svg",
+  "Reyla’s Ascension": "reylas-ascension.svg"
+};
+const glossarySceneAlt={
+"The Fracture":"A witness watches the violet rupture split the sky over the city",
+"Separation Era":"Taylor and Breni spend another evening isolated inside their forest mansion",
+"Merger Era":"Two women stand on a bridge as the divided world rejoins",
+"Divine Creation":"Plu and Selena shape a living landscape in the beginning",
+"Druidic Magic":"A Druid touches a forest tree as living roots and leaves stir with magic",
+"Residual Essence":"An investigator gathers glowing magical fragments from a damaged sanctuary",
+"Pocket Reality":"A mansion stands enclosed inside a separated pocket of reality",
+"Crystal Storage":"Government machinery holds stolen magical essence inside glowing crystals",
+"Reyla’s Ascension":"Reyla joins a living tree as her form becomes connected to the world"
+};
 const glossaryEntries=[
  ['The Fracture','A defining disruption of reality whose causes emerge across the trilogy.',false],
  ['Separation Era','The age of divided realities in Elf Blood.',false],
@@ -585,7 +609,16 @@ function renderGlossary(){
  root.replaceChildren();
  glossaryEntries.filter(x=>spoiler||!x[2]).forEach(x=>{
   const card=document.createElement('article');card.className='glossary-card';
-  const illustration=document.createElement('img');illustration.className='glossary-visual';illustration.loading='lazy';illustration.src=loreArtFor(['History',x[0]]);illustration.alt='Original Chronicles fantasy lore illustration';
+  const illustration=document.createElement('img');
+  illustration.className='glossary-visual';
+  illustration.loading='lazy';
+  const scene=glossarySceneImages[x[0]];
+  illustration.src=scene?'assets/glossary-scenes/'+scene:loreArtFor(['History',x[0]]);
+  illustration.alt=glossarySceneAlt[x[0]]||'Illustrated moment from The Chronicles';
+  illustration.addEventListener('error',()=>{
+   const fallback=loreArtFor(['History',x[0]]);
+   if(!illustration.src.endsWith('/'+fallback))illustration.src=fallback;
+  });
   const title=document.createElement('h3');title.textContent=x[0];
   const p=document.createElement('p');p.textContent=x[1];
   card.append(illustration,title,p);root.append(card);
