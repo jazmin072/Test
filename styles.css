@@ -313,3 +313,16 @@
  background-position:center 17%!important;
  background-repeat:no-repeat;
 }
+
+/* Approved cinematic male-and-female Druid portrait. Two backgrounds retain the
+   existing species illustration until the new image is uploaded. */
+.approved-race-art[data-race-portrait="Druids"]{
+ background-image:url("/druids-approved.webp"),url("/chronicles-approved-races-sprite.webp");
+ background-size:cover,400% 400%;
+ background-position:center 23%,33.333% 0%!important;
+ background-repeat:no-repeat,no-repeat;
+}
+.lore-card-visual.approved-race-art[data-race-portrait="Druids"]{
+ aspect-ratio:1.15;
+ background-position:center 18%,33.333% 0%!important;
+}
