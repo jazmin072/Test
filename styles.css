@@ -740,3 +740,81 @@
  #bestiary .codex-entry .codex-info h3{font-size:17px}
  #bestiary .codex-info .race-explanation{font-size:12px}
 }
+
+/* Approved race uploads (Nov 4):
+   four Dragon models in their correct order and a full-body Cyclopes pair.
+   Keep source art intact; crop the lettering from the Dragon sheet via
+   background viewport, never show title plaques inside the picture. */
+#bestiary .bestiary-grid .dragon-race-card,
+#bestiary .bestiary-grid .cyclopes-race-card{
+ grid-column:1 / -1;
+ grid-template-columns:minmax(0, 62%) minmax(0, 38%);
+}
+#bestiary .dragon-race-card .codex-portrait,
+#bestiary .cyclopes-race-card .codex-portrait{
+ padding:14px;
+}
+#bestiary .dragon-model-grid{
+ display:grid;
+ grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:9px;
+ width:100%;
+ align-items:start;
+}
+#bestiary .dragon-model-cell{
+ display:block;
+ width:100%;
+ aspect-ratio:384 / 645;
+ background-image:url('/cc46fce9-238a-41e6-955e-082095b35d30.png');
+ background-size:400% auto;
+ background-repeat:no-repeat;
+ background-color:#191327;
+ background-position-y:top;
+ border:1px solid #a78b66;
+ border-radius:3px;
+ box-shadow:0 8px 18px #0007;
+}
+#bestiary .dragon-model-0{background-position-x:0%}
+#bestiary .dragon-model-1{background-position-x:33.333333%}
+#bestiary .dragon-model-2{background-position-x:66.666667%}
+#bestiary .dragon-model-3{background-position-x:100%}
+#bestiary .cyclopes-model-pair{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ width:100%;
+ background:#18151f;
+ border:1px solid #a78b66;
+ border-radius:3px;
+ overflow:hidden;
+}
+#bestiary .cyclopes-model-pair img{
+ display:block;
+ width:auto;
+ max-width:100%;
+ max-height:530px;
+ height:auto;
+ object-fit:contain;
+ background:#18151f;
+}
+@media(max-width:900px){
+ #bestiary .bestiary-grid .dragon-race-card,
+ #bestiary .bestiary-grid .cyclopes-race-card{
+  grid-template-columns:1fr;
+ }
+ #bestiary .dragon-race-card .codex-portrait,
+ #bestiary .cyclopes-race-card .codex-portrait{
+  min-height:0;
+  border-right:0;
+  border-bottom:1px solid #baa07b;
+ }
+ #bestiary .cyclopes-model-pair img{max-height:650px}
+}
+@media(max-width:560px){
+ #bestiary .dragon-model-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+ }
+ #bestiary .dragon-race-card .codex-portrait,
+ #bestiary .cyclopes-race-card .codex-portrait{padding:10px}
+}
