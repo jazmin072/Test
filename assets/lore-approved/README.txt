@@ -1,0 +1,1 @@
+Upload the 10 WEBP images from chronicles_lore_artwork_github_upload.zip into this folder with the filenames unchanged. The Lore Encyclopedia is already configured to use them for the corresponding magical symbols and location flags. Before the image files are uploaded, the site falls back to its original SVG illustrations.
