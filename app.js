@@ -251,7 +251,7 @@ function showLocation(index){
  const landTitle=document.createElement('h4');landTitle.textContent='The land';
  const land=document.createElement('p');land.textContent=hiddenLocation?'The full landscape notes are available in Lore Explorer mode.':place.land;
  const books=document.createElement('p');books.className='location-source';books.textContent='Explore in: '+place.books;
- const caveat=document.createElement('small');caveat.className='atlas-caveat';caveat.textContent=place.x==null?'Not placed on the globe · exact location not established':'Illustrative pin placement · coordinates not established in canon';
+ const caveat=document.createElement('small');caveat.className='atlas-caveat';caveat.textContent=place.portal?'Beyond the main world · no map placement':'Concept artwork only · exact geographic position not confirmed in canon';
  locationDetail.append(label,title,description,peopleTitle,people,landTitle,land,books,caveat);
 }
 if(locationList&&locationDetail){
