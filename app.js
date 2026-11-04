@@ -2,7 +2,7 @@ const books=[
 {id:'elf',cover:'assets/elf-blood.png',title:'Elf Blood',type:'trilogy',label:'Book One · Main trilogy',color:'blue',url:'https://books2read.com/u/b61750',desc:'An elf without her memories, an unusual household, and events that unsettle a carefully separated world.',more:'The opening novel introduces Taylor, Breni, Reyla and an unfolding mystery about reality, memory and power.'},
 {id:'before',cover:'assets/the-world-before.png',title:'The World Before',type:'trilogy',label:'Book Two · Main trilogy',color:'gold',url:'https://books2read.com/u/b61dg6',desc:'Journey to an earlier age, when powerful creators shaped the first living worlds and ancient choices cast long shadows.',more:'The primordial era of the Chronicles explores creation, early civilizations and the roots of later conflicts.'},
 {id:'goddess',cover:'assets/the-goddess-elf.png',title:'The Goddess Elf',type:'trilogy',label:'Book Three · Main trilogy',color:'rose',url:'https://books2read.com/u/mZA1dB',desc:'Old bonds and impossible responsibilities test the people who hold reality together.',more:'The final book in the original trilogy brings the intertwined destinies of the central characters to a new stage.'},
-{id:'listening',cover:'assets/the-listening-world.png',title:'The Listening World',type:'companion',label:'STANDALONE STORY · Outside main continuity',color:'green',url:'https://books2read.com/u/bPWpQx',desc:'A reflective journey through communities, forests and the quiet language of a living world.',more:'A separate, self-contained story about listening, mediation and belonging among different peoples.'},
+{id:'listening',cover:'assets/the-listening-world.png',title:'The Listening World',type:'companion',label:'POST-TRILOGY COMPANION · A Reyla story',color:'green',url:'https://books2read.com/u/bPWpQx',desc:'A reflective journey through communities, forests and the quiet language of a living world.',more:'Reyla journeys through communities and living landscapes two centuries after the main trilogy, seeking understanding rather than violence.'},
 {id:'rain',cover:'assets/dark-rain.png',title:'Dark Rain',type:'companion',label:'POST-MAIN-STORY · A Breni story',color:'rain',url:'https://books2read.com/u/3ngxn5',desc:'A rain-soaked island, two vampire clans and a mystery that threatens an uneasy peace.',more:'Breni enters a tense dispute between vampire clans while dangerous secrets surface.'},
 {id:'wonders',cover:'assets/small-wonders.png',title:'Small Wonders',type:'companion',label:'Selena & Talula · Companion',color:'rose',desc:'A tender portrait of daily life, growing trust and the small moments that make a family.',more:'An intimate story about Selena and Talula and the everyday love that binds them.'},
 {id:'creatures',title:"Plu's Creatures",type:'companion',label:'A Plu story · Companion',color:'gold',desc:'A playful collection of encounters with the remarkable creatures of the world.',more:'A lighter-hearted episodic journey across the strange and wonderful beings of the Chronicles.'},
@@ -16,14 +16,14 @@ listening:[['All retailers · Books2Read',books[3].url],['Fishpond · paperback'
 rain:[['All retailers · Books2Read',books[4].url],['ThriftBooks','https://www.thriftbooks.com/w/dark-rain-the-chronicles-of-plu-and-selena_jonathan-m-reed/60774735/'],['IBS · paperback','https://www.ibs.it/dark-rain-libro-inglese-jonathan-m-reed/e/9798237895520'],['Feltrinelli · paperback','https://www.lafeltrinelli.it/dark-rain-libro-inglese-jonathan-m-reed/e/9798237895520']]
 };
 const releaseInfo={
-elf:{status:'Listed as published',date:'October 2026',desc:'Paperback listed with an October 2026 release month. Exact day varies or has not been verified.'},
-before:{status:'Upcoming · preorder',date:'December 10, 2026',desc:'Retailer listings currently show December 10, 2026 for print and eBook editions.'},
-goddess:{status:'Date to be confirmed',date:'Not announced',desc:'No independently confirmed publication date found; please check the bookstore listings.'},
-listening:{status:'Published',date:'October 21, 2026',desc:'Paperback publication date reported by an independent retailer.'},
-rain:{status:'Published',date:'October 21, 2026',desc:'Paperback publication date reported by an independent retailer.'},
+elf:{status:'Retailer listing available',date:'See retailer',desc:'Use the retailer link to check current formats, pricing and availability.'},
+before:{status:'Retailer listing available',date:'See retailer',desc:'Use the retailer link to check publication status, formats and availability.'},
+goddess:{status:'Retailer listing available',date:'See retailer',desc:'Use the retailer link to check publication status, formats and availability.'},
+listening:{status:'Retailer listing available',date:'See retailer',desc:'Reyla’s companion story, set two centuries after the main trilogy. Check retailers for formats.'},
+rain:{status:'Retailer listing available',date:'See retailer',desc:'Breni’s post-trilogy companion story. Check retailers for formats and availability.'},
 wonders:{status:'In progress',date:'To be announced',desc:'Companion story about Selena and Talula. Publication date not confirmed.'},
-creatures:{status:'Release date not confirmed',date:'To be announced',desc:'The playful Plu creature adventures. No confirmed retailer release date.'},
-plu:{status:'Still being written',date:'After the other books',desc:'The final companion book is still being written. Its publication date has not been announced.'}
+creatures:{status:'In progress',date:'To be announced',desc:'Plu’s lighter-hearted creature adventures. Release date not confirmed.'},
+plu:{status:'Still being written',date:'To be announced',desc:'A future Plu companion story. Publication date not confirmed.'}
 };
 const chars=[
 {image:'assets/breni.webp',id:'breni',name:'Breni',symbol:'☽',group:'core',subtitle:'Vampire · Demi-god · Warrior',height:'6′9″',age:'Ageless',love:'Family and those she protects',overview:'A composed, fiercely loyal warrior whose imposing strength is matched by restraint. She builds a home with Taylor, protects Reyla, and takes responsibility for people in danger.',abilities:['Twin silver daggers','Exceptional strength and speed','Sunlight immunity','Immobilization'],books:['Elf Blood','The Goddess Elf','Dark Rain']},
@@ -77,20 +77,20 @@ function retailerLinks(book){
  return list.length?'<div class="storefront-links" aria-label="Retailers for '+book.title+'">'+list.map(([store,url])=>'<a href="'+url+'" rel="noopener noreferrer" target="_blank">'+store+' ↗</a>').join('')+'</div>':'<p class="retailer-empty">Store listings will be added when confirmed.</p>';
 }
 function renderBookCard(book){
- const info=releaseInfo[book.id],upcoming=['before','goddess','wonders','creatures','plu'].includes(book.id);
- const category=book.type==='trilogy'?'MAIN TRILOGY':(book.id==='listening'?'STANDALONE STORY · OUTSIDE MAIN CONTINUITY':(book.id==='rain'?'POST-TRILOGY COMPANION':'COMPANION STORY'));
+ const info=releaseInfo[book.id],upcoming=['wonders','creatures','plu'].includes(book.id);
+ const category=book.type==='trilogy'?'MAIN TRILOGY':(book.id==='listening'?'POST-TRILOGY COMPANION · A REYLA STORY':(book.id==='rain'?'POST-TRILOGY COMPANION':'COMPANION STORY'));
  return '<article class="book-card '+(book.type==='trilogy'?'main-volume':'companion-volume')+'"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small class="book-category">'+category+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p><p class="release-short"><strong>'+info.status+'</strong> · '+info.date+'</p>'+(['elf','before','goddess','listening','rain'].includes(book.id)?'<a class="text-link" href="'+({'elf':'elf-blood.html','before':'the-world-before.html','goddess':'the-goddess-elf.html','listening':'the-listening-world.html','rain':'dark-rain.html'}[book.id])+'">Explore book page →</a>':'<button class="text-link" data-book="'+book.id+'">Discover this story →</button>')+'<h4>Available retailers</h4>'+retailerLinks(book)+'</div></article>';
 }
 function renderBooks(filter='all'){
  const groups=[
   {id:'trilogy',title:'The original trilogy',hint:'Start here · Read Books One through Three',ids:['elf','before','goddess']},
-  {id:'after',title:'Stories after the trilogy',hint:'Breni’s story · Read after the main trilogy',ids:['rain']},
-  {id:'standalone',title:'Separate standalone story',hint:'Outside the main trilogy continuity · Can be read independently',ids:['listening']},
+  {id:'after',title:'Breni’s companion story',hint:'Set after the main trilogy · Contains later-era context',ids:['rain']},
+  {id:'standalone',title:'Reyla’s companion story',hint:'Set two centuries after Book Three · A self-contained journey',ids:['listening']},
   {id:'other',title:'Other companions & stories ahead',hint:'Family moments, creature tales and future adventures',ids:['wonders','creatures','plu']}
  ];
  const eligible=book=>{
   if(filter==='all')return true;
-  if(filter==='upcoming')return ['before','goddess','wonders','creatures','plu'].includes(book.id);
+  if(filter==='upcoming')return ['wonders','creatures','plu'].includes(book.id);
   return book.type===filter;
  };
  $('#bookGrid').innerHTML=groups.map(g=>{
