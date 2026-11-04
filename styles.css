@@ -990,3 +990,24 @@
 @media(prefers-reduced-motion:reduce){
  #bestiary .archive-voice-button{transition:none}
 }
+
+/* Story-specific glossary scenes: cinematic vignette rather than a shared icon. */
+#glossary .glossary-visual,
+.glossary-grid .glossary-visual{
+ display:block;
+ width:100%;
+ height:200px;
+ object-fit:cover;
+ object-position:center center;
+ border-bottom:1px solid #b38a64;
+ background:#121b31;
+}
+.glossary-card{
+ overflow:hidden;
+ border-color:#9b7659;
+ box-shadow:0 14px 25px #0004;
+}
+.glossary-card h3{margin-top:16px}
+@media(max-width:760px){
+ #glossary .glossary-visual,.glossary-grid .glossary-visual{height:185px}
+}
