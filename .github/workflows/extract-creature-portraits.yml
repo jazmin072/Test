@@ -36,6 +36,9 @@ jobs:
           test "$count" -eq 27
           find assets/creatures -maxdepth 1 -type f -printf '%f\n' | sort
 
+      - name: Check website JavaScript syntax
+        run: node --check app.js
+
       - name: Commit extracted artwork
         shell: bash
         run: |
