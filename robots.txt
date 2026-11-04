@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pluandselena.vercel.app/sitemap.xml
