@@ -658,3 +658,18 @@
 .approved-race-art[data-race-portrait="Cyclopes"]{background-image:url("/cyclopes-approved.webp");background-size:contain!important;background-position:center!important}
 .approved-race-art[data-race-portrait="Succubi"]{background-position:100% 66.666%!important}
 .approved-race-art[data-race-portrait="Dark Slimes"]{background-position:0 100%!important}
+
+/* The Bestiary's ID-scoped portrait rule must not override sprite coordinates. */
+#bestiary .approved-race-art[data-race-portrait="Elves"]{background-position:0 0!important}
+#bestiary .approved-race-art[data-race-portrait="Vampires"]{background-position:66.666% 0!important}
+#bestiary .approved-race-art[data-race-portrait="Minotaurs"]{background-position:100% 0!important}
+#bestiary .approved-race-art[data-race-portrait="Dragons"]{background-position:0 33.333%!important}
+#bestiary .approved-race-art[data-race-portrait="Dwarves"]{background-position:100% 33.333%!important}
+#bestiary .approved-race-art[data-race-portrait="Giants"]{background-position:0 66.666%!important}
+#bestiary .approved-race-art[data-race-portrait="Ogres"]{background-position:33.333% 66.666%!important}
+#bestiary .approved-race-art[data-race-portrait="Succubi"]{background-position:100% 66.666%!important}
+#bestiary .approved-race-art[data-race-portrait="Dark Slimes"]{background-position:0 100%!important}
+#bestiary .approved-race-art[data-race-portrait="Druids"],
+#bestiary .approved-race-art[data-race-portrait="Goblins"],
+#bestiary .approved-race-art[data-race-portrait="Dark Elves"],
+#bestiary .approved-race-art[data-race-portrait="Cyclopes"]{background-size:contain!important;background-position:center!important}
