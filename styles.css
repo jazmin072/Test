@@ -536,3 +536,47 @@
  padding:12px 14px;
  }
 }
+
+
+/* Unified creature-gallery art direction (Reyla/Talula cinematic reference).
+   Existing approved creature identities and source artwork remain untouched. */
+#bestiary .codex-entry,
+#world .lore-card:has(.approved-race-art){
+ background:linear-gradient(155deg,#22362e 0%,#211b2d 65%,#15131d 100%);
+ border:1px solid #b79a72;
+ border-radius:8px;
+ box-shadow:0 14px 30px #05030b88,inset 0 0 0 1px #e8d4a017;
+ overflow:hidden;
+}
+#bestiary .codex-portrait{
+ aspect-ratio:3/4;
+ background:radial-gradient(ellipse at 50% 20%,#48584b,#1e1b2a 80%);
+ border-bottom:2px solid #c6a377;
+ position:relative;
+}
+#bestiary .codex-portrait::after,
+#world .lore-card-visual.approved-race-art::after{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(180deg,#0c171100 55%,#12152099 100%);
+ box-shadow:inset 0 0 28px #0c0b1780;
+}
+#bestiary .approved-race-art{
+ min-height:0;
+ filter:saturate(.83) contrast(1.055) brightness(.96);
+}
+#bestiary .approved-race-art[data-race-portrait="Druids"],
+#bestiary .approved-race-art[data-race-portrait="Dark Elves"],
+#bestiary .approved-race-art[data-race-portrait="Goblins"],
+#bestiary .approved-race-art[data-race-portrait="Cyclopes"]{
+ filter:saturate(.9) contrast(1.025);
+}
+#bestiary .codex-info{background:linear-gradient(180deg,#202c2a,#1a1725);border-top:1px solid #c1a16b3a}
+#bestiary .codex-info h3{color:#f0d8a9}
+#bestiary .bestiary-art-note{color:#c8b9ae}
+#world .lore-card-visual.approved-race-art{position:relative;overflow:hidden;filter:saturate(.86) contrast(1.04)}
+#world .lore-card:has(.approved-race-art) .lore-card-body{background:linear-gradient(180deg,#23342e,#221a2d)}
+/* Approved single-image sources supersede older illustrated species collage. */
+.approved-race-art[data-race-portrait="Druids"]{background-image:url("/druids-approved.webp");background-size:cover}
+.approved-race-art[data-race-portrait="Dark Elves"],
+.approved-race-art[data-race-portrait="Goblins & Dark Elves"]{background-image:url("/dark-elves-approved.webp");background-size:cover}
+.approved-race-art[data-race-portrait="Cyclopes"]{background-image:url("/cyclopes-approved.webp");background-size:cover}
