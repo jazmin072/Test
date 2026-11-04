@@ -409,3 +409,30 @@ if(globalSearch){
  });
  renderGlobalSearch();
 }
+
+
+/* Unified official reference gallery: all portraits are sourced from the same
+   character records used by profiles, the connection map and lightbox. */
+const officialLineup=document.querySelector('#officialCastLineup');
+if(officialLineup){
+ const officialOrder=['plu','selena','breni','reyla','taylor','talula','ray'];
+ officialLineup.replaceChildren();
+ officialOrder.forEach(id=>{
+  const person=chars.find(ch=>ch.id===id);
+  if(!person||!person.image)return;
+  const anchor=document.createElement('a');
+  anchor.className='official-cast-face';
+  anchor.href='#gallery';
+  anchor.dataset.portrait=id;
+  anchor.setAttribute('aria-label','See the official portrait of '+person.name);
+  const image=document.createElement('img');
+  image.src=person.image;
+  image.alt='Official reference portrait of '+person.name;
+  image.loading='lazy';
+  image.onerror=()=>{if(person.fallback&&image.src.indexOf(person.fallback)<0){image.src=person.fallback}else{anchor.hidden=true}};
+  const name=document.createElement('span');
+  name.textContent=person.name;
+  anchor.append(image,name);
+  officialLineup.append(anchor);
+ });
+}
