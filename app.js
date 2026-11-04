@@ -504,40 +504,16 @@ let bestiaryVoice='government';
 const escapeCreatureText=value=>String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 
 let bestiaryFilter='All';
-/* Author-approved uploads: landscape four-panel Dragon sheet and portrait
-   Cyclopes pair. Only image presentation changes; book lore stays intact. */
-const approvedCreatureUploads={
- dragons:'/cc46fce9-238a-41e6-955e-082095b35d30.png',
- cyclopes:'/76967ae9-60d7-4739-94ac-f49080622d51.png'
-};
-/* Confirm that a landscape image is the four-column Dragon sheet and that the
-   portrait image is the Cyclopes pair, even if GitHub changed upload names. */
-function reconcileApprovedCreatureImages(){
- const urls=[approvedCreatureUploads.dragons,approvedCreatureUploads.cyclopes];
- Promise.all(urls.map(url=>new Promise(resolve=>{
-  const probe=new Image();
-  probe.onload=()=>resolve({url,width:probe.naturalWidth,height:probe.naturalHeight});
-  probe.onerror=()=>resolve(null);
-  probe.src=url;
- }))).then(found=>{
-  const ready=found.filter(Boolean);
-  const dragons=ready.find(info=>info.width>info.height);
-  const cyclopes=ready.find(info=>info.height>info.width);
-  if(dragons)document.querySelectorAll('.dragon-model-cell').forEach(node=>node.style.backgroundImage='url("'+dragons.url+'")');
-  if(cyclopes)document.querySelectorAll('.cyclopes-model-pair img').forEach(node=>{if(node.getAttribute('src')!==cyclopes.url)node.setAttribute('src',cyclopes.url)});
- });
-}
+/* Every race and creature uses its own approved image file.
+   This keeps the archive consistent and avoids sprite-sheet panel crops. */
 function approvedRacePortrait(entry,portraits){
- if(entry.name==='Dragons'){
-  const labels=['Humanoid male','Humanoid female','Beast-form male','Beast-form female'];
-  return '<div class="dragon-model-grid" role="group" aria-label="Four approved Dragon models">'+
-   labels.map((label,i)=>'<div class="dragon-model-cell dragon-model-'+i+'" role="img" aria-label="'+label+' Dragon portrait, without printed image lettering"></div>').join('')+
-   '</div>';
+ if(!portraits.length){
+  return '<div class="codex-portrait-gallery single"><p class="codex-art-pending">Approved artwork is being prepared.</p></div>';
  }
- if(entry.name==='Cyclopes'){
-  return '<div class="cyclopes-model-pair"><img src="'+approvedCreatureUploads.cyclopes+'" alt="Approved full-body male and female Cyclopes, with their eyes covered by broad leather visors" loading="lazy"></div>';
- }
- return '<div class="codex-portrait-gallery '+(portraits.length===1?'single':'')+'">'+portraits.map(([file,label])=>'<figure class="codex-portrait-figure"><img class="codex-portrait-image" src="/assets/creatures/'+file+'" alt="Full-body '+label.toLowerCase()+' portrait of '+entry.name+'" loading="lazy"><figcaption>'+label+' reference</figcaption></figure>').join('')+'</div>';
+ const safeName=escapeCreatureText(entry.name);
+ return '<div class="codex-portrait-gallery '+(portraits.length===1?'single':'')+'">'+
+  portraits.map(([file,label])=>'<figure class="codex-portrait-figure"><img class="codex-portrait-image" src="/assets/creatures/'+file+'" alt="Full-body '+escapeCreatureText(label.toLowerCase())+' portrait of '+safeName+'" loading="lazy"><figcaption>'+escapeCreatureText(label)+' reference</figcaption></figure>').join('')+
+  '</div>';
 }
 function renderBestiary(){
  const host=document.querySelector('#bestiaryGrid');
@@ -560,7 +536,6 @@ function renderBestiary(){
   const bookReference=rows?'<details class="creature-reference"><summary>Additional book-reference notes</summary><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+escapeCreatureText(stats.basis||'Book details take priority; visual interpretation is not additional canon.')+'</p></details>':'';
   return '<article class="bestiary-card codex-entry '+(entry.name==='Dragons'?'dragon-race-card':entry.name==='Cyclopes'?'cyclopes-race-card':'')+' '+(bestiaryVoice==='plu'?'plu-active':'government-active')+'"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+escapeCreatureText(entry.category)+' · '+escapeCreatureText(entry.realm)+'</small><h3>'+escapeCreatureText(entry.name)+'</h3>'+voiceMarkup+bookReference+'</div></article>';
  }).join('');
- reconcileApprovedCreatureImages();
 }
 const bestiaryVoiceControls=document.querySelector('#bestiaryVoiceControls');
 if(bestiaryVoiceControls){
