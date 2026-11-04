@@ -688,3 +688,11 @@
 .race-visual-profile strong{color:#f3d49a}
 @media(max-width:760px){.lore-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lore-card-body{padding:14px}}
 @media(max-width:450px){.lore-grid{grid-template-columns:1fr}.lore-card-visual{aspect-ratio:4/3;object-fit:contain}}
+
+
+/* Bestiary portraits now use one independent full-body image per entry. */
+#bestiary .codex-portrait{aspect-ratio:4/5;min-height:0;padding:12px;background:radial-gradient(circle at 50% 35%,#473054,#130d20 78%)}
+#bestiary .codex-portrait-image{display:block;width:100%;height:100%;max-height:440px;object-fit:contain;object-position:center center}
+#bestiary .codex-entry{display:flex;flex-direction:column;min-width:0}
+#bestiary .codex-info{min-width:0}
+@media(max-width:640px){#bestiary .codex-portrait{aspect-ratio:3/4}#bestiary .codex-portrait-image{max-height:360px}}
