@@ -696,3 +696,16 @@
 #bestiary .codex-entry{display:flex;flex-direction:column;min-width:0}
 #bestiary .codex-info{min-width:0}
 @media(max-width:640px){#bestiary .codex-portrait{aspect-ratio:3/4}#bestiary .codex-portrait-image{max-height:360px}}
+
+
+/* Approved full-body creature artwork: show one isolated cell from the 4x4 sheet per card. */
+#bestiary .codex-sprite-portrait{
+ aspect-ratio:2/3;
+ background-image:url('/chronicles-approved-races-sprite.webp')!important;
+ background-size:400% 400%!important;
+ background-repeat:no-repeat!important;
+ background-color:#171126;
+}
+@media(max-width:640px){
+ #bestiary .codex-sprite-portrait{aspect-ratio:2/3}
+}
