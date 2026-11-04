@@ -714,3 +714,29 @@
 #bestiary .codex-art-pending{aspect-ratio:2/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.55rem;padding:1.2rem;text-align:center;color:#ead8b6;background:radial-gradient(ellipse at 50% 35%,#3b304a 0%,#171326 72%);border:1px solid rgba(216,184,119,.55);}
 #bestiary .codex-art-pending span{font-family:Georgia,serif;font-size:1.05rem;}
 #bestiary .codex-art-pending small{font-size:.75rem;opacity:.78;}
+
+
+/* Single-source Bestiary: full-body approved portraits, paired where supplied. */
+#bestiary .bestiary-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+#bestiary .codex-entry{display:grid;grid-template-columns:minmax(190px,36%) minmax(0,1fr);align-items:stretch;min-height:0}
+#bestiary .codex-entry .codex-portrait{display:flex;align-items:center;justify-content:center;min-height:100%;height:auto;aspect-ratio:auto;padding:12px;border:0;border-right:1px solid #baa07b;background:radial-gradient(circle at 50% 35%,#473054,#130d20 78%)}
+#bestiary .codex-portrait-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:9px;width:100%}
+#bestiary .codex-portrait-gallery.single{grid-template-columns:minmax(0,1fr);max-width:250px}
+#bestiary .codex-portrait-figure{display:flex;flex-direction:column;min-width:0;margin:0;padding:5px;border:1px solid #94734e;background:#171126}
+#bestiary .codex-portrait-image{display:block;width:100%;height:auto;aspect-ratio:1/2;max-height:420px;object-fit:contain;object-position:center;background:#100b1b}
+#bestiary .codex-portrait-figure figcaption{padding:5px 2px 1px;color:#e9c17e;text-align:center;font:10px/1.3 'DM Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase}
+#bestiary .codex-info{min-width:0;padding:18px;gap:7px}
+#bestiary .codex-info .race-explanation{line-height:1.6}
+#bestiary .codex-info .race-stats{margin-top:3px}
+#bestiary .codex-info .race-stats-basis{margin-top:8px;font-style:italic}
+@media(max-width:850px){#bestiary .bestiary-grid{grid-template-columns:1fr}}
+@media(max-width:560px){
+ #bestiary .codex-entry{grid-template-columns:38% 62%}
+ #bestiary .codex-entry .codex-portrait{padding:8px}
+ #bestiary .codex-portrait-gallery{gap:5px}
+ #bestiary .codex-portrait-figure{padding:3px}
+ #bestiary .codex-portrait-image{max-height:330px}
+ #bestiary .codex-info{padding:12px;gap:5px}
+ #bestiary .codex-entry .codex-info h3{font-size:17px}
+ #bestiary .codex-info .race-explanation{font-size:12px}
+}
