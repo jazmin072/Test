@@ -613,3 +613,11 @@
 #bestiary .race-stats-basis{font-size:10px;line-height:1.5;margin:8px 0 0;color:#c8b9ae}
 @media(max-width:850px){#bestiary .bestiary-grid{grid-template-columns:1fr}}
 @media(max-width:560px){#bestiary .codex-entry{grid-template-columns:40% 60%}#bestiary .codex-entry .codex-portrait{min-height:300px;aspect-ratio:auto}#bestiary .codex-info{padding:13px;gap:5px}#bestiary .race-stat{grid-template-columns:1fr;gap:2px;padding:6px 0}#bestiary .race-stat strong{font-size:10px}}
+
+
+/* Preserve the uncropped full-figure approved single-image sources. */
+#bestiary .approved-race-art[data-race-portrait="Druids"],
+#bestiary .approved-race-art[data-race-portrait="Dark Elves"],
+#bestiary .approved-race-art[data-race-portrait="Cyclopes"]{
+ background-size:contain!important;background-position:center center!important;background-repeat:no-repeat!important;
+}
