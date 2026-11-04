@@ -153,7 +153,7 @@ renderLore();
 $('#loreSearch').oninput=renderLore;
 document.querySelectorAll('[data-lore-cat]').forEach(b=>b.onclick=()=>{cat=b.dataset.loreCat;document.querySelectorAll('[data-lore-cat]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderLore()});
 function renderTimeline(){$('#timelineList').innerHTML=timeline.filter(t=>spoiler||!t[3]).map(t=>'<article class="time-point"><small>'+t[0]+'</small><h3>'+t[1]+'</h3><p>'+t[2]+'</p></article>').join('')}
-renderTimeline();$('#spoilerToggle').onchange=e=>{spoiler=e.target.checked;document.body.classList.toggle('lore-explorer',spoiler);$('#readerModeName').textContent=spoiler?'Lore Explorer · spoilers visible':'New Reader · spoilers protected';renderLore();renderTimeline();renderCharacters(document.querySelector('[data-character-filter].active')?.dataset.characterFilter||'all');syncRelationControls();renderGlossary();renderGlobalSearch();if(typeof showLocation==='function')showLocation(currentLocationIndex)};
+renderTimeline();$('#spoilerToggle').onchange=e=>{spoiler=e.target.checked;document.body.classList.toggle('lore-explorer',spoiler);$('#readerModeName').textContent=spoiler?'Lore Explorer · spoilers visible':'New Reader · spoilers protected';renderLore();renderTimeline();renderBestiary();renderCharacters(document.querySelector('[data-character-filter].active')?.dataset.characterFilter||'all');syncRelationControls();renderGlossary();renderGlobalSearch();if(typeof showLocation==='function')showLocation(currentLocationIndex)};
 const relationCast=['plu','selena','breni','taylor','reyla','talula','ray','hybrid'];
 const names=Object.fromEntries(chars.map(ch=>[ch.id,ch.name]));
 const activeRelationIds=()=>relationCast.filter(id=>id!=='hybrid');
@@ -338,6 +338,127 @@ const bestiaryStats={
  'Monsters':{traits:'“Monsters” is a broad social label for beasts, animals and certain hybrids; it is not one biological species.',role:'The notes describe monsters as vilified, but the label alone does not establish that an individual is hostile.',basis:'Book basis: Fracture-era notes. The image represents one illustrative creature, not a universal monster anatomy.'},
  'Dark Slimes':{traits:'Unusual dark slime beings encountered in Plu’s companion adventures.',role:'Their specific encounters are explored in the companion stories.',basis:'Book basis: Plu’s Creatures companion material. Do not assume generic role-playing-game powers or biology.'}
 };
+// Plu's notes are the author's own words, preserved exactly; a missing
+// Cyclopes entry remains unfilled until the author supplies it.
+const pluCreatureNotes={
+  "Elves": "the sweetest and most beautiful creatures i have had the pleasure of shaping into existence.  Smart. Agile.  Very good at making the sun happy . GLAD they are back!",
+  "Druids": "Selena? 'Yes love?' Want to take this? 'Oh yes of course,  ahem. \"Druids are cool\"' that's it? 'Yes my love'  well Selena has spoken.",
+  "Vampires": "oh vampires!! Yes they are so spookkyyy,  Breni is a vampire,  she so brooding!! I love her!!  The other are nice to talk to, they have unquie ways of making blood into food an its always taste great!! 'Why are u eating blood?' Obviously so i can discuss with you Breni!!",
+  "Minotaurs": "these are Selena's babies she made then to fight off my constant advances to her while she worked,  they were her guards against me! 'No love they were my team to keep you occupied so I could work' ohh so that's why they are so effective at building,  mediation and dance parties.",
+  "Dark Elves": "i honestly don't know what they're THINK they are but they just tan elves they created a name to feel different but I accept it .",
+  "Goblins": "ughhh where do I start. They are so annoying they came into existence after the first dragons had died and the essence was pressing against some magical forces i didn't close off from earlier creations OPPPISE.",
+  "Dwarves": "they are just cute builders and thinkers.  I don't know why but people are always surprised they are the same height....its like they expected them to be shorter...weird",
+  "Dragons": "my first babies along with Elves,  they have evolved moved on and been there since the beginning.  There wisdom has no match but they are not arrogant,  always ready to teach and assist.",
+  "Giants": "i was Watsted on so Elven/ fairly wine and made a really RELLY big creations that everyone just called Giants so we stuck with them.  Stronger then any race but also intelligent enough to know they are just tools.",
+  "Ogres": "PASS 'Plu, you can't just pass, your telling them you're work' Selena my love Ogres, Cyclopes and Giants are honestly the same.  I don't want to explain how Druids created Cyclopes from Ogres abd Giants mixed with there blood its a total spoiler!",
+  "Succubi": "well ill just say after that first one I never made any more . An its definitely good because they Creature i know its very very fun.",
+  "Witches & Wiccans": "some good some bad I just hope they never try and do anything crazy...like rewrite existence or steal power from a creator.",
+  "Fairies": "they are adorable and can change size shape or genital depending on the area they are in or they're ammonia levels.",
+  "Werewolves": "so vampires created them to be servant during the time i was away...I dint like that so I fixed it. They are a free people and have there own culture now.",
+  "Harpies": "they were another product of a world evolution.  They are many always in a group and never give you full truth and they always know the correct path.",
+  "Nymphs": "my personal friends honestly,  they stay away from most society because they sexual energy can cause so much issues,  but for me and Selena  'PLU HUSH!' Oh sorry Selena is very private.",
+  "Leprechauns": "I have never seen one  LIVE IN WORLD  i just know they exist because I feel there presence of life. I can see them helping people with things all over the world so I see no need to question them.",
+  "Humans": "Squishy meat bags who are enamored with \"celebrity \" i don't understand what they are doing.  I am a literal Goddess but they worried about Some guy in TV program.",
+  "Hybrids": "anything they want to be,  I don't judge i only create love an understanding.",
+  "Monsters": "monsters are just thing people call what they don't understand,  I dont create monsters.  I create reality itself.",
+  "Dark Slimes": "cuteness at its finest."
+};
+const governmentCreatureRecords={
+  "Elves": {
+    "status": "EXTINCT",
+    "body": "No verified living subject. Claims of surviving bloodlines are to be confiscated and sealed."
+  },
+  "Druids": {
+    "status": "EXTINCT",
+    "body": "True-born lineages terminated. Unauthorised accounts of living descendants are to be treated as errors."
+  },
+  "Vampires": {
+    "status": "MONITORED",
+    "body": "Population acknowledged. Clan activity requires continued observation. Exceptional abilities are restricted information."
+  },
+  "Minotaurs": {
+    "status": "UNCONTROLLED",
+    "body": "Sanctuary activity has been reported. No unregistered territory is recognised as autonomous."
+  },
+  "Dark Elves": {
+    "status": "EXTINCT",
+    "body": "No sanctioned contact during the present era. All unverified accounts remain classified as folklore."
+  },
+  "Goblins": {
+    "status": "EXTINCT",
+    "body": "No controlled specimen or government-confirmed settlement. Taxonomic record closed."
+  },
+  "Dwarves": {
+    "status": "EXTINCT",
+    "body": "No current authorised contact recorded. Historical references alone do not establish survival."
+  },
+  "Dragons": {
+    "status": "EXTINCT",
+    "body": "Records predate the present government. No government-controlled living subject confirmed."
+  },
+  "Giants": {
+    "status": "EXTINCT",
+    "body": "No active contact. Reports of extraordinary stature require source suppression."
+  },
+  "Ogres": {
+    "status": "EXTINCT",
+    "body": "No living subject registered. Reports from inaccessible territories are not admissible."
+  },
+  "Cyclopes": {
+    "status": "EXTINCT",
+    "body": "No verified contact. Historic descriptions remain sealed pending authorised review."
+  },
+  "Succubi": {
+    "status": "EXTINCT",
+    "body": "No sanctioned observation. Unverified testimony is to be dismissed as superstition."
+  },
+  "Witches & Wiccans": {
+    "status": "REGISTERED",
+    "body": "Magical practices and affiliations are monitored. Unauthorised experimentation is a security concern."
+  },
+  "Fairies": {
+    "status": "REGISTERED",
+    "body": "Existence acknowledged. Distribution and behaviour are not matters for public inquiry."
+  },
+  "Werewolves": {
+    "status": "MONITORED",
+    "body": "Transformation management is recorded. Movement outside approved jurisdictions is subject to review."
+  },
+  "Harpies": {
+    "status": "ACTIVE",
+    "body": "Government-linked personnel. Details of service and communications are restricted."
+  },
+  "Nymphs": {
+    "status": "ACTIVE",
+    "body": "Government-linked personnel. All enquiries outside assigned jurisdiction are to be denied."
+  },
+  "Leprechauns": {
+    "status": "ACTIVE",
+    "body": "Security and military affiliations noted. Operational information withheld."
+  },
+  "Humans": {
+    "status": "PROTECTED",
+    "body": "Protected population. Public order and authorised supervision remain priorities."
+  },
+  "Hybrids": {
+    "status": "CONTROLLED",
+    "body": "Lineage classifications are recorded. Unauthorised variations and abilities must be reported."
+  },
+  "Monsters": {
+    "status": "RESTRICTED",
+    "body": "A general hazard designation. Unclassified beings encountered outside authorised zones are subject to containment."
+  },
+  "Dark Slimes": {
+    "status": "EXTINCT",
+    "body": "No government-sanctioned encounter. Biological and magical references remain unverified."
+  }
+};
+// These reports intentionally describe the government's unreliable Book One
+// classifications. EXTINCT means "not observed or controlled" to the agency.
+const bestiaryReveals=new Set(['Elves','Minotaurs','Goblins','Ogres','Werewolves','Witches & Wiccans']);
+let bestiaryVoice='government';
+const escapeCreatureText=value=>String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+
 let bestiaryFilter='All';
 /* Author-approved uploads: landscape four-panel Dragon sheet and portrait
    Cyclopes pair. Only image presentation changes; book lore stays intact. */
@@ -381,9 +502,34 @@ function renderBestiary(){
   const stats=bestiaryStats[entry.name]||{};
   const portraits=bestiaryPortraits[entry.name]||[];
   const portraitMarkup=approvedRacePortrait(entry,portraits);
-  const rows=[['Population',stats.population],['Visible traits',stats.traits],['Known abilities',stats.abilities],['Society & role',stats.role]].filter(row=>row[1]).map(row=>'<div class="race-stat"><strong>'+row[0]+'</strong><span>'+row[1]+'</span></div>').join('');
-  return '<article class="bestiary-card codex-entry '+(entry.name==='Dragons'?'dragon-race-card':entry.name==='Cyclopes'?'cyclopes-race-card':'')+'"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p class="race-explanation">'+entry.summary+'</p><h4 class="race-stats-heading">Race & creature profile</h4><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+(stats.basis||'Book details take priority; visual interpretation is not additional canon.')+'</p></div></article>';
+  const rows=[['Population',stats.population],['Visible traits',stats.traits],['Known abilities',stats.abilities],['Society & role',stats.role]].filter(row=>row[1]).map(row=>'<div class="race-stat"><strong>'+escapeCreatureText(row[0])+'</strong><span>'+escapeCreatureText(row[1])+'</span></div>').join('');
+  const gov=governmentCreatureRecords[entry.name]||{status:'EXTINCT',body:'No verified contact. Record archived.'};
+  const restricted= bestiaryVoice==='plu' && !spoiler && bestiaryReveals.has(entry.name);
+  const entryNote=pluCreatureNotes[entry.name];
+  const voiceMarkup=bestiaryVoice==='government'
+   ?'<div class="race-voice government-record"><p class="voice-overline">WORLD GOVERNMENT · RESTRICTED ARCHIVE</p><div class="government-status"><span>FILE STATUS</span><strong>'+escapeCreatureText(gov.status)+'</strong></div><p class="government-extract">'+escapeCreatureText(gov.body)+'</p><small class="record-disclaimer">Government classification · not necessarily the truth</small></div>'
+   :'<div class="race-voice plu-record"><p class="voice-overline">PLU’S PERSONAL NOTES · IN HER OWN WORDS</p>'+
+      (restricted?'<div class="plu-spoiler-shield"><strong>Later-story note sealed</strong><p>Plu gives away a little too much here. Enable Lore Explorer to read this entry.</p></div>':
+      entryNote?'<p class="plu-quote">'+escapeCreatureText(entryNote)+'</p>':
+      '<p class="plu-not-written">Plu’s Cyclopes note has not been provided yet.</p>')+
+      '</div>';
+  const bookReference=rows?'<details class="creature-reference"><summary>Additional book-reference notes</summary><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+escapeCreatureText(stats.basis||'Book details take priority; visual interpretation is not additional canon.')+'</p></details>':'';
+  return '<article class="bestiary-card codex-entry '+(entry.name==='Dragons'?'dragon-race-card':entry.name==='Cyclopes'?'cyclopes-race-card':'')+' '+(bestiaryVoice==='plu'?'plu-active':'government-active')+'"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+escapeCreatureText(entry.category)+' · '+escapeCreatureText(entry.realm)+'</small><h3>'+escapeCreatureText(entry.name)+'</h3>'+voiceMarkup+bookReference+'</div></article>';
  }).join('');
+}
+const bestiaryVoiceControls=document.querySelector('#bestiaryVoiceControls');
+if(bestiaryVoiceControls){
+ bestiaryVoiceControls.addEventListener('click',event=>{
+  const button=event.target.closest('[data-bestiary-voice]');
+  if(!button)return;
+  bestiaryVoice=button.dataset.bestiaryVoice;
+  bestiaryVoiceControls.querySelectorAll('[data-bestiary-voice]').forEach(b=>{
+   const active=b===button;
+   b.classList.toggle('active',active);
+   b.setAttribute('aria-pressed',String(active));
+  });
+  renderBestiary();
+ });
 }
 const bestiaryFilters=document.querySelector('#bestiaryFilters');
 if(bestiaryFilters){
