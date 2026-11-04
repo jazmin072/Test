@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'chronicles-of-plu-selena-27-portraits.zip'
+      - 'app.js'
       - '.github/workflows/extract-creature-portraits.yml'
   workflow_dispatch:
 
