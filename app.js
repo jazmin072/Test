@@ -109,13 +109,17 @@ renderBooks();
 document.querySelectorAll('[data-book-filter]').forEach(btn=>btn.addEventListener('click',()=>{
  document.querySelectorAll('[data-book-filter]').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderBooks(btn.dataset.bookFilter)
 }));
-/* Four author-uploaded supporting-cast portraits occupy the first four
-   panels of the approved sheet, ordered Saelis, Torven, Vessa, Iven.
-   Keep their original on-page profiles and all main-cast imagery intact. */
-const supportingPortraits={saelis:true,torven:true,vessa:true,iven:true};
+/* Author-uploaded full-length individual portraits, not collage crops.
+   No headshots or separate thumbnails for supporting cast. */
+const supportingPortraits={
+ saelis:'assets/supporting/saelis.png',
+ torven:'assets/supporting/torven.png',
+ vessa:'assets/supporting/vessa.png',
+ iven:'assets/supporting/iven.png'
+};
 function characterArtMarkup(c){
  if(supportingPortraits[c.id]){
-  return '<span class="supporting-cast-portrait supporting-portrait-'+c.id+'" aria-hidden="true"></span>';
+  return '<img class="supporting-full-figure" src="'+supportingPortraits[c.id]+'" alt="" loading="lazy">';
  }
  return (c.image?'<img src="'+c.image+'" alt="" loading="lazy" data-fallback="'+(c.fallback||'')+'" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;delete this.dataset.fallback}else{this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'}">':'')+
   '<span class="character-symbol" style="'+(c.image?'display:none':'')+'">'+c.symbol+'</span>';
@@ -124,10 +128,8 @@ function renderCharacters(filter='all'){
  const visible=chars.filter(c=>(filter==='all'||c.group===filter)&&(!c.spoiler||spoiler));
  $('#characterGrid').innerHTML=visible.map(c=>{
   const isApprovedSupport=Boolean(supportingPortraits[c.id]);
-  const supportingHeader=isApprovedSupport
-   ?'<div class="supporting-character-heading"><span class="supporting-headshot supporting-headshot-'+c.id+'" role="img" aria-label="Smaller headshot of '+c.name+'"></span><div class="supporting-heading-copy"><p class="character-group">SUPPORTING CAST</p><h3>'+c.name+'</h3><p class="role">'+c.subtitle+'</p></div></div>'
-   :'<p class="character-group">'+(c.group==='core'?'MAIN CAST':'SUPPORTING CAST')+'</p><h3>'+c.name+'</h3><p class="role">'+c.subtitle+'</p>';
-  return '<article class="character-card '+(isApprovedSupport?'supporting-full-body-card':'')+'"><div class="character-art" '+(isApprovedSupport?'role="img" aria-label="Full-body illustration of '+c.name+'"':'aria-hidden="true"')+'>'+characterArtMarkup(c)+'</div><div class="character-info">'+supportingHeader+'<div class="stats"><div><span>Height</span><strong>'+c.height+'</strong></div><div><span>Age</span><strong>'+c.age+'</strong></div><div><span>Important bonds</span><strong>'+c.love+'</strong></div></div><button class="btn" data-char="'+c.id+'">View full profile</button></div></article>';
+  const heading='<p class="character-group">'+(c.group==='core'?'MAIN CAST':'SUPPORTING CAST')+'</p><h3>'+c.name+'</h3><p class="role">'+c.subtitle+'</p>';
+  return '<article class="character-card '+(isApprovedSupport?'supporting-full-body-card':'')+'"><div class="character-art" '+(isApprovedSupport?'role="img" aria-label="Full-body illustration of '+c.name+'"':'aria-hidden="true"')+'>'+characterArtMarkup(c)+'</div><div class="character-info">'+heading+'<div class="stats"><div><span>Height</span><strong>'+c.height+'</strong></div><div><span>Age</span><strong>'+c.age+'</strong></div><div><span>Important bonds</span><strong>'+c.love+'</strong></div></div><button class="btn" data-char="'+c.id+'">View full profile</button></div></article>';
  }).join('');
 }
 renderCharacters();
