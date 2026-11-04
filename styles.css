@@ -595,3 +595,21 @@
 }
 #bestiary .race-setting{font-size:.86rem;line-height:1.45;color:#e8cf9f;border-left:2px solid #c3a078;padding-left:10px;margin:4px 0 12px}
 @media(max-width:700px){#bestiary .codex-portrait{min-height:260px}}
+
+
+/* Race and creature encyclopedia: one full-figure illustration per entry, with its own profile. */
+#bestiary .bestiary-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:stretch}
+#bestiary .codex-entry{display:grid;grid-template-columns:minmax(210px,42%) minmax(0,1fr);min-height:0}
+#bestiary .codex-entry .codex-portrait{aspect-ratio:2/3;min-height:390px;height:100%;border:0;border-right:2px solid #baa07b;background:#171522}
+#bestiary .codex-entry .approved-race-art{width:100%;height:100%;min-height:0;background-size:400% 400%;background-repeat:no-repeat}
+#bestiary .codex-info{padding:22px;display:flex;flex-direction:column;gap:7px}
+#bestiary .codex-info h3{margin:4px 0 2px}
+#bestiary .codex-info .race-explanation{line-height:1.65}
+#bestiary .race-stats-heading{font:600 13px Cinzel,Georgia,serif;color:#e9c17e;letter-spacing:.08em;text-transform:uppercase;margin:8px 0 2px}
+#bestiary .race-stats{border-top:1px solid #b79a7255}
+#bestiary .race-stat{display:grid;grid-template-columns:minmax(90px,34%) 1fr;gap:10px;padding:7px 0;border-bottom:1px solid #b79a722b;font-size:12px;line-height:1.45}
+#bestiary .race-stat strong{color:#e8c38e;font-weight:600}
+#bestiary .race-stat span{color:#eee4db}
+#bestiary .race-stats-basis{font-size:10px;line-height:1.5;margin:8px 0 0;color:#c8b9ae}
+@media(max-width:850px){#bestiary .bestiary-grid{grid-template-columns:1fr}}
+@media(max-width:560px){#bestiary .codex-entry{grid-template-columns:40% 60%}#bestiary .codex-entry .codex-portrait{min-height:300px;aspect-ratio:auto}#bestiary .codex-info{padding:13px;gap:5px}#bestiary .race-stat{grid-template-columns:1fr;gap:2px;padding:6px 0}#bestiary .race-stat strong{font-size:10px}}
