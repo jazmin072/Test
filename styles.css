@@ -714,3 +714,10 @@
 #bestiary .codex-art-pending{aspect-ratio:2/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.55rem;padding:1.2rem;text-align:center;color:#ead8b6;background:radial-gradient(ellipse at 50% 35%,#3b304a 0%,#171326 72%);border:1px solid rgba(216,184,119,.55);}
 #bestiary .codex-art-pending span{font-family:Georgia,serif;font-size:1.05rem;}
 #bestiary .codex-art-pending small{font-size:.75rem;opacity:.78;}
+
+/* Individual approved bestiary portraits */
+.codex-portrait-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:12px;background:linear-gradient(145deg,#171025,#281b35);border-bottom:1px solid #6b4c73}
+.codex-portrait-gallery figure{margin:0;min-width:0;display:flex;flex-direction:column;align-items:center}
+.codex-portrait-image{display:block;width:100%;height:310px;object-fit:contain;object-position:center bottom;background:radial-gradient(ellipse at 50% 45%,#584365,#21162f 72%);border:1px solid #765b7b}
+.codex-portrait-gallery figcaption{font:10px Cinzel,Georgia,serif;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;padding:5px}
+@media(max-width:620px){.codex-portrait-image{height:250px}.codex-portrait-gallery{gap:6px;padding:8px}}
