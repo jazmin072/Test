@@ -127,8 +127,8 @@ document.addEventListener('click',e=>{
 });
 $('.close-dialog').onclick=()=>$('#bookDialog').close();
 $('#bookDialog').onclick=e=>{if(e.target===$('#bookDialog'))$('#bookDialog').close()};
-$('#loreFilters').innerHTML=['All','Peoples','Magic','Places','History'].map(c=>'<button class="pill '+(c==='All'?'active':'')+'" data-lore-cat="'+c+'">'+c+'</button>').join('');
-/* Approved 4x4 artwork sheet: each entry displays its own 256x384 full-body cell. */
+$('#loreFilters').innerHTML=['All','Magic','Places','History'].map(c=>'<button class="pill '+(c==='All'?'active':'')+'" data-lore-cat="'+c+'">'+c+'</button>').join('');
+/* World encyclopedia illustrations are limited to magic, places and history. */
 function loreArtFor(entry){
  const title=entry[1];
  if(/Everlangyrs/i.test(title))return 'assets/lore-valley.svg';
