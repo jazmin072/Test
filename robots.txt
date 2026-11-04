@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pluandselena.vercel.app/sitemap.xml
+Sitemap: https://chronicles-of-plu-and.vercel.app/sitemap.xml
