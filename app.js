@@ -339,15 +339,33 @@ const bestiaryStats={
  'Dark Slimes':{traits:'Unusual dark slime beings encountered in Plu’s companion adventures.',role:'Their specific encounters are explored in the companion stories.',basis:'Book basis: Plu’s Creatures companion material. Do not assume generic role-playing-game powers or biology.'}
 };
 let bestiaryFilter='All';
+/* Author-approved uploads: landscape four-panel Dragon sheet and portrait
+   Cyclopes pair. Only image presentation changes; book lore stays intact. */
+const approvedCreatureUploads={
+ dragons:'/cc46fce9-238a-41e6-955e-082095b35d30.png',
+ cyclopes:'/76967ae9-60d7-4739-94ac-f49080622d51.png'
+};
+function approvedRacePortrait(entry,portraits){
+ if(entry.name==='Dragons'){
+  const labels=['Humanoid male','Humanoid female','Beast-form male','Beast-form female'];
+  return '<div class="dragon-model-grid" role="group" aria-label="Four approved Dragon models">'+
+   labels.map((label,i)=>'<div class="dragon-model-cell dragon-model-'+i+'" role="img" aria-label="'+label+' Dragon portrait, without printed image lettering"></div>').join('')+
+   '</div>';
+ }
+ if(entry.name==='Cyclopes'){
+  return '<div class="cyclopes-model-pair"><img src="'+approvedCreatureUploads.cyclopes+'" alt="Approved full-body male and female Cyclopes, with their eyes covered by broad leather visors" loading="lazy"></div>';
+ }
+ return '<div class="codex-portrait-gallery '+(portraits.length===1?'single':'')+'">'+portraits.map(([file,label])=>'<figure class="codex-portrait-figure"><img class="codex-portrait-image" src="/assets/creatures/'+file+'" alt="Full-body '+label.toLowerCase()+' portrait of '+entry.name+'" loading="lazy"><figcaption>'+label+' reference</figcaption></figure>').join('')+'</div>';
+}
 function renderBestiary(){
  const host=document.querySelector('#bestiaryGrid');
  if(!host)return;
  host.innerHTML=bestiaryEntries.filter(entry=>bestiaryFilter==='All'||entry.category===bestiaryFilter).map(entry=>{
   const stats=bestiaryStats[entry.name]||{};
   const portraits=bestiaryPortraits[entry.name]||[];
-  const portraitMarkup='<div class="codex-portrait-gallery '+(portraits.length===1?'single':'')+'">'+portraits.map(([file,label])=>'<figure class="codex-portrait-figure"><img class="codex-portrait-image" src="/assets/creatures/'+file+'" alt="Full-body '+label.toLowerCase()+' portrait of '+entry.name+'" loading="lazy"><figcaption>'+label+' reference</figcaption></figure>').join('')+'</div>';
+  const portraitMarkup=approvedRacePortrait(entry,portraits);
   const rows=[['Population',stats.population],['Visible traits',stats.traits],['Known abilities',stats.abilities],['Society & role',stats.role]].filter(row=>row[1]).map(row=>'<div class="race-stat"><strong>'+row[0]+'</strong><span>'+row[1]+'</span></div>').join('');
-  return '<article class="bestiary-card codex-entry"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p class="race-explanation">'+entry.summary+'</p><h4 class="race-stats-heading">Race & creature profile</h4><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+(stats.basis||'Book details take priority; visual interpretation is not additional canon.')+'</p></div></article>';
+  return '<article class="bestiary-card codex-entry '+(entry.name==='Dragons'?'dragon-race-card':entry.name==='Cyclopes'?'cyclopes-race-card':'')+'"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p class="race-explanation">'+entry.summary+'</p><h4 class="race-stats-heading">Race & creature profile</h4><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+(stats.basis||'Book details take priority; visual interpretation is not additional canon.')+'</p></div></article>';
  }).join('');
 }
 const bestiaryFilters=document.querySelector('#bestiaryFilters');
