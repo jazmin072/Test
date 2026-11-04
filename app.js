@@ -516,6 +516,7 @@ function renderBestiary(){
   const bookReference=rows?'<details class="creature-reference"><summary>Additional book-reference notes</summary><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+escapeCreatureText(stats.basis||'Book details take priority; visual interpretation is not additional canon.')+'</p></details>':'';
   return '<article class="bestiary-card codex-entry '+(entry.name==='Dragons'?'dragon-race-card':entry.name==='Cyclopes'?'cyclopes-race-card':'')+' '+(bestiaryVoice==='plu'?'plu-active':'government-active')+'"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+escapeCreatureText(entry.category)+' · '+escapeCreatureText(entry.realm)+'</small><h3>'+escapeCreatureText(entry.name)+'</h3>'+voiceMarkup+bookReference+'</div></article>';
  }).join('');
+ reconcileApprovedCreatureImages();
 }
 const bestiaryVoiceControls=document.querySelector('#bestiaryVoiceControls');
 if(bestiaryVoiceControls){
@@ -541,7 +542,6 @@ if(bestiaryFilters){
   renderBestiary();
  });
  renderBestiary();
- reconcileApprovedCreatureImages();
 }
 
 /* Universal discovery - search reflects spoiler visibility and links into the archive. */
