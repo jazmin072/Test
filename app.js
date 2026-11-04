@@ -133,6 +133,7 @@ $('#loreFilters').innerHTML=['All','Magic','Places','History'].map(c=>'<button c
 // after its image file exists in /assets/lore-approved; the original icon
 // remains as a graceful fallback until the art is added to the repository.
 const approvedLoreImages={
+  "The Government": "government-faceless-officials.webp",
   "Divine Creation": "celestial_creation_mandala.png",
   "Druidic Magic": "luminous_tree_of_life_sigil.png",
   "Residual Essence": "amethyst_essence_in_twilight_emblem.png",
