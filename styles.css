@@ -1090,3 +1090,19 @@
  .artwork-grid{grid-template-columns:1fr}
  .artwork-card img{height:auto;max-height:560px}
 }
+
+
+/* Temporary visual-concept disclosure (sitewide). */
+footer .artwork-placeholder-notice{
+ width:min(780px,100%);
+ margin:18px auto 25px;
+ padding:14px 18px;
+ border-top:1px solid #796183;
+ border-bottom:1px solid #796183;
+ color:#d8cad7;
+ font-size:12px;
+ line-height:1.75;
+}
+footer .artwork-placeholder-notice strong{
+ color:var(--gold);
+}
