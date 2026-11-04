@@ -339,7 +339,6 @@ const bestiaryStats={
  'Dark Slimes':{traits:'Unusual dark slime beings encountered in Plu’s companion adventures.',role:'Their specific encounters are explored in the companion stories.',basis:'Book basis: Plu’s Creatures companion material. Do not assume generic role-playing-game powers or biology.'}
 };
 let bestiaryFilter='All';
-let bestiaryFilter='All';
 function renderBestiary(){
  const host=document.querySelector('#bestiaryGrid');
  if(!host)return;
