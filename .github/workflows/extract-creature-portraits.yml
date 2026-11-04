@@ -1,0 +1,50 @@
+name: Extract approved creature portraits
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'chronicles-of-plu-selena-27-portraits.zip'
+      - '.github/workflows/extract-creature-portraits.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the website
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Extract the 27 approved portraits
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f chronicles-of-plu-selena-27-portraits.zip
+          mkdir -p assets/creatures
+          rm -f assets/creatures/*.webp
+          mkdir -p /tmp/creature-portraits
+          unzip -oq chronicles-of-plu-selena-27-portraits.zip -d /tmp/creature-portraits
+          find /tmp/creature-portraits -type f -iname '*.webp' -exec cp {} assets/creatures/ \;
+          count=$(find assets/creatures -maxdepth 1 -type f -iname '*.webp' | wc -l)
+          echo "Extracted $count WebP portraits"
+          test "$count" -eq 27
+          find assets/creatures -maxdepth 1 -type f -printf '%f\n' | sort
+
+      - name: Commit extracted artwork
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/creatures
+          if git diff --cached --quiet; then
+            echo "Portraits already extracted; no changes to commit."
+          else
+            git commit -m "Add 27 separate approved creature portraits"
+            git push origin HEAD:main
+          fi
