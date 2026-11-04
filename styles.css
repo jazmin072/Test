@@ -326,3 +326,19 @@
  aspect-ratio:1.15;
  background-position:center 18%,33.333% 0%!important;
 }
+
+/* Final species-specific art: Dark Elves have no horns; Cyclopes have one eye.
+   These supersede the old sprite art once the approved WebP images are uploaded. */
+.approved-race-art[data-race-portrait="Dark Elves"],
+.approved-race-art[data-race-portrait="Goblins & Dark Elves"]{
+ background-image:url("/dark-elves-approved.webp"),url("/chronicles-approved-races-sprite.webp");
+ background-size:cover,400% 400%;
+ background-position:center 35%,66.667% 33.333%!important;
+ background-repeat:no-repeat,no-repeat;
+}
+.approved-race-art[data-race-portrait="Cyclopes"]{
+ background-image:url("/cyclopes-approved.webp"),url("/chronicles-approved-races-sprite.webp");
+ background-size:cover,400% 400%;
+ background-position:center 28%,50% 66.667%!important;
+ background-repeat:no-repeat,no-repeat;
+}
