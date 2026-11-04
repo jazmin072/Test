@@ -709,3 +709,8 @@
 @media(max-width:640px){
  #bestiary .codex-sprite-portrait{aspect-ratio:2/3}
 }
+
+/* Honest placeholder for bestiary entries without approved book-specific art. */
+#bestiary .codex-art-pending{aspect-ratio:2/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.55rem;padding:1.2rem;text-align:center;color:#ead8b6;background:radial-gradient(ellipse at 50% 35%,#3b304a 0%,#171326 72%);border:1px solid rgba(216,184,119,.55);}
+#bestiary .codex-art-pending span{font-family:Georgia,serif;font-size:1.05rem;}
+#bestiary .codex-art-pending small{font-size:.75rem;opacity:.78;}
