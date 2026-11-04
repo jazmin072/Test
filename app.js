@@ -122,7 +122,13 @@ function characterArtMarkup(c){
 }
 function renderCharacters(filter='all'){
  const visible=chars.filter(c=>(filter==='all'||c.group===filter)&&(!c.spoiler||spoiler));
- $('#characterGrid').innerHTML=visible.map(c=>'<article class="character-card"><div class="character-art" aria-label="'+(supportingPortraits[c.id]?c.name+' portrait':'')+'" '+(supportingPortraits[c.id]?'role="img"':'aria-hidden="true"')+'>'+characterArtMarkup(c)+'</div><div class="character-info"><p class="character-group">'+(c.group==='core'?'MAIN CAST':'SUPPORTING CAST')+'</p><h3>'+c.name+'</h3><p class="role">'+c.subtitle+'</p><div class="stats"><div><span>Height</span><strong>'+c.height+'</strong></div><div><span>Age</span><strong>'+c.age+'</strong></div><div><span>Important bonds</span><strong>'+c.love+'</strong></div></div><button class="btn" data-char="'+c.id+'">View full profile</button></div></article>').join('');
+ $('#characterGrid').innerHTML=visible.map(c=>{
+  const isApprovedSupport=Boolean(supportingPortraits[c.id]);
+  const supportingHeader=isApprovedSupport
+   ?'<div class="supporting-character-heading"><span class="supporting-headshot supporting-headshot-'+c.id+'" role="img" aria-label="Smaller headshot of '+c.name+'"></span><div class="supporting-heading-copy"><p class="character-group">SUPPORTING CAST</p><h3>'+c.name+'</h3><p class="role">'+c.subtitle+'</p></div></div>'
+   :'<p class="character-group">'+(c.group==='core'?'MAIN CAST':'SUPPORTING CAST')+'</p><h3>'+c.name+'</h3><p class="role">'+c.subtitle+'</p>';
+  return '<article class="character-card '+(isApprovedSupport?'supporting-full-body-card':'')+'"><div class="character-art" '+(isApprovedSupport?'role="img" aria-label="Full-body illustration of '+c.name+'"':'aria-hidden="true"')+'>'+characterArtMarkup(c)+'</div><div class="character-info">'+supportingHeader+'<div class="stats"><div><span>Height</span><strong>'+c.height+'</strong></div><div><span>Age</span><strong>'+c.age+'</strong></div><div><span>Important bonds</span><strong>'+c.love+'</strong></div></div><button class="btn" data-char="'+c.id+'">View full profile</button></div></article>';
+ }).join('');
 }
 renderCharacters();
 document.querySelectorAll('[data-character-filter]').forEach(btn=>btn.addEventListener('click',()=>{
