@@ -342,3 +342,153 @@
  background-position:center 28%,50% 66.667%!important;
  background-repeat:no-repeat,no-repeat;
 }
+
+/* Character identity art direction — the approved Reyla/Talula portraits establish
+   the website's forest-cinematic visual language. Reframe rather than alter
+   portrait source files: no mirroring, face reconstruction, or colour filtering. */
+:root{
+ --portrait-paper:#ead9ba;
+ --portrait-gold:#b99b73;
+ --portrait-forest:#253d35;
+ --portrait-ink:#160f21;
+ --portrait-violet:#3a2b4c;
+}
+.official-cast-lineup{
+ display:grid;
+ grid-template-columns:repeat(7,minmax(0,1fr));
+ gap:clamp(7px,1.25vw,17px);
+ margin:0 auto 46px;
+ max-width:1180px;
+ padding:clamp(12px,2.2vw,24px);
+ border:1px solid #b8996c;
+ border-radius:8px;
+ background:radial-gradient(ellipse at 35% 8%,#39594c80,transparent 58%),
+            radial-gradient(ellipse at 85% 75%,#51416e80,transparent 48%),
+            linear-gradient(145deg,#100f1e,#1a1927 70%,#0b111a);
+ box-shadow:inset 0 0 0 4px #c6a47312,0 20px 48px #0009;
+}
+.official-cast-face{
+ display:flex;flex-direction:column;gap:0;
+ min-width:0;overflow:hidden;
+ background:#171a22;
+ border:1px solid #b59a72;
+ border-radius:4px;
+ text-align:center;
+ box-shadow:0 10px 22px #0007;
+ transition:border-color .2s,transform .2s;
+}
+.official-cast-face img{
+ display:block;width:100%;aspect-ratio:3/4;
+ object-fit:cover;object-position:center 22%;
+ background:linear-gradient(145deg,#28483b,#241a38);
+}
+.official-cast-face span{
+ font:600 clamp(10px,1.15vw,15px)/1.4 Cinzel,Georgia,serif;
+ color:#f2ddba;
+ padding:10px 4px;
+ background:linear-gradient(100deg,#21332d,#211728);
+}
+.official-cast-face:hover,.official-cast-face:focus-visible{
+ border-color:#f4d8a5;outline:2px solid #e0c49b;outline-offset:2px;
+ transform:translateY(-3px);
+}
+#characters .character-card,
+#gallery .portrait-tile{
+ background:linear-gradient(165deg,#25352f,#20182a 70%);
+ border:1px solid #aa906c;
+ border-radius:5px;
+ box-shadow:0 12px 26px #0005;
+}
+#characters .character-art{
+ height:auto;aspect-ratio:3/4;
+ min-height:0;background:linear-gradient(150deg,#3b5649,#2b2240);
+ border-bottom:2px solid #ba9d73;
+}
+#characters .character-art img,
+#gallery .portrait-tile img{
+ display:block;width:100%;height:100%;
+ object-fit:cover;object-position:center 22%;
+ filter:none;
+ transform:none;
+}
+#gallery .portrait-tile img{
+ aspect-ratio:3/4;
+ border-bottom:2px solid #ba9d73;
+}
+#gallery .portrait-tile:hover img{transform:none}
+#characters .character-info{
+ background:linear-gradient(180deg,#242d2a,#1b1727);
+}
+#characters .character-info h3,
+#gallery .portrait-label{color:#f3dcad}
+#gallery .portrait-tile small{color:#d4c2cf}
+#characters .stats{border-top:1px solid #a18d744d}
+#characters .character-card:focus-within,
+#gallery .portrait-tile:focus-visible{outline:2px solid #dfc297;outline-offset:3px}
+#characters .detail,
+#galleryDialog{
+ background:linear-gradient(145deg,#27382f,#201628 75%);
+ border:1px solid #b99970;
+ box-shadow:0 16px 35px #0008;
+}
+#galleryDialogContent>img{
+ background:#17231e;
+ border:1px solid #bea175;
+ border-radius:4px;
+}
+.relation-photo{
+ border-color:#c7aa7e;
+ background:linear-gradient(155deg,#385747,#211a38);
+}
+.relation-photo img{
+ filter:none;transform:none;
+ object-fit:cover;object-position:center 22%;
+}
+#reading-guide .guide-branch{
+ background:linear-gradient(115deg,#27372f,#25192f);
+ border-color:#907b62;
+ border-radius:5px;
+}
+#reading-guide .guide-branch img{
+ aspect-ratio:3/4;
+ object-fit:cover;object-position:center 22%;
+ border:1px solid #b19a74;
+ border-radius:3px;
+}
+#moments .moment-illustrated{
+ background:linear-gradient(160deg,#24362e,#20182a 78%);
+ border-color:#9f8668;
+ border-radius:5px;
+}
+#moments .moment-illustrated>img{
+ object-position:center 22%;
+ filter:none;
+}
+#bestiary .codex-entry{
+ border:1px solid #b49b73;
+ box-shadow:0 12px 27px #0005;
+ border-radius:5px;
+}
+#bestiary .codex-info{
+ background:linear-gradient(150deg,#efe3c8,#d3c3a8);
+}
+#bestiary .codex-portrait{border-bottom:2px solid #baa07b}
+#world .lore-card,
+#glossary .glossary-card{
+ border-color:#98816b;
+ background:linear-gradient(155deg,#25382e,#22182a 80%);
+}
+#world .lore-card-visual,
+#glossary .glossary-visual{border-bottom-color:#bfa17c}
+@media(max-width:1000px){
+ .official-cast-lineup{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:620px){
+ .official-cast-lineup{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:10px}
+ .official-cast-face span{font-size:11px;padding:8px 3px}
+ #characters .character-art{aspect-ratio:3/4}
+}
+@media(prefers-reduced-motion:reduce){
+ .official-cast-face{transition:none}
+ .official-cast-face:hover{transform:none}
+}
