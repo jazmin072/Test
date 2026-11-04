@@ -1050,3 +1050,43 @@
   border:0;
 }
 .character-card.supporting-full-body-card .character-info { padding-top:20px; }
+
+
+/* Dedicated Artwork page section */
+.artwork-section{background:linear-gradient(145deg,#151024,#0b0717 70%)}
+.artwork-grid{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:20px;
+ margin-top:34px;
+}
+.artwork-card{
+ margin:0;
+ overflow:hidden;
+ background:#1c1430;
+ border:1px solid #80634f;
+ box-shadow:0 12px 30px #0005;
+}
+.artwork-card a{display:block;background:#100d1d}
+.artwork-card img{
+ display:block;
+ width:100%;
+ height:360px;
+ object-fit:contain;
+ transition:transform .25s ease;
+}
+.artwork-card a:hover img{transform:scale(1.025)}
+.artwork-card figcaption{
+ padding:12px 15px;
+ color:#e9c17e;
+ font:500 14px Cinzel,Georgia,serif;
+ letter-spacing:.06em;
+}
+@media(max-width:900px){
+ .artwork-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+ .artwork-card img{height:320px}
+}
+@media(max-width:520px){
+ .artwork-grid{grid-template-columns:1fr}
+ .artwork-card img{height:auto;max-height:560px}
+}
