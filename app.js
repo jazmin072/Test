@@ -571,6 +571,16 @@ if(bestiaryFilters){
 /* Universal discovery - search reflects spoiler visibility and links into the archive. */
 /* Each glossary entry illustrates a concrete narrative moment rather
    than reusing generic magic icons. Spoiler visibility remains unchanged. */
+// Cropped cinematic panels from the author's earlier approved glossary artwork.
+// The six regular entries use a single real-image sprite, not placeholder SVGs.
+const approvedGlossaryPanelIndex={
+ 'The Fracture':0,
+ 'Separation Era':1,
+ 'Merger Era':2,
+ 'Divine Creation':3,
+ 'Druidic Magic':4,
+ 'Residual Essence':5
+};
 const glossarySceneImages={
   "The Fracture": "the-fracture.svg",
   "Separation Era": "separation-era.svg",
@@ -609,16 +619,25 @@ function renderGlossary(){
  root.replaceChildren();
  glossaryEntries.filter(x=>spoiler||!x[2]).forEach(x=>{
   const card=document.createElement('article');card.className='glossary-card';
-  const illustration=document.createElement('img');
-  illustration.className='glossary-visual';
-  illustration.loading='lazy';
-  const scene=glossarySceneImages[x[0]];
-  illustration.src=scene?'assets/glossary-scenes/'+scene:loreArtFor(['History',x[0]]);
-  illustration.alt=glossarySceneAlt[x[0]]||'Illustrated moment from The Chronicles';
-  illustration.addEventListener('error',()=>{
-   const fallback=loreArtFor(['History',x[0]]);
-   if(!illustration.src.endsWith('/'+fallback))illustration.src=fallback;
-  });
+  const panel=approvedGlossaryPanelIndex[x[0]];
+  let illustration;
+  if(Number.isInteger(panel)){
+   illustration=document.createElement('div');
+   illustration.className='glossary-visual glossary-approved-scene glossary-panel-'+panel;
+   illustration.setAttribute('role','img');
+   illustration.setAttribute('aria-label',glossarySceneAlt[x[0]]||'An illustrated scene from the books');
+  }else{
+   illustration=document.createElement('img');
+   illustration.className='glossary-visual';
+   illustration.loading='lazy';
+   const scene=glossarySceneImages[x[0]];
+   illustration.src=scene?'assets/glossary-scenes/'+scene:loreArtFor(['History',x[0]]);
+   illustration.alt=glossarySceneAlt[x[0]]||'Illustrated moment from The Chronicles';
+   illustration.addEventListener('error',()=>{
+    const fallback=loreArtFor(['History',x[0]]);
+    if(!illustration.src.endsWith('/'+fallback))illustration.src=fallback;
+   });
+  }
   const title=document.createElement('h3');title.textContent=x[0];
   const p=document.createElement('p');p.textContent=x[1];
   card.append(illustration,title,p);root.append(card);
