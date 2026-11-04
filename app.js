@@ -507,6 +507,16 @@ let bestiaryFilter='All';
 /* Every race and creature uses its own approved image file.
    This keeps the archive consistent and avoids sprite-sheet panel crops. */
 function approvedRacePortrait(entry,portraits){
+ // Prefer the already-uploaded species-specific illustrations over the
+ // older generic humanoid portraits for these two creature entries.
+ if(entry.name==='Cyclopes'){
+  return '<div class="codex-portrait-gallery single"><figure class="codex-portrait-figure"><img class="codex-portrait-image" src="/cyclopes-approved.webp" alt="Single-eyed cyclops carrying a stone hammer in mountainous terrain" loading="lazy"><figcaption>Cyclops concept illustration</figcaption></figure></div>';
+ }
+ if(entry.name==='Dragons'){
+  return '<div class="dragon-model-grid" role="group" aria-label="Four dragon concept illustrations">'+
+   [0,1,2,3].map(n=>'<div class="dragon-model-cell dragon-model-'+n+'" role="img" aria-label="Dragon concept illustration '+(n+1)+'"></div>').join('')+
+   '</div>';
+ }
  if(!portraits.length){
   return '<div class="codex-portrait-gallery single"><p class="codex-art-pending">Approved artwork is being prepared.</p></div>';
  }
