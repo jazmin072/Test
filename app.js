@@ -152,7 +152,7 @@ const visualProfiles={
 };
 function loreArtFor(entry){
  const title=entry[1];
- if(raceArtFiles[title])return 'assets/'+raceArtFiles[title];
+ if(raceArtFiles[title])return 'assets/creatures/'+raceArtFiles[title];
  if(/Everlangyrs/i.test(title))return 'assets/lore-valley.svg';
  if(/Dark Veil|Mountain/i.test(title))return 'assets/lore-mountains.svg';
  if(/Government/i.test(title))return 'assets/lore-technology.svg';
