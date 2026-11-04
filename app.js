@@ -109,9 +109,20 @@ renderBooks();
 document.querySelectorAll('[data-book-filter]').forEach(btn=>btn.addEventListener('click',()=>{
  document.querySelectorAll('[data-book-filter]').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderBooks(btn.dataset.bookFilter)
 }));
+/* Four author-uploaded supporting-cast portraits occupy the first four
+   panels of the approved sheet, ordered Saelis, Torven, Vessa, Iven.
+   Keep their original on-page profiles and all main-cast imagery intact. */
+const supportingPortraits={saelis:true,torven:true,vessa:true,iven:true};
+function characterArtMarkup(c){
+ if(supportingPortraits[c.id]){
+  return '<span class="supporting-cast-portrait supporting-portrait-'+c.id+'" aria-hidden="true"></span>';
+ }
+ return (c.image?'<img src="'+c.image+'" alt="" loading="lazy" data-fallback="'+(c.fallback||'')+'" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;delete this.dataset.fallback}else{this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'}">':'')+
+  '<span class="character-symbol" style="'+(c.image?'display:none':'')+'">'+c.symbol+'</span>';
+}
 function renderCharacters(filter='all'){
  const visible=chars.filter(c=>(filter==='all'||c.group===filter)&&(!c.spoiler||spoiler));
- $('#characterGrid').innerHTML=visible.map(c=>'<article class="character-card"><div class="character-art" aria-hidden="true">'+(c.image?'<img src="'+c.image+'" alt="" loading="lazy" data-fallback="'+(c.fallback||'')+'" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;delete this.dataset.fallback}else{this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'}">':'')+'<span class="character-symbol" style="'+(c.image?'display:none':'')+'">'+c.symbol+'</span></div><div class="character-info"><p class="character-group">'+(c.group==='core'?'MAIN CAST':'SUPPORTING CAST')+'</p><h3>'+c.name+'</h3><p class="role">'+c.subtitle+'</p><div class="stats"><div><span>Height</span><strong>'+c.height+'</strong></div><div><span>Age</span><strong>'+c.age+'</strong></div><div><span>Important bonds</span><strong>'+c.love+'</strong></div></div><button class="btn" data-char="'+c.id+'">View full profile</button></div></article>').join('');
+ $('#characterGrid').innerHTML=visible.map(c=>'<article class="character-card"><div class="character-art" aria-label="'+(supportingPortraits[c.id]?c.name+' portrait':'')+'" '+(supportingPortraits[c.id]?'role="img"':'aria-hidden="true"')+'>'+characterArtMarkup(c)+'</div><div class="character-info"><p class="character-group">'+(c.group==='core'?'MAIN CAST':'SUPPORTING CAST')+'</p><h3>'+c.name+'</h3><p class="role">'+c.subtitle+'</p><div class="stats"><div><span>Height</span><strong>'+c.height+'</strong></div><div><span>Age</span><strong>'+c.age+'</strong></div><div><span>Important bonds</span><strong>'+c.love+'</strong></div></div><button class="btn" data-char="'+c.id+'">View full profile</button></div></article>').join('');
 }
 renderCharacters();
 document.querySelectorAll('[data-character-filter]').forEach(btn=>btn.addEventListener('click',()=>{
