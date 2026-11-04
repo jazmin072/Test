@@ -673,3 +673,18 @@
 #bestiary .approved-race-art[data-race-portrait="Goblins"],
 #bestiary .approved-race-art[data-race-portrait="Dark Elves"],
 #bestiary .approved-race-art[data-race-portrait="Cyclopes"]{background-size:contain!important;background-position:center!important}
+
+
+/* Individual race and creature reference cards */
+.lore-grid{align-items:stretch}
+.lore-card{display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.lore-card-visual{display:block;width:100%;height:auto;aspect-ratio:9/11;object-fit:cover;object-position:center top;background:#100b1d;border-bottom:1px solid #80618a}
+.lore-card-body{padding:20px;display:flex;flex-direction:column;flex:1}
+.lore-card-body>small{color:var(--gold);letter-spacing:.12em;text-transform:uppercase}
+.lore-card-body h3{margin:9px 0 8px;color:#f5d7a9}
+.race-visual-profile{margin-top:auto;padding-top:12px;border-top:1px solid #6b4c73;color:#d9c9df}
+.race-visual-profile small{display:block;color:#e9c17e;font-size:9px;letter-spacing:.12em;margin-bottom:8px}
+.race-visual-profile p{font-size:12px;line-height:1.55;margin:4px 0;color:#d9c9df}
+.race-visual-profile strong{color:#f3d49a}
+@media(max-width:760px){.lore-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lore-card-body{padding:14px}}
+@media(max-width:450px){.lore-grid{grid-template-columns:1fr}.lore-card-visual{aspect-ratio:4/3;object-fit:contain}}
