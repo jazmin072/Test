@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b0717"><meta name="description" content="The Chronicles of Plu and Selena by Jonathan M. Reed: books, reading order, upcoming releases, retailer listings, reader community, character profiles, official art gallery, reading guide and world encyclopedia."><title>The Chronicles of Plu and Selena | Official World</title><link rel="stylesheet" href="styles.css"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b0717"><meta name="description" content="The Chronicles of Plu and Selena by Jonathan M. Reed: books, reading order, upcoming releases, retailer listings, reader community, character profiles, official art gallery, reading guide and world encyclopedia."><title>The Chronicles of Plu and Selena | Official World</title><link rel="stylesheet" href="styles.css"><style>.atlas-pin-layer{position:absolute;inset:0 0 2.5rem;pointer-events:none}.atlas-pin{position:absolute;transform:translate(-50%,-50%);z-index:2;pointer-events:auto;border:1px solid #e7d3a7;background:#171126e8;color:#fff;border-radius:20px;padding:5px 9px;cursor:pointer;font:600 11px/1.2 inherit;box-shadow:0 0 12px #c5a2ff88}.atlas-pin-dot{color:#f5d18e;margin-right:4px}.atlas-pin.active{outline:2px solid #f5d18e;background:#483269}.atlas-pin-label{white-space:nowrap}@media(max-width:650px){.atlas-pin{padding:4px;font-size:9px}.atlas-pin-label{display:none}.atlas-pin.active .atlas-pin-label{display:inline}}</style></head>
 <body><header class="topbar"><a class="brand" href="#home">✧ <span>PLU & SELENA<small>THE CHRONICLES</small></span></a><button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button><nav id="nav" aria-label="Main navigation">
 <a class="nav-home" href="#home">Home</a>
 <details class="nav-group"><summary>Books</summary><div class="nav-dropdown"><a href="#trilogy">Main trilogy</a><a href="#books">All books</a><a href="#reading-guide">Reading order</a><a href="#releases">Release calendar</a></div></details>
@@ -79,11 +79,11 @@
 <section class="section alt" id="world"><p class="eyebrow">A LIVING ARCHIVE</p><h2>The World Encyclopedia</h2><p>Discover cultures, places and the powers that shape the universe.</p><div class="world-controls"><label class="search-box">⌕ <input id="loreSearch" type="search" placeholder="Search the encyclopedia..." aria-label="Search encyclopedia"></label><div class="pills" id="loreFilters"></div></div><div class="lore-grid" id="loreGrid"></div><p id="loreEmpty" hidden>No entries match your search.</p></section>
 
 <section class="section locations-section" id="locations">
-<div class="atlas-heading"><p class="eyebrow">THE CHRONICLES ATLAS</p><h2>Explore the lands and their people</h2><p>Select a glowing location to discover the landscape, its communities, and its place in the stories. The illustrated map is a visual concept, not a confirmed geographical chart. Select a location below to read established information from the books.</p></div>
+<div class="atlas-heading"><p class="eyebrow">THE CHRONICLES ATLAS</p><h2>Explore the lands and their people</h2><p>Select a glowing location to discover the landscape, its communities, and its place in the stories. The map uses flexible, story-friendly placements rather than fixed canonical coordinates. Select a location below to read established information from the books.</p></div>
 <div class="atlas-shell">
- <div class="atlas-topline"><span>THE WORLD OF PLU & SELENA</span><span>CONCEPT ATLAS · LOCATIONS UNCONFIRMED</span></div>
- <figure class="atlas-artwork"><img src="/chronicles-atlas-illustration.webp" alt="Illustrated concept atlas for the Chronicles, with artistic and unconfirmed location placements" loading="lazy" onerror="this.closest('figure').hidden=true">
- <figcaption>Concept atlas — place labels and relative positions are illustrative, not established geography. Use the location directory below for book-grounded information.</figcaption></figure>
+ <div class="atlas-topline"><span>THE WORLD OF PLU & SELENA</span><span>INTERACTIVE ATLAS · FLEXIBLE GEOGRAPHY</span></div>
+ <figure class="atlas-artwork" style="position:relative"><img src="/chronicles-atlas-illustration.webp" alt="Illustrated concept atlas for the Chronicles, with artistic and unconfirmed location placements" loading="lazy" onerror="this.closest('figure').hidden=true">
+ <div id="atlasPins" class="atlas-pin-layer" aria-label="Select a location on the atlas"></div><figcaption>Concept atlas — place labels and relative positions are illustrative, not established geography. Use the location directory below for book-grounded information.</figcaption></figure>
  <div class="atlas-portal">
   <div class="portal-ring" aria-hidden="true"><span>✧</span></div>
   <div><small>BEYOND THE VEIL · OTHER WORLDS</small><h3>Plu’s off-world journeys</h3><p>Some adventures take place beyond this world. Enter the portal to learn about Plu’s travels without placing those destinations on the Earth map.</p></div>
@@ -92,7 +92,7 @@
  <div class="atlas-bottomline"><span>✧ CONCEPT ART · NOT CANONICAL GEOGRAPHY</span><span>THE CHRONICLES OF PLU AND SELENA</span></div>
 </div>
 <div class="location-browser atlas-details"><div class="location-list" id="locationList" role="group" aria-label="Choose a setting"></div><article class="location-detail" id="locationDetail" aria-live="polite"></article></div>
-<p class="location-note">The atlas follows established place names and story information. The concept artwork is not a definitive geographical map. Exact coastlines, positions, distances and cross-world routes have not been confirmed in the manuscripts.</p>
+<p class="location-note">The atlas follows established place names and story information. The concept artwork is not a definitive geographical map. Location markers are arranged for storytelling and can be moved without changing the books.</p>
 </section>
 <section class="section glossary-section alt" id="glossary">
  <p class="eyebrow">TERMS FROM THE WORLD</p><h2>A reader’s glossary</h2><p>A short guide to the eras and kinds of magic introduced in the books. Important late-story definitions remain behind the Lore Explorer setting.</p>
