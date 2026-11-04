@@ -41,7 +41,7 @@ const chars=[
 ];
 let spoiler=false,cat='All';
 const lore=[
-['Peoples','Elves','An ancient people connected to magic, memory and history.'],['Peoples','Druids','Rare guardians connected to the living world.'],['Peoples','Vampires','A powerful people with varied clans and traditions.'],['Peoples','Minotaurs','A formidable civilization with protected sanctuaries.'],['Peoples','Dragons','Magnificent beings present since the earliest ages.'],['Peoples','Ogres & Giants','Enormous peoples with ancient disputes.'],['Peoples','Goblins & Dark Elves','Distinct peoples with complicated relationships.'],['Peoples','Dwarves','Communities known for their inventive craftsmanship.'],
+['Peoples','Elves','An ancient people connected to magic, memory and history.'],['Peoples','Druids','Rare guardians connected to the living world.'],['Peoples','Vampires','A powerful people with varied clans and traditions.'],['Peoples','Minotaurs','A formidable civilization with protected sanctuaries.'],['Peoples','Dragons','Magnificent beings present since the earliest ages.'],['Peoples','Goblins','A distinct people with their own communities and political traditions.'],['Peoples','Dark Elves','A distinct people with a complicated history alongside neighbouring communities.'],['Peoples','Dwarves','Communities known for inventive craftsmanship.'],['Peoples','Giants','An enormous people whose scale and strength are visible in the official artwork.'],['Peoples','Ogres','A powerful, broad-built people depicted with heavy weapons and substantial physical strength.'],['Peoples','Cyclopes','A large, powerful people depicted with a single central eye and imposing build.'],['Peoples','Succubi','Winged beings depicted with horns, tails and a magical presence.'],['Peoples','Dark Slimes','Unusual amorphous creatures depicted as shadowy, tentacled magical lifeforms.'],
 ['Magic','Divine Creation','The ability to shape life and worlds.'],['Magic','Druidic Magic','Power rooted in connection and understanding.'],['Magic','Residual Essence','Traces of power that linger in materials and places.'],['Magic','Crystal Storage','Crystals capable of holding unusual magical energies.'],
 ['Places','New Londanais','An important urban center.'],['Places','Bozton','A city where the extraordinary meets everyday life.'],['Places','Everlangyrs','A region with complicated coexistence among peoples.'],['Places','Teramek','A distinctive territory in the wider world.'],['Places','Dark Veil Mountains','Remote mountains linked to dragon communities.'],['Places','The Minotaur Sanctuary','A place of refuge and tradition.'],
 ['History','The Government','An institution using specially empowered technology.'],['History','The Fracture','A defining disruption at the heart of the trilogy.'],['History','The Separation Era','An age marked by realities divided.'],['History','The Merger Era','A later age of changing relationships between worlds.']];
@@ -129,16 +129,21 @@ document.addEventListener('click',e=>{
 $('.close-dialog').onclick=()=>$('#bookDialog').close();
 $('#bookDialog').onclick=e=>{if(e.target===$('#bookDialog'))$('#bookDialog').close()};
 $('#loreFilters').innerHTML=['All','Peoples','Magic','Places','History'].map(c=>'<button class="pill '+(c==='All'?'active':'')+'" data-lore-cat="'+c+'">'+c+'</button>').join('');
-const approvedRaceNames=['Elves','Druids','Vampires','Minotaurs','Dragons','Goblins','Dark Elves','Dwarves','Giants','Ogres','Cyclopes','Succubi','Dark Slimes'];
-function raceArtworkForLore(name){
- const mapped={'Ogres & Giants':'Giants','Goblins & Dark Elves':'Dark Elves'}[name]||name;
- const idx=approvedRaceNames.indexOf(mapped);
- return idx<0?null:(idx%4*100/3)+'% '+(Math.floor(idx/4)*100/3)+'%';
-}
+const raceArtFiles={
+'Elves':'race-elves.svg','Druids':'race-druids.svg','Vampires':'race-vampires.svg','Minotaurs':'race-minotaurs.svg','Dragons':'race-dragons.svg','Goblins':'race-goblins.svg','Dark Elves':'race-dark-elves.svg','Dwarves':'race-dwarves.svg','Giants':'race-giants.svg','Ogres':'race-ogres.svg','Cyclopes':'race-cyclopes.svg','Succubi':'race-succubi.svg','Dark Slimes':'race-dark-slimes.svg'
+};
+const visualProfiles={
+'Elves':['Humanoid · tall and slender','Agility · magical perception'], 'Druids':['Humanoid · nature-attuned','Nature connection · mediation'],
+'Vampires':['Humanoid · powerful build','Strength · speed · clan knowledge'],'Minotaurs':['Humanoid · large and horned','Physical strength · sanctuary traditions'],
+'Dragons':['Great-scaled creature · winged','Flight · formidable physical power'],'Goblins':['Humanoid · compact and agile','Resourcefulness · community knowledge'],
+'Dark Elves':['Humanoid · slender build','Agility · leadership · negotiation'],'Dwarves':['Humanoid · compact and sturdy','Craftsmanship · endurance'],
+'Giants':['Humanoid · exceptionally large','Reach · physical strength'],'Ogres':['Humanoid · massive and broad-built','Physical strength · heavy-weapon use'],
+'Cyclopes':['Humanoid · massive, single-eyed','Physical strength · powerful reach'],'Succubi':['Winged humanoid · horned','Flight · magical presence'],
+'Dark Slimes':['Amorphous creature · variable size','Fluid movement · tentacle-like extensions']
+};
 function loreArtFor(entry){
- const title=entry[1],category=entry[0];
- const species={'Elves':'race-elves','Druids':'race-druids','Vampires':'race-vampires','Minotaurs':'race-minotaurs','Dragons':'race-dragons','Ogres & Giants':'race-giants','Goblins & Dark Elves':'race-dark-elves','Dwarves':'race-dwarves'};
- if(species[title])return 'assets/'+species[title]+'.svg';
+ const title=entry[1];
+ if(raceArtFiles[title])return 'assets/'+raceArtFiles[title];
  if(/Everlangyrs/i.test(title))return 'assets/lore-valley.svg';
  if(/Dark Veil|Mountain/i.test(title))return 'assets/lore-mountains.svg';
  if(/Government/i.test(title))return 'assets/lore-technology.svg';
@@ -146,9 +151,18 @@ function loreArtFor(entry){
  if(/Crystal|Essence/i.test(title))return 'assets/lore-crystal.svg';
  if(/Fracture|Separation|Pocket/i.test(title))return 'assets/lore-fracture.svg';
  if(/Druid|Sanctuary|Ascension/i.test(title))return 'assets/lore-forest.svg';
- return category==='History'?'assets/lore-fracture.svg':category==='Magic'?'assets/lore-creation.svg':'assets/lore-valley.svg';
+ return entry[0]==='History'?'assets/lore-fracture.svg':entry[0]==='Magic'?'assets/lore-creation.svg':'assets/lore-valley.svg';
 }
-function renderLore(){const q=$('#loreSearch').value.toLowerCase();let entries=lore.concat(spoiler?secrets:[]).filter(x=>(cat==='All'||x[0]===cat)&&x.join(' ').toLowerCase().includes(q));$('#loreGrid').innerHTML=entries.map(x=>'<article class="lore-card">'+(raceArtworkForLore(x[1])?'<div class="lore-card-visual approved-race-art" data-race-portrait="'+x[1]+'" role="img" aria-label="Chronicles illustrated '+x[1]+'" style="background-position:'+raceArtworkForLore(x[1])+'"></div>':'<img class="lore-card-visual" src="'+loreArtFor(x)+'" alt="Illustrated lore scene for '+x[1]+'" loading="lazy">')+'<div class="lore-card-body"><small>'+x[0]+'</small><h3>'+x[1]+'</h3><p>'+x[2]+'</p></div></article>').join('');$('#loreEmpty').hidden=entries.length!==0}
+function renderLore(){
+ const q=$('#loreSearch').value.toLowerCase();
+ let entries=lore.concat(spoiler?secrets:[]).filter(x=>(cat==='All'||x[0]===cat)&&x.join(' ').toLowerCase().includes(q));
+ $('#loreGrid').innerHTML=entries.map(x=>{
+  const art=loreArtFor(x),profile=visualProfiles[x[1]];
+  const visual=profile?'<div class="race-visual-profile"><small>ILLUSTRATION-BASED PROFILE · ESTIMATE</small><p><strong>Build:</strong> '+profile[0]+'</p><p><strong>Visible traits:</strong> '+profile[1]+'</p></div>':'';
+  return '<article class="lore-card"><img class="lore-card-visual" src="'+art+'" alt="Full-body illustrated reference for '+x[1]+'" loading="lazy"><div class="lore-card-body"><small>'+x[0]+'</small><h3>'+x[1]+'</h3><p>'+x[2]+'</p>'+visual+'</div></article>';
+ }).join('');
+ $('#loreEmpty').hidden=entries.length!==0;
+}
 renderLore();
 $('#loreSearch').oninput=renderLore;
 document.querySelectorAll('[data-lore-cat]').forEach(b=>b.onclick=()=>{cat=b.dataset.loreCat;document.querySelectorAll('[data-lore-cat]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderLore()});
