@@ -41,7 +41,6 @@ const chars=[
 ];
 let spoiler=false,cat='All';
 const lore=[
-['Peoples','Elves','An ancient people connected to magic, memory and history.'],['Peoples','Druids','Rare guardians connected to the living world.'],['Peoples','Vampires','A powerful people with varied clans and traditions.'],['Peoples','Minotaurs','A formidable civilization with protected sanctuaries.'],['Peoples','Dragons','Magnificent beings present since the earliest ages.'],['Peoples','Goblins','A distinct people with their own communities and political traditions.'],['Peoples','Dark Elves','A distinct people with a complicated history alongside neighbouring communities.'],['Peoples','Dwarves','Communities known for inventive craftsmanship.'],['Peoples','Giants','An enormous people whose scale and strength are visible in the official artwork.'],['Peoples','Ogres','A powerful, broad-built people depicted with heavy weapons and substantial physical strength.'],['Peoples','Cyclopes','A large, powerful people depicted with a single central eye and imposing build.'],['Peoples','Succubi','Winged beings depicted with horns, tails and a magical presence.'],['Peoples','Dark Slimes','Unusual amorphous creatures depicted as shadowy, tentacled magical lifeforms.'],
 ['Magic','Divine Creation','The ability to shape life and worlds.'],['Magic','Druidic Magic','Power rooted in connection and understanding.'],['Magic','Residual Essence','Traces of power that linger in materials and places.'],['Magic','Crystal Storage','Crystals capable of holding unusual magical energies.'],
 ['Places','New Londanais','An important urban center.'],['Places','Bozton','A city where the extraordinary meets everyday life.'],['Places','Everlangyrs','A region with complicated coexistence among peoples.'],['Places','Teramek','A distinctive territory in the wider world.'],['Places','Dark Veil Mountains','Remote mountains linked to dragon communities.'],['Places','The Minotaur Sanctuary','A place of refuge and tradition.'],
 ['History','The Government','An institution using specially empowered technology.'],['History','The Fracture','A defining disruption at the heart of the trilogy.'],['History','The Separation Era','An age marked by realities divided.'],['History','The Merger Era','A later age of changing relationships between worlds.']];
@@ -130,22 +129,8 @@ $('.close-dialog').onclick=()=>$('#bookDialog').close();
 $('#bookDialog').onclick=e=>{if(e.target===$('#bookDialog'))$('#bookDialog').close()};
 $('#loreFilters').innerHTML=['All','Peoples','Magic','Places','History'].map(c=>'<button class="pill '+(c==='All'?'active':'')+'" data-lore-cat="'+c+'">'+c+'</button>').join('');
 /* Approved 4x4 artwork sheet: each entry displays its own 256x384 full-body cell. */
-const raceArtSlots={
-'Elves':0,'Druids':1,'Vampires':2,'Minotaurs':3,'Dragons':4,'Goblins':5,'Dark Elves':6,'Dwarves':7,'Giants':8,'Ogres':9,'Cyclopes':10,'Succubi':11,'Dark Slimes':12
-};
-const raceArtPositions=Object.fromEntries(Object.entries(raceArtSlots).map(([name,slot])=>[name,((slot%4)/3*100)+'% '+(Math.floor(slot/4)/3*100)+'%']));
-const visualProfiles={
-'Elves':['Humanoid · tall and slender','Agility · magical perception'], 'Druids':['Humanoid · nature-attuned','Nature connection · mediation'],
-'Vampires':['Humanoid · powerful build','Strength · speed · clan knowledge'],'Minotaurs':['Humanoid · large and horned','Physical strength · sanctuary traditions'],
-'Dragons':['Great-scaled creature · winged','Flight · formidable physical power'],'Goblins':['Humanoid · compact and agile','Resourcefulness · community knowledge'],
-'Dark Elves':['Humanoid · slender build','Agility · leadership · negotiation'],'Dwarves':['Humanoid · compact and sturdy','Craftsmanship · endurance'],
-'Giants':['Humanoid · exceptionally large','Reach · physical strength'],'Ogres':['Humanoid · massive and broad-built','Physical strength · heavy-weapon use'],
-'Cyclopes':['Humanoid · massive, single-eyed','Physical strength · powerful reach'],'Succubi':['Winged humanoid · horned','Flight · magical presence'],
-'Dark Slimes':['Amorphous creature · variable size','Fluid movement · tentacle-like extensions']
-};
 function loreArtFor(entry){
  const title=entry[1];
- if(raceArtFiles[title])return 'assets/'+raceArtFiles[title];
  if(/Everlangyrs/i.test(title))return 'assets/lore-valley.svg';
  if(/Dark Veil|Mountain/i.test(title))return 'assets/lore-mountains.svg';
  if(/Government/i.test(title))return 'assets/lore-technology.svg';
@@ -157,11 +142,10 @@ function loreArtFor(entry){
 }
 function renderLore(){
  const q=$('#loreSearch').value.toLowerCase();
- let entries=lore.concat(spoiler?secrets:[]).filter(x=>(cat==='All'||x[0]===cat)&&x.join(' ').toLowerCase().includes(q));
+ const entries=lore.concat(spoiler?secrets:[]).filter(x=>(cat==='All'||x[0]===cat)&&x.join(' ').toLowerCase().includes(q));
  $('#loreGrid').innerHTML=entries.map(x=>{
-  const art=loreArtFor(x),profile=visualProfiles[x[1]];
-  const visual=profile?'<div class="race-visual-profile"><small>ILLUSTRATION-BASED PROFILE · ESTIMATE</small><p><strong>Build:</strong> '+profile[0]+'</p><p><strong>Visible traits:</strong> '+profile[1]+'</p></div>':'';
-  return '<article class="lore-card"><img class="lore-card-visual" src="'+art+'" alt="Full-body illustrated reference for '+x[1]+'" loading="lazy"><div class="lore-card-body"><small>'+x[0]+'</small><h3>'+x[1]+'</h3><p>'+x[2]+'</p>'+visual+'</div></article>';
+  const art=loreArtFor(x);
+  return '<article class="lore-card"><img class="lore-card-visual" src="'+art+'" alt="Chronicles illustration for '+x[1]+'" loading="lazy"><div class="lore-card-body"><small>'+x[0]+'</small><h3>'+x[1]+'</h3><p>'+x[2]+'</p></div></article>';
  }).join('');
  $('#loreEmpty').hidden=entries.length!==0;
 }
@@ -306,78 +290,65 @@ const bestiaryEntries=[
  {name:'Monsters',category:'Creatures',realm:'Fracture era · vilified beings',summary:'“Monsters” is a broad social label applied to beasts, animals and certain hybrids. The notes describe them as vilified, but the label alone does not establish that an individual is hostile.'},
  {name:'Dark Slimes',category:'Creatures',realm:'Plu’s Creatures',summary:'Unusual dark slime creatures encountered in Plu’s comedic travels. Their particular encounters are explored in the companion stories.'}
 ];
-const raceSceneSettings={"Elves":"Ancient woodland · illustrative","Druids":"Living woodland · nature-connected community","Vampires":"Island vampire clans · Dark Rain","Minotaurs":"The Minotaur Sanctuary","Dark Elves":"Everlangyrs · dark elf community","Goblins":"Everlangyrs · goblin community","Dwarves":"Stone-built workshops · illustrative","Dragons":"Dark Veil Mountains · later dragon community","Giants":"Rugged highlands · illustrative","Ogres":"Rocky wilderness · illustrative","Cyclopes":"Stony highlands · illustrative","Succubi":"Plu’s Creatures · exact region unspecified","Dark Slimes":"Plu’s Creatures · exact region unspecified"};
-/* Illustrated race concepts are visual interpretations, not an assertion of
-   fixed clothing, physical traits or abilities. Replace with approved art files as available. */
-const bestiaryDesign={
- 'Elves':{skin:'#edd1b7',hair:'#bb4a68',back:'#593961',eye:'#dfa854',kind:'elf'},
- 'Druids':{skin:'#d9bd9e',hair:'#5e9d63',back:'#325b45',eye:'#a5e5a7',kind:'druid'},
- 'Vampires':{skin:'#b6afc2',hair:'#282037',back:'#48315d',eye:'#e56f83',kind:'vampire'},
- 'Minotaurs':{skin:'#9e6a50',hair:'#55413a',back:'#68402e',eye:'#f8cd8d',kind:'minotaur'},
- 'Dark Elves':{skin:'#8b8ab5',hair:'#22223d',back:'#2d2851',eye:'#b7c2f8',kind:'elf'},
- 'Goblins':{skin:'#78a96c',hair:'#536442',back:'#365947',eye:'#e0d27b',kind:'goblin'},
- 'Dwarves':{skin:'#bd8967',hair:'#533b3c',back:'#5c3c2a',eye:'#eec98a',kind:'dwarf'},
- 'Dragons':{skin:'#4c728d',hair:'#a7d0df',back:'#2d455e',eye:'#f2c26f',kind:'dragon'},
- 'Giants':{skin:'#b49d90',hair:'#d4c0b0',back:'#5d526e',eye:'#e5cfb7',kind:'giant'},
- 'Ogres':{skin:'#8f648e',hair:'#d8709e',back:'#513451',eye:'#f1daac',kind:'ogre'},
- 'Cyclopes':{skin:'#9779bd',hair:'#533b7e',back:'#403169',eye:'#f9c777',kind:'cyclops'},
- 'Succubi':{skin:'#ae8fa4',hair:'#33273c',back:'#6a2855',eye:'#ee8ca1',kind:'succubus'},
- 'Dark Slimes':{skin:'#543269',hair:'#9a64ca',back:'#1b1b43',eye:'#dbb0ff',kind:'slime'}
+const bestiaryPortraits={
+ 'Elves':[['elves-male.webp','Male'],['elves-female.webp','Female']],
+ 'Druids':[['druids-male.webp','Male'],['druids-female.webp','Female']],
+ 'Vampires':[['vampires-male.webp','Male'],['vampires-female.webp','Female']],
+ 'Minotaurs':[['minotaurs-male.webp','Male'],['minotaurs-female.webp','Female']],
+ 'Goblins':[['goblins-male.webp','Male'],['goblins-female.webp','Female']],
+ 'Dark Elves':[['dark-elves.webp','Female']],
+ 'Dwarves':[['dwarves.webp','Female']],
+ 'Dragons':[['dragons.webp','Female']],
+ 'Giants':[['giants.webp','Female']],
+ 'Ogres':[['ogres.webp','Female']],
+ 'Cyclopes':[['cyclopes.webp','Female']],
+ 'Succubi':[['succubi.webp','Female']],
+ 'Witches & Wiccans':[['witches-wiccans.webp','Female']],
+ 'Fairies':[['fairies.webp','Female']],
+ 'Werewolves':[['werewolves.webp','Female']],
+ 'Harpies':[['harpies.webp','Female']],
+ 'Nymphs':[['nymphs.webp','Female']],
+ 'Leprechauns':[['leprechauns.webp','Female']],
+ 'Humans':[['humans.webp','Female']],
+ 'Hybrids':[['hybrids.webp','Female']],
+ 'Monsters':[['monsters.webp','Female']],
+ 'Dark Slimes':[['dark-slimes.webp','Female']]
 };
-function bestiaryPortrait(name){
- const a=bestiaryDesign[name]||bestiaryDesign.Elves;
- const horns=['succubus','minotaur','ogre'].includes(a.kind)?'<path d="M83 94 Q30 45 58 24 Q81 31 107 82 M177 94 Q227 45 202 24 Q177 31 153 82" fill="'+a.hair+'" stroke="#e6c58b" stroke-width="3"/>':'';
- const ears=['elf','goblin','druid','vampire'].includes(a.kind)?'<path d="M93 139 44 96 62 157 97 160 M165 139 213 96 198 157 164 160" fill="'+a.skin+'" stroke="#5c4060" stroke-width="3"/>':'';
- const flora=a.kind==='druid'?'<g fill="#aee0a8" stroke="#377753" stroke-width="2"><path d="M71 84Q58 37 28 45 Q29 85 71 84"/><path d="M176 67Q197 19 233 42 Q225 77 176 67"/><circle cx="128" cy="47" r="12" fill="#f1d39f"/></g>':'';
- const scales=a.kind==='dragon'?'<path d="M65 173 42 148 70 141 50 116 79 113 M191 173 217 148 190 141 208 116 179 113" fill="#7094af" stroke="#d4bb8d" stroke-width="3"/>':'';
- const eye=a.kind==='cyclops'?'<ellipse cx="129" cy="144" rx="24" ry="15" fill="#f1e3d1" stroke="#3b2b40" stroke-width="3"/><circle cx="129" cy="144" r="10" fill="'+a.eye+'"/><circle cx="129" cy="144" r="4" fill="#171525"/>':'<path d="M90 143Q109 130 123 146Q109 152 90 143 M136 146Q153 130 172 143Q153 152 136 146" fill="#f1e3d1" stroke="#3a283b" stroke-width="3"/><circle cx="108" cy="143" r="5" fill="'+a.eye+'"/><circle cx="153" cy="143" r="5" fill="'+a.eye+'"/>';
- const fang=a.kind==='vampire'||a.kind==='succubus'?'<path d="M119 174 123 184 127 175 M137 174 141 184 145 175" fill="#fcf5ed"/>':'';
- const one=a.kind==='slime';
- const content=one?'<path d="M59 227Q28 194 49 150Q38 117 62 97Q70 57 108 70Q130 33 161 74Q210 71 213 120Q242 157 205 184Q223 223 182 233Z" fill="url(#body)" stroke="#d7a4ff" stroke-width="3"/><path d="M78 154Q97 130 111 153M146 153Q164 132 184 154" fill="none" stroke="#ecd7ff" stroke-width="8" stroke-linecap="round"/><path d="M113 193Q130 204 151 190" fill="none" stroke="#e7c8ff" stroke-width="4" stroke-linecap="round"/><path d="M78 102Q110 61 145 81" fill="none" stroke="#fff" stroke-width="6" opacity=".35"/>':
- '<path d="M51 264 Q51 214 92 209 L113 201 L147 201 L170 209 Q214 217 213 264Z" fill="'+a.hair+'" stroke="#bb9d6d" stroke-width="2"/>'+horns+ears+scales+
- '<path d="M97 188 Q108 205 108 221 Q130 233 150 221 Q151 205 163 188" fill="'+a.skin+'"/>'+
- '<path d="M80 115Q83 69 129 73Q182 72 180 115 L177 178Q164 206 129 209Q95 204 81 178Z" fill="'+a.skin+'" stroke="#78556c" stroke-width="3"/>'+
- '<path d="M77 129Q58 72 97 62Q128 27 166 62Q199 68 184 128 Q168 112 167 91Q138 105 102 92Q99 119 77 129Z" fill="'+a.hair+'"/>'+
- flora+eye+'<path d="M119 175Q128 181 139 175" stroke="#7e5361" stroke-width="3" fill="none" stroke-linecap="round"/>'+fang+
- (a.kind==='minotaur'?'<path d="M101 181Q127 201 156 181 Q142 218 127 216 Q114 216 101 181" fill="#87634c"/>':'')+
- (a.kind==='dragon'?'<path d="M131 64Q138 24 164 25L157 80" fill="#a4d8e5" stroke="#d1ba84" stroke-width="2"/>':'');
- const svg='<svg xmlns="http://www.w3.org/2000/svg" width="260" height="270" viewBox="0 0 260 270"><defs><radialGradient id="bg"><stop stop-color="'+a.back+'"/><stop offset="1" stop-color="#141126"/></radialGradient><linearGradient id="body" x2="0" y2="1"><stop stop-color="#ae79dc"/><stop offset="1" stop-color="#2b173f"/></linearGradient></defs><rect width="260" height="270" fill="url(#bg)"/><g opacity=".3" stroke="#cba56c"><circle cx="130" cy="135" r="113" fill="none"/><circle cx="130" cy="135" r="99" fill="none"/><path d="M10 135H250 M130 10V260"/></g><g>'+content+'</g><path d="M9 9H251V261H9Z" fill="none" stroke="#d8b877" stroke-width="3"/><path d="M22 22H42 M22 22V42 M238 22H218 M238 22V42 M22 248H42 M22 248V228 M238 248H218 M238 248V228" stroke="#f3cf8d" stroke-width="3" fill="none"/></svg>';
- return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
-}
-const raceArtwork={"Elves":"elves","Druids":"druids","Vampires":"vampires","Minotaurs":"minotaurs","Dark Elves":"dark-elves","Goblins":"goblins","Dwarves":"dwarves","Dragons":"dragons","Giants":"giants","Ogres":"ogres","Cyclopes":"cyclopes","Succubi":"succubi","Dark Slimes":"dark-slimes"};
 const bestiaryStats={
- 'Elves':{traits:'Tall stature is described; an elf bride wears her hair braided with starlight lilies. Elves emerged from the old-growth forests and share an ancient language with the sky-dwellers.',basis:'Book references: The World Before and the wedding scene in Our Goddess, Book One. No standard height, lifespan or body type is specified.'},
- 'Druids':{traits:'A Druid is described as broad-shouldered, with palms stained by the dark green ink of the forest floor. Their people are connected to the dirt, living nature and the manipulation of living blood.',basis:'Book reference: Our Goddess, Book One. No standard height, lifespan or universal clothing is specified.'},
- 'Vampires':{traits:'The books establish full-blooded and half-blooded vampires, vampire clans and exceptionally slow visible aging in at least one ancient vampire. Individual appearances vary.',basis:'Use individual character descriptions from the novels; do not impose a universal skin tone, body type or costume.'},
- 'Minotaurs':{traits:'Enormous, horned people with families, children, merchants, workers, metalworkers and gardens in their sanctuary. A young Minotaur is described with small horns, one notched near the tip.',role:'A complete community with a sanctuary and working city.',basis:'Book reference: The Goddess Elf / Book Three sanctuary scene. Do not depict them as mindless monsters.'},
- 'Dark Elves':{traits:'A distinct people with their own community and history with neighbouring goblins in Everlangyrs.',role:'Community and political counterpart to the goblins.',basis:'The novels establish their people and history; avoid inventing universal anatomy or clothing.'},
- 'Goblins':{traits:'A distinct community in Everlangyrs with leaders, history and negotiations with the dark elves.',role:'Community with its own leadership and political interests.',basis:'The novels establish their society; physical details should come from individual book descriptions.'},
- 'Dwarves':{traits:'Dwarves are shown breaking through a mountain rock face and opening a massive stone hall to the sky.',role:'Stone-hall builders and established people of the world.',basis:'Book reference: Our Goddess, Book One. No universal height or body type is specified.'},
- 'Dragons':{traits:'Ancient sky-dwellers who existed before the elves; the old language of the elves was shared with them. Later stories include dragon settlements in the Dark Veil Mountains.',role:'Ancient people with settlements in later eras.',basis:'Book references: The World Before and later dragon-settlement material. Use only the physical details explicitly described for a particular dragon.'},
- 'Giants':{traits:'An ancient people whose early conflicts are part of the world’s history.',basis:'The books establish their place in the ancient history; standard height, lifespan and appearance are not specified here.'},
- 'Ogres':{traits:'An ancient people whose conflict with giants belongs to the early history explored in The World Before.',basis:'Do not use generic ogre anatomy as if it were canon; use only details stated in the books.'},
- 'Cyclopes':{traits:'A people included in the world’s ancient history and later gatherings.',basis:'The name alone is not sufficient to establish height, build or abilities; book-specific details take priority.'},
- 'Succubi':{traits:'A type of being encountered in Plu’s companion adventures.',basis:'Keep physical traits and abilities limited to what the companion stories actually describe.'},
- 'Witches & Wiccans':{traits:'The books show witches using copper instruments, glass lenses, measurement devices and experimental magic. Practices and appearance are not uniform.',role:'A large and varied population group; some factions conduct magical experimentation.',basis:'Use the technology and practices shown in the novels rather than a single stereotyped witch costume.'},
- 'Fairies':{traits:'Fairies exist as part of everyday society in the Fracture-era notes. A single universal appearance is not established there.',basis:'Do not assume standard wings, height or clothing unless a specific passage describes them.'},
- 'Werewolves':{traits:'The notes describe an amulet used to prevent unwanted transformations.',role:'The amulet is a practical part of transformation control.',basis:'The amulet is established; exact transformation details and physical forms should follow individual book passages.'},
- 'Harpies':{traits:'Specific physical details are not established in the current bestiary notes.',role:'Associated with official positions in the World Government.',basis:'Keep the portrait female as requested, but do not invent a canonical anatomy.'},
- 'Nymphs':{traits:'Tiny, translucent beings that move through mist and gather around people.',role:'Associated with official positions in the World Government in the Fracture-era notes.',basis:'Book description: tiny and translucent; retain those traits rather than making them ordinary winged fairies.'},
- 'Leprechauns':{traits:'Specific physical details are not established in the current bestiary notes.',role:'Associated with security forces and the military.',basis:'Military role is established; avoid importing stereotyped folklore costumes.'},
- 'Humans':{traits:'Human appearance varies; the novels include humans in multiple roles and historical settings.',role:'Identified as a protected species in the author’s Fracture-era notes.',basis:'Use the relevant era and character descriptions; no single costume or body type represents all humans.'},
- 'Hybrids':{traits:'A broad class formed from two or more species or lineages. Appearance varies according to the lineages involved.',role:'The books describe hybrid captives, hunters and experimentation; hybrid status does not automatically make someone dangerous.',basis:'Do not create one standard hybrid body. Use the specific lineage combination described in each case.'},
- 'Monsters':{traits:'A broad social label applied to beasts, animals and certain hybrids; it does not describe one biological species.',role:'The notes describe monsters as vilified, but the label alone does not mean an individual is hostile.',basis:'Portraits must represent a specific book creature, not an invented generic monster.'},
- 'Dark Slimes':{traits:'Unusual dark slime beings encountered in Plu’s companion adventures.',basis:'Keep form and abilities tied to the actual companion-story descriptions; do not assume generic RPG slime powers.'}
+ 'Elves':{traits:'Tall stature is described. An elf bride wears her hair braided with starlight lilies. Elves emerged from old-growth forests and share an ancient language with the sky-dwellers.',role:'During the Fracture, the world believes the Elves are gone. Taylor is the last surviving Elf known to the story; the people return publicly after Plu repairs the shattered world.',basis:'Book basis: The World Before and the wedding material in Our Goddess, Book One. No universal height measurement, lifespan or standard clothing is stated.'},
+ 'Druids':{traits:'A Druid is described as broad-shouldered, with palms stained by the dark green ink of the forest floor.',abilities:'Connection to dirt and living nature; the books also describe the manipulation of living blood.',role:'Their history and relationship with the living world shape events across the Chronicles.',basis:'Book basis: Our Goddess, Book One. No universal height, lifespan or clothing is specified.'},
+ 'Vampires':{traits:'The books distinguish full-blooded and half-blooded vampires. At least one ancient vampire, about 2,010 years old, retains an appearance of roughly 30.',population:'Approximately 15% in the Fracture-era author notes.',role:'Vampire clans have their own communities and tensions; Dark Rain follows a conflict between two clans.',basis:'Book basis: Elf Blood, Dark Rain and Fracture-era notes. The age example is individual, not a universal aging rule.'},
+ 'Minotaurs':{traits:'Enormous, horned people. A young Minotaur is described with small horns, one notched near the tip.',role:'The sanctuary is a functioning community with families, children, merchants, workers, metalworkers, gardens and places of refuge.',basis:'Book basis: The Goddess Elf, sanctuary scenes. They are a people and community, not mindless monsters.'},
+ 'Dark Elves':{traits:'The books establish a distinct people and community; they do not establish one universal body type or costume.',role:'Their shared history and political relationship with neighbouring goblins shape events in Everlangyrs.',basis:'Book basis: The Goddess Elf and The Listening World. Clothing and physical details should be treated as portrait interpretation unless a passage specifies them.'},
+ 'Goblins':{traits:'The books establish a distinct people and community; they do not establish one universal body type or costume.',role:'They have leaders, community interests and a history of negotiation and conflict with the dark elves in Everlangyrs.',basis:'Book basis: The Goddess Elf and The Listening World. The portrait is not a claim that all goblins look alike.'},
+ 'Dwarves':{traits:'The books show dwarves breaking through a mountain rock face and opening a massive stone hall to the sky.',role:'Their communities include skilled builders and workers; dwarven characters also appear in Breni’s later island investigation.',basis:'Book basis: Our Goddess, Book One, and Dark Rain. No universal height or body type is stated.'},
+ 'Dragons':{traits:'Ancient sky-dwellers who existed before the elves and shared an old language with them.',role:'Later stories include dragon settlements in the Dark Veil Mountains.',basis:'Book basis: The World Before and later dragon-settlement material. Specific anatomy, colours and abilities should follow individual descriptions.'},
+ 'Giants':{traits:'An ancient people included in the early history of the world. The books do not establish a standard height or universal build in the current reference notes.',role:'Their conflicts with ogres form part of the ancient history explored in The World Before.',basis:'Book basis: The World Before. Any details visible only in the portrait are visual interpretation, not additional canon.'},
+ 'Ogres':{traits:'An ancient people included in the early history of the world. The current book notes do not establish a universal body type or anatomy.',role:'Their conflict with giants is part of the ancient history explored in The World Before.',basis:'Book basis: The World Before. Avoid importing generic fantasy-ogre traits as facts about this world.'},
+ 'Cyclopes':{traits:'A people included in ancient history and later gatherings. The name alone is not used as evidence for height, build or additional abilities.',role:'Their place in the world is established, while further social details remain limited in the current references.',basis:'Book basis: The World Before and The Goddess Elf. The portrait should not be treated as proof of unstated traits.'},
+ 'Succubi':{traits:'A type of being encountered in Plu’s companion adventures. The current notes do not establish a universal appearance.',role:'Their appearances belong to the companion stories rather than the central trilogy conflict.',basis:'Book basis: Plu’s Creatures companion material. Specific traits and abilities should be tied to the particular encounter.'},
+ 'Witches & Wiccans':{traits:'The books show copper instruments, glass lenses, measuring devices and experimental magic. Practices and appearances vary.',population:'Approximately 60% in the Fracture-era author notes.',role:'A large and varied population group; some factions conduct magical experimentation.',basis:'Book basis: Fracture-era notes and the witches’ experimental equipment in the novels. No single stereotyped costume represents the group.'},
+ 'Fairies':{traits:'Fairies exist as part of everyday society. The author notes deliberately do not establish one standard appearance.',role:'Their existence is treated as ordinary in the world; characters do not generally stop to question why they exist.',basis:'Book basis: Fracture-era author notes. Wings, height and clothing are not assumed unless a specific passage says so.'},
+ 'Werewolves':{traits:'The notes establish an amulet used to prevent unwanted transformations.',role:'The amulet is a practical part of transformation control.',basis:'Book basis: Fracture-era notes. Transformation triggers, schedules and exact forms are not generalized here.'},
+ 'Harpies':{traits:'The current book references do not establish standard anatomy, clothing or body measurements.',role:'Harpies are associated with official positions in the World Government.',basis:'Book basis: Fracture-era notes. The female portrait is an artistic reference, not a claim that all harpies share one appearance.'},
+ 'Nymphs':{traits:'Tiny, translucent beings that move through mist and gather around people.',role:'Nymphs are also associated with official positions in the World Government.',basis:'Book basis: Fracture-era notes. Keep their described small, translucent nature distinct from generic winged-fairy imagery.'},
+ 'Leprechauns':{traits:'The current book references do not establish standard physical traits or costume.',role:'Leprechauns are associated with security forces and the military.',basis:'Book basis: Fracture-era notes. Avoid importing stereotyped folklore clothing or abilities.'},
+ 'Humans':{traits:'Human appearances vary by individual and era; no single portrait represents the entire population.',role:'Humans are identified as a protected species in the Fracture-era notes.',basis:'Book basis: Fracture-era notes and individual human characters. Clothing should reflect the depicted era.'},
+ 'Hybrids':{traits:'A broad class formed from two or more species or lineages. Appearance varies according to the lineages involved.',role:'The books describe hybrid captives, hunters and experimentation. Hybrid status alone does not make an individual dangerous.',basis:'Book basis: Fracture-era notes and the novels. Each hybrid design should identify its lineage combination where the text provides it.'},
+ 'Monsters':{traits:'“Monsters” is a broad social label for beasts, animals and certain hybrids; it is not one biological species.',role:'The notes describe monsters as vilified, but the label alone does not establish that an individual is hostile.',basis:'Book basis: Fracture-era notes. The image represents one illustrative creature, not a universal monster anatomy.'},
+ 'Dark Slimes':{traits:'Unusual dark slime beings encountered in Plu’s companion adventures.',role:'Their specific encounters are explored in the companion stories.',basis:'Book basis: Plu’s Creatures companion material. Do not assume generic role-playing-game powers or biology.'}
 };
 let bestiaryFilter='All';
+let bestiaryFilter='All';
 function renderBestiary(){
- const host=document.querySelector('#bestiaryGrid');if(!host)return;
+ const host=document.querySelector('#bestiaryGrid');
+ if(!host)return;
  host.innerHTML=bestiaryEntries.filter(entry=>bestiaryFilter==='All'||entry.category===bestiaryFilter).map(entry=>{
   const stats=bestiaryStats[entry.name]||{};
-  const rows=[['Typical height',stats.height],['Build',stats.build],['Lifespan',stats.lifespan],['Population',stats.population],['Strengths',stats.strength],['Visible traits',stats.traits],['Societal role',stats.role]].filter(row=>row[1]).map(row=>'<div class="race-stat"><strong>'+row[0]+'</strong><span>'+row[1]+'</span></div>').join('');
-  const artPosition=raceArtPositions[entry.name];
-  const portrait=artPosition?'<div class="codex-portrait codex-sprite-portrait" role="img" aria-label="Existing full-body artwork for '+entry.name+'" style="background-position:'+artPosition+'"></div>':'<div class="codex-portrait codex-art-pending" role="img" aria-label="Portrait artwork not yet available for '+entry.name+'"><span>Portrait artwork pending</span><small>Book-specific design required</small></div>';
-  return '<article class="bestiary-card codex-entry '+(portrait?'':'text-only-entry')+'">'+portrait+'<div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3>'+(raceSceneSettings[entry.name]?'<p class="race-setting">Scene: '+raceSceneSettings[entry.name]+'</p>':'')+'<p class="race-explanation">'+entry.summary+'</p><h4 class="race-stats-heading">Race & creature profile</h4><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+(stats.basis||'Illustrative estimate; book details take priority.')+'</p></div></article>';
+  const portraits=bestiaryPortraits[entry.name]||[];
+  const portraitMarkup='<div class="codex-portrait-gallery '+(portraits.length===1?'single':'')+'">'+portraits.map(([file,label])=>'<figure class="codex-portrait-figure"><img class="codex-portrait-image" src="/assets/creatures/'+file+'" alt="Full-body '+label.toLowerCase()+' portrait of '+entry.name+'" loading="lazy"><figcaption>'+label+' reference</figcaption></figure>').join('')+'</div>';
+  const rows=[['Population',stats.population],['Visible traits',stats.traits],['Known abilities',stats.abilities],['Society & role',stats.role]].filter(row=>row[1]).map(row=>'<div class="race-stat"><strong>'+row[0]+'</strong><span>'+row[1]+'</span></div>').join('');
+  return '<article class="bestiary-card codex-entry"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+entry.category+' · '+entry.realm+'</small><h3>'+entry.name+'</h3><p class="race-explanation">'+entry.summary+'</p><h4 class="race-stats-heading">Race & creature profile</h4><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+(stats.basis||'Book details take priority; visual interpretation is not additional canon.')+'</p></div></article>';
  }).join('');
 }
 const bestiaryFilters=document.querySelector('#bestiaryFilters');
