@@ -622,10 +622,16 @@ function renderGlossary(){
   const panel=approvedGlossaryPanelIndex[x[0]];
   let illustration;
   if(Number.isInteger(panel)){
-   illustration=document.createElement('div');
-   illustration.className='glossary-visual glossary-approved-scene glossary-panel-'+panel;
-   illustration.setAttribute('role','img');
-   illustration.setAttribute('aria-label',glossarySceneAlt[x[0]]||'An illustrated scene from the books');
+   const sceneFiles=['the-fracture.avif','separation-era.avif','merger-era.avif','divine-creation.avif','druidic-magic.avif','residual-essence.avif'];
+   illustration=document.createElement('img');
+   illustration.className='glossary-visual glossary-detailed-art';
+   illustration.loading='lazy';
+   illustration.src='assets/glossary-scenes/'+sceneFiles[panel];
+   illustration.alt=glossarySceneAlt[x[0]]||'An illustrated scene from the books';
+   illustration.addEventListener('error',()=>{
+    const fallback='assets/glossary-scenes/'+glossarySceneImages[x[0]];
+    if(!illustration.src.endsWith('/'+fallback))illustration.src=fallback;
+   });
   }else{
    illustration=document.createElement('img');
    illustration.className='glossary-visual';
