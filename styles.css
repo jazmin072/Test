@@ -1333,3 +1333,38 @@ footer .artwork-placeholder-notice strong{
 .gallery-details h4{color:#f1d49b;font-size:15px;margin:20px 0 5px}
 .gallery-details p{line-height:1.6;margin:0 0 10px}
 @media(max-width:650px){.gallery-dialog{width:96vw;padding:18px;max-height:92vh;overflow-y:auto}#galleryDialogContent{grid-template-columns:1fr;gap:14px}#galleryDialogContent .gallery-full-figure{max-height:52vh}#galleryDialogContent .gallery-full-figure img{max-height:52vh;object-fit:contain}.gallery-details h3{font-size:24px}}
+
+/* Full-body character comparison artwork in the Faces gallery. */
+#galleryDialogContent .gallery-montage-crop{
+  position:relative;
+  width:100%;
+  max-height:none;
+  overflow:hidden;
+  border:1px solid #9d7e67;
+  border-radius:10px;
+  background:#180f27;
+  display:block;
+  flex:none;
+}
+#galleryDialogContent .gallery-montage-crop img{
+  position:absolute;
+  display:block;
+  max-width:none;
+  max-height:none;
+  width:calc(var(--panel-count) * 100%);
+  height:200%;
+  left:calc(var(--panel-index) * -100%);
+  top:calc(var(--panel-row) * -100%);
+  object-fit:fill;
+}
+#galleryDialogContent .gallery-details{align-self:center;}
+#galleryDialogContent .gallery-details .btn{display:inline-flex;margin-top:14px;}
+@media(max-width:650px){
+ #galleryDialogContent .gallery-montage-crop{max-height:none;overflow:hidden;}
+ #galleryDialogContent .gallery-montage-crop img{
+  max-height:none;
+  width:calc(var(--panel-count) * 100%);
+  height:200%;
+  object-fit:fill;
+ }
+}
