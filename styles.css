@@ -1351,10 +1351,10 @@ footer .artwork-placeholder-notice strong{
   display:block;
   max-width:none;
   max-height:none;
-  width:calc(var(--panel-count) * 100%);
+  width:var(--crop-width);
   height:200%;
-  left:calc(var(--panel-index) * -100%);
-  top:calc(var(--panel-row) * -100%);
+  left:var(--crop-left);
+  top:var(--crop-top);
   object-fit:fill;
 }
 #galleryDialogContent .gallery-details{align-self:center;}
@@ -1363,7 +1363,7 @@ footer .artwork-placeholder-notice strong{
  #galleryDialogContent .gallery-montage-crop{max-height:none;overflow:hidden;}
  #galleryDialogContent .gallery-montage-crop img{
   max-height:none;
-  width:calc(var(--panel-count) * 100%);
+  width:var(--crop-width);
   height:200%;
   object-fit:fill;
  }
