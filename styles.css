@@ -1368,3 +1368,10 @@ footer .artwork-placeholder-notice strong{
   object-fit:fill;
  }
 }
+
+/* Spoiler guidance in the character connections section. */
+.connections-spoiler-invite{max-width:850px;margin:18px 0 22px;padding:16px 20px;border-left:3px solid #d9b56f;background:rgba(67,42,88,.22)}
+.connections-spoiler-invite p{margin:0;line-height:1.6}
+.connections-spoiler-invite .plu-aside{margin-top:8px;font:italic 600 17px Georgia,serif;color:#ebc787}
+#relationResult p{line-height:1.75;margin:12px 0}
+#relationResult .spoiler-detail{margin-top:18px;padding-top:14px;border-top:1px solid #7b6276}
