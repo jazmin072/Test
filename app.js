@@ -86,11 +86,17 @@ function retailerLinks(book){
  const list=storefronts[book.id]||[];
  return list.length?'<div class="storefront-links" aria-label="Retailers for '+book.title+'">'+list.map(([store,url])=>'<a href="'+url+'" rel="noopener noreferrer" target="_blank">'+store+' ↗</a>').join('')+'</div>':'<p class="retailer-empty">Retailers coming soon.</p>';
 }
+const readerAvailability={
+ elf:{label:'Free ebook · Start here',note:'Book One · Released October 31, 2026 · Free ebook',button:'Read Elf Blood free'},
+ before:{label:'Book Two · Retailers',note:'Continue the main trilogy · Retailer pricing and formats vary',button:'Explore Book Two'},
+ goddess:{label:'Book Three · Retailers',note:'Complete the trilogy · Retailer pricing and formats vary',button:'Explore Book Three'},
+ rain:{label:'Paid companion',note:'Breni’s post-trilogy story · Now a paid title',button:'Explore Dark Rain'},
+ listening:{label:'Reyla companion',note:'A later-era companion story · Check retailer pricing',button:'Explore The Listening World'}
+};
 function renderBookCard(book){
- const info=releaseInfo[book.id],page=bookPages[book.id];
- const action=book.id==='rain'?'Explore ebook & paperback':book.id==='elf'?'Start with Elf Blood':'Explore '+book.title;
+ const info=releaseInfo[book.id],page=bookPages[book.id],availability=readerAvailability[book.id];
  const category=book.type==='trilogy'?'MAIN TRILOGY':(book.id==='listening'?'POST-TRILOGY COMPANION · A REYLA STORY':(book.id==='rain'?'POST-TRILOGY COMPANION':'COMPANION STORY'));
- return '<article class="book-card '+(book.type==='trilogy'?'main-volume':'companion-volume')+'"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small class="book-category">'+category+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p>'+(page?'<a class="btn primary" href="'+page+'">'+action+'</a><details class="book-retailers"><summary>Retailer options</summary>'+retailerLinks(book)+'</details>':'<p class="release-short">'+info.status+'</p><button class="text-link" data-book="'+book.id+'">Discover this story →</button>')+'</div></article>';
+ return '<article class="book-card '+(book.type==='trilogy'?'main-volume':'companion-volume')+'"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small class="book-category">'+category+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p>'+(page?'<p class="book-availability"><strong>'+availability.label+'</strong><span>'+availability.note+'</span></p><a class="btn primary" href="'+page+'">'+availability.button+'</a><a class="reader-direct-link" href="'+book.url+'" target="_blank" rel="noopener noreferrer">Find reading formats and retailers ↗</a><details class="book-retailers"><summary>More retailer options</summary>'+retailerLinks(book)+'</details>':'<p class="release-short">In progress · Release date to be announced</p><button class="text-link" data-book="'+book.id+'">Discover this story →</button>')+'</div></article>';
 }
 function renderBooks(filter='all'){
  const groups=[
@@ -275,6 +281,16 @@ function renderRelationMap(){
  }).join('');
  if(focused)$('#relationMap').querySelector('[data-person="'+focused+'"]')?.focus({preventScroll:true});
 }
+const relationshipMoments={
+ 'plu|selena':{plain:'Long before the worlds had names, Plu and Selena were already partners. Their teasing, everyday affection and shared responsibility as creators keep their marriage personal rather than distant or ceremonial.',deep:'When Plu returns, Selena recognises her presence almost instantly. Their reunion becomes a moment powerful enough to stop the world around them.'},
+ 'breni|taylor':{plain:'Before Reyla arrives, Breni and Taylor spend many decades together at the mansion. Taylor tends living things and Breni keeps their home safe; the quiet routine they share is as meaningful as any battle.',deep:'Their shared life changes after Taylor and Talula merge, but its memories remain part of Plu and of Breni.'},
+ 'selena|talula':{plain:'Talula notices that Selena does not age and asks questions as she grows. Selena responds as a mother who wants her daughter to understand and feel safe, even as extraordinary events draw closer.',deep:'Their closeness and the spark around Talula echo the forces behind the first Fracture.'},
+ 'breni|reyla':{plain:'Breni discovers Reyla near a stream in the seventy-ninth year of life at the mansion. Taking her home changes the household from a pair into a family.',deep:'When Reyla later joins the living world, Breni still misses their familiar daily life together.'},
+ 'plu|breni':{plain:'Breni meets extraordinary power with restraint rather than flattery. Plu recognises how much care lies beneath Breni’s guarded strength, while Breni comes to understand Plu through her actions toward their family.',deep:'Plu carries memories from Taylor’s years with Breni, giving their relationship an especially complicated intimacy after her return.'},
+ 'ray|reyla':{plain:'Ray investigates by following evidence while Reyla reads people and the living world with patience. Their differences make their friendship meaningful: they are distinct people whose paths matter to one another.',deep:'The soul-projection experiment joins their fates; Plu later brings their two souls together peacefully without erasing either identity.'},
+ 'reyla|taylor':{plain:'Taylor welcomes Reyla into the mansion rather than treating her as a stranger to fear. Everyday kindness and shared domestic life turn a safe place into a home.',deep:'Taylor’s experiences with Reyla survive as part of the memories Plu carries.'}
+};
+function relationshipMomentFor(a,b){return relationshipMoments[[a,b].sort().join('|')]||relationshipMoments[a+'|'+b]||relationshipMoments[b+'|'+a]}
 const featuredPerspectives={
  'plu|selena':[['Plu','Selena is the person she can tease, trust and build worlds with. Their ordinary time together matters as much as their work as creators.'],['Selena','She loves the woman who makes her laugh and shares the responsibility of caring for what they created.']],
  'breni|plu':[['Breni','She judges Plu by how she cares for their family. Her respect comes from what Plu does with her power.'],['Plu','She values the care and restraint beneath Breni’s formidable strength.']],
@@ -282,10 +298,11 @@ const featuredPerspectives={
 };
 function updateRelation(){
  const one=$('#firstPerson').value,two=$('#secondPerson').value,key=[one,two].sort().join('|');
- const perspectives=featuredPerspectives[key];
+ const perspectives=featuredPerspectives[key]||featuredPerspectives[[one,two].join('|')]||featuredPerspectives[[two,one].join('|')];
+ const moment=relationshipMomentFor(one,two);
  $('#featuredConnections').querySelectorAll('[data-pair]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.pair.split('|').sort().join('|')===key)));
  const rel=relations[key]||relations[[one,two].join('|')]||relations[[two,one].join('|')];const result=$('#relationResult');
- result.innerHTML=one===two?'<strong>Select two different characters</strong><p>Choose another portrait or use the menus.</p>':rel?'<strong>'+names[one]+' & '+names[two]+'</strong><small class="relation-type">'+rel.label+'</small><p>'+rel.text+'</p>'+(perspectives?'<dl class="bond-perspectives">'+perspectives.map(([name,copy])=>'<div><dt>'+name+'</dt><dd>'+copy+'</dd></div>').join('')+'</dl>':'')+(spoiler&&rel.spoiler?'<p class="spoiler-detail"><strong>Spoiler:</strong> '+rel.spoiler+'</p>':''):'<strong>'+names[one]+' & '+names[two]+'</strong><p>Both belong to the wider Chronicles, but the books do not establish a specific close personal connection between them.</p>';
+ result.innerHTML=one===two?'<strong>Select two different characters</strong><p>Choose another portrait or use the menus.</p>':rel?'<strong>'+names[one]+' & '+names[two]+'</strong><small class="relation-type">'+rel.label+'</small><p>'+rel.text+'</p>'+ (moment?'<div class="relationship-moment"><h4>A moment that defines them</h4><p>'+moment.plain+'</p>'+(spoiler&&moment.deep?'<p class="spoiler-detail"><strong>Beyond the mystery:</strong> '+moment.deep+'</p>':'')+'</div>':'')+(perspectives?'<dl class="bond-perspectives">'+perspectives.map(([name,copy])=>'<div><dt>'+name+'</dt><dd>'+copy+'</dd></div>').join('')+'</dl>':'')+(spoiler&&rel.spoiler?'<p class="spoiler-detail"><strong>Spoiler:</strong> '+rel.spoiler+'</p>':''):'<strong>'+names[one]+' & '+names[two]+'</strong><p>Both belong to the wider Chronicles, but the books do not establish a specific close personal connection between them.</p>';
  renderRelationMap();
 }
 function syncRelationControls(){
