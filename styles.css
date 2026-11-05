@@ -1248,3 +1248,81 @@ footer .artwork-placeholder-notice strong{
   #bestiary .dragon-race-card .codex-portrait,
   #bestiary .cyclopes-race-card .codex-portrait{padding:12px}
 }
+
+/* New race-scene illustrations from the author's latest uploads. */
+#bestiary .race-scene-and-models{
+ width:100%;
+ display:flex;
+ flex-direction:column;
+ gap:10px;
+ padding:12px;
+ box-sizing:border-box;
+}
+#bestiary .race-illustrated-scene{
+ width:100%;
+ margin:0;
+ border:1px solid #a58b66;
+ background:#161122;
+ overflow:hidden;
+ box-shadow:0 10px 25px #0005;
+}
+#bestiary .race-illustrated-scene img{
+ display:block;
+ width:100%;
+ height:auto;
+ max-height:680px;
+ object-fit:contain;
+ object-position:center;
+ background:#151223;
+}
+#bestiary .race-illustrated-scene figcaption{
+ color:#e3c394;
+ padding:9px 10px;
+ text-align:center;
+ font:600 11px/1.4 'DM Sans',sans-serif;
+ text-transform:uppercase;
+ letter-spacing:.07em;
+}
+#bestiary .race-older-art{
+ width:100%;
+ margin-top:3px;
+ border:1px solid #72647b;
+ background:#1c1529;
+ border-radius:3px;
+ box-sizing:border-box;
+}
+#bestiary .race-older-art summary{
+ cursor:pointer;
+ padding:12px 13px;
+ font-size:12px;
+ color:#efdcbb;
+ font-weight:600;
+}
+#bestiary .race-older-art summary:hover{text-decoration:underline}
+#bestiary .race-older-art .codex-portrait-gallery,
+#bestiary .race-older-art .dragon-model-grid{
+ padding:6px;
+ box-sizing:border-box;
+}
+#bestiary .race-scene-card .codex-portrait{
+ height:auto;
+ min-height:0;
+ display:block;
+ padding:0;
+ aspect-ratio:auto;
+}
+@media(max-width:700px){
+ #bestiary .bestiary-grid .race-scene-card{
+  display:flex;
+  flex-direction:column;
+ }
+ #bestiary .race-scene-card .codex-portrait{
+  width:100%;
+  min-height:0;
+  height:auto;
+  border-right:0;
+  border-bottom:1px solid #baa07b;
+ }
+ #bestiary .race-scene-and-models{padding:10px}
+ #bestiary .race-illustrated-scene img{max-height:580px}
+}
