@@ -280,7 +280,7 @@ const galleryFullBody={
  reyla:'77ed7802-659d-4506-9f55-3e78f5bbff50.png',
  taylor:'360871c1-2ab0-4679-8166-40438e6fc4f7.png',
  talula:'d1b276c8-c2d2-45a6-8ac3-8f71f3e5d10b.png',
- ray:'ce474fc4-670e-4711-b4e9-dbee502bc41e.png'
+ ray:'ce474fc4-670e-4711-b4e9-bdee502bc41e.png'
 };
 const galleryHost=document.querySelector('#portraitGallery');
 const galleryModal=document.querySelector('#galleryDialog');
