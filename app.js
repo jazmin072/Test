@@ -506,7 +506,7 @@ const escapeCreatureText=value=>String(value).replace(/[&<>"']/g,ch=>({'&':'&amp
 let bestiaryFilter='All';
 /* Every race and creature uses its own approved image file.
    This keeps the archive consistent and avoids sprite-sheet panel crops. */
-function approvedRacePortrait(entry,portraits){
+function legacyRacePortrait(entry,portraits){
  // Prefer the already-uploaded species-specific illustrations over the
  // older generic humanoid portraits for these two creature entries.
  if(entry.name==='Cyclopes'){
@@ -525,6 +525,41 @@ function approvedRacePortrait(entry,portraits){
   portraits.map(([file,label])=>'<figure class="codex-portrait-figure"><img class="codex-portrait-image" src="/assets/creatures/'+file+'" alt="Full-body '+escapeCreatureText(label.toLowerCase())+' portrait of '+safeName+'" loading="lazy"><figcaption>'+escapeCreatureText(label)+' reference</figcaption></figure>').join('')+
   '</div>';
 }
+
+/* The author's newer GitHub uploads are scenes showing each race in its
+   environment. Keep the earlier full-body portrait gallery available
+   without replacing it or changing any established book lore. */
+const raceSceneUploads={
+  "Elves": "elves.png",
+  "Druids": "druids.png",
+  "Vampires": "vampires.png",
+  "Minotaurs": "minotaurs.png",
+  "Dark Elves": "dark-elves.png",
+  "Goblins": "goblins.png",
+  "Giants": "giants.png",
+  "Ogres": "ogres.png",
+  "Cyclopes": "cyclopes.png",
+  "Succubi": "succubi.png",
+  "Witches & Wiccans": "witches-wiccans.png",
+  "Fairies": "fairies.png",
+  "Werewolves": "werewolves.png",
+  "Harpies": "harpies.png",
+  "Nymphs": "nymphs.png",
+  "Leprechauns": "leprechauns.png",
+  "Dark Slimes": "dark-slimes.png"
+};
+function approvedRacePortrait(entry,portraits){
+ const previousPortraits=legacyRacePortrait(entry,portraits);
+ const sceneFile=raceSceneUploads[entry.name];
+ if(!sceneFile)return previousPortraits;
+ const raceName=escapeCreatureText(entry.name);
+ const sceneAlt='Illustrated concept scene showing '+raceName+' in their world';
+ return '<div class="race-scene-and-models">'+
+  '<figure class="race-illustrated-scene"><img src="/assets/race-scenes/'+sceneFile+'" alt="'+sceneAlt+'" loading="lazy" decoding="async"><figcaption>'+raceName+' · concept artwork</figcaption></figure>'+
+  '<details class="race-older-art"><summary>View additional character designs</summary>'+previousPortraits+'</details>'+
+  '</div>';
+}
+
 function renderBestiary(){
  const host=document.querySelector('#bestiaryGrid');
  if(!host)return;
@@ -544,7 +579,7 @@ function renderBestiary(){
       '<p class="plu-not-written">Plu’s Cyclopes note has not been provided yet.</p>')+
       '</div>';
   const bookReference=rows?'<details class="creature-reference"><summary>Additional book-reference notes</summary><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+escapeCreatureText(stats.basis||'Book details take priority; visual interpretation is not additional canon.')+'</p></details>':'';
-  return '<article class="bestiary-card codex-entry '+(entry.name==='Dragons'?'dragon-race-card':entry.name==='Cyclopes'?'cyclopes-race-card':'')+' '+(bestiaryVoice==='plu'?'plu-active':'government-active')+'"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+escapeCreatureText(entry.category)+' · '+escapeCreatureText(entry.realm)+'</small><h3>'+escapeCreatureText(entry.name)+'</h3>'+voiceMarkup+bookReference+'</div></article>';
+  return '<article class="bestiary-card codex-entry '+(raceSceneUploads[entry.name]?'race-scene-card ':'')+(entry.name==='Dragons'?'dragon-race-card':entry.name==='Cyclopes'?'cyclopes-race-card':'')+' '+(bestiaryVoice==='plu'?'plu-active':'government-active')+'"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+escapeCreatureText(entry.category)+' · '+escapeCreatureText(entry.realm)+'</small><h3>'+escapeCreatureText(entry.name)+'</h3>'+voiceMarkup+bookReference+'</div></article>';
  }).join('');
 }
 const bestiaryVoiceControls=document.querySelector('#bestiaryVoiceControls');
