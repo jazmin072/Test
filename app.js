@@ -299,9 +299,9 @@ function openCharacterGallery(id){
  if(panel){
   visual.classList.add('gallery-montage-crop');
   visual.style.aspectRatio=panel.count===4?'3 / 4':'1 / 1';
-  visual.style.setProperty('--panel-count',String(panel.count));
-  visual.style.setProperty('--panel-index',String(panel.index));
-  visual.style.setProperty('--panel-row',String(panel.row));
+  visual.style.setProperty('--crop-width',(panel.count*100)+'%');
+  visual.style.setProperty('--crop-left',(-panel.index*100)+'%');
+  visual.style.setProperty('--crop-top',(-panel.row*100)+'%');
   img.src=encodeURI(galleryMontage);
   img.alt='Full-body book and beach looks of '+person.name;
  }else{
