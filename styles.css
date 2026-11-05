@@ -1396,3 +1396,34 @@ footer .artwork-placeholder-notice strong{
 .artwork-card figcaption a{color:var(--gold)}
 @media(max-width:480px){.bond-perspectives{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Reader-first book discovery and relationship history */
+.book-availability{display:grid;gap:4px;margin:14px 0;padding:12px 14px;border-left:3px solid #d4b075;background:rgba(70,48,82,.22);line-height:1.5}
+.book-availability strong{color:#f1d6a6;font-size:14px}
+.book-availability span{font-size:13px;color:#d5ccd7}
+.reader-direct-link{display:inline-block;margin:12px 0;color:#f1d49b;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.relationship-moment{margin-top:18px;padding:16px 18px;border:1px solid rgba(202,166,117,.5);border-radius:12px;background:rgba(47,33,63,.35)}
+.relationship-moment h4{margin:0;color:#f1d49b;font-size:17px}
+.relationship-moment p{margin:10px 0 0}
+.bond-history{margin-top:44px;clear:both}
+.bond-history-heading h3{font-size:clamp(22px,3vw,30px);margin:.3em 0}
+.bond-history-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;list-style:none;margin:24px 0 0;padding:0}
+.bond-history-list li{padding:19px;border:1px solid #816488;border-radius:12px;background:rgba(28,21,44,.55)}
+.bond-history-list .bond-era{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#edca93;margin-bottom:10px}
+.bond-history-list strong{display:block;font-size:18px;color:#f3deba}
+.bond-history-list p{margin:9px 0 0;line-height:1.65}
+.bond-history-secret{display:none}
+body.lore-explorer .bond-history-secret{display:block}
+body.lore-explorer .bond-history-prompt{display:none}
+.bond-history-prompt{margin-top:18px;line-height:1.6}
+.bond-history-prompt em{display:block;margin-top:5px;color:#f1d49b}
+@media(max-width:760px){
+ .bond-history-list{grid-template-columns:1fr}
+ .relationship-moment{padding:14px}
+ .book-availability{padding:11px 12px}
+ .reader-direct-link{min-height:40px;display:inline-flex;align-items:center}
+}
+@media(max-width:420px){
+ .bond-history-list li{padding:15px}
+ .bond-history-heading h3{font-size:23px}
+}
