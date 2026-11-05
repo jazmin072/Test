@@ -16,14 +16,14 @@ listening:[['All retailers · Books2Read',books[3].url],['Fishpond · paperback'
 rain:[['All retailers · Books2Read',books[4].url],['ThriftBooks','https://www.thriftbooks.com/w/dark-rain-the-chronicles-of-plu-and-selena_jonathan-m-reed/60774735/'],['IBS · paperback','https://www.ibs.it/dark-rain-libro-inglese-jonathan-m-reed/e/9798237895520'],['Feltrinelli · paperback','https://www.lafeltrinelli.it/dark-rain-libro-inglese-jonathan-m-reed/e/9798237895520']]
 };
 const releaseInfo={
-elf:{status:'Retailer listing available',date:'See retailer',desc:'Use the retailer link to check current formats, pricing and availability.'},
-before:{status:'Retailer listing available',date:'See retailer',desc:'Use the retailer link to check publication status, formats and availability.'},
+elf:{status:'Retailer listing available',date:'See retailer',desc:'View retailers and formats.'},
+before:{status:'Retailer listing available',date:'See retailer',desc:'View retailers and formats.'},
 goddess:{status:'Retailer listing available',date:'See retailer',desc:'Use the retailer link to check publication status, formats and availability.'},
-listening:{status:'Retailer listing available',date:'See retailer',desc:'Reyla’s companion story, set two centuries after the main trilogy. Check retailers for formats.'},
-rain:{status:'Retailer listing available',date:'See retailer',desc:'Breni’s post-trilogy companion story. Check retailers for formats and availability.'},
-wonders:{status:'In progress',date:'To be announced',desc:'Companion story about Selena and Talula. Publication date not confirmed.'},
-creatures:{status:'In progress',date:'To be announced',desc:'Plu’s lighter-hearted creature adventures. Release date not confirmed.'},
-plu:{status:'Still being written',date:'To be announced',desc:'A future Plu companion story. Publication date not confirmed.'}
+listening:{status:'Retailer listing available',date:'See retailer',desc:'Reyla’s story, set two centuries after the trilogy.'},
+rain:{status:'Retailer listing available',date:'See retailer',desc:'Breni’s post-trilogy mystery.'},
+wonders:{status:'In progress',date:'To be announced',desc:'Selena and Talula’s companion story.'},
+creatures:{status:'In progress',date:'To be announced',desc:'Plu’s creature adventures.'},
+plu:{status:'Still being written',date:'To be announced',desc:'A Plu companion story.'}
 };
 const chars=[
 {image:'assets/breni.webp',id:'breni',name:'Breni',symbol:'☽',group:'core',subtitle:'Vampire · Demi-god · Warrior',height:'6′9″',age:'Ageless',love:'Family and those she protects',overview:'A composed, fiercely loyal warrior whose imposing strength is matched by restraint. She builds a home with Taylor, protects Reyla, and takes responsibility for people in danger.',abilities:['Twin silver daggers','Exceptional strength and speed','Sunlight immunity','Immobilization'],books:['Elf Blood','The Goddess Elf','Dark Rain']},
@@ -74,7 +74,7 @@ const relations={
 const $=s=>document.querySelector(s);
 function retailerLinks(book){
  const list=storefronts[book.id]||[];
- return list.length?'<div class="storefront-links" aria-label="Retailers for '+book.title+'">'+list.map(([store,url])=>'<a href="'+url+'" rel="noopener noreferrer" target="_blank">'+store+' ↗</a>').join('')+'</div>':'<p class="retailer-empty">Store listings will be added when confirmed.</p>';
+ return list.length?'<div class="storefront-links" aria-label="Retailers for '+book.title+'">'+list.map(([store,url])=>'<a href="'+url+'" rel="noopener noreferrer" target="_blank">'+store+' ↗</a>').join('')+'</div>':'<p class="retailer-empty">Retailers coming soon.</p>';
 }
 function renderBookCard(book){
  const info=releaseInfo[book.id],upcoming=['wonders','creatures','plu'].includes(book.id);
@@ -518,7 +518,7 @@ function legacyRacePortrait(entry,portraits){
    '</div>';
  }
  if(!portraits.length){
-  return '<div class="codex-portrait-gallery single"><p class="codex-art-pending">Approved artwork is being prepared.</p></div>';
+  return '<div class="codex-portrait-gallery single"><p class="codex-art-pending">Artwork coming soon.</p></div>';
  }
  const safeName=escapeCreatureText(entry.name);
  return '<div class="codex-portrait-gallery '+(portraits.length===1?'single':'')+'">'+
