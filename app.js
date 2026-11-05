@@ -125,12 +125,32 @@ function characterArtMarkup(c){
  return (c.image?'<img src="'+c.image+'" alt="" loading="lazy" data-fallback="'+(c.fallback||'')+'" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;delete this.dataset.fallback}else{this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'}">':'')+
   '<span class="character-symbol" style="'+(c.image?'display:none':'')+'">'+c.symbol+'</span>';
 }
+// Short, spoiler-safe profile facts. Interpretive details are character flavour, not new story canon.
+const characterTidbits={
+ ray:[['Role','Sector 1-7 agent'],['Gift','Green aura-sight'],['Style','Metallica shirt']],
+ iven:[['People','Dwarf'],['Strength','Practical thinking'],['Adventure','Dark Rain']],
+ saelis:[['People','Dark elves'],['Role','Commander'],['Priority','Her community']],
+ torven:[['People','Goblins'],['Role','King'],['Priority','His people']],
+ vessa:[['Features','Horns and wings'],['Personality','Outspoken'],['Known for','Hospitality']],
+ reyla:[['Calling','Druid'],['Gift','Nature connection'],['Approach','Peaceful mediation']],
+ talula:[['Family','Selena’s daughter'],['Strength','Quick learner'],['Gift','Magical resonance']],
+ hybrid:[['Position','Government official'],['Influence','Behind the scenes'],['Identity','A mystery']]
+};
+function characterFactRows(c){
+ const facts=characterTidbits[c.id]||[['Height',c.height],['Age',c.age],['Important bonds',c.love]];
+ return facts.map(([label,value])=>'<div><span>'+label+'</span><strong>'+value+'</strong></div>').join('');
+}
+function characterFactLines(c){
+ const facts=characterTidbits[c.id]||[['Height',c.height],['Age',c.age],['Important bonds',c.love]];
+ return facts.map(([label,value])=>label+': '+value).join('<br>');
+}
+
 function renderCharacters(filter='all'){
  const visible=chars.filter(c=>(filter==='all'||c.group===filter)&&(!c.spoiler||spoiler));
  $('#characterGrid').innerHTML=visible.map(c=>{
   const isApprovedSupport=Boolean(supportingPortraits[c.id]);
   const heading='<p class="character-group">'+(c.group==='core'?'MAIN CAST':'SUPPORTING CAST')+'</p><h3>'+c.name+'</h3><p class="role">'+c.subtitle+'</p>';
-  return '<article class="character-card '+(isApprovedSupport?'supporting-full-body-card':'')+'"><div class="character-art" '+(isApprovedSupport?'role="img" aria-label="Full-body illustration of '+c.name+'"':'aria-hidden="true"')+'>'+characterArtMarkup(c)+'</div><div class="character-info">'+heading+'<div class="stats"><div><span>Height</span><strong>'+c.height+'</strong></div><div><span>Age</span><strong>'+c.age+'</strong></div><div><span>Important bonds</span><strong>'+c.love+'</strong></div></div><button class="btn" data-char="'+c.id+'">View full profile</button></div></article>';
+  return '<article class="character-card '+(isApprovedSupport?'supporting-full-body-card':'')+'"><div class="character-art" '+(isApprovedSupport?'role="img" aria-label="Full-body illustration of '+c.name+'"':'aria-hidden="true"')+'>'+characterArtMarkup(c)+'</div><div class="character-info">'+heading+'<div class="stats">'+characterFactRows(c)+'</div><button class="btn" data-char="'+c.id+'">View full profile</button></div></article>';
  }).join('');
 }
 renderCharacters();
@@ -142,7 +162,7 @@ document.addEventListener('click',e=>{
  const b=e.target.closest('[data-book]');
  if(b){const x=books.find(v=>v.id===b.dataset.book);$('#bookDialogContent').innerHTML='<small>'+x.label+'</small><h2>'+x.title+'</h2><p>'+x.desc+'</p><p>'+x.more+'</p>'+'<h3>Retailer listings</h3>'+retailerLinks(x);$('#bookDialog').showModal()}
  const cb=e.target.closest('[data-char]');
- if(cb){const c=chars.find(v=>v.id===cb.dataset.char),d=$('#characterDetail');d.hidden=false;d.innerHTML='<button class="detail-close" aria-label="Close profile">×</button><p class="eyebrow">'+(c.group==='core'?'MAIN CAST':'SUPPORTING CAST')+'</p><h3>'+c.name+'</h3><p>'+c.subtitle+'</p><div class="split"><div><h3>Biography</h3><p>'+c.overview+'</p><p><strong>Appearances:</strong> '+c.books.join(', ')+'</p></div><div><h3>Key abilities & traits</h3><ul>'+c.abilities.map(a=>'<li>'+a+'</li>').join('')+'</ul><h3>Profile</h3><p>Height: '+c.height+'<br>Age: '+c.age+'<br>Important bonds: '+c.love+'</p></div></div>';d.scrollIntoView({behavior:'smooth',block:'nearest'})}
+ if(cb){const c=chars.find(v=>v.id===cb.dataset.char),d=$('#characterDetail');d.hidden=false;d.innerHTML='<button class="detail-close" aria-label="Close profile">×</button><p class="eyebrow">'+(c.group==='core'?'MAIN CAST':'SUPPORTING CAST')+'</p><h3>'+c.name+'</h3><p>'+c.subtitle+'</p><div class="split"><div><h3>Biography</h3><p>'+c.overview+'</p><p><strong>Appearances:</strong> '+c.books.join(', ')+'</p></div><div><h3>Key abilities & traits</h3><ul>'+c.abilities.map(a=>'<li>'+a+'</li>').join('')+'</ul><h3>Profile</h3><p>'+characterFactLines(c)+'</p></div></div>';d.scrollIntoView({behavior:'smooth',block:'nearest'})}
  if(e.target.matches('.detail-close'))$('#characterDetail').hidden=true;
 });
 $('.close-dialog').onclick=()=>$('#bookDialog').close();
