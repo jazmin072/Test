@@ -6,13 +6,14 @@ const books=[
 {id:'rain',cover:'assets/compact/dark-rain.webp',title:'Dark Rain',type:'companion',label:'POST-MAIN-STORY · A Breni story',color:'rain',url:'https://books2read.com/u/3ngxn5',desc:'A rain-soaked island, two vampire clans and a mystery that threatens an uneasy peace.',more:'Breni enters a tense dispute between vampire clans while dangerous secrets surface.'},
 {id:'wonders',cover:'assets/compact/small-wonders.webp',title:'Small Wonders',type:'companion',label:'Selena & Talula · Companion',color:'rose',desc:'A tender portrait of daily life, growing trust and the small moments that make a family.',more:'An intimate story about Selena and Talula and the everyday love that binds them.'},
 {id:'creatures',title:"Plu's Creatures",type:'companion',label:'A Plu story · Companion',color:'gold',desc:'A playful collection of encounters with the remarkable creatures of the world.',more:'A lighter-hearted episodic journey across the strange and wonderful beings of the Chronicles.'},
-{id:'plu',cover:'assets/compact/plu-side-story.webp',title:'PLU — A Goddess’s Side Story',type:'companion',label:'Final companion · In progress',color:'gold',desc:'A future side story centered on Plu, set after the other books.',more:'This story is still being written and will appear after the other books in the reading collection.'}];
+{id:'plu',cover:'assets/compact/plu-side-story.webp',title:'PLU — A Goddess’s Side Story',type:'companion',label:'Plu companion · Scheduled May 29, 2027',color:'gold',url:'https://books2read.com/u/bMKj5v',desc:'A character-focused fantasy companion exploring Plu’s curiosity, humour, relationships and adventures beyond the great events.',more:'The ebook manuscript has been uploaded to Draft2Digital, with a scheduled release date of May 29, 2027. Check Books2Read for retailer availability and preorder options.'}];
 
 const storefronts={
 elf:[['All retailers · Books2Read',books[0].url],['Barnes & Noble','https://www.barnesandnoble.com/w/elf-blood-jonathan-m-reed/1151826925?ean=2940197076762'],['ThriftBooks','https://www.thriftbooks.com/w/elf-blood-the-chronicles-of-plu-and-selena_jonathan-m-reed/60835761/']],
 before:[['All retailers · Books2Read',books[1].url],['Barnes & Noble','https://www.barnesandnoble.com/w/the-world-before-jonathan-m-reed/1151832194?ean=2940197269034'],['ThriftBooks','https://www.thriftbooks.com/w/the-world-before-the-chronicles-of-plu-and-selena_jonathan-m-reed/60834395/'],['Feltrinelli · eBook','https://www.lafeltrinelli.it/world-before-ebook-inglese-jonathan-m-reed/e/9798237360950']],
 goddess:[['All retailers · Books2Read',books[2].url],['Barnes & Noble','https://www.barnesandnoble.com/w/the-goddess-elf-jonathan-m-reed/1151849785?ean=2940197154309']],
 listening:[['All retailers · Books2Read',books[3].url],['Fishpond · paperback','https://www.fishpond.com.au/Books/listening-world-Jonathan-M-Reed/9798237084870'],['IBS · paperback','https://www.ibs.it/listening-world-libro-inglese-jonathan-m-reed/e/9798237084870']],
+plu:[['Books2Read · Retailers and preorder information',books.find(book=>book.id==='plu').url]],
 rain:[['All retailers · Books2Read',books[4].url],['ThriftBooks','https://www.thriftbooks.com/w/dark-rain-the-chronicles-of-plu-and-selena_jonathan-m-reed/60774735/'],['IBS · paperback','https://www.ibs.it/dark-rain-libro-inglese-jonathan-m-reed/e/9798237895520'],['Feltrinelli · paperback','https://www.lafeltrinelli.it/dark-rain-libro-inglese-jonathan-m-reed/e/9798237895520']]
 };
 const releaseInfo={
@@ -23,7 +24,7 @@ listening:{status:'Retailer listing available',date:'See retailer',desc:'Reyla�
 rain:{status:'Retailer listing available',date:'See retailer',desc:'Breni’s post-trilogy mystery.'},
 wonders:{status:'In progress',date:'To be announced',desc:'Selena and Talula’s companion story.'},
 creatures:{status:'In progress',date:'To be announced',desc:'Plu’s creature adventures.'},
-plu:{status:'Still being written',date:'To be announced',desc:'A Plu companion story.'}
+plu:{status:'Ebook scheduled · Check Books2Read',date:'May 29, 2027',desc:'A Plu-focused fantasy companion. Draft2Digital lists May 29, 2027 as the planned ebook release date.'}
 };
 const chars=[
 {image:'assets/breni.webp',id:'breni',name:'Breni',symbol:'☽',group:'core',subtitle:'Vampire · Demi-god · Warrior',height:'6′9″',age:'Ageless',love:'Family and those she protects',overview:'A composed, fiercely loyal warrior whose imposing strength is matched by restraint. She builds a home with Taylor, protects Reyla, and takes responsibility for people in danger.',abilities:['Twin silver daggers','Exceptional strength and speed','Sunlight immunity','Immobilization'],books:['Elf Blood','The Goddess Elf','Dark Rain']},
@@ -96,7 +97,7 @@ const readerAvailability={
 function renderBookCard(book){
  const info=releaseInfo[book.id],page=bookPages[book.id],availability=readerAvailability[book.id];
  const category=book.type==='trilogy'?'MAIN TRILOGY':(book.id==='listening'?'POST-TRILOGY COMPANION · A REYLA STORY':(book.id==='rain'?'POST-TRILOGY COMPANION':'COMPANION STORY'));
- return '<article class="book-card '+(book.type==='trilogy'?'main-volume':'companion-volume')+'"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small class="book-category">'+category+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p>'+(page?'<p class="book-availability"><strong>'+availability.label+'</strong><span>'+availability.note+'</span></p><a class="btn primary" href="'+page+'">'+availability.button+'</a><a class="reader-direct-link" href="'+book.url+'" target="_blank" rel="noopener noreferrer">Find reading formats and retailers ↗</a><details class="book-retailers"><summary>More retailer options</summary>'+retailerLinks(book)+'</details>':'<p class="release-short">In progress · Release date to be announced</p><button class="text-link" data-book="'+book.id+'">Discover this story →</button>')+'</div></article>';
+ return '<article class="book-card '+(book.type==='trilogy'?'main-volume':'companion-volume')+'"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small class="book-category">'+category+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p>'+(page?'<p class="book-availability"><strong>'+availability.label+'</strong><span>'+availability.note+'</span></p><a class="btn primary" href="'+page+'">'+availability.button+'</a><a class="reader-direct-link" href="'+book.url+'" target="_blank" rel="noopener noreferrer">Find reading formats and retailers ↗</a><details class="book-retailers"><summary>More retailer options</summary>'+retailerLinks(book)+'</details>':'<p class="release-short">'+(book.id==='plu'?'Scheduled ebook release · May 29, 2027':'In progress · Release date to be announced')+'</p>'+(book.url?'<a class="btn primary" href="'+book.url+'" target="_blank" rel="noopener noreferrer">View Books2Read listing ↗</a>':'')+'<button class="text-link" data-book="'+book.id+'">Discover this story →</button>')+'</div></article>';
 }
 function renderBooks(filter='all'){
  const groups=[
@@ -119,7 +120,7 @@ function renderBooks(filter='all'){
 function renderReleases(){
  $('#releaseGrid').innerHTML=books.filter(book=>!bookPages[book.id]).map(book=>{
  const info=releaseInfo[book.id];
- return '<article class="release-card"><img src="'+(book.cover||'assets/plu.webp')+'" alt="" loading="lazy"><div><small>'+info.status+'</small><h3>'+book.title+'</h3><p class="release-date">'+info.date+'</p><p>'+info.desc+'</p><button class="text-link" data-book="'+book.id+'">Explore this upcoming story</button></div></article>';
+ return '<article class="release-card"><img src="'+(book.cover||'assets/plu.webp')+'" alt="" loading="lazy"><div><small>'+info.status+'</small><h3>'+book.title+'</h3><p class="release-date">'+info.date+'</p><p>'+info.desc+'</p>(book.url?'<a class="btn primary" href="'+book.url+'" target="_blank" rel="noopener noreferrer">View Books2Read listing ↗</a>':'')+'<button class="text-link" data-book="'+book.id+'">Explore this upcoming story</button>'</div></article>';
  }).join('');
 }
 renderReleases();
@@ -187,7 +188,7 @@ document.querySelectorAll('[data-character-filter]').forEach(btn=>btn.addEventLi
 }));
 document.addEventListener('click',e=>{
  const b=e.target.closest('[data-book]');
- if(b){const x=books.find(v=>v.id===b.dataset.book);$('#bookDialogContent').innerHTML='<small>'+x.label+'</small><h2>'+x.title+'</h2><p>'+x.desc+'</p><p>'+x.more+'</p>'+'<h3>Retailer listings</h3>'+retailerLinks(x);$('#bookDialog').showModal()}
+ if(b){const x=books.find(v=>v.id===b.dataset.book);$('#bookDialogContent').innerHTML='<small>'+x.label+'</small><h2>'+x.title+'</h2><p>'+x.desc+'</p><p>'+x.more+'</p>'+(x.id==='plu'?'<p><strong>Scheduled ebook release: May 29, 2027</strong></p>':'')+'<h3>Retailer listings</h3>'+retailerLinks(x);$('#bookDialog').showModal()}
  const cb=e.target.closest('[data-char]');
  if(cb)showCharacterProfile(cb.dataset.char,{trigger:cb});
  if(e.target.closest('.detail-close')){
