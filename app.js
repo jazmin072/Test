@@ -119,8 +119,8 @@ function renderBooks(filter='all'){
 
 function renderReleases(){
  $('#releaseGrid').innerHTML=books.filter(book=>!bookPages[book.id]).map(book=>{
- const info=releaseInfo[book.id];
- return '<article class="release-card"><img src="'+(book.cover||'assets/plu.webp')+'" alt="" loading="lazy"><div><small>'+info.status+'</small><h3>'+book.title+'</h3><p class="release-date">'+info.date+'</p><p>'+info.desc+'</p>(book.url?'<a class="btn primary" href="'+book.url+'" target="_blank" rel="noopener noreferrer">View Books2Read listing ↗</a>':'')+'<button class="text-link" data-book="'+book.id+'">Explore this upcoming story</button>'</div></article>';
+  const info=releaseInfo[book.id];
+  return '<article class="release-card"><img src="'+(book.cover||'assets/plu.webp')+'" alt="" loading="lazy"><div><small>'+info.status+'</small><h3>'+book.title+'</h3><p class="release-date">'+info.date+'</p><p>'+info.desc+'</p>'+(book.url?'<a class="btn primary" href="'+book.url+'" target="_blank" rel="noopener noreferrer">View Books2Read listing ↗</a>':'')+'<button class="text-link" data-book="'+book.id+'">Explore this upcoming story</button></div></article>';
  }).join('');
 }
 renderReleases();
