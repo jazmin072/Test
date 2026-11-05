@@ -260,27 +260,55 @@ document.querySelectorAll('#nav details').forEach(d=>d.addEventListener('toggle'
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('#nav details').forEach(d=>d.open=false);$('#nav').classList.remove('open');$('.menu-toggle').setAttribute('aria-expanded','false')}});
 $('#year').textContent=new Date().getFullYear();
 
-/* Gallery is built from the existing approved illustrations. */
+/* Interactive character gallery. Keep achievements spoiler-safe by default. */
 const galleryCharacters=['plu','selena','breni','reyla','taylor','talula','ray'];
+const galleryFacts={
+ plu:{achievement:'Helped shape worlds and brought hope to a divided reality.',secret:'Returned as the Goddess Elf and helped restore the fractured world.',food:'Honey-glazed cinnamon buns'},
+ selena:{achievement:'Protected Talula and helped her find the Minotaur sanctuary.',secret:'Held her family together through the Fracture and Plu’s return.',food:'Blackberry pastries'},
+ breni:{achievement:'Protected her family through the events at the mansion.',secret:'Defended her family and later uncovered the conspiracy behind the vampire-clan conflict.',food:'Smoky mushroom stew'},
+ reyla:{achievement:'Found a home with Breni and Taylor and grew into her Druidic calling.',secret:'Became part of the living world while preserving her bonds with loved ones.',food:'Rosemary bread with roasted vegetables'},
+ taylor:{achievement:'Used her healing gift to care for living things and protect her family.',secret:'Her merging with Talula helped bring the Goddess Elf home.',food:'Strawberry and honey tarts'},
+ talula:{achievement:'Travelled with Selena and reached the Minotaur sanctuary.',secret:'Joined with Taylor to bring Plu back as the Goddess Elf.',food:'Apple-cinnamon pancakes'},
+ ray:{achievement:'Followed unusual magical evidence despite the government’s official account.',secret:'Her investigation and soul-projection journey helped uncover the divided-realities mystery.',food:'Strong coffee and toasted cheese sandwiches'}
+};
+// A full-body source can be specified here once an approved full-length illustration
+// is available; never stretch or crop a headshot to pretend it is full-body.
+const galleryFullBody={};
 const galleryHost=document.querySelector('#portraitGallery');
 const galleryModal=document.querySelector('#galleryDialog');
 const galleryContent=document.querySelector('#galleryDialogContent');
+function openCharacterGallery(id){
+ const person=chars.find(x=>x.id===id);
+ if(!person||!galleryModal||!galleryContent)return;
+ const info=galleryFacts[id]||{};
+ galleryContent.replaceChildren();
+ const visual=document.createElement('div');
+ visual.className='gallery-full-figure';
+ const img=document.createElement('img');
+ img.src=galleryFullBody[id]||person.image;
+ img.alt='Character artwork of '+person.name;
+ img.onerror=()=>{if(person.fallback&&img.src.indexOf(person.fallback)<0)img.src=person.fallback};
+ visual.append(img);
+ const bio=document.createElement('div');bio.className='gallery-details';
+ const title=document.createElement('h3');title.textContent=person.name;
+ const subtitle=document.createElement('p');subtitle.textContent=person.subtitle;
+ const heading=document.createElement('h4');heading.textContent='Biggest achievement';
+ const achievement=document.createElement('p');achievement.textContent=(spoiler&&info.secret)||info.achievement||'A story still unfolding.';
+ const foodHeading=document.createElement('h4');foodHeading.textContent='Favourite food';
+ const food=document.createElement('p');food.textContent=info.food||'A warm home-cooked meal';
+ const link=document.createElement('a');link.href='#characters';link.className='btn';link.textContent='View full profile';
+ bio.append(title,subtitle,heading,achievement,foodHeading,food,link);
+ galleryContent.append(visual,bio);
+ if(!galleryModal.open)galleryModal.showModal();
+}
 if(galleryHost&&galleryModal&&galleryContent){
  galleryHost.innerHTML=galleryCharacters.map(id=>{
   const person=chars.find(x=>x.id===id);
-  return '<button type="button" class="portrait-tile" data-gallery-person="'+id+'" aria-label="View '+person.name+' portrait"><img src="'+person.image+'" alt="Portrait of '+person.name+'" loading="lazy"><span class="portrait-label">'+person.name+'</span><small>'+person.subtitle+'</small></button>';
+  return '<button type="button" class="portrait-tile" data-gallery-person="'+id+'" aria-label="Open '+person.name+' character gallery"><img src="'+person.image+'" alt="Portrait of '+person.name+'" loading="lazy"><span class="portrait-label">'+person.name+'</span><small>'+person.subtitle+'</small></button>';
  }).join('');
  galleryHost.addEventListener('click',event=>{
-  const tile=event.target.closest('[data-gallery-person]');if(!tile)return;
-  const person=chars.find(x=>x.id===tile.dataset.galleryPerson);
-  galleryContent.replaceChildren();
-  const img=document.createElement('img');img.src=person.image;img.alt='Official portrait of '+person.name;
-  const bio=document.createElement('div');bio.className='gallery-details';
-  const title=document.createElement('h3');title.textContent=person.name;
-  const subtitle=document.createElement('p');subtitle.textContent=person.subtitle;
-  const link=document.createElement('a');link.href='#characters';link.className='btn';link.textContent='View character profiles';
-  bio.append(title,subtitle,link);galleryContent.append(img,bio);
-  galleryModal.showModal();
+  const tile=event.target.closest('[data-gallery-person]');
+  if(tile)openCharacterGallery(tile.dataset.galleryPerson);
  });
  galleryModal.querySelector('.close-gallery').addEventListener('click',()=>galleryModal.close());
  galleryModal.addEventListener('click',e=>{if(e.target===galleryModal)galleryModal.close()});
