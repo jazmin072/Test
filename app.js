@@ -546,7 +546,11 @@ const raceSceneUploads={
   "Harpies": "harpies.png",
   "Nymphs": "nymphs.png",
   "Leprechauns": "leprechauns.png",
-  "Dark Slimes": "dark-slimes.png"
+  "Dark Slimes": "dark-slimes.png",
+  "Dwarves": "dwarves.avif",
+  "Humans": "humans.avif",
+  "Hybrids": "hybrids.avif",
+  "Monsters": "monsters.avif"
 };
 function approvedRacePortrait(entry,portraits){
  const previousPortraits=legacyRacePortrait(entry,portraits);
