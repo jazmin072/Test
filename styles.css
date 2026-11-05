@@ -1326,3 +1326,10 @@ footer .artwork-placeholder-notice strong{
  #bestiary .race-scene-and-models{padding:10px}
  #bestiary .race-illustrated-scene img{max-height:580px}
 }
+
+/* Expanded gallery art and character highlights */
+#galleryDialogContent .gallery-full-figure{display:flex;align-items:center;justify-content:center;min-width:0;max-height:76vh;overflow:auto}
+#galleryDialogContent .gallery-full-figure img{display:block;width:100%;max-height:76vh;object-fit:contain;object-position:center center}
+.gallery-details h4{color:#f1d49b;font-size:15px;margin:20px 0 5px}
+.gallery-details p{line-height:1.6;margin:0 0 10px}
+@media(max-width:650px){.gallery-dialog{width:96vw;padding:18px;max-height:92vh;overflow-y:auto}#galleryDialogContent{grid-template-columns:1fr;gap:14px}#galleryDialogContent .gallery-full-figure{max-height:52vh}#galleryDialogContent .gallery-full-figure img{max-height:52vh;object-fit:contain}.gallery-details h3{font-size:24px}}
