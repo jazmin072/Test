@@ -1375,3 +1375,24 @@ footer .artwork-placeholder-notice strong{
 .connections-spoiler-invite .plu-aside{margin-top:8px;font:italic 600 17px Georgia,serif;color:#ebc787}
 #relationResult p{line-height:1.75;margin:12px 0}
 #relationResult .spoiler-detail{margin-top:18px;padding-top:14px;border-top:1px solid #7b6276}
+
+/* Reader controls, relationship reading order, and artwork navigation. */
+.reader-mode-inline{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem;margin:0 0 1.5rem;padding:1rem;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+#readerModeName{scroll-margin-top:90px}
+.connections-spoiler-invite label{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem}
+.featured-connections{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}
+.featured-connections button[aria-pressed=true]{border-color:var(--gold);color:var(--gold);background:var(--panel)}
+#relationResult{max-width:850px;margin:1rem 0;padding:1rem 1.25rem;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+#relationResult>strong{display:block;font-size:1.35rem}
+.bond-perspectives{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem}
+.bond-perspectives dt{color:var(--gold);font-weight:700}
+.bond-perspectives dd{margin:.25rem 0 0;line-height:1.5}
+.relation-node:focus-visible,.featured-connections button:focus-visible,#relationResult:focus-visible,#characterDetail h3:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+#characterDetail{scroll-margin-top:85px}
+.gallery-notice{color:var(--muted);font-size:.9rem}
+.cast-reference,.book-retailers{margin-top:1rem}
+.cast-reference summary,.book-retailers summary{cursor:pointer;color:var(--gold)}
+.cast-reference .artwork-grid{margin-top:1rem}
+.artwork-card figcaption a{color:var(--gold)}
+@media(max-width:480px){.bond-perspectives{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

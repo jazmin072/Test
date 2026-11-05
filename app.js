@@ -1,12 +1,12 @@
 const books=[
-{id:'elf',cover:'assets/elf-blood.png',title:'Elf Blood',type:'trilogy',label:'Book One · Main trilogy',color:'blue',url:'https://books2read.com/u/b61750',desc:'An elf without her memories, an unusual household, and events that unsettle a carefully separated world.',more:'The opening novel introduces Taylor, Breni, Reyla and an unfolding mystery about reality, memory and power.'},
-{id:'before',cover:'assets/the-world-before.png',title:'The World Before',type:'trilogy',label:'Book Two · Main trilogy',color:'gold',url:'https://books2read.com/u/b61dg6',desc:'Journey to an earlier age, when powerful creators shaped the first living worlds and ancient choices cast long shadows.',more:'The primordial era of the Chronicles explores creation, early civilizations and the roots of later conflicts.'},
-{id:'goddess',cover:'assets/the-goddess-elf.png',title:'The Goddess Elf',type:'trilogy',label:'Book Three · Main trilogy',color:'rose',url:'https://books2read.com/u/mZA1dB',desc:'Old bonds and impossible responsibilities test the people who hold reality together.',more:'The final book in the original trilogy brings the intertwined destinies of the central characters to a new stage.'},
-{id:'listening',cover:'assets/the-listening-world.png',title:'The Listening World',type:'companion',label:'POST-TRILOGY COMPANION · A Reyla story',color:'green',url:'https://books2read.com/u/bPWpQx',desc:'A reflective journey through communities, forests and the quiet language of a living world.',more:'Reyla journeys through communities and living landscapes two centuries after the main trilogy, seeking understanding rather than violence.'},
-{id:'rain',cover:'assets/dark-rain.png',title:'Dark Rain',type:'companion',label:'POST-MAIN-STORY · A Breni story',color:'rain',url:'https://books2read.com/u/3ngxn5',desc:'A rain-soaked island, two vampire clans and a mystery that threatens an uneasy peace.',more:'Breni enters a tense dispute between vampire clans while dangerous secrets surface.'},
-{id:'wonders',cover:'assets/small-wonders.png',title:'Small Wonders',type:'companion',label:'Selena & Talula · Companion',color:'rose',desc:'A tender portrait of daily life, growing trust and the small moments that make a family.',more:'An intimate story about Selena and Talula and the everyday love that binds them.'},
+{id:'elf',cover:'assets/compact/elf-blood.webp',title:'Elf Blood',type:'trilogy',label:'Book One · Main trilogy',color:'blue',url:'https://books2read.com/u/b61750',desc:'An elf without her memories, an unusual household, and events that unsettle a carefully separated world.',more:'The opening novel introduces Taylor, Breni, Reyla and an unfolding mystery about reality, memory and power.'},
+{id:'before',cover:'assets/compact/the-world-before.webp',title:'The World Before',type:'trilogy',label:'Book Two · Main trilogy',color:'gold',url:'https://books2read.com/u/b61dg6',desc:'Journey to an earlier age, when powerful creators shaped the first living worlds and ancient choices cast long shadows.',more:'The primordial era of the Chronicles explores creation, early civilizations and the roots of later conflicts.'},
+{id:'goddess',cover:'assets/compact/the-goddess-elf.webp',title:'The Goddess Elf',type:'trilogy',label:'Book Three · Main trilogy',color:'rose',url:'https://books2read.com/u/mZA1dB',desc:'Old bonds and impossible responsibilities test the people who hold reality together.',more:'The final book in the original trilogy brings the intertwined destinies of the central characters to a new stage.'},
+{id:'listening',cover:'assets/compact/the-listening-world.webp',title:'The Listening World',type:'companion',label:'POST-TRILOGY COMPANION · A Reyla story',color:'green',url:'https://books2read.com/u/bPWpQx',desc:'A reflective journey through communities, forests and the quiet language of a living world.',more:'Reyla journeys through communities and living landscapes two centuries after the main trilogy, seeking understanding rather than violence.'},
+{id:'rain',cover:'assets/compact/dark-rain.webp',title:'Dark Rain',type:'companion',label:'POST-MAIN-STORY · A Breni story',color:'rain',url:'https://books2read.com/u/3ngxn5',desc:'A rain-soaked island, two vampire clans and a mystery that threatens an uneasy peace.',more:'Breni enters a tense dispute between vampire clans while dangerous secrets surface.'},
+{id:'wonders',cover:'assets/compact/small-wonders.webp',title:'Small Wonders',type:'companion',label:'Selena & Talula · Companion',color:'rose',desc:'A tender portrait of daily life, growing trust and the small moments that make a family.',more:'An intimate story about Selena and Talula and the everyday love that binds them.'},
 {id:'creatures',title:"Plu's Creatures",type:'companion',label:'A Plu story · Companion',color:'gold',desc:'A playful collection of encounters with the remarkable creatures of the world.',more:'A lighter-hearted episodic journey across the strange and wonderful beings of the Chronicles.'},
-{id:'plu',cover:'assets/plu-side-story.png',title:'PLU — A Goddess’s Side Story',type:'companion',label:'Final companion · In progress',color:'gold',desc:'A future side story centered on Plu, set after the other books.',more:'This story is still being written and will appear after the other books in the reading collection.'}];
+{id:'plu',cover:'assets/compact/plu-side-story.webp',title:'PLU — A Goddess’s Side Story',type:'companion',label:'Final companion · In progress',color:'gold',desc:'A future side story centered on Plu, set after the other books.',more:'This story is still being written and will appear after the other books in the reading collection.'}];
 
 const storefronts={
 elf:[['All retailers · Books2Read',books[0].url],['Barnes & Noble','https://www.barnesandnoble.com/w/elf-blood-jonathan-m-reed/1151826925?ean=2940197076762'],['ThriftBooks','https://www.thriftbooks.com/w/elf-blood-the-chronicles-of-plu-and-selena_jonathan-m-reed/60835761/']],
@@ -40,6 +40,17 @@ const chars=[
 {id:'vessa',name:'Vessa',symbol:'❧',group:'supporting',subtitle:'A winged acquaintance',height:'Not confirmed',age:'Not confirmed',love:'Not confirmed',overview:'An outspoken, hospitable woman with curved horns, wings, and a tail whose meeting with Plu and Selena becomes an unexpectedly memorable encounter.',abilities:['Resourcefulness','Hospitality','Independent spirit'],books:['Plu side story']}
 ];
 let spoiler=false,cat='All';
+const publicProfiles={
+ breni:{subtitle:'Vampire · Warrior',overview:'Breni is a reserved and fiercely loyal vampire. She shares a home with Taylor and shows her affection through practical care and quiet companionship.',abilities:['Strength','Restraint','Protecting her household']},
+ reyla:{subtitle:'A thoughtful listener',overview:'Reyla pays attention to what other people miss. She finds a home with Taylor and Breni and brings a patient curiosity to the people and places around her.',abilities:['Observation','Listening','Care for the natural world']},
+ plu:{subtitle:'The Goddess Elf · Creator',overview:'Plu is a playful creator who loves Selena and takes an irrepressible interest in the people and creatures of their worlds.',abilities:['Creation','Curiosity','Playfulness']},
+ selena:{subtitle:'Goddess · Co-creator · Mother',overview:'Selena helped create worlds with her wife, Plu. As Talula’s mother, she brings that same devotion to the routines and responsibilities of everyday life.',abilities:['Creation','Protecting her family','Practical care']},
+ taylor:{subtitle:'Elf · Healer',overview:'Taylor has no memory of her past. She makes a home with Breni and tends to the living things around their forest mansion.',abilities:['Healing','Gardening','Care for her household']},
+ talula:{subtitle:'Selena’s daughter',overview:'Talula is a bright, observant young woman who asks hard questions and shares a close bond with her mother, Selena.',abilities:['Quick learning','Curiosity','Observation']},
+ ray:{subtitle:'Human agent · Sector 1-7',overview:'Ray follows unusual evidence with persistence and a sharp eye. Her work leads her to question the official account.',abilities:['Investigation','Aura-sight','Attention to detail']}
+};
+const profileFor=c=>spoiler?c:{...c,...publicProfiles[c.id]};
+const bookPages={elf:'elf-blood.html',before:'the-world-before.html',goddess:'the-goddess-elf.html',listening:'the-listening-world.html',rain:'dark-rain.html'};
 const lore=[
 ['Magic','Divine Creation','The ability to shape life and worlds.'],['Magic','Druidic Magic','Power rooted in connection and understanding.'],['Magic','Residual Essence','Traces of power that linger in materials and places.'],['Magic','Crystal Storage','Crystals capable of holding unusual magical energies.'],
 ['Places','New Londanais','An important urban center.'],['Places','Bozton','A city where the extraordinary meets everyday life.'],['Places','Everlangyrs','A region with complicated coexistence among peoples.'],['Places','Teramek','A distinctive territory in the wider world.'],['Places','Dark Veil Mountains','Remote mountains linked to dragon communities.'],['Places','The Minotaur Sanctuary','A place of refuge and tradition.'],
@@ -76,9 +87,10 @@ function retailerLinks(book){
  return list.length?'<div class="storefront-links" aria-label="Retailers for '+book.title+'">'+list.map(([store,url])=>'<a href="'+url+'" rel="noopener noreferrer" target="_blank">'+store+' ↗</a>').join('')+'</div>':'<p class="retailer-empty">Retailers coming soon.</p>';
 }
 function renderBookCard(book){
- const info=releaseInfo[book.id],upcoming=['wonders','creatures','plu'].includes(book.id);
+ const info=releaseInfo[book.id],page=bookPages[book.id];
+ const action=book.id==='rain'?'Explore ebook & paperback':book.id==='elf'?'Start with Elf Blood':'Explore '+book.title;
  const category=book.type==='trilogy'?'MAIN TRILOGY':(book.id==='listening'?'POST-TRILOGY COMPANION · A REYLA STORY':(book.id==='rain'?'POST-TRILOGY COMPANION':'COMPANION STORY'));
- return '<article class="book-card '+(book.type==='trilogy'?'main-volume':'companion-volume')+'"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small class="book-category">'+category+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p><p class="release-short"><strong>'+info.status+'</strong> · '+info.date+'</p>'+(['elf','before','goddess','listening','rain'].includes(book.id)?'<a class="text-link" href="'+({'elf':'elf-blood.html','before':'the-world-before.html','goddess':'the-goddess-elf.html','listening':'the-listening-world.html','rain':'dark-rain.html'}[book.id])+'">Explore book page →</a>':'<button class="text-link" data-book="'+book.id+'">Discover this story →</button>')+'<h4>Available retailers</h4>'+retailerLinks(book)+'</div></article>';
+ return '<article class="book-card '+(book.type==='trilogy'?'main-volume':'companion-volume')+'"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small class="book-category">'+category+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p>'+(page?'<a class="btn primary" href="'+page+'">'+action+'</a><details class="book-retailers"><summary>Retailer options</summary>'+retailerLinks(book)+'</details>':'<p class="release-short">'+info.status+'</p><button class="text-link" data-book="'+book.id+'">Discover this story →</button>')+'</div></article>';
 }
 function renderBooks(filter='all'){
  const groups=[
@@ -99,9 +111,9 @@ function renderBooks(filter='all'){
 }
 
 function renderReleases(){
- $('#releaseGrid').innerHTML=books.map(book=>{
+ $('#releaseGrid').innerHTML=books.filter(book=>!bookPages[book.id]).map(book=>{
  const info=releaseInfo[book.id];
- return '<article class="release-card"><img src="'+(book.cover||'assets/plu.webp')+'" alt="" loading="lazy"><div><small>'+info.status+'</small><h3>'+book.title+'</h3><p class="release-date">'+info.date+'</p><p>'+info.desc+'</p><a href="#books">See book & retailers</a></div></article>';
+ return '<article class="release-card"><img src="'+(book.cover||'assets/plu.webp')+'" alt="" loading="lazy"><div><small>'+info.status+'</small><h3>'+book.title+'</h3><p class="release-date">'+info.date+'</p><p>'+info.desc+'</p><button class="text-link" data-book="'+book.id+'">Explore this upcoming story</button></div></article>';
  }).join('');
 }
 renderReleases();
@@ -126,27 +138,37 @@ function characterArtMarkup(c){
 }
 // Short, spoiler-safe profile facts. Interpretive details are character flavour, not new story canon.
 const characterTidbits={
- ray:[['Role','Sector 1-7 agent'],['Gift','Green aura-sight'],['Style','Metallica shirt']],
  iven:[['People','Dwarf'],['Strength','Practical thinking'],['Adventure','Dark Rain']],
  saelis:[['People','Dark elves'],['Role','Commander'],['Priority','Her community']],
  torven:[['People','Goblins'],['Role','King'],['Priority','His people']],
  vessa:[['Features','Horns and wings'],['Personality','Outspoken'],['Known for','Hospitality']],
- reyla:[['Calling','Druid'],['Gift','Nature connection'],['Approach','Peaceful mediation']],
- talula:[['Family','Selena’s daughter'],['Strength','Quick learner'],['Gift','Magical resonance']],
+
  hybrid:[['Position','Government official'],['Influence','Behind the scenes'],['Identity','A mystery']]
 };
+function profileFacts(c){
+ if(c.group!=='core')return characterTidbits[c.id]||[];
+ const bonds={breni:'Family and those she protects',reyla:'The living world',plu:'Selena',selena:'Plu',taylor:'Breni',talula:'Selena',ray:'Undisclosed'};
+ return [['Height',c.height],['Age',c.age],['Important bonds',bonds[c.id]||'Undisclosed']];
+}
 function characterFactRows(c){
- const facts=characterTidbits[c.id]||[['Height',c.height],['Age',c.age],['Important bonds',c.love]];
- return facts.map(([label,value])=>'<div><span>'+label+'</span><strong>'+value+'</strong></div>').join('');
+ return profileFacts(c).map(([label,value])=>'<div><span>'+label+'</span><strong>'+value+'</strong></div>').join('');
 }
-function characterFactLines(c){
- const facts=characterTidbits[c.id]||[['Height',c.height],['Age',c.age],['Important bonds',c.love]];
- return facts.map(([label,value])=>label+': '+value).join('<br>');
+let activeProfile=null,profileTrigger=null;
+function showCharacterProfile(id,{focus=true,trigger=null}={}){
+ const original=chars.find(c=>c.id===id);
+ const detail=$('#characterDetail');
+ if(!original||(!spoiler&&original.spoiler)){detail.hidden=true;activeProfile=null;return}
+ const c=profileFor(original);
+ activeProfile=id;
+ if(trigger)profileTrigger=trigger;
+ detail.hidden=false;
+ detail.innerHTML='<button class="detail-close" aria-label="Close profile">×</button><h3 tabindex="-1">'+c.name+'</h3><p>'+c.subtitle+'</p><div class="split"><div><h4>Biography</h4><p>'+c.overview+'</p>'+(spoiler?'<p><strong>Appearances:</strong> '+c.books.join(', ')+'</p>':'')+'</div><div><h4>Key abilities & traits</h4><ul>'+c.abilities.map(a=>'<li>'+a+'</li>').join('')+'</ul><h4>Profile</h4><div class="stats">'+characterFactRows(c)+'</div></div></div>';
+ if(focus){detail.scrollIntoView({block:'start'});detail.querySelector('h3').focus({preventScroll:true})}
 }
-
 function renderCharacters(filter='all'){
  const visible=chars.filter(c=>(filter==='all'||c.group===filter)&&(!c.spoiler||spoiler));
- $('#characterGrid').innerHTML=visible.map(c=>{
+ $('#characterGrid').innerHTML=visible.map(original=>{
+  const c=profileFor(original);
   const isApprovedSupport=Boolean(supportingPortraits[c.id]);
   const heading='<p class="character-group">'+(c.group==='core'?'MAIN CAST':'SUPPORTING CAST')+'</p><h3>'+c.name+'</h3><p class="role">'+c.subtitle+'</p>';
   return '<article class="character-card '+(isApprovedSupport?'supporting-full-body-card':'')+'"><div class="character-art" '+(isApprovedSupport?'role="img" aria-label="Full-body illustration of '+c.name+'"':'aria-hidden="true"')+'>'+characterArtMarkup(c)+'</div><div class="character-info">'+heading+'<div class="stats">'+characterFactRows(c)+'</div><button class="btn" data-char="'+c.id+'">View full profile</button></div></article>';
@@ -155,14 +177,21 @@ function renderCharacters(filter='all'){
 renderCharacters();
 document.querySelectorAll('[data-character-filter]').forEach(btn=>btn.addEventListener('click',()=>{
  document.querySelectorAll('[data-character-filter]').forEach(x=>x.classList.remove('active'));btn.classList.add('active');
- $('#characterDetail').hidden=true;renderCharacters(btn.dataset.characterFilter)
+ $('#characterDetail').hidden=true;activeProfile=null;profileTrigger=null;renderCharacters(btn.dataset.characterFilter)
 }));
 document.addEventListener('click',e=>{
  const b=e.target.closest('[data-book]');
  if(b){const x=books.find(v=>v.id===b.dataset.book);$('#bookDialogContent').innerHTML='<small>'+x.label+'</small><h2>'+x.title+'</h2><p>'+x.desc+'</p><p>'+x.more+'</p>'+'<h3>Retailer listings</h3>'+retailerLinks(x);$('#bookDialog').showModal()}
  const cb=e.target.closest('[data-char]');
- if(cb){const c=chars.find(v=>v.id===cb.dataset.char),d=$('#characterDetail');d.hidden=false;d.innerHTML='<button class="detail-close" aria-label="Close profile">×</button><p class="eyebrow">'+(c.group==='core'?'MAIN CAST':'SUPPORTING CAST')+'</p><h3>'+c.name+'</h3><p>'+c.subtitle+'</p><div class="split"><div><h3>Biography</h3><p>'+c.overview+'</p><p><strong>Appearances:</strong> '+c.books.join(', ')+'</p></div><div><h3>Key abilities & traits</h3><ul>'+c.abilities.map(a=>'<li>'+a+'</li>').join('')+'</ul><h3>Profile</h3><p>'+characterFactLines(c)+'</p></div></div>';d.scrollIntoView({behavior:'smooth',block:'nearest'})}
- if(e.target.matches('.detail-close'))$('#characterDetail').hidden=true;
+ if(cb)showCharacterProfile(cb.dataset.char,{trigger:cb});
+ if(e.target.closest('.detail-close')){
+  const id=activeProfile;
+  $('#characterDetail').hidden=true;
+  activeProfile=null;
+  const target=profileTrigger?.isConnected?profileTrigger:document.querySelector('[data-char="'+id+'"]');
+  target?.focus();
+ }
+
 });
 $('.close-dialog').onclick=()=>$('#bookDialog').close();
 $('#bookDialog').onclick=e=>{if(e.target===$('#bookDialog'))$('#bookDialog').close()};
@@ -201,7 +230,7 @@ function renderLore(){
  $('#loreGrid').innerHTML=entries.map(x=>{
   const fallback=loreArtFor(x);
   const art=approvedLoreImages[x[1]]?'assets/lore-approved/'+approvedLoreImages[x[1]]:fallback;
-  return '<article class="lore-card"><img class="lore-card-visual" src="'+art+'" data-fallback-src="'+fallback+'" alt="Chronicles illustration for '+x[1]+'" loading="lazy"><div class="lore-card-body"><small>'+x[0]+'</small><h3>'+x[1]+'</h3><p>'+x[2]+'</p></div></article>';
+  return '<article id="lore-'+x[1].toLowerCase().replace(/[^a-z0-9]+/g,'-')+'" class="lore-card"><img class="lore-card-visual" src="'+art+'" data-fallback-src="'+fallback+'" alt="Chronicles illustration for '+x[1]+'" loading="lazy"><div class="lore-card-body"><small>'+x[0]+'</small><h3>'+x[1]+'</h3><p>'+x[2]+'</p></div></article>';
  }).join('');
  $('#loreGrid').querySelectorAll('img[data-fallback-src]').forEach(img=>{
   img.addEventListener('error',()=>{
@@ -216,7 +245,21 @@ renderLore();
 $('#loreSearch').oninput=renderLore;
 document.querySelectorAll('[data-lore-cat]').forEach(b=>b.onclick=()=>{cat=b.dataset.loreCat;document.querySelectorAll('[data-lore-cat]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderLore()});
 function renderTimeline(){$('#timelineList').innerHTML=timeline.filter(t=>spoiler||!t[3]).map(t=>'<article class="time-point"><small>'+t[0]+'</small><h3>'+t[1]+'</h3><p>'+t[2]+'</p></article>').join('')}
-renderTimeline();$('#spoilerToggle').onchange=e=>{spoiler=e.target.checked;document.body.classList.toggle('lore-explorer',spoiler);$('#readerModeName').textContent=spoiler?'Lore Explorer · spoilers visible':'New Reader · spoilers protected';renderLore();renderTimeline();renderBestiary();renderCharacters(document.querySelector('[data-character-filter].active')?.dataset.characterFilter||'all');syncRelationControls();renderGlossary();renderGlobalSearch();if(typeof showLocation==='function')showLocation(currentLocationIndex)};
+renderTimeline();
+const spoilerControls=[...document.querySelectorAll('[data-spoiler-toggle]')];
+spoilerControls.forEach(control=>control.addEventListener('change',()=>{
+ spoiler=control.checked;
+ spoilerControls.forEach(toggle=>toggle.checked=spoiler);
+ document.body.classList.toggle('lore-explorer',spoiler);
+ $('#readerModeName').textContent=spoiler?'Lore Explorer · spoilers visible':'New Reader · spoilers protected';
+ renderLore();renderTimeline();renderBestiary();
+ renderCharacters(document.querySelector('[data-character-filter].active')?.dataset.characterFilter||'all');
+ if(activeProfile)showCharacterProfile(activeProfile,{focus:false});
+ updateRelation();renderGlossary();renderGlobalSearch();showLocation(currentLocationIndex);
+ galleryHost.querySelectorAll('[data-gallery-person]').forEach(tile=>{
+  tile.querySelector('small').textContent=profileFor(chars.find(c=>c.id===tile.dataset.galleryPerson)).subtitle;
+ });
+}));
 const relationCast=['plu','selena','breni','taylor','reyla','talula','ray','hybrid'];
 const names=Object.fromEntries(chars.map(ch=>[ch.id,ch.name]));
 const activeRelationIds=()=>relationCast.filter(id=>id!=='hybrid');
@@ -225,15 +268,24 @@ function setOptions(select,choice){select.innerHTML=activeRelationIds().map(id=>
 let selected=[];
 function renderRelationMap(){
  const first=$('#firstPerson').value,second=$('#secondPerson').value;
+ const focused=$('#relationMap').contains(document.activeElement)?document.activeElement.dataset.person:null;
  $('#relationMap').innerHTML=activeRelationIds().map(id=>{
-  const ch=chars.find(c=>c.id===id),pic=assetFor(id);
-  return '<button type="button" class="relation-node '+(id===first||id===second?'selected':'')+' '+(id==='ray'?'ray-node':'')+'" data-person="'+id+'" aria-label="Select '+ch.name+'"><span class="relation-photo">'+(pic?'<img src="'+pic+'" alt="" loading="lazy">':'<span class="relation-glyph">'+ch.symbol+'</span>')+'</span><span class="relation-name">'+ch.name+'</span><small>'+ch.subtitle+'</small></button>';
+  const ch=profileFor(chars.find(c=>c.id===id)),pic=assetFor(id);
+  return '<button type="button" class="relation-node '+(id===first||id===second?'selected':'')+' '+(id==='ray'?'ray-node':'')+'" data-person="'+id+'" aria-pressed="'+(id===first||id===second)+'" aria-label="Select '+ch.name+'"><span class="relation-photo">'+(pic?'<img src="'+pic+'" alt="" loading="lazy">':'<span class="relation-glyph">'+ch.symbol+'</span>')+'</span><span class="relation-name">'+ch.name+'</span><small>'+ch.subtitle+'</small></button>';
  }).join('');
+ if(focused)$('#relationMap').querySelector('[data-person="'+focused+'"]')?.focus({preventScroll:true});
 }
+const featuredPerspectives={
+ 'plu|selena':[['Plu','Selena is the person she can tease, trust and build worlds with. Their ordinary time together matters as much as their work as creators.'],['Selena','She loves the woman who makes her laugh and shares the responsibility of caring for what they created.']],
+ 'breni|plu':[['Breni','She judges Plu by how she cares for their family. Her respect comes from what Plu does with her power.'],['Plu','She values the care and restraint beneath Breni’s formidable strength.']],
+ 'selena|talula':[['Selena','Being Talula’s mother means listening to difficult questions and sharing the daily work of growing up.'],['Talula','Selena is the person she trusts with questions she cannot answer on her own.']]
+};
 function updateRelation(){
  const one=$('#firstPerson').value,two=$('#secondPerson').value,key=[one,two].sort().join('|');
+ const perspectives=featuredPerspectives[key];
+ $('#featuredConnections').querySelectorAll('[data-pair]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.pair.split('|').sort().join('|')===key)));
  const rel=relations[key]||relations[[one,two].join('|')]||relations[[two,one].join('|')];const result=$('#relationResult');
- result.innerHTML=one===two?'<strong>Select two different characters</strong><p>Choose another portrait or use the menus.</p>':rel?'<strong>'+names[one]+' & '+names[two]+'</strong><small class="relation-type">'+rel.label+'</small><p>'+rel.text+'</p>'+(spoiler&&rel.spoiler?'<p class="spoiler-detail"><strong>Spoiler:</strong> '+rel.spoiler+'</p>':''):'<strong>'+names[one]+' & '+names[two]+'</strong><p>Both belong to the wider Chronicles, but the books do not establish a specific close personal connection between them.</p>';
+ result.innerHTML=one===two?'<strong>Select two different characters</strong><p>Choose another portrait or use the menus.</p>':rel?'<strong>'+names[one]+' & '+names[two]+'</strong><small class="relation-type">'+rel.label+'</small><p>'+rel.text+'</p>'+(perspectives?'<dl class="bond-perspectives">'+perspectives.map(([name,copy])=>'<div><dt>'+name+'</dt><dd>'+copy+'</dd></div>').join('')+'</dl>':'')+(spoiler&&rel.spoiler?'<p class="spoiler-detail"><strong>Spoiler:</strong> '+rel.spoiler+'</p>':''):'<strong>'+names[one]+' & '+names[two]+'</strong><p>Both belong to the wider Chronicles, but the books do not establish a specific close personal connection between them.</p>';
  renderRelationMap();
 }
 function syncRelationControls(){
@@ -253,6 +305,16 @@ $('#relationMap').addEventListener('click',e=>{
  updateRelation();
 });
 syncRelationControls();
+$('#featuredConnections').addEventListener('click',event=>{
+ const button=event.target.closest('[data-pair]');
+ if(!button)return;
+ const [first,second]=button.dataset.pair.split('|');
+ $('#firstPerson').value=first;
+ $('#secondPerson').value=second;
+ selected=[];
+ updateRelation();
+ $('#relationResult').focus();
+});
 $('.menu-toggle').onclick=()=>{const nav=$('#nav');nav.classList.toggle('open');$('.menu-toggle').setAttribute('aria-expanded',nav.classList.contains('open'))};
 document.querySelectorAll('#nav a').forEach(a=>a.onclick=()=>{$('#nav').classList.remove('open');$('.menu-toggle').setAttribute('aria-expanded','false');document.querySelectorAll('#nav details').forEach(d=>d.open=false)});
 document.querySelectorAll('#nav details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)document.querySelectorAll('#nav details').forEach(other=>{if(other!==d)other.open=false})}));
@@ -264,8 +326,8 @@ const galleryCharacters=['plu','selena','breni','reyla','taylor','talula','ray']
 const galleryFacts={
  plu:{achievement:'Helped shape worlds and brought hope to a divided reality.',secret:'Returned as the Goddess Elf and helped restore the fractured world.',food:'Rosemary-roasted duck with blackberry glaze, buttery turnips and aged goat cheese'},
  selena:{achievement:'Protected Talula and helped her find the Minotaur sanctuary.',secret:'Held her family together through the Fracture and Plu’s return.',food:'Chargrilled lamb with spiced aubergine, saffron rice and crumbled sheep’s cheese'},
- breni:{achievement:'Protected her family through the events at the mansion.',secret:'Defended her family and later uncovered the conspiracy behind the vampire-clan conflict.',food:'Pepper-crusted venison with wild mushrooms, roasted root vegetables and sharp cheddar'},
- reyla:{achievement:'Found a home with Breni and Taylor and grew into her Druidic calling.',secret:'Became part of the living world while preserving her bonds with loved ones.',food:'Herb-baked trout with lemon greens, creamy potatoes and fresh soft cheese'},
+ breni:{achievement:'Built a home with Taylor and made room for someone who needed shelter.',secret:'Defended her family and later uncovered the conspiracy behind the vampire-clan conflict.',food:'Pepper-crusted venison with wild mushrooms, roasted root vegetables and sharp cheddar'},
+ reyla:{achievement:'Found a home with Breni and Taylor and earned their trust.',secret:'Became part of the living world while preserving her bonds with loved ones.',food:'Herb-baked trout with lemon greens, creamy potatoes and fresh soft cheese'},
  taylor:{achievement:'Used her healing gift to care for living things and protect her family.',secret:'Her merging with Talula helped bring the Goddess Elf home.',food:'Roast chicken with garlic potatoes, glazed carrots and melted Gruyère'},
  talula:{achievement:'Travelled with Selena and reached the Minotaur sanctuary.',secret:'Joined with Taylor to bring Plu back as the Goddess Elf.',food:'Cheese-stuffed beef dumplings with pepper sauce and crisp cabbage'},
  ray:{achievement:'Followed unusual magical evidence despite the government’s official account.',secret:'Her investigation and soul-projection journey helped uncover the divided-realities mystery.',food:'Spicy beef-and-pepper skillet with melted provolone, onions and garlic-roasted potatoes'}
@@ -273,20 +335,23 @@ const galleryFacts={
 // Character-specific full-body artwork uploaded to GitHub.
 // Each image shows the book outfit beside the beach outfit.
 const galleryFullBody={
- plu:'0f7490b3-ad7a-4030-8399-890cc379ab97.png',
- selena:'b1a2b840-e9f4-4a6f-bff2-725eea003a14.png',
- breni:'5545d97b-0c95-4c28-ae19-0027f7498eb3.png',
- reyla:'77ed7802-659d-4506-9f55-3e78f5bbff50.png',
- taylor:'360871c1-2ab0-4679-8166-40438e6fc4f7.png',
- talula:'d1b276c8-c2d2-45a6-8ac3-8f71f3e5d10b.png',
- ray:'ce474fc4-670e-4711-b4e9-bdee502bc41e.png'
+ plu:'assets/compact/portrait-plu.webp',
+ selena:'assets/compact/portrait-selena.webp',
+ breni:'assets/compact/portrait-breni.webp',
+ reyla:'assets/compact/portrait-reyla.webp',
+ taylor:'assets/compact/portrait-taylor.webp',
+ talula:'assets/compact/portrait-talula.webp',
+ ray:'assets/compact/portrait-ray.webp'
 };
 const galleryHost=document.querySelector('#portraitGallery');
 const galleryModal=document.querySelector('#galleryDialog');
 const galleryContent=document.querySelector('#galleryDialogContent');
+let galleryReturnFocus=null,galleryOpeningProfile=false;
 function openCharacterGallery(id){
- const person=chars.find(x=>x.id===id);
- if(!person||!galleryModal||!galleryContent)return;
+ const original=chars.find(x=>x.id===id);
+ if(!original||!galleryModal||!galleryContent)return;
+ const person=profileFor(original);
+ galleryReturnFocus=document.activeElement;
  const info=galleryFacts[id]||{};
  galleryContent.replaceChildren();
  const visual=document.createElement('div');
@@ -307,14 +372,19 @@ function openCharacterGallery(id){
  const achievement=document.createElement('p');achievement.textContent=(spoiler&&info.secret)||info.achievement||'A story still unfolding.';
  const foodHeading=document.createElement('h4');foodHeading.textContent='Favourite food';
  const food=document.createElement('p');food.textContent=info.food||'A warm home-cooked meal';
- const link=document.createElement('a');link.href='#characters';link.className='btn';link.textContent='View full profile';
+ const link=document.createElement('button');link.type='button';link.className='btn';link.textContent='View full profile';
+ link.addEventListener('click',()=>{
+  galleryOpeningProfile=true;
+  galleryModal.close();
+  showCharacterProfile(id,{trigger:galleryReturnFocus});
+ });
  bio.append(title,subtitle,heading,achievement,foodHeading,food,link);
  galleryContent.append(visual,bio);
- if(!galleryModal.open)galleryModal.showModal();
+ if(!galleryModal.open){galleryModal.showModal();galleryModal.querySelector('.close-gallery').focus()}
 }
 if(galleryHost&&galleryModal&&galleryContent){
  galleryHost.innerHTML=galleryCharacters.map(id=>{
-  const person=chars.find(x=>x.id===id);
+  const person=profileFor(chars.find(x=>x.id===id));
   return '<button type="button" class="portrait-tile" data-gallery-person="'+id+'" aria-label="Open '+person.name+' character gallery"><img src="'+person.image+'" alt="Portrait of '+person.name+'" loading="lazy"><span class="portrait-label">'+person.name+'</span><small>'+person.subtitle+'</small></button>';
  }).join('');
  galleryHost.addEventListener('click',event=>{
@@ -323,8 +393,12 @@ if(galleryHost&&galleryModal&&galleryContent){
  });
  galleryModal.querySelector('.close-gallery').addEventListener('click',()=>galleryModal.close());
  galleryModal.addEventListener('click',e=>{if(e.target===galleryModal)galleryModal.close()});
- galleryContent.addEventListener('click',e=>{if(e.target.closest('a[href="#characters"]'))galleryModal.close()});
+ galleryModal.addEventListener('close',()=>{
+  if(!galleryOpeningProfile)galleryReturnFocus?.focus({preventScroll:true});
+  galleryOpeningProfile=false;
+ });
 }
+const locationAnchor=name=>'atlas-'+name.toLowerCase().replace(/[^a-z0-9]+/g,'-');
 const knownLocations=[
  {name:'New Londanais',tag:'Urban centre',x:37,y:42,description:'A named urban centre within the separated-era setting. Its appearance in the books connects the city to the wider human world, but the official map does not establish exact streets or borders.',people:'Urban residents living within the human world during the events of the trilogy. The books do not establish a complete demographic breakdown.',land:'City terrain and precise regional boundaries have not been specified.',books:'Elf Blood · Main trilogy'},
  {name:'Bozton',tag:'City',x:49,y:51,description:'An urban setting featured in The Goddess Elf, where residents must respond to events far larger than the city itself.',people:'Citizens of Bozton, whose everyday lives intersect with the main characters.',land:'A settled city; its physical position and surrounding territory have not been fixed in the books.',books:'The Goddess Elf'},
@@ -353,19 +427,24 @@ function showLocation(index){
  const people=document.createElement('p');people.textContent=hiddenLocation?'Further details are protected for new readers.':place.people;
  const landTitle=document.createElement('h4');landTitle.textContent='The land';
  const land=document.createElement('p');land.textContent=hiddenLocation?'The full landscape notes are available in Lore Explorer mode.':place.land;
- const books=document.createElement('p');books.className='location-source';books.textContent='Explore in: '+place.books;
- const caveat=document.createElement('small');caveat.className='atlas-caveat';caveat.textContent=place.portal?'Beyond the main world · no map placement':'Illustrative placement · locations may shift as the stories develop';
- locationDetail.append(label,title,description,peopleTitle,people,landTitle,land,books,caveat);
+ const books=document.createElement('p');books.className='location-source';books.textContent=hiddenLocation?'Explore this location in Lore Explorer.':'Explore in: '+place.books;
+ locationDetail.append(label,title,description,peopleTitle,people,landTitle,land,books);
 }
 if(locationList&&locationDetail){
- locationList.innerHTML=knownLocations.map((place,i)=>'<button type="button" data-location="'+i+'" aria-pressed="false">'+place.name+' <span>›</span></button>').join('');
+ locationList.innerHTML=knownLocations.map((place,i)=>'<button id="'+locationAnchor(place.name)+'" type="button" data-location="'+i+'" aria-pressed="false">'+place.name+' <span>›</span></button>').join('');
  locationList.addEventListener('click',event=>{const button=event.target.closest('[data-location]');if(button)showLocation(Number(button.dataset.location))});
  if(atlasPins){
   atlasPins.innerHTML=knownLocations.map((place,i)=>place.x==null?'':'<button type="button" class="atlas-pin" style="left:'+place.x+'%;top:'+place.y+'%" data-atlas-index="'+i+'" aria-pressed="false" aria-label="Explore '+place.name+'"><span class="atlas-pin-dot" aria-hidden="true">✦</span><span class="atlas-pin-label">'+place.name+'</span></button>').join('');
   atlasPins.addEventListener('click',event=>{const button=event.target.closest('[data-atlas-index]');if(!button)return;showLocation(Number(button.dataset.atlasIndex));if(matchMedia('(max-width:760px)').matches)locationDetail.scrollIntoView({behavior:'smooth',block:'start'})});
  }
  atlasPortalButton?.addEventListener('click',()=>{showLocation(knownLocations.length-1);locationDetail.scrollIntoView({behavior:'smooth',block:'nearest'})});
+ const selectLocationHash=()=>{
+  const index=knownLocations.findIndex(place=>'#'+locationAnchor(place.name)===location.hash);
+  if(index>=0)showLocation(index);
+ };
+ window.addEventListener('hashchange',selectLocationHash);
  showLocation(0);
+ selectLocationHash();
 }
 
 /* Canon-conscious, art-ready creature notes. Images can be attached once approved. */
@@ -588,6 +667,7 @@ function legacyRacePortrait(entry,portraits){
 /* The author's newer GitHub uploads are scenes showing each race in its
    environment. Keep the earlier full-body portrait gallery available
    without replacing it or changing any established book lore. */
+const creatureAnchor=name=>'creature-'+name.toLowerCase().replace(/[^a-z0-9]+/g,'-');
 const raceSceneUploads={
   "Elves": "elves.png",
   "Druids": "druids.png",
@@ -641,8 +721,8 @@ function renderBestiary(){
       entryNote?'<p class="plu-quote">'+escapeCreatureText(entryNote)+'</p>':
       '<p class="plu-not-written">Plu’s Cyclopes note has not been provided yet.</p>')+
       '</div>';
-  const bookReference=rows?'<details class="creature-reference"><summary>Additional book-reference notes</summary><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+escapeCreatureText(stats.basis||'Book details take priority; visual interpretation is not additional canon.')+'</p></details>':'';
-  return '<article class="bestiary-card codex-entry '+(raceSceneUploads[entry.name]?'race-scene-card ':'')+(entry.name==='Dragons'?'dragon-race-card':entry.name==='Cyclopes'?'cyclopes-race-card':'')+' '+(bestiaryVoice==='plu'?'plu-active':'government-active')+'"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+escapeCreatureText(entry.category)+' · '+escapeCreatureText(entry.realm)+'</small><h3>'+escapeCreatureText(entry.name)+'</h3>'+voiceMarkup+bookReference+'</div></article>';
+  const bookReference=rows.length&&(spoiler||!bestiaryReveals.has(entry.name))?'<details class="creature-reference"><summary>Additional book-reference notes</summary><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+escapeCreatureText(stats.basis||'Book details take priority; visual interpretation is not additional canon.')+'</p></details>':'';
+  return '<article id="'+creatureAnchor(entry.name)+'" class="bestiary-card codex-entry '+(raceSceneUploads[entry.name]?'race-scene-card ':'')+(entry.name==='Dragons'?'dragon-race-card':entry.name==='Cyclopes'?'cyclopes-race-card':'')+' '+(bestiaryVoice==='plu'?'plu-active':'government-active')+'"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+escapeCreatureText(entry.category)+' · '+escapeCreatureText(entry.realm)+'</small><h3>'+escapeCreatureText(entry.name)+'</h3>'+voiceMarkup+bookReference+'</div></article>';
  }).join('');
 }
 const bestiaryVoiceControls=document.querySelector('#bestiaryVoiceControls');
@@ -709,7 +789,7 @@ const glossarySceneAlt={
 const glossaryEntries=[
  ['The Fracture','A defining disruption of reality whose causes emerge across the trilogy.',false],
  ['Separation Era','The age of divided realities in Elf Blood.',false],
- ['Merger Era','A later period of change between the worlds.',false],
+ ['Merger Era','A later period of change between the worlds.',true],
  ['Divine Creation','The shaping of worlds and life associated with Plu and Selena.',false],
  ['Druidic Magic','Magic rooted in deep connection with the living world.',false],
  ['Residual Essence','Power that remains after an extraordinary magical event.',false],
@@ -730,7 +810,7 @@ function renderGlossary(){
    illustration.className='glossary-visual glossary-detailed-art';
    illustration.loading='lazy';
    illustration.src='assets/glossary-scenes/'+sceneFiles[panel];
-   illustration.alt=glossarySceneAlt[x[0]]||'An illustrated scene from the books';
+   illustration.alt=(spoiler?glossarySceneAlt[x[0]]:undefined)||'An illustrated scene from the books';
    illustration.addEventListener('error',()=>{
     const fallback='assets/glossary-scenes/'+glossarySceneImages[x[0]];
     if(!illustration.src.endsWith('/'+fallback))illustration.src=fallback;
@@ -741,7 +821,7 @@ function renderGlossary(){
    illustration.loading='lazy';
    const scene=glossarySceneImages[x[0]];
    illustration.src=scene?'assets/glossary-scenes/'+scene:loreArtFor(['History',x[0]]);
-   illustration.alt=glossarySceneAlt[x[0]]||'Illustrated moment from The Chronicles';
+   illustration.alt=(spoiler?glossarySceneAlt[x[0]]:undefined)||'Illustrated moment from The Chronicles';
    illustration.addEventListener('error',()=>{
     const fallback=loreArtFor(['History',x[0]]);
     if(!illustration.src.endsWith('/'+fallback))illustration.src=fallback;
@@ -756,23 +836,28 @@ renderGlossary();
 const globalSearch=document.querySelector('#globalSearch'),globalResults=document.querySelector('#globalSearchResults'),globalStatus=document.querySelector('#globalSearchStatus'),globalFilters=document.querySelector('#globalSearchFilters');
 let globalFilter='All';
 function searchable(){
- const links={elf:'elf-blood.html',before:'the-world-before.html',goddess:'the-goddess-elf.html'};
+ const links=bookPages;
  const entries=[
  ...books.map(b=>({type:'Books',title:b.title,description:b.desc,href:links[b.id]||'#books'})),
- ...chars.filter(ch=>(spoiler||!ch.spoiler)&&ch.id!=='hybrid').map(ch=>({type:'Characters',title:ch.name,description:ch.subtitle,href:'#characters',char:ch.id})),
- ...knownLocations.filter(loc=>spoiler||!['Everlangyrs','Teramek','Dark Veil Mountains','Breni’s Island Mystery','Plu’s Off-world Journeys'].includes(loc.name)).map(loc=>({type:'Locations',title:loc.name,description:loc.tag,href:'#locations',location:knownLocations.indexOf(loc)})),
- ...bestiaryEntries.map(b=>({type:'Creatures',title:b.name,description:b.category+' · '+b.summary,href:'#bestiary'})),
+ ...chars.filter(ch=>(spoiler||!ch.spoiler)&&ch.id!=='hybrid').map(ch=>({type:'Characters',title:ch.name,description:profileFor(ch).subtitle,href:'#characters',char:ch.id})),
+ ...knownLocations.map(loc=>({type:'Locations',title:loc.name,description:loc.tag,href:'#'+locationAnchor(loc.name),location:knownLocations.indexOf(loc)})),
+ ...bestiaryEntries.map(b=>({type:'Creatures',title:b.name,description:spoiler?b.summary:b.category+' of the Chronicles',href:'#'+creatureAnchor(b.name)})),
  ...lore.concat(spoiler?secrets:[]).filter(x=>x[1]!=='The Hybrid Official').map(x=>({type:'Lore',title:x[1],description:x[2],href:'#world'})),
  ...glossaryEntries.filter(x=>spoiler||!x[2]).map(x=>({type:'Lore',title:x[0],description:x[1],href:'#glossary'}))
  ];
  return entries;
+}
+function searchRank(hit,term){
+ const title=hit.title.toLocaleLowerCase();
+ if(title===term)return hit.type==='Locations'?0:1;
+ return title.startsWith(term)?2:title.includes(term)?3:4;
 }
 function renderGlobalSearch(){
  if(!globalSearch||!globalResults)return;
  const term=globalSearch.value.toLocaleLowerCase().trim();
  globalResults.replaceChildren();
  if(!term){globalStatus.textContent='Start typing to explore the Chronicles.';return}
- const hits=searchable().filter(x=>(globalFilter==='All'||x.type===globalFilter)&&[x.title,x.description].join(' ').toLocaleLowerCase().includes(term)).slice(0,24);
+ const hits=searchable().filter(x=>(globalFilter==='All'||x.type===globalFilter)&&[x.title,x.description].join(' ').toLocaleLowerCase().includes(term)).sort((a,b)=>searchRank(a,term)-searchRank(b,term)).slice(0,24);
  globalStatus.textContent=hits.length+' '+(hits.length===1?'result':'results')+(spoiler?' · Lore Explorer':' · New Reader');
  hits.forEach(hit=>{
   const link=document.createElement('a');link.className='global-result';link.href=hit.href;
@@ -795,8 +880,9 @@ if(globalSearch){
  });
  globalResults.addEventListener('click',e=>{
   const link=e.target.closest('.global-result');if(!link)return;
-  if(link.dataset.resultLocation)showLocation(Number(link.dataset.resultLocation));
-  if(link.dataset.resultChar){document.querySelector('[data-character-filter="all"]')?.click();const id=link.dataset.resultChar;requestAnimationFrame(()=>document.querySelector('[data-char="'+id+'"]')?.click())}
+  if(link.dataset.resultLocation!==undefined)showLocation(Number(link.dataset.resultLocation));
+  if(link.hash.startsWith('#creature-')&&!document.querySelector(link.hash))document.querySelector('[data-bestiary-cat="All"]')?.click();
+  if(link.dataset.resultChar){e.preventDefault();showCharacterProfile(link.dataset.resultChar,{trigger:link})}
  });
  renderGlobalSearch();
 }
