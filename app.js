@@ -271,9 +271,19 @@ const galleryFacts={
  talula:{achievement:'Travelled with Selena and reached the Minotaur sanctuary.',secret:'Joined with Taylor to bring Plu back as the Goddess Elf.',food:'Cheese-stuffed beef dumplings with pepper sauce and crisp cabbage'},
  ray:{achievement:'Followed unusual magical evidence despite the government’s official account.',secret:'Her investigation and soul-projection journey helped uncover the divided-realities mystery.',food:'Spicy beef-and-pepper skillet with melted provolone, onions and garlic-roasted potatoes'}
 };
-// A full-body source can be specified here once an approved full-length illustration
-// is available; never stretch or crop a headshot to pretend it is full-body.
-const galleryFullBody={};
+// Full-body costume and beach looks from the GitHub artwork montage.
+// Panels are cropped from the full-resolution uploaded montage, never from headshots.
+// Map: top row Plu, Selena, Taylor, Talula; bottom row Breni, Reyla, Ray.
+const galleryMontage='Fantasy Main Cast Montage.png';
+const galleryMontagePanels={
+ plu:{row:0,index:0,count:4},
+ selena:{row:0,index:1,count:4},
+ taylor:{row:0,index:2,count:4},
+ talula:{row:0,index:3,count:4},
+ breni:{row:1,index:0,count:3},
+ reyla:{row:1,index:1,count:3},
+ ray:{row:1,index:2,count:3}
+};
 const galleryHost=document.querySelector('#portraitGallery');
 const galleryModal=document.querySelector('#galleryDialog');
 const galleryContent=document.querySelector('#galleryDialogContent');
@@ -284,10 +294,25 @@ function openCharacterGallery(id){
  galleryContent.replaceChildren();
  const visual=document.createElement('div');
  visual.className='gallery-full-figure';
+ const panel=galleryMontagePanels[id];
  const img=document.createElement('img');
- img.src=galleryFullBody[id]||person.image;
- img.alt='Character artwork of '+person.name;
- img.onerror=()=>{if(person.fallback&&img.src.indexOf(person.fallback)<0)img.src=person.fallback};
+ if(panel){
+  visual.classList.add('gallery-montage-crop');
+  visual.style.aspectRatio=panel.count===4?'3 / 4':'1 / 1';
+  visual.style.setProperty('--panel-count',String(panel.count));
+  visual.style.setProperty('--panel-index',String(panel.index));
+  visual.style.setProperty('--panel-row',String(panel.row));
+  img.src=encodeURI(galleryMontage);
+  img.alt='Full-body book and beach looks of '+person.name;
+ }else{
+  img.src=person.image;
+  img.alt='Character artwork of '+person.name;
+ }
+ img.onerror=()=>{
+  visual.classList.remove('gallery-montage-crop');
+  visual.style.aspectRatio='';
+  if(img.src!==new URL(person.image,document.baseURI).href)img.src=person.image;
+ };
  visual.append(img);
  const bio=document.createElement('div');bio.className='gallery-details';
  const title=document.createElement('h3');title.textContent=person.name;
@@ -813,6 +838,10 @@ if(officialLineup){
   const name=document.createElement('span');
   name.textContent=person.name;
   anchor.append(image,name);
+  anchor.addEventListener('click',event=>{
+   event.preventDefault();
+   openCharacterGallery(id);
+  });
   officialLineup.append(anchor);
  });
 }
