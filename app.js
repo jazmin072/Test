@@ -263,13 +263,13 @@ $('#year').textContent=new Date().getFullYear();
 /* Interactive character gallery. Keep achievements spoiler-safe by default. */
 const galleryCharacters=['plu','selena','breni','reyla','taylor','talula','ray'];
 const galleryFacts={
- plu:{achievement:'Helped shape worlds and brought hope to a divided reality.',secret:'Returned as the Goddess Elf and helped restore the fractured world.',food:'Honey-glazed cinnamon buns'},
- selena:{achievement:'Protected Talula and helped her find the Minotaur sanctuary.',secret:'Held her family together through the Fracture and Plu’s return.',food:'Blackberry pastries'},
- breni:{achievement:'Protected her family through the events at the mansion.',secret:'Defended her family and later uncovered the conspiracy behind the vampire-clan conflict.',food:'Smoky mushroom stew'},
- reyla:{achievement:'Found a home with Breni and Taylor and grew into her Druidic calling.',secret:'Became part of the living world while preserving her bonds with loved ones.',food:'Rosemary bread with roasted vegetables'},
- taylor:{achievement:'Used her healing gift to care for living things and protect her family.',secret:'Her merging with Talula helped bring the Goddess Elf home.',food:'Strawberry and honey tarts'},
- talula:{achievement:'Travelled with Selena and reached the Minotaur sanctuary.',secret:'Joined with Taylor to bring Plu back as the Goddess Elf.',food:'Apple-cinnamon pancakes'},
- ray:{achievement:'Followed unusual magical evidence despite the government’s official account.',secret:'Her investigation and soul-projection journey helped uncover the divided-realities mystery.',food:'Strong coffee and toasted cheese sandwiches'}
+ plu:{achievement:'Helped shape worlds and brought hope to a divided reality.',secret:'Returned as the Goddess Elf and helped restore the fractured world.',food:'Rosemary-roasted duck with blackberry glaze, buttery turnips and aged goat cheese'},
+ selena:{achievement:'Protected Talula and helped her find the Minotaur sanctuary.',secret:'Held her family together through the Fracture and Plu’s return.',food:'Chargrilled lamb with spiced aubergine, saffron rice and crumbled sheep’s cheese'},
+ breni:{achievement:'Protected her family through the events at the mansion.',secret:'Defended her family and later uncovered the conspiracy behind the vampire-clan conflict.',food:'Pepper-crusted venison with wild mushrooms, roasted root vegetables and sharp cheddar'},
+ reyla:{achievement:'Found a home with Breni and Taylor and grew into her Druidic calling.',secret:'Became part of the living world while preserving her bonds with loved ones.',food:'Herb-baked trout with lemon greens, creamy potatoes and fresh soft cheese'},
+ taylor:{achievement:'Used her healing gift to care for living things and protect her family.',secret:'Her merging with Talula helped bring the Goddess Elf home.',food:'Roast chicken with garlic potatoes, glazed carrots and melted Gruyère'},
+ talula:{achievement:'Travelled with Selena and reached the Minotaur sanctuary.',secret:'Joined with Taylor to bring Plu back as the Goddess Elf.',food:'Cheese-stuffed beef dumplings with pepper sauce and crisp cabbage'},
+ ray:{achievement:'Followed unusual magical evidence despite the government’s official account.',secret:'Her investigation and soul-projection journey helped uncover the divided-realities mystery.',food:'Spicy beef-and-pepper skillet with melted provolone, onions and garlic-roasted potatoes'}
 };
 // A full-body source can be specified here once an approved full-length illustration
 // is available; never stretch or crop a headshot to pretend it is full-body.
