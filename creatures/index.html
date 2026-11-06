@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0717">
+<title>Creature Directory | The Chronicles of Plu and Selena</title>
+<meta name="description" content="Browse the peoples and creatures of The Chronicles of Plu and Selena in a grouped, spoiler-conscious directory.">
+<link rel="canonical" href="https://chronicles-of-plu-and.vercel.app/creatures/">
+<meta property="og:type" content="website"><meta property="og:title" content="The Creature Directory | The Chronicles of Plu and Selena"><meta property="og:description" content="An illustrated directory of the people and creatures in Plu and Selena's world."><meta property="og:url" content="https://chronicles-of-plu-and.vercel.app/creatures/"><meta property="og:image" content="https://chronicles-of-plu-and.vercel.app/assets/chronicles-header.webp">
+<link rel="stylesheet" href="/styles.css">
+<style>
+:root{--bg:#0b0717;--panel:#1c1430;--gold:#e9c17e;--text:#f7f0e9;--muted:#c9bccc;--line:#6c4a6a}
+*{box-sizing:border-box}
+body.creature-directory{margin:0;background:radial-gradient(circle at 82% 2%,rgba(117,71,153,.28),transparent 37%),var(--bg);color:var(--text);font:16px/1.65 'DM Sans',sans-serif}
+.directory-header{display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid var(--line);padding:18px max(24px,calc((100vw - 1120px)/2));background:#110a20}
+.directory-header .mark{font:600 18px 'Cinzel',serif;color:var(--gold);text-decoration:none}
+.directory-header nav{display:flex;gap:20px;flex-wrap:wrap}
+.directory-header nav a{color:var(--text);text-decoration:none;font-size:14px}
+.directory-header nav a:hover,.directory-header nav a:focus-visible{color:var(--gold)}
+.directory-shell{max-width:1130px;margin:auto;padding:48px 24px 72px}
+.directory-hero{padding:42px 0 38px;max-width:880px}
+.directory-hero .eyebrow,.index-label{color:var(--gold);font:600 12px 'DM Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.directory-hero h1{font:600 clamp(34px,6vw,66px)/1.16 'Cinzel',serif;margin:12px 0 18px;color:#f8ecd9}
+.directory-hero .intro{color:var(--muted);max-width:650px;margin:0}
+.plu-landing-card{margin-top:28px;border:1px solid #b69066;background:linear-gradient(125deg,rgba(77,48,85,.85),rgba(23,15,43,.92));border-radius:18px;padding:30px 34px;box-shadow:0 15px 40px #08041277}
+.plu-landing-card .speaker{font:600 12px 'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:.13em;color:var(--gold);margin:0 0 12px}
+.plu-landing-card blockquote{font:400 clamp(18px,2.4vw,23px)/1.6 'DM Sans',sans-serif;margin:0;max-width:920px;color:#fff8eb}
+.directory-jump{display:flex;flex-wrap:wrap;gap:11px;margin:27px 0 8px}
+.directory-jump a{padding:9px 15px;border:1px solid #8b668b;border-radius:30px;color:var(--text);text-decoration:none;font-size:14px;background:#241834}
+.directory-jump a:hover,.directory-jump a:focus-visible{border-color:var(--gold)}
+.directory-section{padding:42px 0 28px;scroll-margin-top:20px;border-bottom:1px solid #443251}
+.section-intro{max-width:700px;margin-bottom:22px}
+.section-intro h2{font:500 clamp(24px,3.4vw,36px) 'Cinzel',serif;margin:7px 0;color:#f6e9cb}
+.section-intro p{color:var(--muted);margin:4px 0 0}
+.creature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}
+.creature-tile{border:1px solid #62466a;border-radius:13px;padding:20px;min-height:177px;background:linear-gradient(160deg,#291b3c,#171026);color:var(--text);text-decoration:none;display:flex;flex-direction:column;gap:8px;transition:border-color .15s ease,transform .15s ease}
+.creature-tile:hover,.creature-tile:focus-visible{border-color:var(--gold);transform:translateY(-2px)}
+.creature-tile strong{font:500 19px 'Cinzel',serif;color:var(--gold)}
+.creature-tile>span:nth-child(2){font-size:14px;line-height:1.5;color:var(--muted);flex:1}
+.tile-cta{font-size:12px;font-weight:700;color:#f6dfae}
+.directory-footer{margin-top:36px;color:var(--muted);font-size:14px}
+.directory-footer a{color:var(--gold)}
+@media(max-width:650px){.directory-header{padding:16px 22px;align-items:start;flex-direction:column}.directory-header nav{gap:13px}.directory-shell{padding:24px 18px 56px}.directory-hero{padding:24px 0}.plu-landing-card{padding:22px}.creature-grid{grid-template-columns:1fr}.creature-tile{min-height:140px}}
+@media(prefers-reduced-motion:reduce){.creature-tile{transition:none}}
+</style>
+</head>
+<body class="creature-directory">
+<header class="directory-header"><a href="/" class="mark">✧ PLU &amp; SELENA</a><nav aria-label="Creature directory navigation"><a href="/">Home</a><a href="/#books">Books</a><a href="/#bestiary">Full bestiary</a><a href="/#world">Encyclopedia</a></nav></header>
+<main class="directory-shell">
+<div class="directory-hero"><span class="eyebrow">THE ILLUSTRATED WORLD COMPENDIUM</span><h1>Peoples &amp; Creatures</h1><p class="intro">Explore the world's peoples, working lives, and extraordinary beings. Choose a group to browse the encyclopedia. Some entries may contain later-story details; the main archive provides a Reader/Lore Explorer control.</p></div>
+<aside class="plu-landing-card" aria-label="Plu's introduction"><p class="speaker">✧ A note from Plu</p><blockquote>“A people cannot be described by a single workshop, no matter how well I like its owner. Select a creature below to examine where they work, what their hands can make, and when to get out of the way of their balance.”</blockquote></aside>
+<nav class="directory-jump" aria-label="Browse creature groups"><a href="#group-1">Origins &amp; history</a><a href="#group-2">Living communities</a><a href="#group-3">Wings, magic &amp; unusual life</a></nav>
+<section class="directory-section" id="group-1" aria-labelledby="group-title-1"><div class="section-intro"><span class="index-label">SECTION 01</span><h2 id="group-title-1">Origins & old histories</h2><p>Peoples whose stories stretch across the world's earliest ages.</p></div><div class="creature-grid"><a class="creature-tile" href="/#creature-chimeras"><strong>Chimeras</strong><span>One body is never the rule for a whole people.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-elves"><strong>Elves</strong><span>Memory, loss and the history of the early world.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-dark-elves"><strong>Dark Elves</strong><span>A distinct community with its own history.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-druids"><strong>Druids</strong><span>A connection to the living world.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-dwarves"><strong>Dwarves</strong><span>Daily work, craft and the people who depend on it.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-giants"><strong>Giants</strong><span>Great size, practical lives and ancient conflict.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-ogres"><strong>Ogres</strong><span>A people connected to the early Ogre–Giant war.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a></div></section>
+<section class="directory-section" id="group-2" aria-labelledby="group-title-2"><div class="section-intro"><span class="index-label">SECTION 02</span><h2 id="group-title-2">Living communities</h2><p>The varied people who make the world more than its legends.</p></div><div class="creature-grid"><a class="creature-tile" href="/#creature-humans"><strong>Humans</strong><span>A protected population in the Fracture era.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-hybrids"><strong>Hybrids</strong><span>Multiple lineages do not define character.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-vampires"><strong>Vampires</strong><span>Different lineages, families and communities.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-minotaurs"><strong>Minotaurs</strong><span>A sanctuary and traditions worth protecting.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-goblins"><strong>Goblins</strong><span>Leaders, neighbours and negotiations.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-witches-wiccans"><strong>Witches &amp; Wiccans</strong><span>Magic, society and different practices.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-werewolves"><strong>Werewolves</strong><span>Daily life shaped by transformation.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-leprechauns"><strong>Leprechauns</strong><span>Connections to the world's security forces.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a></div></section>
+<section class="directory-section" id="group-3" aria-labelledby="group-title-3"><div class="section-intro"><span class="index-label">SECTION 03</span><h2 id="group-title-3">Wings, magic & unusual life</h2><p>Creatures and peoples whose abilities invite closer examination.</p></div><div class="creature-grid"><a class="creature-tile" href="/#creature-dragons"><strong>Dragons</strong><span>Bodies, movement and skills developed over time.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-cyclopes"><strong>Cyclopes</strong><span>Judging distance and meeting the world with one eye.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-fairies"><strong>Fairies</strong><span>Co-operation and fairy-circle crossings.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-dark-slimes"><strong>Dark Slimes</strong><span>Flexible bodies and damp habitats.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-harpies"><strong>Harpies</strong><span>A people with a place in public life.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-nymphs"><strong>Nymphs</strong><span>A people recorded in government histories.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-succubi"><strong>Succubi</strong><span>A distinctive encounter in Plu's adventures.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a>
+<a class="creature-tile" href="/#creature-monsters"><strong>Monsters</strong><span>A label that should never replace looking closer.</span><span class="tile-cta">View entry <span aria-hidden="true">→</span></span></a></div></section>
+<div class="directory-footer"><p>This directory groups existing encyclopedia entries for easier browsing. Categories are navigation aids, not new biological or historical canon. Illustrations are concept art and may be placeholders.</p><p><a href="/#bestiary">Open full illustrated bestiary</a> · <a href="/">Return to the Chronicles</a></p></div>
+</main>
+</body></html>
