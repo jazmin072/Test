@@ -475,6 +475,7 @@ const bestiaryEntries=[
  {name:'Dark Elves',category:'Peoples',realm:'The Goddess Elf · The Listening World',summary:'A distinct community whose history with neighbouring goblins is important to the future of Everlangyrs.'},
  {name:'Goblins',category:'Peoples',realm:'The Goddess Elf · The Listening World',summary:'A community with its own leaders and history in Everlangyrs. Their negotiations with the dark elves shape the region.'},
  {name:'Dwarves',category:'Peoples',realm:'The World Before · Dark Rain',summary:'An established people of the world. Dwarven characters play important roles in the mystery surrounding Breni’s island journey.'},
+ {name:'Chimeras',category:'Peoples',realm:'Plu’s Creatures · Maera’s story',summary:'Maera illustrates how a chimera’s particular features can affect work, balance and daily life. One person’s appearance does not define every chimera.'},
  {name:'Dragons',category:'Creatures',realm:'The World Before · The Listening World',summary:'Among the world’s ancient beings. Reyla’s later travels take her toward dragon settlements in the Dark Veil Mountains.'},
  {name:'Giants',category:'Creatures',realm:'The World Before · The Goddess Elf',summary:'Powerful beings whose early conflicts are part of the world’s deep history and whose presence continues into later eras.'},
  {name:'Ogres',category:'Creatures',realm:'The World Before',summary:'An ancient people whose conflict with giants belongs to the early history explored in The World Before.'},
