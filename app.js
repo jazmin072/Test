@@ -5,7 +5,7 @@ const books=[
 {id:'listening',cover:'assets/compact/the-listening-world.webp',title:'The Listening World',type:'companion',label:'POST-TRILOGY COMPANION · A Reyla story',color:'green',url:'https://books2read.com/u/bPWpQx',desc:'A reflective journey through communities, forests and the quiet language of a living world.',more:'Reyla journeys through communities and living landscapes two centuries after the main trilogy, seeking understanding rather than violence.'},
 {id:'rain',cover:'assets/compact/dark-rain.webp',title:'Dark Rain',type:'companion',label:'POST-MAIN-STORY · A Breni story',color:'rain',url:'https://books2read.com/u/3ngxn5',desc:'A rain-soaked island, two vampire clans and a mystery that threatens an uneasy peace.',more:'Breni enters a tense dispute between vampire clans while dangerous secrets surface.'},
 {id:'wonders',cover:'assets/compact/small-wonders.webp',title:'Small Wonders',type:'companion',label:'Selena & Talula · Scheduled January 27, 2027',color:'rose',url:'https://books2read.com/u/38BoMZ',desc:'A tender portrait of daily life, growing trust and the small moments that make a family.',more:'An intimate story about Selena and Talula and the everyday love that binds them.'},
-{id:'creatures',cover:'6171b117-c259-4ec7-84b0-61ced6a89a91.png',title:"Plu's Creatures",type:'companion',label:'A Plu story · Companion',color:'gold',desc:'A playful collection of encounters with the remarkable creatures of the world.',more:'A lighter-hearted episodic journey across the strange and wonderful beings of the Chronicles.'},
+{id:'creatures',cover:'6171b117-c259-4ec7-84b0-61ced6a89a91.png',title:"Plu's Creatures",type:'companion',label:'A Plu story · Companion',color:'gold',desc:'A guide to the creatures and peoples of the Chronicles, told in Plu’s own voice. She explains why they came into being and what they made of the lives they were given.',more:'Plu speaks directly to you throughout the guide. When she looks back on Taylor’s life in the chapter on elves, she tells that part in the third person.'},
 {id:'plu',cover:'assets/compact/plu-side-story.webp',title:'PLU — A Goddess’s Side Story',type:'companion',label:'Plu companion · Scheduled May 29, 2027',color:'gold',url:'https://books2read.com/u/bMKj5v',desc:'A character-focused fantasy companion exploring Plu’s curiosity, humour, relationships and adventures beyond the great events.',more:'The ebook manuscript has been uploaded to Draft2Digital, with a scheduled release date of May 29, 2027. Check Books2Read for retailer availability and preorder options.'}];
 
 const storefronts={
@@ -24,7 +24,7 @@ goddess:{status:'Retailer listing available',date:'See retailer',desc:'Use the r
 listening:{status:'Retailer listing available',date:'See retailer',desc:'Reyla’s story, set two centuries after the trilogy.'},
 rain:{status:'Retailer listing available',date:'See retailer',desc:'Breni’s post-trilogy mystery.'},
 wonders:{status:'Ebook scheduled · Check Books2Read',date:'January 27, 2027',desc:'Selena and Talula’s companion story. See Books2Read for retailer and preorder availability.'},
-creatures:{status:'In progress',date:'To be announced',desc:'Plu’s creature adventures.'},
+creatures:{status:'In progress',date:'To be announced',desc:'Plu explains where the world’s creatures and peoples came from, in her own words.'},
 plu:{status:'Ebook scheduled · Check Books2Read',date:'May 29, 2027',desc:'A Plu-focused fantasy companion. Draft2Digital lists May 29, 2027 as the planned ebook release date.'}
 };
 const chars=[
