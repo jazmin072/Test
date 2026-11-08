@@ -5,7 +5,7 @@ const books=[
 {id:'listening',cover:'assets/compact/the-listening-world.webp',title:'The Listening World',type:'companion',label:'POST-TRILOGY COMPANION · A Reyla story',color:'green',url:'https://books2read.com/u/bPWpQx',desc:'A reflective journey through communities, forests and the quiet language of a living world.',more:'Reyla journeys through communities and living landscapes two centuries after the main trilogy, seeking understanding rather than violence.'},
 {id:'rain',cover:'assets/compact/dark-rain.webp',title:'Dark Rain',type:'companion',label:'POST-MAIN-STORY · A Breni story',color:'rain',url:'https://books2read.com/u/3ngxn5',desc:'When an attack at Greybridge threatens a fragile peace between rival clans, Breni investigates evidence implicating missing dwarves. The closer she looks, the more carefully staged the violence appears.',more:'Working with Iven, Breni uncovers a conspiracy involving captive people and old technology, while an unexpected protective gift begins to awaken.'},
 {id:'wonders',cover:'assets/compact/small-wonders.webp',title:'Small Wonders',type:'companion',label:'Selena & Talula · Scheduled January 27, 2027',color:'rose',url:'https://books2read.com/u/38BoMZ',desc:'A tender portrait of daily life, growing trust and the small moments that make a family.',more:'An intimate story about Selena and Talula and the everyday love that binds them.'},
-{id:'creatures',cover:'6171b117-c259-4ec7-84b0-61ced6a89a91.png',title:"Plu's Creatures",type:'companion',label:'A Plu story · Companion',color:'gold',desc:'A guide to the creatures and peoples of the Chronicles, told in Plu’s own voice. She explains why they came into being and what they made of the lives they were given.',more:'Plu speaks directly to you throughout the guide. When she looks back on Taylor’s life in the chapter on elves, she tells that part in the third person.'},
+{id:'creatures',cover:'6171b117-c259-4ec7-84b0-61ced6a89a91.png',title:"Plu's Creatures",type:'companion',label:'Free website-exclusive book · 27 chapters',color:'gold',desc:'Read all 27 chapters of Plu’s guide to the peoples, creatures, crafts and histories of the Chronicles—free, exclusively on this website.',more:'Plu speaks directly to you throughout the guide. When she looks back on Taylor’s life in the chapter on elves, she tells that part in the third person.'},
 {id:'plu',cover:'assets/compact/plu-side-story.webp',title:'PLU — A Goddess’s Side Story',type:'companion',label:'Plu companion · Scheduled May 29, 2027',color:'gold',url:'https://books2read.com/u/bMKj5v',desc:'A character-focused fantasy companion exploring Plu’s curiosity, humour, relationships and adventures beyond the great events.',more:'The ebook manuscript has been uploaded to Draft2Digital, with a scheduled release date of May 29, 2027. Check Books2Read for retailer availability and preorder options.'}];
 
 const storefronts={
@@ -24,7 +24,7 @@ goddess:{status:'Retailer listing available',date:'See retailer',desc:'Use the r
 listening:{status:'Retailer listing available',date:'See retailer',desc:'Reyla’s story, set two centuries after the trilogy.'},
 rain:{status:'Retailer listing available',date:'See retailer',desc:'Breni’s post-trilogy mystery.'},
 wonders:{status:'Ebook scheduled · Check Books2Read',date:'January 27, 2027',desc:'Selena and Talula’s companion story. See Books2Read for retailer and preorder availability.'},
-creatures:{status:'In progress',date:'To be announced',desc:'Plu explains where the world’s creatures and peoples came from, in her own words.'},
+creatures:{status:'Free website exclusive',date:'Read online now',desc:'The complete 27-chapter Plu’s Creatures reader is free on this website.'},
 plu:{status:'Ebook scheduled · Check Books2Read',date:'May 29, 2027',desc:'A Plu-focused fantasy companion. Draft2Digital lists May 29, 2027 as the planned ebook release date.'}
 };
 const chars=[
@@ -52,7 +52,7 @@ const publicProfiles={
  ray:{subtitle:'Human agent · Sector 1-7',overview:'Ray follows unusual evidence with persistence and a sharp eye. Her work leads her to question the official account.',abilities:['Investigation','Aura-sight','Attention to detail']}
 };
 const profileFor=c=>spoiler?c:{...c,...publicProfiles[c.id]};
-const bookPages={elf:'elf-blood.html',before:'the-world-before.html',goddess:'the-goddess-elf.html',listening:'the-listening-world.html',rain:'dark-rain.html'};
+const bookPages={elf:'elf-blood.html',before:'the-world-before.html',goddess:'the-goddess-elf.html',listening:'the-listening-world.html',rain:'dark-rain.html',creatures:'plu-creatures.html'};
 const lore=[
 ['Magic','Divine Creation','The ability to shape life and worlds.'],['Magic','Druidic Magic','Power rooted in connection and understanding.'],['Magic','Residual Essence','Traces of power that linger in materials and places.'],['Magic','Crystal Storage','Crystals capable of holding unusual magical energies.'],
 ['Places','New Londanais','An important urban center.'],['Places','Bozton','A city where the extraordinary meets everyday life.'],['Places','Everlangyrs','A region with complicated coexistence among peoples.'],['Places','Teramek','A distinctive territory in the wider world.'],['Places','Dark Veil Mountains','Remote mountains linked to dragon communities.'],['Places','The Minotaur Sanctuary','A place of refuge and tradition.'],
@@ -93,12 +93,17 @@ const readerAvailability={
  before:{label:'Book Two · Retailers',note:'Continue the main trilogy · Retailer pricing and formats vary',button:'Explore Book Two'},
  goddess:{label:'Book Three · Retailers',note:'Complete the trilogy · Retailer pricing and formats vary',button:'Explore Book Three'},
  rain:{label:'Paid companion',note:'Breni’s post-trilogy story · Now a paid title',button:'Explore Dark Rain'},
- listening:{label:'Reyla companion',note:'A later-era companion story · Check retailer pricing',button:'Explore The Listening World'}
+ listening:{label:'Reyla companion',note:'A later-era companion story · Check retailer pricing',button:'Explore The Listening World'},
+ creatures:{label:'Free · Website exclusive',note:'Full 27-chapter book · Read online, no registration required',button:'Read all 27 chapters free'}
 };
 function renderBookCard(book){
  const info=releaseInfo[book.id],page=bookPages[book.id],availability=readerAvailability[book.id];
  const category=book.type==='trilogy'?'MAIN TRILOGY':(book.id==='listening'?'POST-TRILOGY COMPANION · A REYLA STORY':(book.id==='rain'?'POST-TRILOGY COMPANION':'COMPANION STORY'));
- return '<article class="book-card '+(book.type==='trilogy'?'main-volume':'companion-volume')+'"><div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.style.display=\'block\'">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div><div class="book-meta"><small class="book-category">'+category+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p>'+(page?'<p class="book-availability"><strong>'+availability.label+'</strong><span>'+availability.note+'</span></p><a class="btn primary" href="'+page+'">'+availability.button+'</a><a class="reader-direct-link" href="'+book.url+'" target="_blank" rel="noopener noreferrer">Find reading formats and retailers ↗</a><details class="book-retailers"><summary>More retailer options</summary>'+retailerLinks(book)+'</details>':'<p class="release-short">'+(book.id==='plu'?'Scheduled ebook release · May 29, 2027':book.id==='wonders'?'Scheduled ebook release · January 27, 2027':'In progress · Release date to be announced')+'</p>'+(book.url?'<a class="btn primary" href="'+book.url+'" target="_blank" rel="noopener noreferrer">View Books2Read listing ↗</a>':'')+'<button class="text-link" data-book="'+book.id+'">Discover this story →</button>')+'</div></article>';
+ const art='<div class="book-art '+book.color+'">'+(book.cover?'<img class="cover-image" src="'+book.cover+'" alt="'+book.title+' cover" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.style.display=\'block\'">':'')+'<span class="cover-text" style="'+(book.cover?'display:none':'')+'">'+book.title+'</span></div>';
+ const readerLink=book.url?'<a class="reader-direct-link" href="'+book.url+'" target="_blank" rel="noopener noreferrer">Find reading formats and retailers ↗</a><details class="book-retailers"><summary>More retailer options</summary>'+retailerLinks(book)+'</details>':'<p class="reader-direct-link">Website exclusive · No payment or account required</p>';
+ const published=page?'<p class="book-availability"><strong>'+availability.label+'</strong><span>'+availability.note+'</span></p><a class="btn primary" href="'+page+'">'+availability.button+'</a>'+readerLink:null;
+ const upcoming='<p class="release-short">'+(book.id==='plu'?'Scheduled ebook release · May 29, 2027':book.id==='wonders'?'Scheduled ebook release · January 27, 2027':'In progress · Release date to be announced')+'</p>'+(book.url?'<a class="btn primary" href="'+book.url+'" target="_blank" rel="noopener noreferrer">View Books2Read listing ↗</a>':'')+'<button class="text-link" data-book="'+book.id+'">Discover this story →</button>';
+ return '<article class="book-card '+(book.type==='trilogy'?'main-volume':'companion-volume')+'">'+art+'<div class="book-meta"><small class="book-category">'+category+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p>'+(published||upcoming)+'</div></article>';
 }
 function renderBooks(filter='all'){
  const groups=[
@@ -109,7 +114,7 @@ function renderBooks(filter='all'){
  ];
  const eligible=book=>{
   if(filter==='all')return true;
-  if(filter==='upcoming')return ['wonders','creatures','plu'].includes(book.id);
+  if(filter==='upcoming')return ['wonders','plu'].includes(book.id);
   return book.type===filter;
  };
  $('#bookGrid').innerHTML=groups.map(g=>{
