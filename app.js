@@ -168,11 +168,14 @@ function characterFactRows(c){
 }
 let activeProfile=null,profileTrigger=null;
 function pluAppearanceMarkup(){
- const cards=[1,2,3,4].map(n=>{
-  const url='assets/plu-appearance-'+n+'.avif';
-  return '<figure><a href="'+url+'" target="_blank" rel="noopener noreferrer" aria-label="Open Plu appearance study '+n+' full size"><img src="'+url+'" loading="lazy" alt="Plu in three full-body looks inspired by her book illustrations: forest green, celestial purple and moonlit blue"></a><figcaption>Appearance study '+String(n).padStart(2,'0')+' · Three outfits</figcaption></figure>';
- }).join('');
- return '<section class="plu-appearance-section" id="plu-appearances" aria-labelledby="plu-appearance-title"><p class="character-group">PLU’S CHANGING APPEARANCE</p><h4 id="plu-appearance-title">The Many Faces of Plu</h4><p>Plu can change how she presents herself with her feelings and to put others at ease. These four full-body studies use the different faces from her book art, each wearing three outfits. They are concept illustrations of one goddess, not four separate characters or fixed transformations.</p><div class="plu-appearance-grid">'+cards+'</div></section>';
+ const studies=[
+  {n:1,url:'assets/plu-appearance-1.avif',title:'Appearance study 01 · Three outfits',alt:'Three full-body costume variations of Plu, featuring a forest gown, a celestial gown, and moonlit clothing',wide:true},
+  {n:2,url:'assets/plu-alternate-2.avif',title:'Appearance 02 · Regal cosmic goddess',alt:'Full-body Plu in her darker regal cosmic goddess appearance with glowing violet eyes, a jeweled crown, and a purple celestial gown'},
+  {n:3,url:'assets/plu-alternate-3.avif',title:'Appearance 03 · Blonde elven form',alt:'Full-body Plu with blonde braided hair, elf ears, and a purple and gold goddess gown'},
+  {n:4,url:'assets/plu-alternate-4.avif',title:'Appearance 04 · Violet-eyed celestial form',alt:'Full-body Plu with dark violet hair, elven ears, ornate purple celestial clothing, and magical light in her hand'}
+ ];
+ const cards=studies.map(item=>'<figure class="'+(item.wide?'plu-appearance-triptych':'plu-appearance-portrait')+'"><a href="'+item.url+'" target="_blank" rel="noopener noreferrer" aria-label="Open '+item.title+' full size"><img src="'+item.url+'" loading="lazy" alt="'+item.alt+'"></a><figcaption>'+item.title+'</figcaption></figure>').join('');
+ return '<section class="plu-appearance-section" id="plu-appearances" aria-labelledby="plu-appearance-title"><p class="character-group">PLU’S CHANGING APPEARANCE</p><h4 id="plu-appearance-title">The Many Faces of Plu</h4><p>Plu can change how she presents herself with her feelings and to put others at ease. These images show alternate appearances drawn from her book artwork. They represent one goddess choosing different faces and presentations, not separate characters or fixed transformations.</p><div class="plu-appearance-grid">'+cards+'</div></section>';
 }
 function showCharacterProfile(id,{focus=true,trigger=null}={}){
  const original=chars.find(c=>c.id===id);
