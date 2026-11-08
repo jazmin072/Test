@@ -2139,7 +2139,7 @@ body.plu-book{background:#0b0717;color:#f7f0e9}
  const max=27;let current=1;let size=18;
  const select=document.getElementById('chapterSelect');
  const panel=document.querySelector('.reading-panel');
- function openChapter(value,scroll=true){const n=Math.max(1,Math.min(max,Number(value)||1));current=n;document.querySelectorAll('.reader-chapter').forEach(el=>el.hidden=Number(el.dataset.chapter)!==n);document.querySelectorAll('[data-open-chapter].chapter-choice').forEach(el=>el.setAttribute('aria-pressed',String(Number(el.dataset.openChapter)===n)));select.value=String(n);history.replaceState(null,'','#chapter-'+n);document.title='Chapter '+n+': '+select.selectedOptions[0].text.replace(/^\d+\. /,'')+' | Plu’s Creatures';if(scroll)panel.scrollIntoView({behavior:'instant',block:'start'});}
+ function openChapter(value,scroll=true){const n=Math.max(1,Math.min(max,Number(value)||1));current=n;document.querySelectorAll('.reader-chapter').forEach(el=>el.hidden=Number(el.dataset.chapter)!==n);document.querySelectorAll('[data-open-chapter].chapter-choice').forEach(el=>el.setAttribute('aria-pressed',String(Number(el.dataset.openChapter)===n)));select.value=String(n);history.replaceState(null,'','#chapter-'+n);document.title='Chapter '+n+': '+select.selectedOptions[0].text.replace(/^\d+\. /,'')+' | Plu’s Creatures';if(scroll)panel.scrollIntoView({behavior:'auto',block:'start'});}
  document.addEventListener('click',e=>{const b=e.target.closest('[data-open-chapter]');if(b&&!b.disabled)openChapter(b.dataset.openChapter);});
  select.addEventListener('change',()=>openChapter(select.value));
  document.getElementById('smallerText').addEventListener('click',()=>{size=Math.max(15,size-1);document.documentElement.style.setProperty('--reading-size',size+'px');});
