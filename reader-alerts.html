@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0717"><title>Reader Alerts | The Chronicles of Plu and Selena</title>
+<meta name="description" content="Subscribe to free email alerts for new books, website-exclusive chapters and news from The Chronicles of Plu and Selena.">
+<link rel="canonical" href="https://chronicles-of-plu-and.vercel.app/reader-alerts.html">
+<meta property="og:title" content="Reader Alerts — The Chronicles of Plu and Selena">
+<meta property="og:description" content="Get occasional, spoiler-conscious alerts about new books and website-exclusive stories.">
+<meta property="og:url" content="https://chronicles-of-plu-and.vercel.app/reader-alerts.html">
+<link rel="stylesheet" href="/styles.css">
+<style>
+.alerts-page{min-height:90vh;background:radial-gradient(circle at 85% 8%,#4a2b57 0,#1d122a 34%,#0b0717 78%);color:#f5edf5}
+.alerts-header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px clamp(18px,5vw,54px);border-bottom:1px solid #7f6183;background:#0d071bcc}
+.alerts-header a{color:#f4d39a;text-decoration:none}
+.alerts-header nav{display:flex;gap:17px;flex-wrap:wrap;font-size:14px}
+.alerts-main{max-width:1040px;margin:0 auto;padding:68px 22px 85px}
+.alerts-kicker{font:700 12px 'DM Sans',sans-serif;color:#d9af6e;letter-spacing:.16em}
+.alerts-main h1{font:600 clamp(32px,5vw,60px)/1.15 'Cinzel',Georgia,serif;color:#f2d7a1;margin:18px 0}
+.alerts-intro{font-size:18px;line-height:1.7;color:#eee0ee;max-width:690px;margin-bottom:32px}
+.alerts-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(230px,.8fr);gap:26px}
+.alerts-box,.alerts-aside{padding:clamp(24px,4vw,36px);border:1px solid #8b6586;border-radius:17px;background:#1f142d}
+.alerts-box h2,.alerts-aside h2{font:600 23px 'Cinzel',Georgia,serif;color:#f0d4a1;margin:0 0 15px}
+.alerts-box p,.alerts-aside p,.alerts-aside li{line-height:1.7;color:#e5d9e7}
+.alerts-cta{display:inline-flex;justify-content:center;align-items:center;min-height:48px;padding:12px 22px;border-radius:8px;background:#f0cc94;color:#1d1120!important;text-decoration:none;font-weight:700;margin-top:12px}
+.alerts-cta:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.alerts-muted{padding:15px;background:#35223c;border-left:3px solid #dbaf70;border-radius:8px;color:#f6e5f0}
+.alerts-small{font-size:13px;line-height:1.6;color:#d3c2d0}
+.alerts-aside ul{padding-left:20px}
+.alerts-footer{text-align:center;padding:30px;color:#cebdd1;border-top:1px solid #5b415f}
+.alerts-footer a{color:#e9c17e}
+@media(max-width:750px){.alerts-grid{grid-template-columns:1fr}.alerts-main{padding:42px 16px}.alerts-header{align-items:flex-start;flex-direction:column}}
+</style></head><body class="alerts-page">
+<header class="alerts-header"><a href="/" aria-label="Chronicles home">✧ THE CHRONICLES OF PLU AND SELENA</a><nav aria-label="Page links"><a href="/">Home</a><a href="/#books">Books</a><a href="/plu-creatures.html">Read Plu’s Creatures</a></nav></header>
+<main class="alerts-main">
+<p class="alerts-kicker">FREE READER UPDATES</p>
+<h1>Stay in the Chronicles</h1>
+<p class="alerts-intro">Hear when a new story arrives, a website-exclusive chapter appears, or there is important news from the world of Plu and Selena. No account or password is necessary.</p>
+<div class="alerts-grid"><section class="alerts-box" aria-labelledby="signup-heading">
+<h2 id="signup-heading">Join the reader alert list</h2>
+<div id="reader-alerts-pending" class="alerts-muted" role="status">Email subscriptions are being set up. The signup is not active yet, and this website is not collecting email addresses.</div>
+<div id="reader-alerts-live" hidden><p>Subscribe securely through our newsletter service. You will receive a confirmation email before joining the list.</p><a id="reader-alerts-link" class="alerts-cta" href="#" rel="noopener noreferrer" target="_blank">Sign up for free email alerts</a><p class="alerts-small">The signup opens on MailerLite. Confirm your address using the email they send you.</p></div>
+<p class="alerts-small">Your email will be used only for the Chronicles updates you request. You can unsubscribe using the link in any alert. Email addresses are managed by the newsletter service, not stored on this website.</p>
+</section>
+<aside class="alerts-aside"><h2>What you’ll hear about</h2><ul><li>New novel and companion story releases</li><li>New website-exclusive chapters and special features</li><li>Occasional changes to reading order or publication dates</li></ul><p>No paid membership, social-media account or community participation required.</p></aside></div>
+</main><footer class="alerts-footer"><a href="/">Return to the official website</a> · © Jonathan M. Reed</footer>
+<script src="/alerts-config.js" defer></script>
+<script defer>
+window.addEventListener('DOMContentLoaded',()=>{
+ const value=window.CHRONICLES_ALERTS_SIGNUP_URL;
+ if(typeof value!=='string')return;
+ let url;try{url=new URL(value);}catch{return;}
+ if(url.protocol!=='https:' || !/(^|\.)mailerlite\.com$|(^|\.)ml-subscribe\.com$/.test(url.hostname))return;
+ document.getElementById('reader-alerts-link').href=url.toString();
+ document.getElementById('reader-alerts-pending').hidden=true;
+ document.getElementById('reader-alerts-live').hidden=false;
+});
+</script></body></html>
