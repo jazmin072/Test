@@ -48,7 +48,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  const value=window.CHRONICLES_ALERTS_SIGNUP_URL;
  if(typeof value!=='string')return;
  let url;try{url=new URL(value);}catch{return;}
- if(url.protocol!=='https:' || !/(^|\.)mailerlite\.com$|(^|\.)ml-subscribe\.com$/.test(url.hostname))return;
+ if(url.protocol!=='https:' || !/(^|\.)mailerlite\.com$|(^|\.)ml-subscribe\.com$|(^|\.)subscribepage\.io$|(^|\.)mailerpage\.io$/.test(url.hostname))return;
  document.getElementById('reader-alerts-link').href=url.toString();
  document.getElementById('reader-alerts-pending').hidden=true;
  document.getElementById('reader-alerts-live').hidden=false;
