@@ -167,6 +167,13 @@ function characterFactRows(c){
  return profileFacts(c).map(([label,value])=>'<div><span>'+label+'</span><strong>'+value+'</strong></div>').join('');
 }
 let activeProfile=null,profileTrigger=null;
+function pluAppearanceMarkup(){
+ const cards=[1,2,3,4].map(n=>{
+  const url='assets/plu-appearance-'+n+'.avif';
+  return '<figure><a href="'+url+'" target="_blank" rel="noopener noreferrer" aria-label="Open Plu appearance study '+n+' full size"><img src="'+url+'" loading="lazy" alt="Plu in three full-body looks inspired by her book illustrations: forest green, celestial purple and moonlit blue"></a><figcaption>Appearance study '+String(n).padStart(2,'0')+' · Three outfits</figcaption></figure>';
+ }).join('');
+ return '<section class="plu-appearance-section" id="plu-appearances" aria-labelledby="plu-appearance-title"><p class="character-group">PLU’S CHANGING APPEARANCE</p><h4 id="plu-appearance-title">The Many Faces of Plu</h4><p>Plu can change how she presents herself with her feelings and to put others at ease. These four full-body studies use the different faces from her book art, each wearing three outfits. They are concept illustrations of one goddess, not four separate characters or fixed transformations.</p><div class="plu-appearance-grid">'+cards+'</div></section>';
+}
 function showCharacterProfile(id,{focus=true,trigger=null}={}){
  const original=chars.find(c=>c.id===id);
  const detail=$('#characterDetail');
@@ -175,7 +182,7 @@ function showCharacterProfile(id,{focus=true,trigger=null}={}){
  activeProfile=id;
  if(trigger)profileTrigger=trigger;
  detail.hidden=false;
- detail.innerHTML='<button class="detail-close" aria-label="Close profile">×</button><h3 tabindex="-1">'+c.name+'</h3><p>'+c.subtitle+'</p><div class="split"><div><h4>Biography</h4><p>'+c.overview+'</p>'+(spoiler?'<p><strong>Appearances:</strong> '+c.books.join(', ')+'</p>':'')+'</div><div><h4>Key abilities & traits</h4><ul>'+c.abilities.map(a=>'<li>'+a+'</li>').join('')+'</ul><h4>Profile</h4><div class="stats">'+characterFactRows(c)+'</div></div></div>';
+ detail.innerHTML='<button class="detail-close" aria-label="Close profile">×</button><h3 tabindex="-1">'+c.name+'</h3><p>'+c.subtitle+'</p><div class="split"><div><h4>Biography</h4><p>'+c.overview+'</p>'+(spoiler?'<p><strong>Appearances:</strong> '+c.books.join(', ')+'</p>':'')+'</div><div><h4>Key abilities & traits</h4><ul>'+c.abilities.map(a=>'<li>'+a+'</li>').join('')+'</ul><h4>Profile</h4><div class="stats">'+characterFactRows(c)+'</div></div>'+(id==='plu'?pluAppearanceMarkup():'')+'</div>';
  if(focus){detail.scrollIntoView({block:'start'});detail.querySelector('h3').focus({preventScroll:true})}
 }
 function renderCharacters(filter='all'){
