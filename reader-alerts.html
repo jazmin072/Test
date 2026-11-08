@@ -36,21 +36,15 @@
 <p class="alerts-intro">Hear when a new story arrives, a website-exclusive chapter appears, or there is important news from the world of Plu and Selena. No account or password is necessary.</p>
 <div class="alerts-grid"><section class="alerts-box" aria-labelledby="signup-heading">
 <h2 id="signup-heading">Join the reader alert list</h2>
-<div id="reader-alerts-pending" class="alerts-muted" role="status">Email subscriptions are being set up. The signup is not active yet, and this website is not collecting email addresses.</div>
-<div id="reader-alerts-live" hidden><p>Subscribe securely through our newsletter service. You will receive a confirmation email before joining the list.</p><a id="reader-alerts-link" class="alerts-cta" href="#" rel="noopener noreferrer" target="_blank">Sign up for free email alerts</a><p class="alerts-small">The signup opens on MailerLite. Confirm your address using the email they send you.</p></div>
+<p>Enter your email in the form below to subscribe. MailerLite manages your subscription and confirmation settings.</p>
+<div class="ml-embedded" data-form="RmMos0" aria-label="Chronicles reader alert email signup"></div>
+<p class="alerts-small">If the signup form does not appear, <a href="https://preview.mailerlite.io/forms/2779571/203598821484135583/share" target="_blank" rel="noopener noreferrer">open the MailerLite form directly</a>.</p>
 <p class="alerts-small">Your email will be used only for the Chronicles updates you request. You can unsubscribe using the link in any alert. Email addresses are managed by the newsletter service, not stored on this website.</p>
 </section>
 <aside class="alerts-aside"><h2>What you’ll hear about</h2><ul><li>New novel and companion story releases</li><li>New website-exclusive chapters and special features</li><li>Occasional changes to reading order or publication dates</li></ul><p>No paid membership, social-media account or community participation required.</p></aside></div>
 </main><footer class="alerts-footer"><a href="/">Return to the official website</a> · © Jonathan M. Reed</footer>
-<script src="/alerts-config.js" defer></script>
-<script defer>
-window.addEventListener('DOMContentLoaded',()=>{
- const value=window.CHRONICLES_ALERTS_SIGNUP_URL;
- if(typeof value!=='string')return;
- let url;try{url=new URL(value);}catch{return;}
- if(url.protocol!=='https:' || !/(^|\.)mailerlite\.com$|(^|\.)ml-subscribe\.com$|(^|\.)subscribepage\.io$|(^|\.)mailerpage\.io$/.test(url.hostname))return;
- document.getElementById('reader-alerts-link').href=url.toString();
- document.getElementById('reader-alerts-pending').hidden=true;
- document.getElementById('reader-alerts-live').hidden=false;
-});
-</script></body></html>
+<script>
+(function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);};l=d.createElement(e);l.async=1;l.src=u;n=d.getElementsByTagName(e)[0];n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+ml('account','2779571');
+</script>
+</body></html>
