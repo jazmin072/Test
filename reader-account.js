@@ -7,7 +7,7 @@
   const emailInput=document.getElementById('reader-email');
   const sendButton=document.getElementById('login-button');
   const avatars=[...document.querySelectorAll('[data-avatar]')];
-  const valid=new Set(['plu','selena','breni','reyla']);
+  const valid=new Set(['plu','selena','breni','reyla','taylor','rey']);
   let selected='plu';
   function message(value){status.textContent=value;}
   function selectAvatar(value){selected=valid.has(value)?value:'plu';avatars.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.avatar===selected)));}
