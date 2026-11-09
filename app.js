@@ -142,7 +142,7 @@ const supportingPortraits={
  torven:'assets/supporting/torven.png',
  vessa:'assets/supporting/vessa.png',
  iven:'assets/supporting/iven.png',
- maera:'assets/maera/maera-sheet-2.webp'
+ maera:'assets/maera/maera-sheet-1.webp'
 };
 function characterArtMarkup(c){
  if(supportingPortraits[c.id]){
@@ -202,7 +202,7 @@ function renderCharacters(filter='all'){
   const c=profileFor(original);
   const isApprovedSupport=Boolean(supportingPortraits[c.id]);
   const heading='<p class="character-group">'+(c.group==='core'?'MAIN CAST':'SUPPORTING CAST')+'</p><h3>'+c.name+'</h3><p class="role">'+c.subtitle+'</p>';
-  return '<article class="character-card '+(isApprovedSupport?'supporting-full-body-card':'')+'"><div class="character-art" '+(isApprovedSupport?'role="img" aria-label="Full-body illustration of '+c.name+'"':'aria-hidden="true"')+'>'+characterArtMarkup(c)+'</div><div class="character-info">'+heading+'<div class="stats">'+characterFactRows(c)+'</div><button class="btn" data-char="'+c.id+'">View full profile</button></div></article>';
+  return '<article class="character-card '+(isApprovedSupport?'supporting-full-body-card':'')+(c.id==='maera'?' maera-portrait-card':'')+'"><div class="character-art" '+(isApprovedSupport?'role="img" aria-label="Full-body illustration of '+c.name+'"':'aria-hidden="true"')+'>'+characterArtMarkup(c)+'</div><div class="character-info">'+heading+'<div class="stats">'+characterFactRows(c)+'</div><button class="btn" data-char="'+c.id+'">View full profile</button></div></article>';
  }).join('');
 }
 renderCharacters();
