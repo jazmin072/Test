@@ -760,7 +760,8 @@ function renderBestiary(){
       '<p class="plu-not-written">Plu’s Cyclopes note has not been provided yet.</p>')+
       '</div>';
   const bookReference=rows.length&&(spoiler||!bestiaryReveals.has(entry.name))?'<details class="creature-reference"><summary>Additional book-reference notes</summary><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+escapeCreatureText(stats.basis||'Book details take priority; visual interpretation is not additional canon.')+'</p></details>':'';
-  return '<article id="'+creatureAnchor(entry.name)+'" class="bestiary-card codex-entry '+(raceSceneUploads[entry.name]?'race-scene-card ':'')+(entry.name==='Dragons'?'dragon-race-card':entry.name==='Cyclopes'?'cyclopes-race-card':'')+' '+(bestiaryVoice==='plu'?'plu-active':'government-active')+'"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+escapeCreatureText(entry.category)+' · '+escapeCreatureText(entry.realm)+'</small><h3>'+escapeCreatureText(entry.name)+'</h3>'+voiceMarkup+bookReference+'</div></article>';
+  const characterLink=entry.name==='Chimeras'?'<p class="race-character-link"><a href="/maera.html">Meet Maera · View character sheet →</a></p>':'';
+  return '<article id="'+creatureAnchor(entry.name)+'" class="bestiary-card codex-entry '+(raceSceneUploads[entry.name]?'race-scene-card ':'')+(entry.name==='Dragons'?'dragon-race-card':entry.name==='Cyclopes'?'cyclopes-race-card':'')+' '+(bestiaryVoice==='plu'?'plu-active':'government-active')+'"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+escapeCreatureText(entry.category)+' · '+escapeCreatureText(entry.realm)+'</small><h3>'+escapeCreatureText(entry.name)+'</h3>'+voiceMarkup+bookReference+characterLink+'</div></article>';
  }).join('');
 }
 const bestiaryVoiceControls=document.querySelector('#bestiaryVoiceControls');
