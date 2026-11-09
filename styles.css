@@ -1509,3 +1509,12 @@ body.lore-explorer .bond-history-prompt{display:none}
 @media(max-width:900px){.new-reader-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.first-visit-cast-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.first-visit-person img{height:230px}}
 @media(max-width:580px){.new-reader-choice-grid{grid-template-columns:1fr}.new-reader-choice{min-height:0;padding:20px}.first-visit-cast-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.first-visit-person img{height:190px}.first-visit-person>span{padding:11px}.first-visit-person small{font-size:11px}}
 @media(max-width:380px){.first-visit-person img{height:155px}}
+
+/* Shared dining illustration used as the site-wide atmospheric background. */
+html{background:#0b0717}
+body{background:transparent;position:relative;isolation:isolate}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(11,7,23,.75),rgba(11,7,23,.86)),url('/assets/four-women-dinner-background.webp') center center/cover no-repeat;background-attachment:fixed}
+.section:not(.alt),main, .hero.illustrated-hero{background-color:transparent}
+/* Keep content readable against the illustrated backdrop. */
+.section.alt,.story-intro,.about{background:rgba(11,7,23,.82)}
+@media(max-width:760px){body::before{background-position:center center;background-attachment:scroll}}
