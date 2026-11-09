@@ -168,17 +168,19 @@ function characterFactRows(c){
 }
 let activeProfile=null,profileTrigger=null;
 function pluAppearanceMarkup(){
- const studies=[
-  {n:1,url:'assets/plu-appearance-1.avif',title:'Appearance study 01 · Three outfits',alt:'Three full-body costume variations of Plu, featuring a forest gown, a celestial gown, and moonlit clothing',wide:true},
-  {n:2,url:'assets/plu-alternate-2.avif',title:'Appearance 02 · Regal cosmic goddess',alt:'Full-body Plu in her darker regal cosmic goddess appearance with glowing violet eyes, a jeweled crown, and a purple celestial gown'},
-  {n:3,url:'assets/plu-alternate-3.avif',title:'Appearance 03 · Blonde elven form',alt:'Full-body Plu with blonde braided hair, elf ears, and a purple and gold goddess gown'},
-  {n:4,url:'assets/plu-alternate-4.avif',title:'Appearance 04 · Violet-eyed celestial form',alt:'Full-body Plu with dark violet hair, elven ears, ornate purple celestial clothing, and magical light in her hand'},
-  {n:5,url:'assets/plu-appearance-2.avif',title:'Appearance study 05 · Three more looks',alt:'Three full-body illustrations of Plu in alternate goddess clothing, shown side by side',wide:true},
-  {n:6,url:'assets/plu-appearance-3.avif',title:'Appearance study 06 · Three more looks',alt:'Full-body Plu appearance variations with changing goddess clothing and magical styling',wide:true},
-  {n:7,url:'assets/plu-appearance-4.avif',title:'Appearance study 07 · Three more looks',alt:'Three alternate full-body outfits and appearances of Plu, the Goddess Elf',wide:true}
+ const portraits=[
+  {url:'assets/plu-alternate-2.avif',title:'Appearance portrait 01 · Regal cosmic form',alt:'Full-body Plu in her darker regal cosmic goddess appearance with glowing violet eyes, a jeweled crown, and a purple celestial gown'},
+  {url:'assets/plu-alternate-3.avif',title:'Appearance portrait 02 · Blonde elven form',alt:'Full-body Plu with blonde braided hair, elf ears, and a purple and gold goddess gown'},
+  {url:'assets/plu-alternate-4.avif',title:'Appearance portrait 03 · Violet-eyed celestial form',alt:'Full-body Plu with dark violet hair, elven ears, ornate purple celestial clothing, and magical light in her hand'}
  ];
- const cards=studies.map(item=>'<figure class="'+(item.wide?'plu-appearance-triptych':'plu-appearance-portrait')+'"><a href="'+item.url+'" target="_blank" rel="noopener noreferrer" aria-label="Open '+item.title+' full size"><img src="'+item.url+'" loading="lazy" alt="'+item.alt+'"></a><figcaption>'+item.title+'</figcaption></figure>').join('');
- return '<section class="plu-appearance-section" id="plu-appearances" aria-labelledby="plu-appearance-title"><p class="character-group">PLU’S CHANGING APPEARANCE</p><h4 id="plu-appearance-title">The Many Faces of Plu</h4><p>Plu can change how she presents herself with her feelings and to put others at ease. These images show alternate appearances drawn from her book artwork. They represent one goddess choosing different faces and presentations, not separate characters or fixed transformations.</p><div class="plu-appearance-grid">'+cards+'</div></section>';
+ const studies=[
+  {url:'assets/plu-appearance-1.avif',title:'Grouped appearance study 01',alt:'Three full-body costume variations of Plu, featuring a forest gown, a celestial gown, and moonlit clothing'},
+  {url:'assets/plu-appearance-2.avif',title:'Grouped appearance study 02',alt:'Three full-body illustrations of Plu in alternate goddess clothing, shown side by side'},
+  {url:'assets/plu-appearance-3.avif',title:'Grouped appearance study 03',alt:'Full-body Plu appearance variations with changing goddess clothing and magical styling'},
+  {url:'assets/plu-appearance-4.avif',title:'Grouped appearance study 04',alt:'Three alternate full-body outfits and appearances of Plu, the Goddess Elf'}
+ ];
+ const renderCards=(items,kind)=>items.map(item=>'<figure class="plu-appearance-'+kind+'"><a href="'+item.url+'" target="_blank" rel="noopener noreferrer" aria-label="Open '+item.title+' full size"><img src="'+item.url+'" loading="lazy" alt="'+item.alt+'"></a><figcaption>'+item.title+'</figcaption></figure>').join('');
+ return '<section class="plu-appearance-section" id="plu-appearances" aria-labelledby="plu-appearance-title"><p class="character-group">PLU’S CHANGING APPEARANCE</p><h4 id="plu-appearance-title">The Many Faces of Plu</h4><p>Plu can change how she presents herself with her feelings and to put others at ease. These are existing artwork studies of the same goddess—not separate characters or fixed transformations. The individual portraits and grouped studies are kept distinct so each piece can be explored at full size.</p><h5 class="plu-appearance-subtitle">Individual full-body portraits</h5><div class="plu-appearance-grid plu-appearance-portraits">'+renderCards(portraits,'portrait')+'</div><h5 class="plu-appearance-subtitle">Additional grouped appearance studies</h5><div class="plu-appearance-grid plu-appearance-studies">'+renderCards(studies,'triptych')+'</div><p class="plu-appearance-note">The artwork is shown as supplied. It is not assigned to a specific book or cover unless that match has been confirmed.</p></section>';
 }
 function showCharacterProfile(id,{focus=true,trigger=null}={}){
  const original=chars.find(c=>c.id===id);
