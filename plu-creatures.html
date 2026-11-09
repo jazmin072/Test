@@ -70,7 +70,7 @@ body.plu-book{background:#0b0717;color:#f7f0e9}
 <button type="button" class="chapter-choice" data-open-chapter="25" aria-pressed="false"><span class="choice-number">25</span> Werewolves</button>
 <button type="button" class="chapter-choice" data-open-chapter="26" aria-pressed="false"><span class="choice-number">26</span> White Horns</button>
 <button type="button" class="chapter-choice" data-open-chapter="27" aria-pressed="false"><span class="choice-number">27</span> Witches &amp; Wiccans</button></div></aside>
-<div class="reading-panel"><div class="reader-controls"><label for="chapterSelect">Select chapter <select id="chapterSelect"><option value="1">01. Chimeras</option><option value="2">02. Cyclopes</option><option value="3">03. Dark Elves</option><option value="4">04. Dark Slimes</option><option value="5">05. Dragons</option><option value="6">06. Druids</option><option value="7">07. Dwarves</option><option value="8">08. Elves</option><option value="9">09. Fairies</option><option value="10">10. Giants</option><option value="11">11. Glacies</option><option value="12">12. Goblins</option><option value="13">13. Harpies</option><option value="14">14. Humans</option><option value="15">15. Hybrids</option><option value="16">16. Leprechauns</option><option value="17">17. Liliraunes</option><option value="18">18. Mandragoras</option><option value="19">19. Minotaurs</option><option value="20">20. Nymphs</option><option value="21">21. Ogres</option><option value="22">22. Specific</option><option value="23">23. Vampires</option><option value="24">24. Werecats</option><option value="25">25. Werewolves</option><option value="26">26. White Horns</option><option value="27">27. Witches &amp; Wiccans</option></select></label><div class="size-buttons" role="group" aria-label="Text size"><button type="button" id="smallerText" aria-label="Decrease text size">A−</button><button type="button" id="largerText" aria-label="Increase text size">A+</button></div></div>
+<div class="reading-panel"><div class="reader-controls"><label for="chapterSelect">Select chapter <select id="chapterSelect" name="chapter" aria-label="Select a chapter to read"><option value="1">01. Chimeras</option><option value="2">02. Cyclopes</option><option value="3">03. Dark Elves</option><option value="4">04. Dark Slimes</option><option value="5">05. Dragons</option><option value="6">06. Druids</option><option value="7">07. Dwarves</option><option value="8">08. Elves</option><option value="9">09. Fairies</option><option value="10">10. Giants</option><option value="11">11. Glacies</option><option value="12">12. Goblins</option><option value="13">13. Harpies</option><option value="14">14. Humans</option><option value="15">15. Hybrids</option><option value="16">16. Leprechauns</option><option value="17">17. Liliraunes</option><option value="18">18. Mandragoras</option><option value="19">19. Minotaurs</option><option value="20">20. Nymphs</option><option value="21">21. Ogres</option><option value="22">22. Specific</option><option value="23">23. Vampires</option><option value="24">24. Werecats</option><option value="25">25. Werewolves</option><option value="26">26. White Horns</option><option value="27">27. Witches &amp; Wiccans</option></select></label><button class="chapter-nav" id="openSelectedChapter" type="button" aria-label="Open selected chapter">Open chapter</button><div class="size-buttons" role="group" aria-label="Text size"><button type="button" id="smallerText" aria-label="Decrease text size">A−</button><button type="button" id="largerText" aria-label="Increase text size">A+</button></div></div>
 <section class="reader-chapter" id="chapter-1" data-chapter="1"  aria-labelledby="chapter-title-1">
 <div class="chapter-topline">CHAPTER 01 OF 27</div><h2 id="chapter-title-1">Chimeras</h2>
 <div class="chapter-manuscript"><p>Maera is a chimera. She has pale fur on her forearms, two horns that curve at different angles, and the good sense to duck before a branch has the opportunity to settle an argument with one of them. If you met her on the road with Breni, you might also remember the pack she carried. It clinked every time she stepped over a rut. Someone can describe a chimera’s appearance in great detail and still leave you wondering what she was doing with all those tools. I’d like to get to the tools before we’re done.</p>
@@ -2136,15 +2136,83 @@ body.plu-book{background:#0b0717;color:#f7f0e9}
 <footer class="reader-footer">© Jonathan M. Reed · Plu’s Creatures · Free to read on the official website · <a href="/#books">Explore the books</a></footer>
 <script>
 (function(){
- const max=27;let current=1;let size=18;
- const select=document.getElementById('chapterSelect');
- const panel=document.querySelector('.reading-panel');
- function openChapter(value,scroll=true){const n=Math.max(1,Math.min(max,Number(value)||1));current=n;document.querySelectorAll('.reader-chapter').forEach(el=>el.hidden=Number(el.dataset.chapter)!==n);document.querySelectorAll('[data-open-chapter].chapter-choice').forEach(el=>el.setAttribute('aria-pressed',String(Number(el.dataset.openChapter)===n)));select.value=String(n);history.replaceState(null,'','#chapter-'+n);document.title='Chapter '+n+': '+select.selectedOptions[0].text.replace(/^\d+\. /,'')+' | Plu’s Creatures';if(scroll)panel.scrollIntoView({behavior:'auto',block:'start'});}
- document.addEventListener('click',e=>{const b=e.target.closest('[data-open-chapter]');if(b&&!b.disabled)openChapter(b.dataset.openChapter);});
- select.addEventListener('change',()=>openChapter(select.value));
- document.getElementById('smallerText').addEventListener('click',()=>{size=Math.max(15,size-1);document.documentElement.style.setProperty('--reading-size',size+'px');});
- document.getElementById('largerText').addEventListener('click',()=>{size=Math.min(26,size+1);document.documentElement.style.setProperty('--reading-size',size+'px');});
- window.addEventListener('hashchange',()=>{const m=location.hash.match(/^#chapter-(\d+)$/);if(m&&Number(m[1])!==current)openChapter(m[1],false)});
- const m=location.hash.match(/^#chapter-(\d+)$/);openChapter(m?m[1]:1,false);
+ "use strict";
+ const select=document.getElementById("chapterSelect");
+ const panel=document.querySelector(".reading-panel");
+ const chapters=Array.from(document.querySelectorAll(".reader-chapter"));
+ const sidebar=Array.from(document.querySelectorAll(".chapter-choice"));
+ const openButton=document.getElementById("openSelectedChapter");
+ const sizeSmall=document.getElementById("smallerText");
+ const sizeLarge=document.getElementById("largerText");
+ if(!select||!panel||chapters.length!==27)return;
+ let current=1;
+ let size=18;
+ let pending=null;
+
+ function displayChapter(value, options){
+   const opts=options||{};
+   const parsed=parseInt(value,10);
+   if(!Number.isFinite(parsed)||parsed<1||parsed>27)return;
+   current=parsed;
+   chapters.forEach(chapter=>{
+     const isCurrent=Number(chapter.getAttribute("data-chapter"))===current;
+     chapter.hidden=!isCurrent;
+     chapter.style.display=isCurrent?"block":"none";
+   });
+   sidebar.forEach(button=>{
+     const active=Number(button.getAttribute("data-open-chapter"))===current;
+     button.setAttribute("aria-pressed",String(active));
+   });
+   select.value=String(current);
+   pending=null;
+   const selected=select.options[select.selectedIndex];
+   const title=selected?selected.text:"Chapter "+current;
+   document.title=title+" | Plu’s Creatures";
+   if(opts.updateHash!==false){
+     try{
+       window.history.replaceState(null,"","#chapter-"+current);
+     }catch(e){
+       // The visible chapter is updated even if URL history is unavailable.
+     }
+   }
+   if(opts.scroll!==false){
+     try{panel.scrollIntoView({block:"start",behavior:"auto"});}
+     catch(e){panel.scrollIntoView();}
+   }
+ }
+
+ function useSelection(){
+   const value=pending||select.value;
+   displayChapter(value);
+ }
+
+ // Native mobile pickers can fire input without an immediate change event.
+ select.addEventListener("input",function(){
+   pending=select.value;
+   displayChapter(select.value,{scroll:false});
+ });
+ select.addEventListener("change",useSelection);
+ openButton.addEventListener("click",useSelection);
+ document.addEventListener("click",function(event){
+   const button=event.target.closest("[data-open-chapter]");
+   if(button&&!button.disabled){
+     event.preventDefault();
+     displayChapter(button.getAttribute("data-open-chapter"));
+   }
+ });
+ if(sizeSmall)sizeSmall.addEventListener("click",function(){
+   size=Math.max(15,size-1);
+   document.documentElement.style.setProperty("--reading-size",size+"px");
+ });
+ if(sizeLarge)sizeLarge.addEventListener("click",function(){
+   size=Math.min(26,size+1);
+   document.documentElement.style.setProperty("--reading-size",size+"px");
+ });
+ window.addEventListener("hashchange",function(){
+   const match=window.location.hash.match(/^#chapter-(\d+)$/);
+   if(match)displayChapter(match[1],{updateHash:false,scroll:true});
+ });
+ const initial=window.location.hash.match(/^#chapter-(\d+)$/);
+ displayChapter(initial?initial[1]:1,{updateHash:false,scroll:false});
 })();
 </script></body></html>
