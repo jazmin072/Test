@@ -1450,3 +1450,13 @@ body.lore-explorer .bond-history-prompt{display:none}
 .plu-appearance-grid img{display:block;width:100%;height:auto;object-fit:contain;background:#140e25}.plu-appearance-grid .plu-appearance-triptych img{aspect-ratio:4 / 3}.plu-appearance-grid .plu-appearance-portrait img{aspect-ratio:2 / 3;max-height:650px}
 .plu-appearance-grid figcaption{color:#e1c5e4;font-size:12px;text-align:center;padding:11px 4px 4px}
 @media(max-width:730px){.plu-appearance-grid{grid-template-columns:1fr;gap:14px}.plu-appearance-grid figure{padding:8px}}
+
+
+/* Chimera species visual studies; appear only after the source images load. */
+.chimera-art-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.chimera-art-grid figure{margin:0;border:1px solid #705474;background:#151020;border-radius:11px;overflow:hidden}
+.chimera-art-grid a{display:block}
+.chimera-art-grid img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .2s ease}
+.chimera-art-grid a:hover img{transform:scale(1.025)}
+.chimera-art-grid figcaption{color:#f0d2a2;font-size:12px;line-height:1.45;padding:10px}
+@media(max-width:590px){.chimera-art-grid{grid-template-columns:1fr}.chimera-art-grid img{aspect-ratio:auto}}
