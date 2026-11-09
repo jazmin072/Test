@@ -39,7 +39,8 @@ const chars=[
 {id:'iven',name:'Iven',symbol:'⚒',group:'supporting',subtitle:'Dwarf · Companion-story ally',height:'Not confirmed',age:'Not confirmed',love:'Not confirmed',overview:'A dwarf connected to Breni’s investigation and the fraught relationship between dwarven communities and vampire clans.',abilities:['Local knowledge','Investigation and practical problem-solving'],books:['Dark Rain']},
 {id:'saelis',name:'Saelis',symbol:'♜',group:'supporting',subtitle:'Dark elf commander',height:'Not confirmed',age:'Not confirmed',love:'Her people',overview:'A dark elf leader involved in the long-running Everlangyrs dispute, where opposing communities must learn to share a future.',abilities:['Leadership','Negotiation','Knowledge of the valley’s history'],books:['The Listening World']},
 {id:'torven',name:'Torven',symbol:'♛',group:'supporting',subtitle:'Goblin king',height:'Not confirmed',age:'Not confirmed',love:'His people',overview:'A goblin ruler representing his community in the Everlangyrs talks. His decisions matter to the future of the valley.',abilities:['Leadership','Political negotiation','Community representation'],books:['The Listening World']},
-{id:'vessa',name:'Vessa',symbol:'❧',group:'supporting',subtitle:'A winged acquaintance',height:'Not confirmed',age:'Not confirmed',love:'Not confirmed',overview:'An outspoken, hospitable woman with curved horns, wings, and a tail whose meeting with Plu and Selena becomes an unexpectedly memorable encounter.',abilities:['Resourcefulness','Hospitality','Independent spirit'],books:['Plu side story']}
+{id:'vessa',name:'Vessa',symbol:'❧',group:'supporting',subtitle:'A winged acquaintance',height:'Not confirmed',age:'Not confirmed',love:'Not confirmed',overview:'An outspoken, hospitable woman with curved horns, wings, and a tail whose meeting with Plu and Selena becomes an unexpectedly memorable encounter.',abilities:['Resourcefulness','Hospitality','Independent spirit'],books:['Plu side story']},
+{image:'assets/maera/maera-sheet-2.webp',id:'maera',name:'Maera',symbol:'⚒',group:'supporting',subtitle:'Chimera · Builder · Travelling craftsperson',height:'Approx. 5′8″–5′9″ (illustration estimates)',age:'Not confirmed',love:'Not confirmed',overview:'Maera is a Chimera known for her practical intelligence, strength, and devotion to useful work. Her two horns curve at different angles, pale fur covers her forearms, and her travel pack carries the tools she uses to build, repair, and help others. She is dependable, resilient, and loyal. Her combination of features is individual to her, rather than a rule for all Chimeras.',abilities:['Heavy lifting and endurance','Building and repair','Skilled use of tools','Resourcefulness and strategic thinking'],books:['Plu’s Creatures · Chapter One']}
 ];
 let spoiler=false,cat='All';
 const publicProfiles={
@@ -140,7 +141,8 @@ const supportingPortraits={
  saelis:'assets/supporting/saelis.png',
  torven:'assets/supporting/torven.png',
  vessa:'assets/supporting/vessa.png',
- iven:'assets/supporting/iven.png'
+ iven:'assets/supporting/iven.png',
+ maera:'assets/maera/maera-sheet-2.webp'
 };
 function characterArtMarkup(c){
  if(supportingPortraits[c.id]){
@@ -152,6 +154,7 @@ function characterArtMarkup(c){
 // Short, spoiler-safe profile facts. Interpretive details are character flavour, not new story canon.
 const characterTidbits={
  iven:[['People','Dwarf'],['Strength','Practical thinking'],['Adventure','Dark Rain']],
+ maera:[['People','Chimera'],['Role','Builder and craftsperson'],['Height','About 5′8″–5′9″']],
  saelis:[['People','Dark elves'],['Role','Commander'],['Priority','Her community']],
  torven:[['People','Goblins'],['Role','King'],['Priority','His people']],
  vessa:[['Features','Horns and wings'],['Personality','Outspoken'],['Known for','Hospitality']],
@@ -190,7 +193,7 @@ function showCharacterProfile(id,{focus=true,trigger=null}={}){
  activeProfile=id;
  if(trigger)profileTrigger=trigger;
  detail.hidden=false;
- detail.innerHTML='<button class="detail-close" aria-label="Close profile">×</button><h3 tabindex="-1">'+c.name+'</h3><p>'+c.subtitle+'</p><div class="split"><div><h4>Biography</h4><p>'+c.overview+'</p>'+(spoiler?'<p><strong>Appearances:</strong> '+c.books.join(', ')+'</p>':'')+'</div><div><h4>Key abilities & traits</h4><ul>'+c.abilities.map(a=>'<li>'+a+'</li>').join('')+'</ul><h4>Profile</h4><div class="stats">'+characterFactRows(c)+'</div></div>'+(id==='plu'?pluAppearanceMarkup():'')+'</div>';
+ detail.innerHTML='<button class="detail-close" aria-label="Close profile">×</button><h3 tabindex="-1">'+c.name+'</h3><p>'+c.subtitle+'</p><div class="split"><div><h4>Biography</h4><p>'+c.overview+'</p>'+(spoiler?'<p><strong>Appearances:</strong> '+c.books.join(', ')+'</p>':'')+'</div><div><h4>Key abilities & traits</h4><ul>'+c.abilities.map(a=>'<li>'+a+'</li>').join('')+'</ul><h4>Profile</h4><div class="stats">'+characterFactRows(c)+'</div></div>'+(id==='plu'?pluAppearanceMarkup():'')+(id==='maera'?'<section class="maera-profile-gallery" aria-label="Maera character reference sheets"><h4>Maera’s illustrated character sheets</h4><p>Her two horns have different curves, and pale fur covers her forearms. She travels with a work pack and tools. The drawings show Maera herself, not a standard body shape for every Chimera.</p><div class="maera-profile-images"><a href="/assets/maera/maera-sheet-1.webp" target="_blank" rel="noopener noreferrer"><img src="/assets/maera/maera-sheet-1.webp" alt="Maera seated with two differently curving horns, fur-covered forearms, and a detailed builder character reference" loading="lazy"></a><a href="/assets/maera/maera-sheet-2.webp" target="_blank" rel="noopener noreferrer"><img src="/assets/maera/maera-sheet-2.webp" alt="Maera travelling with a tool pack; full-body front, side and rear reference views" loading="lazy"></a></div><p><a href="/maera.html">Read Maera’s full standalone profile →</a> · <a href="/#creature-chimeras">Explore Chimeras →</a></p></section>':'')+'</div>';
  if(focus){detail.scrollIntoView({block:'start'});detail.querySelector('h3').focus({preventScroll:true})}
 }
 function renderCharacters(filter='all'){
