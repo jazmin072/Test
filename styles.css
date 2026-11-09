@@ -1462,3 +1462,13 @@ body.lore-explorer .bond-history-prompt{display:none}
 .chimera-art-grid a:hover img{transform:scale(1.025)}
 .chimera-art-grid figcaption{color:#f0d2a2;font-size:12px;line-height:1.45;padding:10px}
 @media(max-width:590px){.chimera-art-grid{grid-template-columns:1fr}.chimera-art-grid img{aspect-ratio:auto}}
+
+/* Maera's supporting character profile: two supplied reference sheets */
+.maera-profile-gallery{grid-column:1/-1;border-top:1px solid #765b78;padding-top:22px;margin-top:12px}
+.maera-profile-gallery h4{color:#e7cb9b;margin-bottom:10px}
+.maera-profile-gallery p{line-height:1.7}
+.maera-profile-images{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}
+.maera-profile-images a{display:block;min-width:0}
+.maera-profile-images img{width:100%;height:auto;display:block;border:1px solid #906f8f;border-radius:10px}
+.maera-profile-gallery a{color:#e9cd9c}
+@media(max-width:680px){.maera-profile-images{grid-template-columns:1fr}}
