@@ -1476,7 +1476,7 @@ body.lore-explorer .bond-history-prompt{display:none}
 
 
 /* Display the approved portrait in full, with the profile text below. */
-.character-card.maera-portrait-card .character-art{position:relative;overflow:hidden;width:100%;height:auto;aspect-ratio:auto;display:block;background:#1c1a23;padding:0}
-.character-card.maera-portrait-card .character-art img.supporting-full-figure{display:block;position:static;inset:auto;width:100%;height:auto;min-width:0;max-width:100%;max-height:none;aspect-ratio:auto;object-fit:contain;object-position:center;margin:0 auto;border:0;transform:none}
-.character-card.maera-portrait-card .character-info{text-align:center;padding:20px 18px}
+#characters .character-card.maera-portrait-card .character-art{position:relative;overflow:hidden;width:100%;height:auto;aspect-ratio:auto;display:block;background:#1c1a23;padding:0}
+#characters .character-card.maera-portrait-card .character-art img.supporting-full-figure{display:block;position:static;inset:auto;width:100%;height:auto;min-width:0;max-width:100%;max-height:none;aspect-ratio:auto;object-fit:contain;object-position:center;margin:0 auto;border:0;transform:none}
+#characters .character-card.maera-portrait-card .character-info{text-align:center;padding:20px 18px}
 .maera-profile-images{grid-template-columns:minmax(0,1fr);max-width:635px;margin:18px auto}
