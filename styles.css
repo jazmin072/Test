@@ -1442,6 +1442,8 @@ body.lore-explorer .bond-history-prompt{display:none}
 /* Plu's four mood-responsive full-body appearance studies */
 .plu-appearance-section{margin-top:30px;padding-top:23px;border-top:1px solid #775a84}
 .plu-appearance-section .character-group{color:#e7bb81;letter-spacing:.1em;font-size:11px}
+.plu-appearance-section h5.plu-appearance-subtitle{font:600 15px/1.35 Cinzel,Georgia,serif;color:#e9c99a;margin:24px 0 10px}
+.plu-appearance-section .plu-appearance-note{font-size:12px;color:#cbbbd5;margin-top:14px}
 .plu-appearance-section h4{font:600 clamp(21px,3vw,29px)/1.2 Cinzel,Georgia,serif;color:#eed19e;margin:11px 0}
 .plu-appearance-section>p:not(.character-group){max-width:830px;color:#e8daec;line-height:1.65}
 .plu-appearance-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:20px 0 12px}
