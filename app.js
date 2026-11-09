@@ -741,13 +741,25 @@ function approvedRacePortrait(entry,portraits){
   '</div>';
 }
 
+function chimeraImageGallery(){
+ const illustrations=[
+  {file:'chimera-gallery-1.webp',caption:'Moonlit winged chimera · Feathered wings and scaled tail',alt:'Winged feline chimera with feathered purple-black wings, curled horns, glowing violet eyes and scorpion-like tail, beneath the moon'},
+  {file:'chimera-gallery-2.webp',caption:'Mountain chimera · Violet winged variation',alt:'Spotted feline chimera with broad violet wings and an armoured scorpion tail on a mountain ledge'},
+  {file:'chimera-gallery-3.webp',caption:'Chimera guardian · Illustrated reference sheet',alt:'Chimera guardian reference sheet showing a horned lion, dragon wings, serpent tail, detail views and notes'},
+  {file:'chimera-gallery-4.webp',caption:'Chimera · Winged guardian character study',alt:'Chimera character sheet with a winged lion, draconic traits, tail and front side and rear anatomy views'}
+ ];
+ return '<div class="chimera-art-grid" aria-label="Chimera concept artwork" style="display:none">'+illustrations.map((art,i)=>{
+  const url='/assets/chimera/'+art.file;
+  return '<figure style="display:none"><a href="'+url+'" target="_blank" rel="noopener noreferrer" aria-label="Open Chimera artwork '+(i+1)+'"><img src="'+url+'" alt="'+art.alt+'" decoding="async" onload="this.closest(\'figure\').style.display=\'block\';this.closest(\'.chimera-art-grid\').style.display=\'grid\'" onerror="this.closest(\'figure\').remove()"></a><figcaption>'+art.caption+'</figcaption></figure>';
+ }).join('')+'</div>';
+}
 function renderBestiary(){
  const host=document.querySelector('#bestiaryGrid');
  if(!host)return;
  host.innerHTML=bestiaryEntries.filter(entry=>bestiaryFilter==='All'||entry.category===bestiaryFilter).map(entry=>{
   const stats=bestiaryStats[entry.name]||{};
   const portraits=bestiaryPortraits[entry.name]||[];
-  const portraitMarkup=approvedRacePortrait(entry,portraits);
+  const portraitMarkup=(entry.name==='Chimeras'?chimeraImageGallery():'')+approvedRacePortrait(entry,portraits);
   const rows=[['Population',stats.population],['Visible traits',stats.traits],['Known abilities',stats.abilities],['Society & role',stats.role]].filter(row=>row[1]).map(row=>'<div class="race-stat"><strong>'+escapeCreatureText(row[0])+'</strong><span>'+escapeCreatureText(row[1])+'</span></div>').join('');
   const gov=governmentCreatureRecords[entry.name]||{status:'EXTINCT',body:'No verified contact. Record archived.'};
   const restricted= bestiaryVoice==='plu' && !spoiler && bestiaryReveals.has(entry.name);
