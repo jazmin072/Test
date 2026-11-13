@@ -1,0 +1,51 @@
+name: Extract game concept visuals
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Chronicles_of_Plu_Game_Visuals.zip'
+      - '.github/workflows/extract-game-concept-visuals.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Extract dedicated game visual assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f Chronicles_of_Plu_Game_Visuals.zip
+          mkdir -p /tmp/game-art-extract
+          unzip -oq Chronicles_of_Plu_Game_Visuals.zip 'assets/game-concept/*.webp' -d /tmp/game-art-extract
+          mkdir -p assets/game-concept
+          cp /tmp/game-art-extract/assets/game-concept/*.webp assets/game-concept/
+          count=$(find assets/game-concept -maxdepth 1 -type f -name '*.webp' | wc -l)
+          echo "Found $count game images"
+          test "$count" -eq 12
+          for file in character-menu solo-adventure combat-encounter magical-fighting revised-gameplay-study-1 revised-gameplay-study-2 party-quests restoration-quests adventure-quests world-exploration franchise-map leisure-world; do
+            test -s "assets/game-concept/$file.webp"
+          done
+
+      - name: Commit game visuals
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/game-concept/
+          if git diff --cached --quiet; then
+            echo "Game visuals already present."
+          else
+            git commit -m "Extract twelve game concept mockups into website assets"
+            git push origin HEAD:main
+          fi
