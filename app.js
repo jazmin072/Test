@@ -283,6 +283,7 @@ spoilerControls.forEach(control=>control.addEventListener('change',()=>{
  spoilerControls.forEach(toggle=>toggle.checked=spoiler);
  document.body.classList.toggle('lore-explorer',spoiler);
  $('#readerModeName').textContent=spoiler?'Lore Explorer · spoilers visible':'New Reader · spoilers protected';
+ $('#navReaderModeName').textContent=spoiler?'Lore Explorer · spoilers visible':'New Reader';
  renderLore();renderTimeline();renderBestiary();
  renderCharacters(document.querySelector('[data-character-filter].active')?.dataset.characterFilter||'all');
  if(activeProfile)showCharacterProfile(activeProfile,{focus:false});
