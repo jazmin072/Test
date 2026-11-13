@@ -1,0 +1,41 @@
+name: Extract character creator artwork
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Chronicles_Plu_Character_Creator_Asset.zip'
+      - '.github/workflows/extract-character-creator.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Extract optimized character creator image
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f Chronicles_Plu_Character_Creator_Asset.zip
+          mkdir -p assets/game-concept
+          unzip -oq Chronicles_Plu_Character_Creator_Asset.zip 'assets/game-concept/character-creator-ue5-concept.webp' -d .
+          test -s assets/game-concept/character-creator-ue5-concept.webp
+      - name: Commit image
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/game-concept/character-creator-ue5-concept.webp
+          if git diff --cached --quiet; then
+            echo "Character creator artwork already present."
+          else
+            git commit -m "Add character creator concept artwork"
+            git push origin HEAD:main
+          fi
