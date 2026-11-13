@@ -1518,3 +1518,17 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 /* Keep content readable against the illustrated backdrop. */
 .section.alt,.story-intro,.about{background:rgba(11,7,23,.82)}
 @media(max-width:760px){body::before{background-position:center center;background-attachment:scroll}}
+
+
+/* Always-visible reader mode control in the main navigation. */
+.topbar nav .nav-reader-mode{
+  display:flex;align-items:center;gap:9px;white-space:nowrap;
+  padding:7px 10px;border:1px solid #8e704f;border-radius:7px;
+  background:#21162c;color:#f1d59f;font:600 10px Cinzel,Georgia,serif;
+}
+.nav-reader-mode label{display:flex;align-items:center;gap:5px;color:#fff4e9;cursor:pointer}
+.nav-reader-mode input{accent-color:#e9c17e;width:15px;height:15px;margin:0}
+.nav-reader-mode #navReaderModeName{color:#e9c17e}
+@media(max-width:1050px){
+ .topbar nav .nav-reader-mode{width:100%;justify-content:space-between;margin:8px 0;padding:12px 10px}
+}
