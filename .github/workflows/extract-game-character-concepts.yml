@@ -1,0 +1,51 @@
+name: Extract game character concept sheets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Chronicles_Plu_Game_Character_Concepts.zip'
+      - '.github/workflows/extract-game-character-concepts.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out site source
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Extract verified six game character sheets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s Chronicles_Plu_Game_Character_Concepts.zip
+          mkdir -p /tmp/game-character-concepts
+          unzip -oq Chronicles_Plu_Game_Character_Concepts.zip 'assets/game-concept/characters/*.webp' -d /tmp/game-character-concepts
+          mkdir -p assets/game-concept/characters
+          cp /tmp/game-character-concepts/assets/game-concept/characters/*.webp assets/game-concept/characters/
+          for name in plu breni selena reyla taylor-talula ray-myers; do
+            test -s "assets/game-concept/characters/${name}-character-sheet.webp"
+          done
+          count=$(find assets/game-concept/characters -maxdepth 1 -name '*-character-sheet.webp' -type f | wc -l)
+          echo "Found $count dedicated character sheets"
+          test "$count" -ge 6
+
+      - name: Commit artwork assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/game-concept/characters/
+          if git diff --cached --quiet; then
+            echo "All six game character concept images already exist."
+          else
+            git commit -m "Add six official game character concept sheets"
+            git push origin HEAD:main
+          fi
