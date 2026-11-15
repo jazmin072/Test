@@ -270,7 +270,8 @@ function renderLore(){
   });
   if(img.complete&&img.naturalWidth===0&&img.dataset.fallbackSrc)img.src=img.dataset.fallbackSrc;
  });
- $('#loreEmpty').hidden=entries.length!==0;
+ $('#loreEmpty').hidden=entries.length!==0 || !q;
+ if(q && entries.length===0) $('#loreEmpty').textContent='No entries match that search. Try a broader term or choose All categories.';
 }
 renderLore();
 $('#loreSearch').oninput=renderLore;
