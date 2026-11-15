@@ -1532,3 +1532,9 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 @media(max-width:1050px){
  .topbar nav .nav-reader-mode{width:100%;justify-content:space-between;margin:8px 0;padding:12px 10px}
 }
+
+
+/* New-reader polish: keep late-story relationship cards fully hidden unless Lore Explorer is active. */
+body:not(.lore-explorer) .bond-history-secret{display:none!important}
+body.lore-explorer .bond-history-secret{display:list-item!important}
+#loreEmpty{color:var(--muted);padding:12px 0}
