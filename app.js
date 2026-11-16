@@ -779,8 +779,14 @@ function renderBestiary(){
       '<p class="plu-not-written">Plu’s Cyclopes note has not been provided yet.</p>')+
       '</div>';
   const bookReference=rows.length&&(spoiler||!bestiaryReveals.has(entry.name))?'<details class="creature-reference"><summary>Additional book-reference notes</summary><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+escapeCreatureText(stats.basis||'Book details take priority; visual interpretation is not additional canon.')+'</p></details>':'';
+  const summaryMarkup=entry.summary
+   ?(bestiaryReveals.has(entry.name)&&!spoiler
+     ?'<div class="plu-spoiler-shield"><strong>Later-story details protected</strong><p>This profile includes information from later books. Turn on Lore Explorer to read the full introduction and book-reference notes.</p></div>'
+     :'<p class="race-explanation">'+escapeCreatureText(entry.summary)+'</p>')
+   :'';
+  const referenceHeading=rows.length&&(spoiler||!bestiaryReveals.has(entry.name))?'<p class="race-stats-heading">Field notes · Book-based details</p>':'';
   const characterLink=entry.name==='Chimeras'?'<p class="race-character-link"><a href="/maera.html">Meet Maera · View character sheet →</a></p>':'';
-  return '<article id="'+creatureAnchor(entry.name)+'" class="bestiary-card codex-entry '+(raceSceneUploads[entry.name]?'race-scene-card ':'')+(entry.name==='Dragons'?'dragon-race-card':entry.name==='Cyclopes'?'cyclopes-race-card':'')+' '+(bestiaryVoice==='plu'?'plu-active':'government-active')+'"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+escapeCreatureText(entry.category)+' · '+escapeCreatureText(entry.realm)+'</small><h3>'+escapeCreatureText(entry.name)+'</h3>'+voiceMarkup+bookReference+characterLink+'</div></article>';
+  return '<article id="'+creatureAnchor(entry.name)+'" class="bestiary-card codex-entry '+(raceSceneUploads[entry.name]?'race-scene-card ':'')+(entry.name==='Dragons'?'dragon-race-card':entry.name==='Cyclopes'?'cyclopes-race-card':'')+' '+(bestiaryVoice==='plu'?'plu-active':'government-active')+'"><div class="codex-portrait">'+portraitMarkup+'</div><div class="codex-info"><small>'+escapeCreatureText(entry.category)+' · '+escapeCreatureText(entry.realm)+'</small><h3>'+escapeCreatureText(entry.name)+'</h3>'+summaryMarkup+voiceMarkup+referenceHeading+bookReference+characterLink+'</div></article>';
  }).join('');
 }
 const bestiaryVoiceControls=document.querySelector('#bestiaryVoiceControls');
