@@ -97,7 +97,7 @@ function showArtwork(position){
  activePosition=((position%available.length)+available.length)%available.length;
  activeArtwork=available[activePosition];
  const item=art[activeArtwork];
- lightboxImage.src='/'+item.path.replace(/^\\//,'');
+ lightboxImage.src='/'+item.path.replace(/^\/+/,'');
  lightboxImage.alt=item.name+' concept artwork';
  lightboxTitle.textContent=item.name;
  lightboxCaption.textContent=(labels[item.category]||'Concept artwork')+' · '+(activePosition+1)+' of '+available.length;
