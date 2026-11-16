@@ -772,7 +772,7 @@ function renderBestiary(){
   const restricted= bestiaryVoice==='plu' && !spoiler && bestiaryReveals.has(entry.name);
   const entryNote=pluCreatureNotes[entry.name];
   const voiceMarkup=bestiaryVoice==='government'
-   ?'<div class="race-voice government-record"><p class="voice-overline">WORLD GOVERNMENT · RESTRICTED ARCHIVE</p><div class="government-status"><span>FILE STATUS</span><strong>'+escapeCreatureText(gov.status)+'</strong></div><p class="government-extract">'+escapeCreatureText(gov.body)+'</p><small class="record-disclaimer">Government classification · not necessarily the truth</small></div>'
+   ?'<div class="race-voice government-record"><p class="voice-overline">WORLD GOVERNMENT · RESTRICTED ARCHIVE</p><div class="government-status"><span>FILE STATUS</span><strong>'+escapeCreatureText(gov.status)+'</strong></div><p class="government-extract">'+escapeCreatureText(gov.body)+'</p><small class="record-disclaimer">Government classification · not necessarily the truth. In these records, “EXTINCT” means the agency has no verified contact or control; it does not prove that a people is extinct.</small></div>'
    :'<div class="race-voice plu-record"><p class="voice-overline">PLU’S PERSONAL NOTES · IN HER OWN WORDS</p>'+
       (restricted?'<div class="plu-spoiler-shield"><strong>Later-story note sealed</strong><p>Plu gives away a little too much here. Enable Lore Explorer to read this entry.</p></div>':
       entryNote?'<p class="plu-quote">'+escapeCreatureText(entryNote)+'</p>':
