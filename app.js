@@ -768,7 +768,7 @@ function renderBestiary(){
   const portraits=bestiaryPortraits[entry.name]||[];
   const portraitMarkup=(entry.name==='Chimeras'?chimeraImageGallery():'')+approvedRacePortrait(entry,portraits);
   const rows=[['Appearance & distinguishing traits',stats.traits],['Abilities & adaptations',stats.abilities],['Population notes',stats.population],['Community & role',stats.role]].filter(row=>row[1]).map(row=>'<div class="race-stat"><strong>'+escapeCreatureText(row[0])+'</strong><span>'+escapeCreatureText(row[1])+'</span></div>').join('');
-  const gov=governmentCreatureRecords[entry.name]||{status:'EXTINCT',body:'No verified contact. Record archived.'};
+  const gov=governmentCreatureRecords[entry.name]||{status:'UNFILED',body:'No Government classification has been provided for this entry.'};
   const restricted= bestiaryVoice==='plu' && !spoiler && bestiaryReveals.has(entry.name);
   const entryNote=pluCreatureNotes[entry.name];
   const voiceMarkup=bestiaryVoice==='government'
