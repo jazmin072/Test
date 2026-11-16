@@ -767,7 +767,7 @@ function renderBestiary(){
   const stats=bestiaryStats[entry.name]||{};
   const portraits=bestiaryPortraits[entry.name]||[];
   const portraitMarkup=(entry.name==='Chimeras'?chimeraImageGallery():'')+approvedRacePortrait(entry,portraits);
-  const rows=[['Population',stats.population],['Visible traits',stats.traits],['Known abilities',stats.abilities],['Society & role',stats.role]].filter(row=>row[1]).map(row=>'<div class="race-stat"><strong>'+escapeCreatureText(row[0])+'</strong><span>'+escapeCreatureText(row[1])+'</span></div>').join('');
+  const rows=[['Appearance & distinguishing traits',stats.traits],['Abilities & adaptations',stats.abilities],['Population notes',stats.population],['Community & role',stats.role]].filter(row=>row[1]).map(row=>'<div class="race-stat"><strong>'+escapeCreatureText(row[0])+'</strong><span>'+escapeCreatureText(row[1])+'</span></div>').join('');
   const gov=governmentCreatureRecords[entry.name]||{status:'EXTINCT',body:'No verified contact. Record archived.'};
   const restricted= bestiaryVoice==='plu' && !spoiler && bestiaryReveals.has(entry.name);
   const entryNote=pluCreatureNotes[entry.name];
@@ -778,7 +778,7 @@ function renderBestiary(){
       entryNote?'<p class="plu-quote">'+escapeCreatureText(entryNote)+'</p>':
       '<p class="plu-not-written">Plu’s Cyclopes note has not been provided yet.</p>')+
       '</div>';
-  const bookReference=rows.length&&(spoiler||!bestiaryReveals.has(entry.name))?'<details class="creature-reference"><summary>Additional book-reference notes</summary><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+escapeCreatureText(stats.basis||'Book details take priority; visual interpretation is not additional canon.')+'</p></details>':'';
+  const bookReference=rows.length&&(spoiler||!bestiaryReveals.has(entry.name))?'<details class="creature-reference"><summary>Open field guide · appearance, abilities &amp; community</summary><div class="race-stats">'+rows+'</div><p class="race-stats-basis">'+escapeCreatureText(stats.basis||'Book details take priority; visual interpretation is not additional canon.')+'</p></details>':'';
   const summaryMarkup=entry.summary
    ?(bestiaryReveals.has(entry.name)&&!spoiler
      ?'<div class="plu-spoiler-shield"><strong>Later-story details protected</strong><p>This profile includes information from later books. Turn on Lore Explorer to read the full introduction and book-reference notes.</p></div>'
