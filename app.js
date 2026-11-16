@@ -743,8 +743,8 @@ function approvedRacePortrait(entry,portraits){
  const raceName=escapeCreatureText(entry.name);
  const sceneAlt='Illustrated concept scene showing '+raceName+' in their world';
  return '<div class="race-scene-and-models">'+
-  '<figure class="race-illustrated-scene"><img src="/assets/race-scenes/'+sceneFile+'" alt="'+sceneAlt+'" loading="lazy" decoding="async"><figcaption>'+raceName+' · concept artwork</figcaption></figure>'+
-  '<details class="race-older-art"><summary>View additional character designs</summary>'+previousPortraits+'</details>'+
+  '<figure class="race-illustrated-scene"><img src="/assets/race-scenes/'+sceneFile+'" alt="'+sceneAlt+'" loading="lazy" decoding="async" onerror="this.closest(\'figure\').hidden=true;this.closest(\'.race-scene-and-models\').querySelector(\'.race-older-art\').open=true"><figcaption>'+raceName+' · concept artwork</figcaption></figure>'+
+  '<details class="race-older-art"><summary>View full-body character references</summary>'+previousPortraits+'</details>'+
   '</div>';
 }
 
