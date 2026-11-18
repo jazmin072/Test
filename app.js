@@ -359,10 +359,19 @@ $('#featuredConnections').addEventListener('click',event=>{
  updateRelation();
  $('#relationResult').focus();
 });
-$('.menu-toggle').onclick=()=>{const nav=$('#nav');nav.classList.toggle('open');$('.menu-toggle').setAttribute('aria-expanded',nav.classList.contains('open'))};
-document.querySelectorAll('#nav a').forEach(a=>a.onclick=()=>{$('#nav').classList.remove('open');$('.menu-toggle').setAttribute('aria-expanded','false');document.querySelectorAll('#nav details').forEach(d=>d.open=false)});
-document.querySelectorAll('#nav details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)document.querySelectorAll('#nav details').forEach(other=>{if(other!==d)other.open=false})}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('#nav details').forEach(d=>d.open=false);$('#nav').classList.remove('open');$('.menu-toggle').setAttribute('aria-expanded','false')}});
+const navigationMenu=$('#nav'),navigationButton=$('.menu-toggle');
+function setNavigationOpen(open){
+ navigationMenu.classList.toggle('open',open);
+ navigationButton.setAttribute('aria-expanded',String(open));
+ navigationButton.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu');
+ if(!open)navigationMenu.querySelectorAll('details').forEach(d=>d.open=false);
+}
+navigationButton.onclick=()=>setNavigationOpen(!navigationMenu.classList.contains('open'));
+navigationMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setNavigationOpen(false)));
+navigationMenu.querySelectorAll('details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)navigationMenu.querySelectorAll('details').forEach(other=>{if(other!==d)other.open=false})}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const wasOpen=navigationMenu.classList.contains('open');setNavigationOpen(false);if(wasOpen)navigationButton.focus()}});
+document.addEventListener('click',e=>{if(navigationMenu.classList.contains('open')&&!e.target.closest('.topbar'))setNavigationOpen(false)});
+window.addEventListener('resize',()=>{if(window.innerWidth>1050&&navigationMenu.classList.contains('open'))setNavigationOpen(false)});
 $('#year').textContent=new Date().getFullYear();
 
 /* Interactive character gallery. Keep achievements spoiler-safe by default. */
