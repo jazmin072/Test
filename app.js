@@ -23,7 +23,7 @@ before:{status:'Retailer listing available',date:'See retailer',desc:'View retai
 goddess:{status:'Retailer listing available',date:'See retailer',desc:'Use the retailer link to check publication status, formats and availability.'},
 listening:{status:'Retailer listing available',date:'See retailer',desc:'Reyla’s story, set two centuries after the trilogy.'},
 rain:{status:'Retailer listing available',date:'See retailer',desc:'Breni’s post-trilogy mystery.'},
-wonders:{status:'Ebook scheduled · Check Books2Read',date:'January 27, 2027',desc:'Selena and Talula’s companion story. See Books2Read for retailer and preorder availability.'},
+wonders:{status:'Planned as final companion release',date:'Date to be confirmed',desc:'Selena and Talula’s spoiler-sensitive prequel is intended to release after the other books. Check Books2Read for the retailer’s latest schedule.'},
 creatures:{status:'Free website exclusive',date:'Read online now',desc:'The complete 27-chapter Plu’s Creatures reader is free on this website.'},
 plu:{status:'Ebook scheduled · Check Books2Read',date:'May 29, 2027',desc:'A Plu-focused fantasy companion. Draft2Digital lists May 29, 2027 as the planned ebook release date.'}
 };
