@@ -104,7 +104,7 @@ function renderBookCard(book){
  const readerLink=book.url?'<a class="reader-direct-link" href="'+book.url+'" target="_blank" rel="noopener noreferrer">Find reading formats and retailers ↗</a><details class="book-retailers"><summary>More retailer options</summary>'+retailerLinks(book)+'</details>':'<p class="reader-direct-link">Website exclusive · No payment or account required</p>';
  const published=page?'<p class="book-availability"><strong>'+availability.label+'</strong><span>'+availability.note+'</span></p><a class="btn primary" href="'+page+'">'+availability.button+'</a>'+readerLink:null;
  const upcoming='<p class="release-short">'+(book.id==='plu'?'Scheduled ebook release · May 29, 2027':book.id==='wonders'?'Planned 2028 release · Retailer date update pending':'In progress · Release date to be announced')+'</p>'+(book.url?'<a class="btn primary" href="'+book.url+'" target="_blank" rel="noopener noreferrer">View Books2Read listing ↗</a>':'')+'<button class="text-link" data-book="'+book.id+'">Discover this story →</button>';
- return '<article class="book-card '+(book.type==='trilogy'?'main-volume':'companion-volume')+'">'+art+'<div class="book-meta"><small class="book-category">'+category+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p>'+(published||upcoming)+'</div></article>';
+ return '<article id="book-'+book.id+'" tabindex="-1" class="book-card '+(book.type==='trilogy'?'main-volume':'companion-volume')+'">'+art+'<div class="book-meta"><small class="book-category">'+category+'</small><h3>'+book.title+'</h3><p>'+book.desc+'</p>'+(published||upcoming)+'</div></article>';
 }
 function renderBooks(filter='all'){
  const groups=[
@@ -256,12 +256,12 @@ function loreArtFor(entry){
  return entry[0]==='History'?'assets/lore-fracture.svg':entry[0]==='Magic'?'assets/lore-creation.svg':'assets/lore-valley.svg';
 }
 function renderLore(){
- const q=$('#loreSearch').value.toLowerCase();
+ const q=$('#loreSearch').value.toLowerCase().trim();
  const entries=lore.concat(spoiler?secrets:[]).filter(x=>(cat==='All'||x[0]===cat)&&x.join(' ').toLowerCase().includes(q));
  $('#loreGrid').innerHTML=entries.map(x=>{
   const fallback=loreArtFor(x);
   const art=approvedLoreImages[x[1]]?'assets/lore-approved/'+approvedLoreImages[x[1]]:fallback;
-  return '<article id="lore-'+x[1].toLowerCase().replace(/[^a-z0-9]+/g,'-')+'" class="lore-card"><img class="lore-card-visual" src="'+art+'" data-fallback-src="'+fallback+'" alt="Chronicles illustration for '+x[1]+'" loading="lazy"><div class="lore-card-body"><small>'+x[0]+'</small><h3>'+x[1]+'</h3><p>'+x[2]+'</p></div></article>';
+  return '<article id="lore-'+x[1].toLowerCase().replace(/[^a-z0-9]+/g,'-')+'" tabindex="-1" class="lore-card"><img class="lore-card-visual" src="'+art+'" data-fallback-src="'+fallback+'" alt="Chronicles illustration for '+x[1]+'" loading="lazy"><div class="lore-card-body"><small>'+x[0]+'</small><h3>'+x[1]+'</h3><p>'+x[2]+'</p></div></article>';
  }).join('');
  $('#loreGrid').querySelectorAll('img[data-fallback-src]').forEach(img=>{
   img.addEventListener('error',()=>{
@@ -270,8 +270,8 @@ function renderLore(){
   });
   if(img.complete&&img.naturalWidth===0&&img.dataset.fallbackSrc)img.src=img.dataset.fallbackSrc;
  });
- $('#loreEmpty').hidden=entries.length!==0 || !q;
- if(q && entries.length===0) $('#loreEmpty').textContent='No entries match that search. Try a broader term or choose All categories.';
+ $('#loreEmpty').hidden=entries.length!==0;
+ if(entries.length===0) $('#loreEmpty').textContent=q?'No entries match that search. Try a broader term or choose All categories.':'No entries in this category. Choose All categories.';
 }
 renderLore();
 $('#loreSearch').oninput=renderLore;
@@ -902,11 +902,11 @@ let globalFilter='All';
 function searchable(){
  const links=bookPages;
  const entries=[
- ...books.map(b=>({type:'Books',title:b.title,description:b.desc,href:links[b.id]||'#books'})),
+ ...books.map(b=>({type:'Books',title:b.title,description:b.desc,href:links[b.id]||'#book-'+b.id,bookId:links[b.id]?null:b.id})),
  ...chars.filter(ch=>(spoiler||!ch.spoiler)&&ch.id!=='hybrid').map(ch=>({type:'Characters',title:ch.name,description:profileFor(ch).subtitle,href:'#characters',char:ch.id})),
  ...knownLocations.map(loc=>({type:'Locations',title:loc.name,description:loc.tag,href:'#'+locationAnchor(loc.name),location:knownLocations.indexOf(loc)})),
  ...bestiaryEntries.map(b=>({type:'Creatures',title:b.name,description:spoiler?b.summary:b.category+' of the Chronicles',href:'#'+creatureAnchor(b.name)})),
- ...lore.concat(spoiler?secrets:[]).filter(x=>x[1]!=='The Hybrid Official').map(x=>({type:'Lore',title:x[1],description:x[2],href:'#world'})),
+ ...lore.concat(spoiler?secrets:[]).filter(x=>x[1]!=='The Hybrid Official').map(x=>({type:'Lore',title:x[1],description:x[2],href:'#lore-'+x[1].toLowerCase().replace(/[^a-z0-9]+/g,'-'),lore:x[1]})),
  ...glossaryEntries.filter(x=>spoiler||!x[2]).map(x=>({type:'Lore',title:x[0],description:x[1],href:'#glossary'}))
  ];
  return entries;
@@ -929,6 +929,8 @@ function renderGlobalSearch(){
   const title=document.createElement('strong');title.textContent=hit.title;
   const desc=document.createElement('span');desc.textContent=hit.description;link.append(type,title,desc);
   if(hit.char)link.dataset.resultChar=hit.char;
+  if(hit.lore)link.dataset.resultLore=hit.lore;
+  if(hit.bookId)link.dataset.resultBook=hit.bookId;
   if(Number.isInteger(hit.location))link.dataset.resultLocation=hit.location;
   globalResults.append(link);
  });
@@ -944,6 +946,23 @@ if(globalSearch){
  });
  globalResults.addEventListener('click',e=>{
   const link=e.target.closest('.global-result');if(!link)return;
+  if(link.dataset.resultLore){
+   e.preventDefault();
+   $('#loreSearch').value=link.dataset.resultLore;
+   cat='All';
+   document.querySelectorAll('[data-lore-cat]').forEach(b=>b.classList.toggle('active',b.dataset.loreCat==='All'));
+   renderLore();
+   const target=document.getElementById(link.hash.slice(1));
+   if(target){history.replaceState(null,'',link.hash);target.scrollIntoView({block:'start'});target.focus({preventScroll:true})}
+   return;
+  }
+  if(link.dataset.resultBook){
+   e.preventDefault();
+   document.querySelector('[data-book-filter="all"]')?.click();
+   const target=document.getElementById('book-'+link.dataset.resultBook);
+   if(target){history.replaceState(null,'','#'+target.id);target.scrollIntoView({block:'start'});target.focus({preventScroll:true})}
+   return;
+  }
   if(link.dataset.resultLocation!==undefined)showLocation(Number(link.dataset.resultLocation));
   if(link.hash.startsWith('#creature-')&&!document.querySelector(link.hash))document.querySelector('[data-bestiary-cat="All"]')?.click();
   if(link.dataset.resultChar){e.preventDefault();showCharacterProfile(link.dataset.resultChar,{trigger:link})}
