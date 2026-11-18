@@ -1557,3 +1557,13 @@ body.lore-explorer .bond-history-secret{display:list-item!important}
 .reyla-era-grid figcaption{padding:12px 15px;color:#efd5ae;font-size:.92rem}
 .reyla-era-note{font-size:.88rem;color:#c7b5d0}
 @media(max-width:700px){.reyla-era-grid{grid-template-columns:1fr}.reyla-era-grid img{height:auto;max-height:500px}.reyla-before-ray>summary,.reyla-era-body{padding-left:17px;padding-right:17px}}
+
+
+/* Reader navigation and keyboard usability. The menu remains responsive at 1050px. */
+.skip-link{position:fixed;z-index:100;top:8px;left:12px;transform:translateY(-160%);padding:11px 18px;border:2px solid #edce96;border-radius:8px;background:#21162c;color:#fff;font-weight:700;text-decoration:none}
+.skip-link:focus,.skip-link:focus-visible{transform:translateY(0)}
+:where(button,input,select,summary,a):focus-visible{outline:3px solid #f3d18e;outline-offset:3px}
+section[id],article[id],#main-content{scroll-margin-top:96px}
+.book-card:focus,.lore-card:focus{outline:3px solid #f3d18e;outline-offset:4px}
+@media(max-width:1050px){.topbar .menu-toggle{min-width:44px;min-height:44px;cursor:pointer}.topbar nav.open{overscroll-behavior:contain}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
